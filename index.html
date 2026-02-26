@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en" data-mapbox-token="pk.eyJ1IjoibGphZSIsImEiOiJjbTdweTJnaWkwdnIxMmtvaGJqNjRkbmpjIn0.gklTGYzXuwEJBf8-VDX6kA">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RunStrict — The 40-Day Journey</title>
+  <meta name="description" content="A location-based running game. Flip hexagonal territory tiles. Dominate your city. 40 days. One season. No mercy." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Mapbox GL JS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+
+  <!-- H3-js -->
+  <script src="https://unpkg.com/h3-js@4.1.0/dist/browser/h3-js.umd.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════ HERO -->
+  <section class="hero" id="hero">
+
+    <!-- Hex background pattern -->
+    <div class="hex-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">RunStrict</span>
+      </div>
+      <div class="nav-links">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#teams">Teams</a>
+        <a href="#season">Season</a>
+        <a href="#download" class="nav-cta">Download</a>
+      </div>
+      <button class="nav-burger" aria-label="Menu" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile nav overlay -->
+    <div class="nav-mobile" id="navMobile">
+      <a href="#how-it-works" onclick="toggleNav()">How It Works</a>
+      <a href="#teams" onclick="toggleNav()">Teams</a>
+      <a href="#season" onclick="toggleNav()">Season</a>
+      <a href="#download" onclick="toggleNav()">Download</a>
+    </div>
+
+    <!-- Hero content -->
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">🏃 Season 4 — Active</div>
+        <h1 class="hero-title">
+          Run.<br />
+          Flip.<br />
+          <span class="title-gradient">Dominate.</span>
+        </h1>
+        <p class="hero-tagline">우리는 같은 길을 달린다</p>
+        <p class="hero-sub">
+          A location-based running game where your footsteps become territory.
+          Choose your team. Flip hexes. Conquer your city — before the season ends.
+        </p>
+        <div class="hero-actions">
+          <a href="#download" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            App Store
+          </a>
+          <a href="#download" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z"/></svg>
+            Google Play
+          </a>
+        </div>
+      </div>
+
+      <!-- Map container -->
+      <div class="map-container">
+        <div class="map-overlay-top">
+          <div class="season-selector">
+            <button class="season-btn" data-season="1" onclick="switchSeason(1)">S1</button>
+            <button class="season-btn" data-season="2" onclick="switchSeason(2)">S2</button>
+            <button class="season-btn" data-season="3" onclick="switchSeason(3)">S3</button>
+            <button class="season-btn active" data-season="4" onclick="switchSeason(4)">S4 ✦</button>
+          </div>
+          <div class="map-legend">
+            <div class="legend-item"><span class="legend-dot flame"></span>FLAME</div>
+            <div class="legend-item"><span class="legend-dot wave"></span>WAVE</div>
+            <div class="legend-item"><span class="legend-dot chaos"></span>CHAOS</div>
+          </div>
+        </div>
+        <div id="map"></div>
+        <div class="map-tooltip" id="mapTooltip" style="display:none;"></div>
+        <div class="map-overlay-bottom">
+          <div class="map-stat"><span class="stat-val" id="statRed">—</span><span class="stat-label">FLAME</span></div>
+          <div class="map-divider"></div>
+          <div class="map-stat"><span class="stat-val" id="statBlue">—</span><span class="stat-label">WAVE</span></div>
+          <div class="map-divider"></div>
+          <div class="map-stat"><span class="stat-val" id="statPurple">—</span><span class="stat-label">CHAOS</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow">↓</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ HOW IT WORKS -->
+  <section class="section how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">THE GAME</div>
+        <h2>Simple rule. Endless war.</h2>
+        <p>Every run is a battle. Every step is a claim.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card reveal" style="--delay: 0s">
+          <div class="step-number">01</div>
+          <div class="step-icon">🏃</div>
+          <h3>Lace Up & Run</h3>
+          <p>Open RunStrict and hit the streets. GPS tracks every step in real-time. Maintain under 8 min/km to activate hex capture.</p>
+        </div>
+        <div class="step-card reveal" style="--delay: 0.1s">
+          <div class="step-number">02</div>
+          <div class="step-icon">⬡</div>
+          <h3>Flip the Hexes</h3>
+          <p>Every ~175m hexagonal tile you run through flips to your team's color. The last runner wins. Speed counts. Consistency matters.</p>
+        </div>
+        <div class="step-card reveal" style="--delay: 0.2s">
+          <div class="step-number">03</div>
+          <div class="step-icon">🗺️</div>
+          <h3>Dominate the Map</h3>
+          <p>Watch the city transform. Earn points, climb leaderboards, and lead your team to province dominance — before The Void resets everything.</p>
+        </div>
+        <div class="step-card reveal" style="--delay: 0.3s">
+          <div class="step-number">04</div>
+          <div class="step-icon">⚡</div>
+          <h3>Earn Buff Multipliers</h3>
+          <p>Red Elites earn 4× points. Blue Union gets district bonuses. Purple CHAOS players grow stronger the more they run together.</p>
+        </div>
+      </div>
+
+      <div class="void-banner reveal">
+        <div class="void-text">
+          <span class="void-label">D-DAY</span>
+          <h3>THE VOID</h3>
+          <p>When the 40-day season ends, everything is wiped. All hexes. All points. All territories. Only the legend remains.</p>
+        </div>
+        <div class="void-countdown">
+          <div class="countdown-item"><span id="countDays" class="count-num">—</span><span class="count-label">DAYS</span></div>
+          <div class="countdown-item"><span id="countHours" class="count-num">—</span><span class="count-label">HOURS</span></div>
+          <div class="countdown-item"><span id="countMins" class="count-num">—</span><span class="count-label">MINS</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ TEAMS -->
+  <section class="section teams" id="teams">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">CHOOSE YOUR SIDE</div>
+        <h2>Three teams. One city.</h2>
+        <p>Your allegiance shapes your strategy — and your destiny.</p>
+      </div>
+
+      <div class="teams-grid">
+        <!-- RED -->
+        <div class="team-card team-red reveal" style="--delay: 0s">
+          <div class="team-glow"></div>
+          <div class="team-emblem">🔥</div>
+          <div class="team-name">FLAME</div>
+          <div class="team-color-tag">Red Team</div>
+          <p class="team-desc">
+            The elite meritocracy. Top 20% of Red runners become Elites — unlocking 4× points and proving dominance through sheer performance.
+          </p>
+          <ul class="team-perks">
+            <li>⚡ Elite tier: 4× flip multiplier</li>
+            <li>🏆 District & Province bonuses</li>
+            <li>🔥 Pure performance-based ranking</li>
+          </ul>
+          <div class="team-stat">
+            <span class="team-stat-val">4×</span>
+            <span class="team-stat-label">Max Multiplier</span>
+          </div>
+        </div>
+
+        <!-- BLUE -->
+        <div class="team-card team-blue reveal" style="--delay: 0.15s">
+          <div class="team-glow"></div>
+          <div class="team-emblem">🌊</div>
+          <div class="team-name">WAVE</div>
+          <div class="team-color-tag">Blue Team</div>
+          <p class="team-desc">
+            United as one. Every Blue runner fights together. District and Province victories amplify the whole team's power with union bonuses.
+          </p>
+          <ul class="team-perks">
+            <li>🌊 Union base buff for all members</li>
+            <li>🏙️ District win: +1× for everyone</li>
+            <li>🗺️ Province win: +1× stacked</li>
+          </ul>
+          <div class="team-stat">
+            <span class="team-stat-val">3×</span>
+            <span class="team-stat-label">Max Multiplier</span>
+          </div>
+        </div>
+
+        <!-- PURPLE -->
+        <div class="team-card team-purple reveal" style="--delay: 0.3s">
+          <div class="team-glow"></div>
+          <div class="team-emblem">☄️</div>
+          <div class="team-name">CHAOS</div>
+          <div class="team-color-tag">Purple Team · Always Open</div>
+          <p class="team-desc">
+            The wildcard. Join anytime — but never go back. CHAOS power scales with participation. The more Purples run, the stronger everyone becomes.
+          </p>
+          <ul class="team-perks">
+            <li>🚪 Available anytime. Irreversible.</li>
+            <li>👥 ≥60% active = 3× buff for all</li>
+            <li>⚠️ Points preserved on defection</li>
+          </ul>
+          <div class="team-stat">
+            <span class="team-stat-val">3×</span>
+            <span class="team-stat-label">Max Multiplier</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ SEASON STATS -->
+  <section class="section season-stats" id="season">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">SEASON 4 — LIVE</div>
+        <h2>The war is happening now.</h2>
+        <p>Real-time territory control. Every run matters.</p>
+      </div>
+
+      <div class="stats-grid reveal">
+        <div class="stat-card">
+          <div class="stat-icon">📅</div>
+          <div class="stat-big" id="daysLeft">—</div>
+          <div class="stat-desc">Days Until The Void</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⬡</div>
+          <div class="stat-big">84,219</div>
+          <div class="stat-desc">Hexes Flipped This Season</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏃</div>
+          <div class="stat-big">2,847</div>
+          <div class="stat-desc">Active Runners</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🌍</div>
+          <div class="stat-big">23</div>
+          <div class="stat-desc">Cities Conquered</div>
+        </div>
+      </div>
+
+      <!-- Season timeline -->
+      <div class="season-timeline reveal">
+        <div class="timeline-header">
+          <span>Season 4 Progress</span>
+          <span class="timeline-dates">Feb 21, 2026 → Apr 1, 2026</span>
+        </div>
+        <div class="timeline-bar">
+          <div class="timeline-fill" id="timelineFill"></div>
+          <div class="timeline-marker" id="timelineMarker"></div>
+        </div>
+        <div class="timeline-labels">
+          <span>Day 1</span>
+          <span>The Void →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FEATURES -->
+  <section class="section features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">BUILT FOR RUNNERS</div>
+        <h2>Every feature earns its place.</h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-item reveal" style="--delay: 0s">
+          <div class="feature-icon">📡</div>
+          <h4>GPS Anti-Cheat</h4>
+          <p>25 km/h cap. Accelerometer verification. GPS ≤50m accuracy. No spoofing. Real runs only.</p>
+        </div>
+        <div class="feature-item reveal" style="--delay: 0.1s">
+          <div class="feature-icon">🔋</div>
+          <h4>Battery Optimized</h4>
+          <p>0.5 Hz GPS polling. No WebSocket drains. Data syncs only on launch, resume, and run completion.</p>
+        </div>
+        <div class="feature-item reveal" style="--delay: 0.2s">
+          <div class="feature-icon">📊</div>
+          <h4>Pace Consistency Score</h4>
+          <p>CV-based Stability Score rewards steady runners. Green ≥80. Yellow ≥50. Red means chaos.</p>
+        </div>
+        <div class="feature-item reveal" style="--delay: 0.3s">
+          <div class="feature-icon">🏅</div>
+          <h4>Tiered Leaderboards</h4>
+          <p>Province, District, Zone scopes. Your rank means something — and it resets every 40 days.</p>
+        </div>
+        <div class="feature-item reveal" style="--delay: 0.4s">
+          <div class="feature-icon">🔒</div>
+          <h4>Privacy First</h4>
+          <p>No runner IDs stored in hexes. Only team color and minimal timestamp for conflict resolution.</p>
+        </div>
+        <div class="feature-item reveal" style="--delay: 0.5s">
+          <div class="feature-icon">🗺️</div>
+          <h4>H3 Hex Grid</h4>
+          <p>Uber's H3 at resolution 9 — ~175m edge hexagons. Global, precise, beautiful on any map.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ DOWNLOAD -->
+  <section class="section download" id="download">
+    <div class="container">
+      <div class="download-card reveal">
+        <div class="download-hex-decoration">⬡</div>
+        <div class="section-badge">JOIN THE SEASON</div>
+        <h2>Your city is waiting.</h2>
+        <p>
+          Download RunStrict and choose your team before Season 4 ends.<br />
+          The Void comes for everyone. Make your mark first.
+        </p>
+        <div class="download-buttons">
+          <a href="#" class="store-btn">
+            <div class="store-btn-icon">
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            </div>
+            <div class="store-btn-text">
+              <div class="store-sub">Download on the</div>
+              <div class="store-name">App Store</div>
+            </div>
+          </a>
+          <a href="#" class="store-btn">
+            <div class="store-btn-icon">
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z"/></svg>
+            </div>
+            <div class="store-btn-text">
+              <div class="store-sub">Get it on</div>
+              <div class="store-name">Google Play</div>
+            </div>
+          </a>
+        </div>
+        <p class="disclaimer">RunStrict is currently in beta. Join our waitlist for early access.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-icon">⬡</span>
+            <span class="logo-text">RunStrict</span>
+          </div>
+          <p class="footer-tagline">우리는 같은 길을 달린다</p>
+          <p class="footer-sub">United Through Running</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h5>Game</h5>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#teams">Teams</a>
+            <a href="#season">Season Stats</a>
+          </div>
+          <div class="footer-col">
+            <h5>Download</h5>
+            <a href="#">App Store</a>
+            <a href="#">Google Play</a>
+          </div>
+          <div class="footer-col">
+            <h5>Legal</h5>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 RunStrict. All rights reserved.</p>
+        <p class="footer-quote">"화합은 선언되지 않습니다. 경쟁 속에서 자연스럽게 쌓입니다."</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
