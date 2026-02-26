@@ -232,130 +232,268 @@ img { max-width: 100%; }
   background: radial-gradient(circle, rgba(0,122,255,0.08) 0%, transparent 70%);
   pointer-events: none;
 
-/* ─── Athlete Feature Section ─── */
+/* ─── Athlete Feature — HUD Card Style ─── */
 .athlete-feature {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 700px;
-  overflow: hidden;
   background: var(--black);
 }
 
-.athlete-image-wrap {
+.athlete-hud {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* HUD card wrapping the runner image */
+.hud-card {
   position: relative;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 9 / 16;
+  max-height: 560px;
+  overflow: hidden;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Neon corner brackets */
+.hud-corners { position: absolute; inset: 0; z-index: 10; pointer-events: none; }
+.hud-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--accent);
+  border-style: solid;
+  opacity: 0.9;
+}
+.hud-corner.tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.hud-corner.tr { top: 0; right: 0; border-width: 2px 2px 0 0; }
+.hud-corner.bl { bottom: 0; left: 0; border-width: 0 0 2px 2px; }
+.hud-corner.br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+
+/* Animated scan line */
+.hud-scan {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
   overflow: hidden;
 }
-.athlete-image-wrap img {
+.hud-scan::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(0,229,255,0.6), transparent);
+  animation: hud-scanline 3s linear infinite;
+  box-shadow: 0 0 12px rgba(0,229,255,0.4);
+}
+@keyframes hud-scanline {
+  0% { top: -2px; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* The runner photo itself */
+.hud-runner-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
-  transform: scale(1.04);
-  transition: transform 8s ease;
-}
-.athlete-feature:hover .athlete-image-wrap img {
-  transform: scale(1.0);
-}
-/* Gradient fade right edge into content side */
-.athlete-image-fade {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to right, transparent 40%, var(--black) 100%),
-    linear-gradient(to top, var(--black) 0%, transparent 25%);
-  pointer-events: none;
+  filter: saturate(0.85) brightness(0.88);
 }
 
-.athlete-content {
+/* HUD top status bar */
+.hud-overlay-top {
+  position: absolute;
+  top: 14px; left: 14px; right: 14px;
+  z-index: 10;
   display: flex;
   align-items: center;
-  padding: 80px 64px;
-  position: relative;
-  z-index: 2;
+  gap: 8px;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-shadow: 0 0 8px rgba(0,229,255,0.8);
 }
-/* Left glow bleed from image */
-.athlete-content::before {
-  content: '';
-  position: absolute;
-  left: -120px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 300px;
-  height: 400px;
-  background: radial-gradient(ellipse, rgba(255,59,48,0.1) 0%, transparent 70%);
-  pointer-events: none;
+.hud-tag {
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(0,229,255,0.35);
+  border-radius: 4px;
+  padding: 2px 8px;
+  backdrop-filter: blur(8px);
+}
+.hud-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #FF3B30;
+  box-shadow: 0 0 8px rgba(255,59,48,0.9);
+  animation: pulse-dot 1.5s ease-in-out infinite;
+  margin-left: auto;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
 }
 
-.athlete-inner {
-  max-width: 520px;
+/* HUD bottom metrics */
+.hud-overlay-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 10;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+  padding: 32px 16px 16px;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+.hud-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+.hud-metric-val {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+.hud-metric-unit {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  text-shadow: 0 0 6px rgba(0,229,255,0.7);
+}
+.hud-bar-wrap { flex: 1; }
+.hud-bar-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.hud-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.hud-bar-fill {
+  height: 100%;
+  width: 62%;
+  background: linear-gradient(to right, var(--red), var(--accent));
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0,229,255,0.5);
+  animation: hud-fill-pulse 2.5s ease-in-out infinite;
+}
+@keyframes hud-fill-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Copy side */
+.athlete-copy { max-width: 480px; }
+
+.hud-eyebrow {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(0,229,255,0.5);
+  margin-bottom: 20px;
 }
 
 .athlete-headline {
-  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-size: clamp(2.2rem, 3.5vw, 3.4rem);
   font-weight: 700;
   line-height: 1.1;
-  margin: 20px 0 20px;
+  margin-bottom: 20px;
 }
 
 .athlete-sub {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--text-dim);
-  line-height: 1.7;
-  margin-bottom: 40px;
-  max-width: 420px;
+  line-height: 1.75;
+  margin-bottom: 36px;
+  max-width: 400px;
 }
 
-.athlete-stats {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 40px;
-  padding: 24px 28px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: var(--radius);
-  backdrop-filter: var(--blur);
+.hud-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
 }
-
-.athlete-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 1;
+.hud-stat-box {
+  background: rgba(0,229,255,0.04);
+  border: 1px solid rgba(0,229,255,0.15);
+  border-radius: 10px;
+  padding: 16px 12px;
+  text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+  cursor: default;
 }
-.athlete-stat-val {
+.hud-stat-box:hover {
+  background: rgba(0,229,255,0.08);
+  border-color: rgba(0,229,255,0.4);
+}
+.hud-stat-num {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 2rem;
   font-weight: 700;
-  background: linear-gradient(135deg, var(--red), var(--purple));
+  line-height: 1;
+  margin-bottom: 6px;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1;
-  margin-bottom: 4px;
 }
-.athlete-stat-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+.hud-stat-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-faint);
 }
-.athlete-stat-divider {
-  width: 1px;
-  height: 40px;
-  background: var(--border);
-  flex-shrink: 0;
-}
 
 .athlete-cta {
-  font-size: 1rem;
-  padding: 16px 36px;
-  box-shadow: 0 0 32px rgba(255,255,255,0.12);
+  gap: 10px;
+  padding: 15px 32px;
+  font-size: 0.95rem;
+  box-shadow: 0 0 32px rgba(255,255,255,0.1), 0 0 0 1px rgba(255,255,255,0.06) inset;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.athlete-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 40px rgba(255,255,255,0.18), 0 0 0 1px rgba(255,255,255,0.1) inset;
 }
 
+/* Responsive */
+@media (max-width: 900px) {
+  .athlete-hud {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .hud-card {
+    max-width: 340px;
+    max-height: 460px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 14;
+  }
+}
+@media (max-width: 600px) {
+  .hud-card { max-height: 380px; aspect-ratio: 9 / 13; }
+  .athlete-headline { font-size: 2rem; }
+  .hud-stats-row { gap: 8px; }
+  .hud-stat-num { font-size: 1.5rem; }
 }
 
 .hero-content {
@@ -1309,31 +1447,11 @@ img { max-width: 100%; }
   .feature-item:nth-child(3n):nth-child(2n) { border-right: none; }
 }
 
-/* Athlete feature responsive */
-@media (max-width: 900px) {
-  .athlete-feature {
-    grid-template-columns: 1fr;
-    grid-template-rows: 420px auto;
-  }
-  .athlete-image-fade {
-    background:
-      linear-gradient(to bottom, transparent 40%, var(--black) 100%);
-  }
-  .athlete-content {
-    padding: 48px 32px 64px;
-  }
-  .athlete-content::before { display: none; }
-  .athlete-stats {
-    gap: 16px;
-    padding: 20px 16px;
-  }
-  .athlete-stat-val { font-size: 1.6rem; }
-}
-
 /* Hero runner bg: hide on mobile (too busy) */
 @media (max-width: 768px) {
   .hero-runner-bg { display: none; }
 }
+
 
 
 @media (max-width: 768px) {

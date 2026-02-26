@@ -116,34 +116,70 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════ ATHLETE FEATURE -->
-  <section class="athlete-feature" id="athlete">
-    <div class="athlete-image-wrap">
-      <img src="assets/hero_runner_opt.jpg" alt="RunStrict athlete running through city" loading="eager" />
-      <div class="athlete-image-fade"></div>
-    </div>
-    <div class="athlete-content">
-      <div class="athlete-inner">
-        <div class="section-badge">YOUR CITY. YOUR RULES.</div>
-        <h2 class="athlete-headline">Every step is<br /><span class="title-gradient">a declaration.</span></h2>
-        <p class="athlete-sub">RunStrict turns your daily run into a territorial battle. The moment you hit the pavement, you're not just running — you're conquering.</p>
-        <div class="athlete-stats">
-          <div class="athlete-stat">
-            <span class="athlete-stat-val">40</span>
-            <span class="athlete-stat-label">Days per season</span>
+  <!-- ═════════════════════════════════════════════ ATHLETE FEATURE -->
+  <section class="section athlete-feature" id="athlete">
+    <div class="container">
+      <div class="athlete-hud reveal">
+
+        <!-- HUD runner card: left -->
+        <div class="hud-card">
+          <div class="hud-corners">
+            <span class="hud-corner tl"></span>
+            <span class="hud-corner tr"></span>
+            <span class="hud-corner bl"></span>
+            <span class="hud-corner br"></span>
           </div>
-          <div class="athlete-stat-divider"></div>
-          <div class="athlete-stat">
-            <span class="athlete-stat-val">175m</span>
-            <span class="athlete-stat-label">Hex edge size</span>
+          <div class="hud-scan"></div>
+          <img src="assets/hero_runner_opt.jpg" alt="RunStrict athlete" class="hud-runner-img" loading="eager" />
+          <!-- HUD overlays -->
+          <div class="hud-overlay-top">
+            <span class="hud-tag">SZN.04</span>
+            <span class="hud-dot"></span>
+            <span class="hud-tag">LIVE</span>
           </div>
-          <div class="athlete-stat-divider"></div>
-          <div class="athlete-stat">
-            <span class="athlete-stat-val">4×</span>
-            <span class="athlete-stat-label">Max multiplier</span>
+          <div class="hud-overlay-bottom">
+            <div class="hud-metric">
+              <span class="hud-metric-val">0.15</span>
+              <span class="hud-metric-unit">KM</span>
+            </div>
+            <div class="hud-bar-wrap">
+              <div class="hud-bar-label">HEX CAPTURE</div>
+              <div class="hud-bar"><div class="hud-bar-fill"></div></div>
+            </div>
+            <div class="hud-metric">
+              <span class="hud-metric-val">4×</span>
+              <span class="hud-metric-unit">BUFF</span>
+            </div>
           </div>
         </div>
-        <a href="#download" class="btn btn-primary athlete-cta">Join the Season</a>
+
+        <!-- Copy: right -->
+        <div class="athlete-copy">
+          <div class="hud-eyebrow">// YOUR CITY. YOUR RULES.</div>
+        <h2 class="athlete-headline">Every step is<br /><span class="title-gradient">a declaration.</span></h2>
+          <p class="athlete-sub">RunStrict turns your daily run into territorial warfare. Hit the streets, flip hexes, and conquer your city before The Void resets everything.</p>
+
+          <div class="hud-stats-row">
+            <div class="hud-stat-box">
+              <div class="hud-stat-num">40</div>
+              <div class="hud-stat-lbl">DAYS / SEASON</div>
+            </div>
+            <div class="hud-stat-box">
+              <div class="hud-stat-num">175<span style="font-size:1.1rem">m</span></div>
+              <div class="hud-stat-lbl">HEX EDGE</div>
+            </div>
+            <div class="hud-stat-box">
+              <div class="hud-stat-num">4<span style="font-size:1.1rem">×</span></div>
+              <div class="hud-stat-lbl">MAX BUFF</div>
+            </div>
+          </div>
+
+          <a href="#download" class="btn btn-primary athlete-cta">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M13 2.05V13h3l-4 7-4-7h3V2.05c.66.09 1.34.18 2 .26V2.05z" opacity="0"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm-1 14.93V13H8l4-7 4 7h-3v3.93c-.66-.04-1.34-.04-2 0z"/></svg>
+            Join the Season
+          </a>
+        </div>
+
       </div>
     </div>
   </section>
