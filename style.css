@@ -231,6 +231,7 @@ img { max-width: 100%; }
   width: 700px; height: 700px;
   background: radial-gradient(circle, rgba(0,122,255,0.08) 0%, transparent 70%);
   pointer-events: none;
+}
 
 /* ─── Athlete Feature — HUD Card Style ─── */
 .athlete-feature {
