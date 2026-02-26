@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — RunStrict</title>
+  <meta name="description" content="Terms of Service for RunStrict, the location-based running game." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:   #0A0A0F;
+      --dark:    #12121C;
+      --dark2:   #1A1A2E;
+      --border:  rgba(255,255,255,0.08);
+      --text:    #E8E8F0;
+      --text-dim: rgba(232,232,240,0.55);
+      --accent:  #00E5FF;
+      --red:     #FF3B30;
+      --blue:    #007AFF;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-back {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-back:hover { color: var(--text); text-decoration: none; }
+
+    /* Layout */
+    .legal-wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 40px 120px;
+    }
+    .legal-header {
+      margin-bottom: 56px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .legal-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+    .legal-header h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 12px;
+    }
+    .legal-header .meta {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    /* Sections */
+    .legal-section {
+      margin-bottom: 48px;
+    }
+    .legal-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      color: var(--text);
+      padding-top: 4px;
+    }
+    .legal-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 24px 0 10px;
+      color: var(--text);
+    }
+    .legal-section p {
+      color: var(--text-dim);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+    .legal-section ul, .legal-section ol {
+      color: var(--text-dim);
+      padding-left: 24px;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+    .legal-section li { margin-bottom: 8px; }
+    .legal-section strong { color: var(--text); }
+
+    /* Table of contents */
+    .toc {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 56px;
+    }
+    .toc h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+    .toc ol {
+      padding-left: 20px;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+    .toc li { margin-bottom: 8px; }
+    .toc a { color: var(--accent); }
+
+    /* Highlight box */
+    .highlight-box {
+      background: rgba(0,229,255,0.05);
+      border: 1px solid rgba(0,229,255,0.15);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+    .warn-box {
+      background: rgba(255,59,48,0.05);
+      border: 1px solid rgba(255,59,48,0.2);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--accent); }
+    .footer-links { margin-top: 12px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .legal-wrap { padding: 48px 20px 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/runner_logo_transparent.png" alt="RunStrict" />
+    </a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </nav>
+
+  <main class="legal-wrap">
+
+    <div class="legal-header">
+      <div class="legal-badge">Legal</div>
+      <h1>Terms of Service</h1>
+      <p class="meta">Effective Date: February 26, 2026 &nbsp;·&nbsp; Last Updated: February 26, 2026</p>
+    </div>
+
+    <div class="toc">
+      <h4>Contents</h4>
+      <ol>
+        <li><a href="#s1">Acceptance of Terms</a></li>
+        <li><a href="#s2">Eligibility</a></li>
+        <li><a href="#s3">Your Account</a></li>
+        <li><a href="#s4">The Game — Rules and Fair Play</a></li>
+        <li><a href="#s5">Prohibited Conduct</a></li>
+        <li><a href="#s6">Intellectual Property</a></li>
+        <li><a href="#s7">User Content</a></li>
+        <li><a href="#s8">Safety and Physical Activity</a></li>
+        <li><a href="#s9">Disclaimers and Limitation of Liability</a></li>
+        <li><a href="#s10">Termination</a></li>
+        <li><a href="#s11">Changes to These Terms</a></li>
+        <li><a href="#s12">Governing Law</a></li>
+        <li><a href="#s13">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <div class="highlight-box">
+      <strong>Summary:</strong> By using RunStrict, you agree to run safely, play fair, and not cheat. The game resets every ~40 days (The Void). Virtual territory has no real-world value. Use common sense when running outdoors.
+    </div>
+
+    <div class="legal-section" id="s1">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By downloading, installing, or using RunStrict (the "App") or visiting runstrict.com (the "Site"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree, do not use the App or Site.</p>
+      <p>These Terms form a legally binding agreement between you and RunStrict ("we," "us," or "our"). Our <a href="privacy-policy.html">Privacy Policy</a> is incorporated into these Terms by reference.</p>
+    </div>
+
+    <div class="legal-section" id="s2">
+      <h2>2. Eligibility</h2>
+      <p>You must be at least <strong>13 years old</strong> (or 16 in the European Economic Area) to use RunStrict. By using the App, you confirm that you meet this age requirement.</p>
+      <p>If you are under 18, you represent that your parent or legal guardian has reviewed and agreed to these Terms on your behalf.</p>
+      <p>RunStrict is available globally. Certain features may be restricted in your jurisdiction due to local laws.</p>
+    </div>
+
+    <div class="legal-section" id="s3">
+      <h2>3. Your Account</h2>
+
+      <h3>3.1 Registration</h3>
+      <p>You must create an account to play. You agree to provide accurate information and keep your credentials secure. You are responsible for all activity that occurs under your account.</p>
+
+      <h3>3.2 Username</h3>
+      <p>Your username is public and visible on leaderboards. Do not use your real name, contact information, or any information that could identify you in the real world if you prefer to remain anonymous. Usernames that are offensive, impersonate others, or violate these Terms may be removed.</p>
+
+      <h3>3.3 Team Selection</h3>
+      <p>You choose one team at registration: FLAME (Red) or WAVE (Blue). CHAOS (Purple) is available at any time but is <strong>irreversible</strong> — once you join CHAOS, you cannot return to FLAME or WAVE. Team balancing mechanics are part of the game design.</p>
+
+      <h3>3.4 Account Security</h3>
+      <p>Notify us immediately at <a href="mailto:support@runstrict.com">support@runstrict.com</a> if you suspect unauthorized access to your account.</p>
+    </div>
+
+    <div class="legal-section" id="s4">
+      <h2>4. The Game — Rules and Fair Play</h2>
+
+      <h3>4.1 How Territory Works</h3>
+      <p>RunStrict uses Uber's H3 hexagonal grid system (resolution 9, ~175m edge) to define geographic territory. When you run through a hex at an eligible pace (≤8:00 min/km, ≤25 km/h), it flips to your team's color. Territory is temporary — every 40-day season ends in "The Void," resetting all hexes globally.</p>
+
+      <h3>4.2 Season Duration</h3>
+      <p>Each season lasts approximately 40 days. The exact end date is announced in-app at the start of each season. No compensation is provided for territory or points lost at The Void — this reset is a core game mechanic.</p>
+
+      <h3>4.3 Points and Leaderboards</h3>
+      <p>Points are calculated based on hex flips, run distance, pace consistency, and applicable team multipliers. Leaderboard rankings are for entertainment purposes only and confer no monetary or tangible value.</p>
+
+      <h3>4.4 Anti-Cheat</h3>
+      <p>We actively enforce fair play through GPS accuracy checks (≤50m), speed caps (25 km/h), accelerometer verification, and server-side validation. Suspected cheating may result in point removal, account suspension, or permanent ban without prior notice.</p>
+    </div>
+
+    <div class="legal-section" id="s5">
+      <h2>5. Prohibited Conduct</h2>
+      <p>You agree <strong>not</strong> to:</p>
+      <ul>
+        <li><strong>Cheat or spoof GPS</strong> — use fake GPS apps, location spoofers, emulators, or any tool to falsify your location</li>
+        <li><strong>Automate gameplay</strong> — use bots, scripts, macros, or any automated means to play the game</li>
+        <li><strong>Exploit bugs</strong> — intentionally exploit game bugs or glitches; report them to <a href="mailto:support@runstrict.com">support@runstrict.com</a> instead</li>
+        <li><strong>Harass others</strong> — use in-app features or external channels to harass, threaten, or harm other players</li>
+        <li><strong>Create multiple accounts</strong> — operate more than one RunStrict account to gain competitive advantage</li>
+        <li><strong>Reverse engineer</strong> — decompile, disassemble, or attempt to extract source code from the App</li>
+        <li><strong>Interfere with servers</strong> — conduct denial-of-service attacks or otherwise disrupt RunStrict infrastructure</li>
+        <li><strong>Misrepresent affiliation</strong> — claim to be a RunStrict employee, moderator, or official representative</li>
+        <li><strong>Violate laws</strong> — use RunStrict in connection with any illegal activity</li>
+      </ul>
+      <p>Violation of these rules may result in account suspension or permanent ban at our sole discretion.</p>
+    </div>
+
+    <div class="legal-section" id="s6">
+      <h2>6. Intellectual Property</h2>
+
+      <h3>6.1 Our Rights</h3>
+      <p>RunStrict, including the App, Site, game mechanics, visual design, branding, logos, and all content, is owned by or licensed to RunStrict and protected by copyright, trademark, and other intellectual property laws. You may not copy, reproduce, modify, or distribute any part of RunStrict without our express written permission.</p>
+
+      <h3>6.2 Your License to Use</h3>
+      <p>We grant you a limited, non-exclusive, non-transferable, revocable license to use the App for personal, non-commercial recreational purposes in accordance with these Terms.</p>
+
+      <h3>6.3 Feedback</h3>
+      <p>If you submit ideas, suggestions, or feedback about RunStrict, you grant us a royalty-free, worldwide, perpetual license to use that feedback without obligation or compensation to you.</p>
+    </div>
+
+    <div class="legal-section" id="s7">
+      <h2>7. User Content</h2>
+      <p>RunStrict does not currently feature user-generated content such as posts or images. Usernames are the primary user-facing content. We reserve the right to remove usernames that violate these Terms or our community standards.</p>
+      <p>If user content features are added in the future, these Terms will be updated accordingly.</p>
+    </div>
+
+    <div class="legal-section" id="s8">
+      <h2>8. Safety and Physical Activity</h2>
+      <div class="warn-box">
+        <strong>Important:</strong> RunStrict involves outdoor physical activity. Always prioritize your personal safety over gameplay.
+      </div>
+      <p>By using RunStrict, you acknowledge and agree that:</p>
+      <ul>
+        <li>You are physically capable of the running activities you undertake</li>
+        <li>You will obey all traffic laws, pedestrian rules, and local regulations while running</li>
+        <li>You will not run in unsafe conditions (extreme weather, impaired visibility, etc.)</li>
+        <li>You will not trespass on private property in pursuit of hex captures</li>
+        <li>You accept full responsibility for your safety and the safety of others during gameplay</li>
+        <li>RunStrict is not liable for any injury, accident, or harm arising from physical activity connected to the game</li>
+      </ul>
+      <p>If you have any medical condition, consult a physician before beginning any running program.</p>
+    </div>
+
+    <div class="legal-section" id="s9">
+      <h2>9. Disclaimers and Limitation of Liability</h2>
+
+      <h3>9.1 As-Is Service</h3>
+      <p>RunStrict is provided "as is" and "as available" without warranties of any kind, express or implied, including warranties of merchantability, fitness for a particular purpose, or non-infringement. We do not guarantee that the App will be error-free, uninterrupted, or available at any particular time.</p>
+
+      <h3>9.2 No Real-World Value</h3>
+      <p>Virtual territory, points, leaderboard rankings, and team achievements have <strong>no real-world monetary value</strong> and are not redeemable for cash, prizes, or goods unless explicitly stated in a promotional offer.</p>
+
+      <h3>9.3 Limitation of Liability</h3>
+      <p>To the maximum extent permitted by applicable law, RunStrict shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of data, loss of profits, or personal injury, arising from your use of the App, even if we have been advised of the possibility of such damages.</p>
+      <p>Our total liability to you for any claims arising under these Terms shall not exceed the amount you paid (if any) to RunStrict in the 12 months preceding the claim.</p>
+    </div>
+
+    <div class="legal-section" id="s10">
+      <h2>10. Termination</h2>
+
+      <h3>10.1 By You</h3>
+      <p>You may delete your account at any time through the App settings. Upon deletion, your personal data will be removed per our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+
+      <h3>10.2 By Us</h3>
+      <p>We may suspend or terminate your account at any time, with or without notice, for violation of these Terms, suspected cheating, harmful behavior, or any reason we deem appropriate to protect the RunStrict community.</p>
+
+      <h3>10.3 Effect of Termination</h3>
+      <p>Upon termination, your license to use the App ends immediately. All game progress, territory, and points associated with your account are forfeited.</p>
+    </div>
+
+    <div class="legal-section" id="s11">
+      <h2>11. Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. Material changes will be communicated via in-app notification or email at least 14 days before they take effect. Continued use of RunStrict after changes take effect constitutes acceptance of the updated Terms.</p>
+    </div>
+
+    <div class="legal-section" id="s12">
+      <h2>12. Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the Republic of Korea, without regard to its conflict of law provisions. Any disputes arising from these Terms shall be resolved in the courts of Seoul, Korea.</p>
+      <p>If you are a consumer in the European Union, you may also benefit from any mandatory provisions of the law of your country of residence.</p>
+    </div>
+
+    <div class="legal-section" id="s13">
+      <h2>13. Contact Us</h2>
+      <p>For questions about these Terms of Service, please contact us:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:support@runstrict.com">support@runstrict.com</a></li>
+        <li><strong>Legal inquiries:</strong> <a href="mailto:legal@runstrict.com">legal@runstrict.com</a></li>
+        <li><strong>Website:</strong> <a href="https://runstrict.com">runstrict.com</a></li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2026 RunStrict. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="mailto:support@runstrict.com">Contact</a>
+    </div>
+  </footer>
+
+</body>
+</html>
