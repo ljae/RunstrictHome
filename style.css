@@ -176,6 +176,35 @@ img { max-width: 100%; }
   z-index: 0;
 }
 
+/* ─── Hero Runner Background Image ─── */
+.hero-runner-bg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-runner-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.18;
+  filter: saturate(0.6) brightness(0.7);
+  mix-blend-mode: luminosity;
+}
+/* Fade left edge so text is clean */
+.hero-runner-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--black) 0%, transparent 40%),
+              linear-gradient(to top, var(--black) 0%, transparent 30%);
+}
+
 /* ─── Hero Section ─── */
 .hero {
   position: relative;
@@ -202,6 +231,131 @@ img { max-width: 100%; }
   width: 700px; height: 700px;
   background: radial-gradient(circle, rgba(0,122,255,0.08) 0%, transparent 70%);
   pointer-events: none;
+
+/* ─── Athlete Feature Section ─── */
+.athlete-feature {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 700px;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.athlete-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+.athlete-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transform: scale(1.04);
+  transition: transform 8s ease;
+}
+.athlete-feature:hover .athlete-image-wrap img {
+  transform: scale(1.0);
+}
+/* Gradient fade right edge into content side */
+.athlete-image-fade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, transparent 40%, var(--black) 100%),
+    linear-gradient(to top, var(--black) 0%, transparent 25%);
+  pointer-events: none;
+}
+
+.athlete-content {
+  display: flex;
+  align-items: center;
+  padding: 80px 64px;
+  position: relative;
+  z-index: 2;
+}
+/* Left glow bleed from image */
+.athlete-content::before {
+  content: '';
+  position: absolute;
+  left: -120px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(255,59,48,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.athlete-inner {
+  max-width: 520px;
+}
+
+.athlete-headline {
+  font-size: clamp(2.4rem, 4vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 20px 0 20px;
+}
+
+.athlete-sub {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 420px;
+}
+
+.athlete-stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding: 24px 28px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius);
+  backdrop-filter: var(--blur);
+}
+
+.athlete-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.athlete-stat-val {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--red), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.athlete-stat-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.athlete-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.athlete-cta {
+  font-size: 1rem;
+  padding: 16px 36px;
+  box-shadow: 0 0 32px rgba(255,255,255,0.12);
+}
+
 }
 
 .hero-content {
@@ -1154,6 +1308,33 @@ img { max-width: 100%; }
   .feature-item:nth-child(3n) { border-right: 1px solid var(--border); }
   .feature-item:nth-child(3n):nth-child(2n) { border-right: none; }
 }
+
+/* Athlete feature responsive */
+@media (max-width: 900px) {
+  .athlete-feature {
+    grid-template-columns: 1fr;
+    grid-template-rows: 420px auto;
+  }
+  .athlete-image-fade {
+    background:
+      linear-gradient(to bottom, transparent 40%, var(--black) 100%);
+  }
+  .athlete-content {
+    padding: 48px 32px 64px;
+  }
+  .athlete-content::before { display: none; }
+  .athlete-stats {
+    gap: 16px;
+    padding: 20px 16px;
+  }
+  .athlete-stat-val { font-size: 1.6rem; }
+}
+
+/* Hero runner bg: hide on mobile (too busy) */
+@media (max-width: 768px) {
+  .hero-runner-bg { display: none; }
+}
+
 
 @media (max-width: 768px) {
   .nav { padding: 20px 24px; }
