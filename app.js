@@ -544,6 +544,43 @@ window.toggleNav = function() {
   nav.classList.toggle('open');
 };
 
+/** Showcase: highlight active screenshot thumbnail */
+window.highlightScreen = function(name) {
+  // Update active class on thumbnails
+  document.querySelectorAll('.phone-thumb').forEach(el => el.classList.remove('active'));
+  const clicked = document.querySelector(`.phone-thumb[onclick*="'${name}'"]`);
+  if (clicked) clicked.classList.add('active');
+
+  // Swap main phone display to show the static screenshot
+  const video = document.querySelector('.phone-video');
+  const screen = document.querySelector('.phone-screen');
+  if (!screen) return;
+
+  // Remove existing static image if any
+  const existing = screen.querySelector('.phone-static-img');
+  if (existing) existing.remove();
+
+  if (name === 'live') {
+    // Restore video
+    if (video) video.style.display = '';
+  } else {
+    // Show screenshot over video
+    if (video) video.style.display = 'none';
+    const img = document.createElement('img');
+    img.src = `assets/screen_${name}.png`;
+    img.className = 'phone-static-img';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;position:absolute;inset:0;';
+    screen.appendChild(img);
+
+    // Auto-restore video after 3s
+    setTimeout(() => {
+      img.remove();
+      if (video) video.style.display = '';
+      document.querySelectorAll('.phone-thumb').forEach(el => el.classList.remove('active'));
+    }, 3000);
+  }
+};
+
 // ═══════════════════════════════════════════════════════════════
 // BOOT
 // ═══════════════════════════════════════════════════════════════

@@ -113,6 +113,57 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════════ APP SHOWCASE -->
+  <section class="section showcase" id="showcase">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">REAL GAME FOOTAGE</div>
+        <h2>See it in action.</h2>
+        <p>Live gameplay from Season 4. Real hexes. Real runners. Real war.</p>
+      </div>
+
+      <!-- Phone video + screenshot carousel -->
+      <div class="showcase-layout reveal">
+
+        <!-- Central phone with looping video -->
+        <div class="phone-main">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+              <video autoplay loop muted playsinline class="phone-video">
+                <source src="assets/demo.mp4" type="video/mp4" />
+              </video>
+            </div>
+            <div class="phone-home-bar"></div>
+          </div>
+          <div class="phone-label">Live gameplay</div>
+        </div>
+
+        <!-- Side screenshots -->
+        <div class="phone-gallery">
+          <div class="phone-thumb" onclick="highlightScreen('map')">
+            <img src="assets/screen_map.png" alt="Map Screen — hex territory" loading="lazy" />
+            <div class="phone-thumb-label">🗺️ Territory Map</div>
+          </div>
+          <div class="phone-thumb" onclick="highlightScreen('run')">
+            <img src="assets/screen_run.png" alt="Running Screen" loading="lazy" />
+            <div class="phone-thumb-label">🏃 Running</div>
+          </div>
+          <div class="phone-thumb" onclick="highlightScreen('team')">
+            <img src="assets/screen_team.png" alt="Team Screen" loading="lazy" />
+            <div class="phone-thumb-label">⚔️ Territory</div>
+          </div>
+          <div class="phone-thumb" onclick="highlightScreen('stats')">
+            <img src="assets/screen_stats.png" alt="Stats Screen" loading="lazy" />
+            <div class="phone-thumb-label">📊 Stats</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
   <!-- ═══════════════════════════════════════════════ HOW IT WORKS -->
   <section class="section how-it-works" id="how-it-works">
     <div class="container">
