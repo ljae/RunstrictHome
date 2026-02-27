@@ -1,7 +1,7 @@
 /**
  * RunStrict Marketing Homepage — app.js
  * World map with H3 hex tiles colored by team season snapshots.
- * Uses Mapbox GL JS + h3-js (both loaded via CDN)
+ * Uses MapLibre GL JS + h3-js (both loaded via CDN)
  */
 
 'use strict';
@@ -10,7 +10,7 @@
 // CONFIG
 // ═══════════════════════════════════════════════════════════════
 
-const MAPBOX_TOKEN = document.documentElement.dataset.mapboxToken || '';
+// No token needed — MapLibre GL JS uses free tile providers
 const H3_RESOLUTION = 3; // res 3 = ~180km edge, perfect for global world view
 
 // Team colors (matches Flutter app theme exactly)
@@ -237,29 +237,33 @@ let seasonData = null;
 let currentSeason = 4;
 
 function initMap() {
-  mapboxgl.accessToken = MAPBOX_TOKEN;
-
-  map = new mapboxgl.Map({
+  map = new maplibregl.Map({
     container: 'map',
-    style: 'mapbox://styles/mapbox/dark-v11',
-    center: [20, 25],      // Centered between Europe/Asia — shows both Eastern and Western hemispheres
+    style: {
+      version: 8,
+      glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
+      sources: {
+        'carto-dark': {
+          type: 'raster',
+          tiles: ['https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'],
+          tileSize: 256,
+          attribution: '© OpenStreetMap © CARTO',
+        },
+      },
+      layers: [{
+        id: 'background',
+        type: 'raster',
+        source: 'carto-dark',
+        minzoom: 0,
+        maxzoom: 22,
+        paint: { 'raster-opacity': 0.85 },
+      }],
+    },
+    center: [20, 25],
     zoom: 1.5,
-    projection: 'globe',   // 3D globe projection
     renderWorldCopies: false,
     attributionControl: false,
-    logoPosition: 'bottom-left',
     antialias: true,
-  });
-
-  // Subtle globe atmosphere
-  map.on('style.load', () => {
-    map.setFog({
-      color: 'rgb(8, 8, 20)',
-      'high-color': 'rgb(20, 20, 40)',
-      'horizon-blend': 0.04,
-      'space-color': 'rgb(5, 5, 15)',
-      'star-intensity': 0.4,
-    });
   });
 
   map.on('load', () => {
@@ -310,9 +314,8 @@ function initMap() {
       },
     });
 
-    // Load current season
-    renderSeason(currentSeason);
-    setupHoverInteraction();
+    // Load current season — defer to next tick to ensure MapLibre style is fully settled
+    setTimeout(() => { renderSeason(currentSeason); setupHoverInteraction(); }, 100);
   });
 
   // Slow auto-rotation for the globe (cinematic effect)
@@ -590,9 +593,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initCountdown();
   initTimeline();
 
-  // Wait for Mapbox + H3 to be fully loaded
+  // Wait for MapLibre + H3 to be fully loaded
   function tryInitMap() {
-    if (typeof mapboxgl !== 'undefined' && typeof h3 !== 'undefined') {
+    if (typeof maplibregl !== 'undefined' && typeof h3 !== 'undefined') {
       try {
         initMap();
       } catch (err) {
