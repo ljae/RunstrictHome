@@ -592,6 +592,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initCountdown();
   initTimeline();
+  initRunnerEffects();
 
   // Wait for MapLibre + H3 to be fully loaded
   function tryInitMap() {
@@ -617,4 +618,28 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   tryInitMap();
+
+  function initRunnerEffects() {
+    const footstep = document.getElementById('hudFootstep');
+    const paceEl   = document.getElementById('hudPace');
+    if (!footstep || !paceEl) return;
+
+    // Footstep ripple fires on each stride (0.55s matches runner-stride animation)
+    function fireFootstep() {
+      footstep.classList.remove('impact');
+      void footstep.offsetWidth; // reflow to restart animation
+      footstep.classList.add('impact');
+    }
+    // Alternate feet: left foot slightly offset
+    setInterval(fireFootstep, 550);
+    setTimeout(() => setInterval(fireFootstep, 550), 275); // right foot offset
+
+    // Pace flicker: randomly tweak pace by ±1s to simulate live GPS
+    const basePaces = ['5\'26"/km', '5\'27"/km', '5\'28"/km', '5\'29"/km', '5\'28"/km'];
+    let paceIdx = 2;
+    setInterval(() => {
+      paceIdx = Math.max(0, Math.min(basePaces.length - 1, paceIdx + (Math.random() > 0.5 ? 1 : -1)));
+      paceEl.textContent = basePaces[paceIdx];
+    }, 3200 + Math.random() * 2000);
+  }
 });
