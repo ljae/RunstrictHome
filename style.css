@@ -240,9 +240,10 @@ img { max-width: 100%; }
 
 .athlete-hud {
   display: grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns: minmax(0, 420px) 1fr;
   gap: 64px;
   align-items: center;
+  justify-content: center;
 }
 
 /* HUD card wrapping the runner image */
@@ -514,7 +515,7 @@ img { max-width: 100%; }
 }
 
 /* Copy side */
-.athlete-copy { max-width: 480px; }
+.athlete-copy { min-width: 0; }
 
 .hud-eyebrow {
   font-family: 'Space Grotesk', monospace;
@@ -538,7 +539,7 @@ img { max-width: 100%; }
   color: var(--text-dim);
   line-height: 1.75;
   margin-bottom: 36px;
-  max-width: 400px;
+  max-width: 100%;
 }
 
 .hud-stats-row {
