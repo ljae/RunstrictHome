@@ -1,0 +1,306 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic:
+      - img
+    - navigation [ref=e3]:
+      - img "RunStrict" [ref=e5]
+      - generic [ref=e6]:
+        - link "How It Works" [ref=e7] [cursor=pointer]:
+          - /url: "#how-it-works"
+        - link "Teams" [ref=e8] [cursor=pointer]:
+          - /url: "#teams"
+        - link "Season" [ref=e9] [cursor=pointer]:
+          - /url: "#season"
+        - link "Download" [ref=e10] [cursor=pointer]:
+          - /url: "#download"
+    - generic [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]: 🏃 Season 4 — Active
+        - heading "Run. Flip. Dominate." [level=1] [ref=e14]:
+          - text: Run.
+          - text: Flip.
+          - generic [ref=e15]: Dominate.
+        - paragraph [ref=e16]: We run the same roads.
+        - paragraph [ref=e17]: A location-based running game where your footsteps become territory. Choose your team. Flip hexes. Conquer your city — before the season ends.
+        - generic [ref=e18]:
+          - link "App Store" [ref=e19] [cursor=pointer]:
+            - /url: "#download"
+            - img [ref=e20]
+            - text: App Store
+          - link "Google Play" [ref=e22] [cursor=pointer]:
+            - /url: "#download"
+            - img [ref=e23]
+            - text: Google Play
+      - generic [ref=e25]:
+        - generic:
+          - generic [ref=e26]:
+            - button "S1" [ref=e27] [cursor=pointer]
+            - button "S2" [ref=e28] [cursor=pointer]
+            - button "S3" [ref=e29] [cursor=pointer]
+            - button "S4 ✦" [ref=e30] [cursor=pointer]
+          - generic:
+            - generic: FLAME
+            - generic: WAVE
+            - generic: CHAOS
+        - region "Map" [ref=e32]
+        - generic:
+          - generic:
+            - generic: "148"
+            - generic: FLAME
+          - generic:
+            - generic: "132"
+            - generic: WAVE
+          - generic:
+            - generic: "82"
+            - generic: CHAOS
+    - generic [ref=e33]:
+      - generic [ref=e34]: Scroll to explore
+      - generic [ref=e35]: ↓
+  - generic [ref=e38]:
+    - generic [ref=e39]:
+      - img "RunStrict athlete" [ref=e40]
+      - generic [ref=e41]:
+        - generic [ref=e42]: SZN.04
+        - generic [ref=e44]: LIVE
+        - generic [ref=e45]: 5'26"/km
+      - generic [ref=e46]:
+        - generic [ref=e47]:
+          - generic [ref=e48]: "15.2"
+          - generic [ref=e49]: KM
+        - generic [ref=e51]: HEX CAPTURE · 1:23:05
+        - generic [ref=e54]:
+          - generic [ref=e55]: 4×
+          - generic [ref=e56]: BUFF
+    - generic [ref=e57]:
+      - generic [ref=e58]: // YOUR CITY. YOUR RULES.
+      - heading "Every step is a declaration." [level=2] [ref=e59]:
+        - text: Every step is
+        - generic [ref=e60]: a declaration.
+      - paragraph [ref=e61]: RunStrict turns your daily run into territorial warfare. Hit the streets, flip hexes, and conquer your city before The Void resets everything.
+      - generic [ref=e62]:
+        - generic [ref=e63]:
+          - generic [ref=e64]: "40"
+          - generic [ref=e65]: DAYS / SEASON
+        - generic [ref=e66]:
+          - generic [ref=e67]: 175m
+          - generic [ref=e68]: HEX EDGE
+        - generic [ref=e69]:
+          - generic [ref=e70]: 4×
+          - generic [ref=e71]: MAX BUFF
+      - link "Join the Season" [ref=e72] [cursor=pointer]:
+        - /url: "#download"
+        - img [ref=e73]
+        - text: Join the Season
+  - generic [ref=e77]:
+    - generic [ref=e78]:
+      - generic [ref=e79]: REAL GAME FOOTAGE
+      - heading "See it in action." [level=2] [ref=e80]
+      - paragraph [ref=e81]: Actual Season 5 gameplay. Real hexes. Real runners. Real war.
+    - generic [ref=e82]:
+      - generic [ref=e89]: Season 5 · Live Run
+      - generic [ref=e90]:
+        - generic [ref=e91] [cursor=pointer]:
+          - img "Territory map — Cupertino H3 hexes" [ref=e92]
+          - generic [ref=e93]: 🗺️ Territory
+        - generic [ref=e94] [cursor=pointer]:
+          - img "Season 5 leaderboard" [ref=e95]
+          - generic [ref=e96]: 🏆 Leaderboard
+        - generic [ref=e97] [cursor=pointer]:
+          - img "Buff multiplier screen" [ref=e98]
+          - generic [ref=e99]: ⚡ Buff & Rank
+        - generic [ref=e100] [cursor=pointer]:
+          - img "Runner stats screen" [ref=e101]
+          - generic [ref=e102]: 📊 Stats
+  - generic [ref=e104]:
+    - generic [ref=e105]:
+      - generic [ref=e106]: THE GAME
+      - heading "Simple rule. Endless war." [level=2] [ref=e107]
+      - paragraph [ref=e108]: Every run is a battle. Every step is a claim.
+    - generic [ref=e109]:
+      - generic [ref=e110]:
+        - generic [ref=e111]: "01"
+        - generic [ref=e112]: 🏃
+        - heading "Lace Up & Run" [level=3] [ref=e113]
+        - paragraph [ref=e114]: Open RunStrict and hit the streets. GPS tracks every step in real-time. Maintain under 8 min/km to activate hex capture.
+      - generic [ref=e115]:
+        - generic [ref=e116]: "02"
+        - generic [ref=e117]: ⬡
+        - heading "Flip the Hexes" [level=3] [ref=e118]
+        - paragraph [ref=e119]: Every ~175m hexagonal tile you run through flips to your team's color. The last runner wins. Speed counts. Consistency matters.
+      - generic [ref=e120]:
+        - generic [ref=e121]: "03"
+        - generic [ref=e122]: 🗺️
+        - heading "Dominate the Map" [level=3] [ref=e123]
+        - paragraph [ref=e124]: Watch the city transform. Earn points, climb leaderboards, and lead your team to province dominance — before The Void resets everything.
+      - generic [ref=e125]:
+        - generic [ref=e126]: "04"
+        - generic [ref=e127]: ⚡
+        - heading "Earn Buff Multipliers" [level=3] [ref=e128]
+        - paragraph [ref=e129]: Red Elites earn 4× points. Blue Union gets district bonuses. Purple CHAOS players grow stronger the more they run together.
+    - generic [ref=e130]:
+      - text: THE VOID
+      - generic [ref=e131]:
+        - generic [ref=e132]: D-DAY
+        - heading "THE VOID" [level=3] [ref=e133]
+        - paragraph [ref=e134]: When the 40-day season ends, everything is wiped. All hexes. All points. All territories. Only the legend remains.
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - generic [ref=e137]: "33"
+          - generic [ref=e138]: DAYS
+        - generic [ref=e139]:
+          - generic [ref=e140]: "08"
+          - generic [ref=e141]: HOURS
+        - generic [ref=e142]:
+          - generic [ref=e143]: "31"
+          - generic [ref=e144]: MINS
+  - generic [ref=e146]:
+    - generic [ref=e147]:
+      - generic [ref=e148]: CHOOSE YOUR SIDE
+      - heading "Three teams. One city." [level=2] [ref=e149]
+      - paragraph [ref=e150]: Your allegiance shapes your strategy — and your destiny.
+    - generic [ref=e151]:
+      - generic [ref=e152]:
+        - generic [ref=e153]: 🔥
+        - generic [ref=e154]: FLAME
+        - generic [ref=e155]: Red Team
+        - paragraph [ref=e156]: The elite meritocracy. Top 20% of Red runners become Elites — unlocking 4× points and proving dominance through sheer performance.
+        - list [ref=e157]:
+          - listitem [ref=e158]: "⚡ Elite tier: 4× flip multiplier"
+          - listitem [ref=e159]: 🏆 District & Province bonuses
+          - listitem [ref=e160]: 🔥 Pure performance-based ranking
+        - generic [ref=e161]:
+          - generic [ref=e162]: 4×
+          - generic [ref=e163]: Max Multiplier
+      - generic [ref=e164]:
+        - generic [ref=e165]: 🌊
+        - generic [ref=e166]: WAVE
+        - generic [ref=e167]: Blue Team
+        - paragraph [ref=e168]: United as one. Every Blue runner fights together. District and Province victories amplify the whole team's power with union bonuses.
+        - list [ref=e169]:
+          - listitem [ref=e170]: 🌊 Union base buff for all members
+          - listitem [ref=e171]: "🏙️ District win: +1× for everyone"
+          - listitem [ref=e172]: "🗺️ Province win: +1× stacked"
+        - generic [ref=e173]:
+          - generic [ref=e174]: 3×
+          - generic [ref=e175]: Max Multiplier
+      - generic [ref=e176]:
+        - generic [ref=e177]: ☄️
+        - generic [ref=e178]: CHAOS
+        - generic [ref=e179]: Purple Team · Always Open
+        - paragraph [ref=e180]: The wildcard. Join anytime — but never go back. CHAOS power scales with participation. The more Purples run, the stronger everyone becomes.
+        - list [ref=e181]:
+          - listitem [ref=e182]: 🚪 Available anytime. Irreversible.
+          - listitem [ref=e183]: 👥 ≥60% active = 3× buff for all
+          - listitem [ref=e184]: ⚠️ Points preserved on defection
+        - generic [ref=e185]:
+          - generic [ref=e186]: 3×
+          - generic [ref=e187]: Max Multiplier
+  - generic [ref=e189]:
+    - generic [ref=e190]:
+      - generic [ref=e191]: SEASON 4 — LIVE
+      - heading "The war is happening now." [level=2] [ref=e192]
+      - paragraph [ref=e193]: Real-time territory control. Every run matters.
+    - generic [ref=e194]:
+      - generic [ref=e195]:
+        - generic [ref=e196]: 📅
+        - generic [ref=e197]: "33"
+        - generic [ref=e198]: Days Until The Void
+      - generic [ref=e199]:
+        - generic [ref=e200]: ⬡
+        - generic [ref=e201]: 84,219
+        - generic [ref=e202]: Hexes Flipped This Season
+      - generic [ref=e203]:
+        - generic [ref=e204]: 🏃
+        - generic [ref=e205]: 2,847
+        - generic [ref=e206]: Active Runners
+      - generic [ref=e207]:
+        - generic [ref=e208]: 🌍
+        - generic [ref=e209]: "23"
+        - generic [ref=e210]: Cities Conquered
+    - generic [ref=e211]:
+      - generic [ref=e212]:
+        - generic [ref=e213]: Season 4 Progress
+        - generic [ref=e214]: Feb 21, 2026 → Apr 1, 2026
+      - generic [ref=e218]:
+        - generic [ref=e219]: Day 1
+        - generic [ref=e220]: The Void →
+  - generic [ref=e222]:
+    - generic [ref=e223]:
+      - generic [ref=e224]: BUILT FOR RUNNERS
+      - heading "Every feature earns its place." [level=2] [ref=e225]
+    - generic [ref=e226]:
+      - generic [ref=e227]:
+        - generic [ref=e228]: 📡
+        - heading "GPS Anti-Cheat" [level=4] [ref=e229]
+        - paragraph [ref=e230]: 25 km/h cap. Accelerometer verification. GPS ≤50m accuracy. No spoofing. Real runs only.
+      - generic [ref=e231]:
+        - generic [ref=e232]: 🔋
+        - heading "Battery Optimized" [level=4] [ref=e233]
+        - paragraph [ref=e234]: 0.5 Hz GPS polling. No WebSocket drains. Data syncs only on launch, resume, and run completion.
+      - generic [ref=e235]:
+        - generic [ref=e236]: 📊
+        - heading "Pace Consistency Score" [level=4] [ref=e237]
+        - paragraph [ref=e238]: CV-based Stability Score rewards steady runners. Green ≥80. Yellow ≥50. Red means chaos.
+      - generic [ref=e239]:
+        - generic [ref=e240]: 🏅
+        - heading "Tiered Leaderboards" [level=4] [ref=e241]
+        - paragraph [ref=e242]: Province, District, Zone scopes. Your rank means something — and it resets every 40 days.
+      - generic [ref=e243]:
+        - generic [ref=e244]: 🔒
+        - heading "Privacy First" [level=4] [ref=e245]
+        - paragraph [ref=e246]: No runner IDs stored in hexes. Only team color and minimal timestamp for conflict resolution.
+      - generic [ref=e247]:
+        - generic [ref=e248]: 🗺️
+        - heading "H3 Hex Grid" [level=4] [ref=e249]
+        - paragraph [ref=e250]: Uber's H3 at resolution 9 — ~175m edge hexagons. Global, precise, beautiful on any map.
+  - generic [ref=e253]:
+    - generic: ⬡
+    - generic [ref=e254]: JOIN THE SEASON
+    - heading "Your city is waiting." [level=2] [ref=e255]
+    - paragraph [ref=e256]:
+      - text: Download RunStrict and choose your team before Season 4 ends.
+      - text: The Void comes for everyone. Make your mark first.
+    - generic [ref=e257]:
+      - link "Download on the App Store" [ref=e258] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e260]
+        - generic [ref=e262]:
+          - generic [ref=e263]: Download on the
+          - generic [ref=e264]: App Store
+      - link "Get it on Google Play" [ref=e265] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e267]
+        - generic [ref=e269]:
+          - generic [ref=e270]: Get it on
+          - generic [ref=e271]: Google Play
+    - paragraph [ref=e272]: RunStrict is currently in beta. Join our waitlist for early access.
+  - contentinfo [ref=e273]:
+    - generic [ref=e274]:
+      - generic [ref=e275]:
+        - generic [ref=e276]:
+          - img "RunStrict" [ref=e278]
+          - paragraph [ref=e279]: United Through Running
+        - generic [ref=e280]:
+          - generic [ref=e281]:
+            - heading "Game" [level=5] [ref=e282]
+            - link "How It Works" [ref=e283] [cursor=pointer]:
+              - /url: "#how-it-works"
+            - link "Teams" [ref=e284] [cursor=pointer]:
+              - /url: "#teams"
+            - link "Season Stats" [ref=e285] [cursor=pointer]:
+              - /url: "#season"
+          - generic [ref=e286]:
+            - heading "Download" [level=5] [ref=e287]
+            - link "App Store" [ref=e288] [cursor=pointer]:
+              - /url: "#"
+            - link "Google Play" [ref=e289] [cursor=pointer]:
+              - /url: "#"
+          - generic [ref=e290]:
+            - heading "Legal" [level=5] [ref=e291]
+            - link "Privacy Policy" [ref=e292] [cursor=pointer]:
+              - /url: privacy-policy.html
+            - link "Terms of Service" [ref=e293] [cursor=pointer]:
+              - /url: terms-of-service.html
+      - generic [ref=e294]:
+        - paragraph [ref=e295]: © 2026 RunStrict. All rights reserved.
+        - paragraph [ref=e296]: "\"Unity is not declared. It builds naturally through competition.\""
