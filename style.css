@@ -1145,9 +1145,19 @@ img { max-width: 100%; }
 .team-purple .team-name { color: var(--purple); }
 
 .team-emblem {
-  font-size: 2.8rem;
   margin-bottom: 16px;
   display: block;
+}
+.team-icon {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgba(255,255,255,0.18));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.team-card:hover .team-icon {
+  transform: scale(1.1) translateY(-4px);
+  filter: drop-shadow(0 0 28px rgba(255,255,255,0.32));
 }
 
 .team-name {
