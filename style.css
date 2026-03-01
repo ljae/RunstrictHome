@@ -2054,3 +2054,60 @@ img { max-width: 100%; }
   .testimonial-card { padding: 28px 24px 22px; }
   .testimonial-detail { white-space: normal; }
 }
+
+
+/* ─── Waitlist Form ────────────────────────────────────────────────────── */
+.waitlist-form {
+  margin: 32px auto 8px;
+  max-width: 480px;
+  text-align: center;
+}
+.waitlist-label {
+  font-size: 0.85rem;
+  color: var(--text-muted, rgba(255,255,255,0.55));
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+.waitlist-input-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+.waitlist-email {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.waitlist-email::placeholder { color: rgba(255,255,255,0.35); }
+.waitlist-email:focus { border-color: var(--cyan, #00f5ff); }
+.waitlist-submit {
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: none;
+  background: var(--cyan, #00f5ff);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.waitlist-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+.waitlist-privacy {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  margin-top: 10px;
+}
+@media (max-width: 480px) {
+  .waitlist-input-row { flex-direction: column; }
+  .waitlist-email, .waitlist-submit { width: 100%; }
+}

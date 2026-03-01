@@ -735,7 +735,27 @@
             </div>
           </a>
         </div>
-        <p class="disclaimer">RunStrict is currently in beta. Join our waitlist for early access.</p>
+        <div class="waitlist-form">
+          <p class="waitlist-label">Not available in your region yet? Join the waitlist:</p>
+          <form
+            action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+            method="POST"
+            class="waitlist-input-row"
+            onsubmit="trackWaitlist(event)"
+          >
+            <input
+              type="email"
+              name="email"
+              placeholder="your@email.com"
+              required
+              class="waitlist-email"
+              aria-label="Email address for waitlist"
+            />
+            <button type="submit" class="waitlist-submit">Join Waitlist</button>
+          </form>
+          <p class="waitlist-privacy">No spam. One email when the app launches in your city.</p>
+        </div>
+        <p class="disclaimer">RunStrict is currently in beta. Early access rolling out by region.</p>
       </div>
     </div>
   </section>

@@ -661,3 +661,15 @@ function toggleFaq(btn) {
     btn.setAttribute('aria-expanded', 'true');
   }
 }
+
+
+// ── Waitlist form tracking ────────────────────────────────────────────────────
+function trackWaitlist(e) {
+  if (typeof gtag === 'function') {
+    gtag('event', 'waitlist_signup', {
+      event_category: 'engagement',
+      event_label: 'download_section',
+    });
+  }
+  // Let the native form submission continue to Formspree
+}
