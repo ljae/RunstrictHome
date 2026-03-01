@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block crawling of legal pages from indexing (optional — remove if you want them indexed)
+# Disallow: /privacy-policy.html
+# Disallow: /terms-of-service.html
+
+Sitemap: https://runstrict.com/sitemap.xml

@@ -3,8 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RunStrict — The 40-Day Journey</title>
-  <meta name="description" content="A location-based running game. Flip hexagonal territory tiles. Dominate your city. 40 days. One season. No mercy." />
+  <title>RunStrict — GPS Running Game | Capture Territory. Dominate Your City.</title>
+  <meta name="description" content="The GPS running game where your footsteps capture territory. Run through hexes, conquer your city, and race The Void before the 40-day season resets. Season 4 LIVE — 2,847 active runners." />
+
+  <!-- ─── SEO: Canonical & Indexing ─── -->
+  <link rel="canonical" href="https://runstrict.com/" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="GPS running game, location-based running game, gamified running app, run to capture territory, hex territory game, team running competition, fitness game app, running challenge app, outdoor GPS game, competitive running app" />
+  <meta name="author" content="RunStrict" />
+  <meta name="theme-color" content="#0A0A0F" />
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- ─── Open Graph (Facebook / iMessage / LinkedIn) ─── -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://runstrict.com/" />
+  <meta property="og:site_name" content="RunStrict" />
+  <meta property="og:title" content="RunStrict — GPS Running Game | Capture Territory. Dominate Your City." />
+  <meta property="og:description" content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, and beat The Void. 40-day seasons. Season 4 LIVE — 2,847 runners." />
+  <meta property="og:image" content="https://runstrict.com/assets/hero_runner_opt.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="RunStrict GPS running game — capture hexagonal territory" />
+
+  <!-- ─── Twitter Card ─── -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@runstrictapp" />
+  <meta name="twitter:title" content="RunStrict — GPS Running Game" />
+  <meta name="twitter:description" content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, beat The Void. Season 4 LIVE." />
+  <meta name="twitter:image" content="https://runstrict.com/assets/hero_runner_opt.jpg" />
+  <meta name="twitter:image:alt" content="RunStrict GPS running game" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -19,6 +46,68 @@
   <script src="https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js"></script>
 
   <link rel="stylesheet" href="style.css" />
+  <!-- ─── Structured Data: MobileApplication + FAQ ─── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MobileApplication",
+        "name": "RunStrict",
+        "description": "A location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Team-based territorial warfare resets every 40 days in The Void.",
+        "operatingSystem": ["iOS", "Android"],
+        "applicationCategory": "SportsApplication",
+        "applicationSubCategory": "Running",
+        "genre": "Sports, Strategy",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": { "@type": "Organization", "name": "RunStrict", "url": "https://runstrict.com" },
+        "url": "https://runstrict.com",
+        "screenshot": [
+          "https://runstrict.com/assets/territory_SS.jpg",
+          "https://runstrict.com/assets/leader_SS.jpg",
+          "https://runstrict.com/assets/buff_SS.jpg",
+          "https://runstrict.com/assets/stats_SS.jpg"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is RunStrict?",
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is a location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to control your city before the 40-day season ends in The Void reset." }
+          },
+          {
+            "@type": "Question",
+            "name": "How does hex capture work in RunStrict?",
+            "acceptedAnswer": { "@type": "Answer", "text": "As you run, RunStrict uses GPS to track your route in real-time. Every ~175m hexagonal tile (H3 resolution 9) you physically run through flips to your team's color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture mode." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is RunStrict free to play?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, RunStrict is free to download and play on iOS and Android. The app is currently in beta — join the waitlist for early access." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is The Void in RunStrict?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The Void is the season reset event that occurs every 40 days. When The Void arrives, all captured hexes, points, and territorial control are completely wiped. Only the season leaderboard legend survives. Then a new 40-day season begins." }
+          },
+          {
+            "@type": "Question",
+            "name": "What teams can I join in RunStrict?",
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict has three teams: FLAME (Red — top 20% earn 4× multipliers through performance), WAVE (Blue — collective bonuses when your district or province wins), and CHAOS (Purple — join anytime, irreversible, power scales with team participation up to 3×)." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is RunStrict available on iPhone and Android?",
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict supports iOS 15+ and Android 10+. GPS accuracy of 50m or better is required for hex capture. Download from the App Store or Google Play and join Season 4." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
 </head>
 <body>
 
@@ -451,6 +540,81 @@
           <h4>H3 Hex Grid</h4>
           <p>Uber's H3 at resolution 9 — ~175m edge hexagons. Global, precise, beautiful on any map.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════ FAQ -->
+  <section class="section faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-badge">FREQUENTLY ASKED</div>
+        <h2>Got questions?</h2>
+        <p>Everything you need to know before your first run.</p>
+      </div>
+
+      <div class="faq-grid reveal">
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What is RunStrict?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>RunStrict is a location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose a team — FLAME, WAVE, or CHAOS — flip hexes, and battle for dominance before the 40-day season resets in The Void.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How does hex capture work?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>GPS tracks your route in real-time. Every ~175m hexagonal tile you physically run through flips to your team’s color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture mode. No spoofing — accelerometer verification blocks cheaters.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Is RunStrict free to play?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Yes — RunStrict is free to download on iOS and Android. The app is currently in beta. Join the waitlist for early access.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What is The Void?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>The Void is the season-end reset event every 40 days. All hexes, points, and territorial control are wiped completely clean. Only the season leaderboard legend survives. Then a brand new 40-day season begins — same map, zero territory.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Which team should I join?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p><strong>FLAME</strong> if you’re a competitive elite — top 20% earn 4× multipliers through pure performance. <strong>WAVE</strong> if you love collective victory — your whole district wins together. <strong>CHAOS</strong> if you want to join anytime with no conditions — but choose carefully. It’s irreversible.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>What phones does RunStrict support?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>RunStrict supports iOS 15+ (iPhone) and Android 10+. GPS accuracy ≤50m is required for hex capture. The app uses battery-optimized 0.5 Hz GPS polling, so it won’t drain your battery on long runs.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
