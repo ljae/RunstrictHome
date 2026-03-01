@@ -1865,3 +1865,77 @@ img { max-width: 100%; }
   .faq-q { padding: 18px 20px; font-size: 0.95rem; }
   .faq-a p { padding: 0 20px 18px; }
 }
+
+/* ─── Social Proof Bar ─── */
+.proof-bar {
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+}
+
+.proof-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+.proof-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 48px;
+}
+
+.proof-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.proof-lbl {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.proof-live {
+  color: #34C759;
+}
+
+.proof-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34C759;
+  box-shadow: 0 0 8px rgba(52,199,89,0.9);
+  animation: heartbeat 1.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.proof-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .proof-stat { padding: 12px 24px; }
+  .proof-bar-inner { gap: 0; }
+  .proof-divider { height: 28px; }
+  .proof-num { font-size: 1.1rem; }
+}
