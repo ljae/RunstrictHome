@@ -324,6 +324,321 @@
     </div>
   </section>
 
+  <!-- ══════════════════════════════════ THE DAILY CIRCUIT EXPLAINER -->
+  <section class="section dc-section" id="daily-circuit">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <div class="section-badge">THE DAILY CIRCUIT</div>
+        <h2>Own the map. <span class="title-gradient">24 hours. Then reset.</span></h2>
+        <p class="dc-intro">Every midnight, The Void wipes every hex. Ghost trails of yesterday's top runners still glow across the grid — follow them, beat them, or blaze a new route before time runs out.</p>
+      </div>
+
+      <div class="dc-arena reveal">
+
+        <!-- ─────────── LEFT PANEL ─────────── -->
+        <div class="dc-col dc-col-left">
+
+          <!-- Countdown -->
+          <div class="dc-card">
+            <div class="dc-card-label">
+              <span class="dc-dot dc-dot-red"></span>
+              CYCLE RESETS IN
+            </div>
+            <div class="dc-timer">
+              <div class="dc-tunit"><span class="dc-tnum" id="dcH">--</span><span class="dc-tsub">HRS</span></div>
+              <span class="dc-tsep">:</span>
+              <div class="dc-tunit"><span class="dc-tnum" id="dcM">--</span><span class="dc-tsub">MIN</span></div>
+              <span class="dc-tsep">:</span>
+              <div class="dc-tunit"><span class="dc-tnum" id="dcS">--</span><span class="dc-tsub">SEC</span></div>
+            </div>
+            <div class="dc-bar-wrap"><div class="dc-bar-fill" id="dcBar"></div></div>
+            <div class="dc-bar-label">Day progress</div>
+          </div>
+
+          <!-- Leaderboard -->
+          <div class="dc-card dc-card-lb">
+            <div class="dc-card-label">
+              <span class="dc-dot dc-dot-live"></span>
+              LIVE LEADERBOARD
+            </div>
+            <ul class="dc-lb">
+              <li class="dc-lb-row">
+                <span class="dc-lb-pos" style="color:#4FC3F7">#1</span>
+                <span class="dc-lb-av" style="background:#007AFF">A</span>
+                <span class="dc-lb-name">APEX_42</span>
+                <span class="dc-lb-score">34 hx</span>
+                <span class="dc-lb-bar"><span style="width:100%;background:#007AFF"></span></span>
+              </li>
+              <li class="dc-lb-row">
+                <span class="dc-lb-pos" style="color:#FFAB76">#2</span>
+                <span class="dc-lb-av" style="background:#FF6B00">G</span>
+                <span class="dc-lb-name">GhostKM</span>
+                <span class="dc-lb-score">28 hx</span>
+                <span class="dc-lb-bar"><span style="width:82%;background:#FF6B00"></span></span>
+              </li>
+              <li class="dc-lb-row">
+                <span class="dc-lb-pos" style="color:#CE93D8">#3</span>
+                <span class="dc-lb-av" style="background:#BF5AF2">S</span>
+                <span class="dc-lb-name">StreetCLR</span>
+                <span class="dc-lb-score">21 hx</span>
+                <span class="dc-lb-bar"><span style="width:62%;background:#BF5AF2"></span></span>
+              </li>
+              <li class="dc-lb-row dc-lb-you">
+                <span class="dc-lb-pos dc-lb-pos-you">YOU</span>
+                <span class="dc-lb-av" style="background:#00E5FF;color:#000">Y</span>
+                <span class="dc-lb-name">__you__</span>
+                <span class="dc-lb-score">19 hx</span>
+                <span class="dc-lb-bar"><span style="width:56%;background:#00E5FF"></span></span>
+              </li>
+              <li class="dc-lb-row dc-lb-dim">
+                <span class="dc-lb-pos">#5</span>
+                <span class="dc-lb-av" style="background:#333">R</span>
+                <span class="dc-lb-name">RunMcRun</span>
+                <span class="dc-lb-score">14 hx</span>
+                <span class="dc-lb-bar"><span style="width:41%;background:#444"></span></span>
+              </li>
+            </ul>
+          </div>
+
+        </div><!-- /.dc-col-left -->
+
+        <!-- ─────────── CENTER MAP ─────────── -->
+        <div class="dc-col dc-col-map">
+          <div class="dc-map-hdr">
+            <span class="dc-map-id">TERRITORY MAP — S5:D18</span>
+            <span class="dc-map-live"><span class="dc-dot dc-dot-live"></span>LIVE</span>
+          </div>
+
+          <div class="dc-iso-stage">
+            <svg class="dc-iso-svg" viewBox="140 60 345 305" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Glow: blue --><filter id="fxB" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feColorMatrix in="b" type="matrix" values="0 0 0 0 0 0 0 0 0 0.48 0 0 0 0 1 0 0 0 0.8 0" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <!-- Glow: orange --><filter id="fxO" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feColorMatrix in="b" type="matrix" values="0 0 0 0 1 0 0 0 0 0.42 0 0 0 0 0 0 0 0 0.8 0" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <!-- Glow: purple --><filter id="fxP" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/><feColorMatrix in="b" type="matrix" values="0 0 0 0 0.75 0 0 0 0 0.35 0 0 0 0 0.95 0 0 0 0.8 0" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <!-- Glow: accent/cyan --><filter id="fxA" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur in="SourceGraphic" stdDeviation="8" result="b"/><feColorMatrix in="b" type="matrix" values="0 0 0 0 0 0 0 0 0 0.9 0 0 0 0 1 0 0 0 1 0" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <!-- Ghost path glow --><filter id="fxG" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                <!-- Runner glow --><filter id="fxR" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur in="SourceGraphic" stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+
+              <!-- ── RING 0: center (YOU) ── -->
+              <polygon class="dc-hex dc-hex-acc" filter="url(#fxA)"
+                points="300,188 319,199 319,221 300,232 281,221 281,199"/>
+
+              <!-- ── RING 1 ── -->
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.08s"
+                points="349,188 368,199 368,221 349,232 330,221 330,199"/>
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.12s"
+                points="324,230 343,241 343,263 324,274 305,263 305,241"/>
+              <polygon class="dc-hex dc-hex-o" filter="url(#fxO)" style="animation-delay:.16s"
+                points="275,230 294,241 294,263 275,274 256,263 256,241"/>
+              <polygon class="dc-hex dc-hex-o" filter="url(#fxO)" style="animation-delay:.20s"
+                points="251,188 270,199 270,221 251,232 232,221 232,199"/>
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.24s"
+                points="276,146 295,157 295,179 276,190 257,179 257,157"/>
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.28s"
+                points="325,146 344,157 344,179 325,190 306,179 306,157"/>
+
+              <!-- ── RING 2 ── -->
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.32s"
+                points="398,188 417,199 417,221 398,232 379,221 379,199"/>
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.36s"
+                points="374,146 393,157 393,179 374,190 355,179 355,157"/>
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.40s"
+                points="350,104 369,115 369,137 350,148 331,137 331,115"/>
+              <polygon class="dc-hex dc-hex-o" filter="url(#fxO)" style="animation-delay:.44s"
+                points="301,104 320,115 320,137 301,148 282,137 282,115"/>
+              <polygon class="dc-hex dc-hex-o" filter="url(#fxO)" style="animation-delay:.48s"
+                points="252,104 271,115 271,137 252,148 233,137 233,115"/>
+              <polygon class="dc-hex dc-hex-p" filter="url(#fxP)" style="animation-delay:.52s"
+                points="227,146 246,157 246,179 227,190 208,179 208,157"/>
+              <polygon class="dc-hex dc-hex-p" filter="url(#fxP)" style="animation-delay:.56s"
+                points="202,188 221,199 221,221 202,232 183,221 183,199"/>
+              <polygon class="dc-hex dc-hex-p" filter="url(#fxP)" style="animation-delay:.60s"
+                points="227,230 246,241 246,263 227,274 208,263 208,241"/>
+              <polygon class="dc-hex dc-hex-o" filter="url(#fxO)" style="animation-delay:.64s"
+                points="252,272 271,283 271,305 252,316 233,305 233,283"/>
+              <polygon class="dc-hex dc-hex-o" filter="url(#fxO)" style="animation-delay:.68s"
+                points="301,272 320,283 320,305 301,316 282,305 282,283"/>
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.72s"
+                points="349,272 368,283 368,305 349,316 330,305 330,283"/>
+              <polygon class="dc-hex dc-hex-b" filter="url(#fxB)" style="animation-delay:.76s"
+                points="373,230 392,241 392,263 373,274 354,263 354,241"/>
+
+              <!-- ── GHOST PATHS (yesterday's runners) ── -->
+              <!-- Cyan: #1 runner, horizontal route -->
+              <polyline class="dc-ghost dc-ghost-c" filter="url(#fxG)"
+                points="202,210 251,210 300,210 349,210 398,210"/>
+              <!-- Magenta: #2 runner, diagonal NW→SE -->
+              <polyline class="dc-ghost dc-ghost-m" filter="url(#fxG)"
+                points="252,294 275,252 300,210 325,168 350,126"/>
+              <!-- Gold: #3 runner, diagonal SW→NE -->
+              <polyline class="dc-ghost dc-ghost-g" filter="url(#fxG)"
+                points="349,294 324,252 300,210 276,168 252,126"/>
+
+              <!-- ── PULSE RINGS at center ── -->
+              <circle class="dc-pulse" cx="300" cy="210" r="30"/>
+              <circle class="dc-pulse dc-pulse-2" cx="300" cy="210" r="30"/>
+
+              <!-- ── RUNNER FIGURE ── -->
+              <g class="dc-runner-fig" transform="translate(300,194)" filter="url(#fxR)">
+                <!-- Head -->
+                <circle class="dc-rf" cx="0" cy="-18" r="6"/>
+                <!-- Body -->
+                <line class="dc-rf" x1="0" y1="-12" x2="0" y2="4"/>
+                <!-- Front arm (raised forward) -->
+                <line class="dc-rf dc-rf-af" x1="0" y1="-7" x2="12" y2="-14"/>
+                <!-- Back arm (trailing) -->
+                <line class="dc-rf dc-rf-ab" x1="0" y1="-7" x2="-10" y2="0"/>
+                <!-- Front leg (forward stride) -->
+                <line class="dc-rf dc-rf-lf" x1="0" y1="4" x2="10" y2="18"/>
+                <!-- Back leg (push-off) -->
+                <line class="dc-rf dc-rf-lb" x1="0" y1="4" x2="-8" y2="16"/>
+                <!-- Front foot -->
+                <line class="dc-rf" x1="10" y1="18" x2="17" y2="14"/>
+                <!-- Back foot -->
+                <line class="dc-rf" x1="-8" y1="16" x2="-15" y2="19"/>
+              </g>
+
+              <!-- YOU tag -->
+              <g transform="translate(300,166)">
+                <rect x="-20" y="-10" width="40" height="17" rx="3"
+                  fill="rgba(0,229,255,0.12)" stroke="rgba(0,229,255,0.45)" stroke-width="0.8"/>
+                <text x="0" y="3" text-anchor="middle"
+                  font-family="Space Grotesk,sans-serif" font-size="8.5" font-weight="700"
+                  fill="#00E5FF" letter-spacing="1.5">YOU</text>
+              </g>
+
+            </svg>
+          </div><!-- /.dc-iso-stage -->
+
+          <!-- Legend -->
+          <div class="dc-legend">
+            <div class="dc-legend-item">
+              <span class="dc-ldot" style="background:#007AFF;box-shadow:0 0 5px #007AFF"></span>
+              Top rank
+            </div>
+            <div class="dc-legend-item">
+              <span class="dc-ldot" style="background:#FF6B00;box-shadow:0 0 5px #FF6B00"></span>
+              Mid rank
+            </div>
+            <div class="dc-legend-item">
+              <span class="dc-ldot" style="background:#BF5AF2;box-shadow:0 0 5px #BF5AF2"></span>
+              Contested
+            </div>
+            <div class="dc-legend-item">
+              <span style="display:inline-block;width:22px;height:2px;background:linear-gradient(to right,#00E5FF80,#00E5FF,#00E5FF80);border-radius:2px;margin-right:7px;vertical-align:middle"></span>
+              Ghost trail
+            </div>
+          </div>
+
+        </div><!-- /.dc-col-map -->
+
+        <!-- ─────────── RIGHT PANEL ─────────── -->
+        <div class="dc-col dc-col-right">
+
+          <!-- Territory Status -->
+          <div class="dc-card">
+            <div class="dc-card-label">
+              <span class="dc-dot"></span>
+              TERRITORY STATUS
+            </div>
+            <div class="dc-ring-wrap">
+              <svg viewBox="0 0 120 120" width="110" height="110">
+                <!-- r=42, circumference≈263.9 -->
+                <g transform="rotate(-90 60 60)">
+                  <!-- Background -->
+                  <circle cx="60" cy="60" r="42" fill="none"
+                    stroke="rgba(255,255,255,0.07)" stroke-width="14"/>
+                  <!-- Blue 38%: 100.3px -->
+                  <circle class="dc-ring dc-ring-b" cx="60" cy="60" r="42" fill="none"
+                    stroke="#007AFF" stroke-width="14"
+                    stroke-dasharray="100 164" stroke-dashoffset="0"/>
+                  <!-- Orange 31%: 81.8px -->
+                  <circle class="dc-ring dc-ring-o" cx="60" cy="60" r="42" fill="none"
+                    stroke="#FF6B00" stroke-width="14"
+                    stroke-dasharray="82 182" stroke-dashoffset="-100"/>
+                  <!-- Purple 21%: 55.4px -->
+                  <circle class="dc-ring dc-ring-p" cx="60" cy="60" r="42" fill="none"
+                    stroke="#BF5AF2" stroke-width="14"
+                    stroke-dasharray="55 209" stroke-dashoffset="-182"/>
+                </g>
+                <text x="60" y="55" text-anchor="middle"
+                  font-family="Space Grotesk,sans-serif" font-size="18" font-weight="700" fill="#E8E8F0">90%</text>
+                <text x="60" y="70" text-anchor="middle"
+                  font-family="Inter,sans-serif" font-size="8" fill="rgba(232,232,240,0.45)">CLAIMED</text>
+              </svg>
+            </div>
+            <div class="dc-terr-list">
+              <div class="dc-terr-row">
+                <span class="dc-tdot" style="background:#007AFF;box-shadow:0 0 4px #007AFF"></span>
+                <span class="dc-tn">BLUE</span>
+                <div class="dc-tb"><div style="width:38%;background:#007AFF"></div></div>
+                <span class="dc-tp">38%</span>
+              </div>
+              <div class="dc-terr-row">
+                <span class="dc-tdot" style="background:#FF6B00;box-shadow:0 0 4px #FF6B00"></span>
+                <span class="dc-tn">ORANGE</span>
+                <div class="dc-tb"><div style="width:31%;background:#FF6B00"></div></div>
+                <span class="dc-tp">31%</span>
+              </div>
+              <div class="dc-terr-row">
+                <span class="dc-tdot" style="background:#BF5AF2;box-shadow:0 0 4px #BF5AF2"></span>
+                <span class="dc-tn">PURPLE</span>
+                <div class="dc-tb"><div style="width:21%;background:#BF5AF2"></div></div>
+                <span class="dc-tp">21%</span>
+              </div>
+              <div class="dc-terr-row">
+                <span class="dc-tdot" style="background:rgba(255,255,255,0.15)"></span>
+                <span class="dc-tn">VOID</span>
+                <div class="dc-tb"><div style="width:10%;background:rgba(255,255,255,0.1)"></div></div>
+                <span class="dc-tp">10%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cycle Stats -->
+          <div class="dc-card">
+            <div class="dc-card-label">
+              <span class="dc-dot dc-dot-live"></span>
+              CYCLE STATS
+            </div>
+            <div class="dc-cstats">
+              <div class="dc-cstat">
+                <div class="dc-cval" style="color:#00E5FF">847</div>
+                <div class="dc-clbl">ACTIVE</div>
+              </div>
+              <div class="dc-cstat">
+                <div class="dc-cval" style="color:#FF6B00">28%</div>
+                <div class="dc-clbl">CONTESTED</div>
+              </div>
+            </div>
+            <div class="dc-sbars">
+              <div class="dc-sbar">
+                <div class="dc-sbar-top">
+                  <span>Hexes Flipped</span><span style="color:#00E5FF">73%</span>
+                </div>
+                <div class="dc-sbar-track">
+                  <div class="dc-sbar-fill" style="width:73%;background:#00E5FF"></div>
+                </div>
+              </div>
+              <div class="dc-sbar">
+                <div class="dc-sbar-top">
+                  <span>Void Reclaim Risk</span><span style="color:#FF3B30">HIGH</span>
+                </div>
+                <div class="dc-sbar-track">
+                  <div class="dc-sbar-fill" style="width:82%;background:#FF3B30"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /.dc-col-right -->
+
+      </div><!-- /.dc-arena -->
+    </div><!-- /.container -->
+  </section>
+
   <!-- ═══════════════════════════════════════════════ APP SHOWCASE -->
   <section class="section showcase" id="showcase">
     <div class="container">
