@@ -234,7 +234,7 @@ function buildGeoJSON(hexes) {
 
 let map = null;
 let seasonData = null;
-let currentSeason = 4;
+let currentSeason = 2;
 
 function initMap() {
   map = new maplibregl.Map({
@@ -491,7 +491,7 @@ function initReveal() {
 
 /** Season countdown to "The Void" */
 function initCountdown() {
-  // Season 4: Feb 21 → Apr 1 (40 days)
+  // Season 2: Feb 21 → Apr 1, 2026 (40 days)
   const voidDate = new Date('2026-04-02T00:00:00+02:00'); // GMT+2
 
   function update() {
