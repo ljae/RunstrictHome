@@ -125,13 +125,19 @@
 </head>
 <body>
 
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress">
+    <div class="scroll-progress-fill" id="scrollProgressFill"></div>
+  </div>
+
   <!-- ═══════════════════════════════════════════════ HERO -->
   <section class="hero" id="hero">
+    <div class="hero-sticky">
 
     <!-- Hex background pattern -->
     <div class="hex-bg"></div>
     <!-- Hero runner image (atmospheric background) -->
-    <div class="hero-runner-bg">
+    <div class="hero-runner-bg hero-parallax-layer" id="heroRunnerBg">
       <picture>
         <source srcset="assets/hero_runner_v3.webp" type="image/webp" />
         <img src="assets/hero_runner_v3.webp" alt="" aria-hidden="true" loading="eager" />
@@ -139,7 +145,7 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" id="mainNav">
       <div class="nav-logo">
         <picture>
           <source srcset="assets/runner_logo_transparent.webp" type="image/webp" />
@@ -150,6 +156,7 @@
         <a href="#how-it-works">How It Works</a>
         <a href="#teams">Teams</a>
         <a href="#season">Season</a>
+        <a href="hexagon.html" class="nav-hex-link">3D Hex Grid ✦</a>
         <a href="#download" class="nav-cta">Download</a>
       </div>
       <button class="nav-burger" aria-label="Menu" onclick="toggleNav()">
@@ -162,14 +169,15 @@
       <a href="#how-it-works" onclick="toggleNav()">How It Works</a>
       <a href="#teams" onclick="toggleNav()">Teams</a>
       <a href="#season" onclick="toggleNav()">Season</a>
+      <a href="hexagon.html" onclick="toggleNav()" style="color:#00E5FF">3D Hex Grid ✦</a>
       <a href="#download" onclick="toggleNav()">Download</a>
     </div>
 
     <!-- Hero content -->
-    <div class="hero-content">
+    <div class="hero-content hero-parallax-layer" id="heroContent">
       <div class="hero-text">
-        <div class="hero-badge">🏃 Season 2 — Active</div>
-        <h1 class="hero-title">
+        <div class="hero-badge">&#x1F3C3; Season 2 — Active</div>
+        <h1 class="hero-title" id="heroTitle">
           Run.<br />
           Flip.<br />
           <span class="title-gradient">Dominate.</span>
@@ -217,10 +225,12 @@
     </div>
 
     <!-- Scroll indicator -->
-    <div class="scroll-hint">
+    <div class="scroll-hint hero-parallax-layer" id="scrollHint">
       <span>Scroll to explore</span>
-      <div class="scroll-arrow">↓</div>
+      <div class="scroll-line"></div>
     </div>
+
+    </div><!-- /hero-sticky -->
   </section>
 
   <!-- ═══════════════════════════════════════════════ SOCIAL PROOF BAR -->
@@ -251,10 +261,10 @@
   <!-- ═════════════════════════════════════════════ ATHLETE FEATURE -->
   <section class="section athlete-feature" id="athlete">
     <div class="container">
-      <div class="athlete-hud reveal">
+      <div class="athlete-hud">
 
         <!-- HUD runner card: left -->
-        <div class="hud-card">
+        <div class="hud-card reveal-left">
           <div class="hud-corners">
             <span class="hud-corner tl"></span>
             <span class="hud-corner tr"></span>
@@ -292,22 +302,22 @@
         </div>
 
         <!-- Copy: right -->
-        <div class="athlete-copy">
+        <div class="athlete-copy reveal-right">
           <div class="hud-eyebrow">// YOUR CITY. YOUR RULES.</div>
           <h2 class="athlete-headline">Every step is<br /><span class="title-gradient">a declaration.</span></h2>
           <p class="athlete-sub">RunStrict turns your daily run into territorial warfare. Hit the streets, flip hexes, and conquer your city before The Void resets everything.</p>
 
           <div class="hud-stats-row">
-            <div class="hud-stat-box">
-              <div class="hud-stat-num">40</div>
+            <div class="hud-stat-box reveal-stagger" style="--delay: 0.1s">
+              <div class="hud-stat-num" data-count="40">0</div>
               <div class="hud-stat-lbl">DAYS / SEASON</div>
             </div>
-            <div class="hud-stat-box">
-              <div class="hud-stat-num">175<span style="font-size:1.1rem">m</span></div>
+            <div class="hud-stat-box reveal-stagger" style="--delay: 0.2s">
+              <div class="hud-stat-num" data-count="175" data-suffix="m">0</div>
               <div class="hud-stat-lbl">HEX EDGE</div>
             </div>
-            <div class="hud-stat-box">
-              <div class="hud-stat-num">4<span style="font-size:1.1rem">×</span></div>
+            <div class="hud-stat-box reveal-stagger" style="--delay: 0.3s">
+              <div class="hud-stat-num" data-count="4" data-suffix="×">0</div>
               <div class="hud-stat-lbl">MAX BUFF</div>
             </div>
           </div>
@@ -395,29 +405,33 @@
       </div>
 
       <div class="steps-grid">
-        <div class="step-card reveal" style="--delay: 0s">
+        <div class="step-card reveal-step" style="--delay: 0s">
           <div class="step-number">01</div>
-          <div class="step-icon">🏃</div>
-          <h3>Lace Up & Run</h3>
+          <div class="step-icon">&#x1F3C3;</div>
+          <h3>Lace Up &amp; Run</h3>
           <p>Open RunStrict and hit the streets. GPS tracks every step in real-time. Maintain under 8 min/km to activate hex capture.</p>
+          <div class="step-progress"><div class="step-progress-fill"></div></div>
         </div>
-        <div class="step-card reveal" style="--delay: 0.1s">
+        <div class="step-card reveal-step" style="--delay: 0.12s">
           <div class="step-number">02</div>
-          <div class="step-icon">⬡</div>
+          <div class="step-icon">&#x2B21;</div>
           <h3>Flip the Hexes</h3>
           <p>Every ~175m hexagonal tile you run through flips to your team's color. The last runner wins. Speed counts. Consistency matters.</p>
+          <div class="step-progress"><div class="step-progress-fill"></div></div>
         </div>
-        <div class="step-card reveal" style="--delay: 0.2s">
+        <div class="step-card reveal-step" style="--delay: 0.24s">
           <div class="step-number">03</div>
-          <div class="step-icon">🗺️</div>
+          <div class="step-icon">&#x1F5FA;&#xFE0F;</div>
           <h3>Dominate the Map</h3>
           <p>Watch the city transform. Earn points, climb leaderboards, and lead your team to province dominance — before The Void resets everything.</p>
+          <div class="step-progress"><div class="step-progress-fill"></div></div>
         </div>
-        <div class="step-card reveal" style="--delay: 0.3s">
+        <div class="step-card reveal-step" style="--delay: 0.36s">
           <div class="step-number">04</div>
-          <div class="step-icon">⚡</div>
+          <div class="step-icon">&#x26A1;</div>
           <h3>Earn Buff Multipliers</h3>
-          <p>Red Elites earn 4× points. Blue Union gets district bonuses. Purple CHAOS players grow stronger the more they run together.</p>
+          <p>Red Elites earn 4&times; points. Blue Union gets district bonuses. Purple CHAOS players grow stronger the more they run together.</p>
+          <div class="step-progress"><div class="step-progress-fill"></div></div>
         </div>
       </div>
 
@@ -447,28 +461,30 @@
 
       <div class="teams-grid">
         <!-- RED -->
-        <div class="team-card team-red reveal" style="--delay: 0s">
+        <div class="team-card team-red reveal-tilt" style="--delay: 0s" data-tilt>
           <div class="team-glow"></div>
+          <div class="team-shine"></div>
           <div class="team-emblem"><img src="assets/flame.webp" alt="FLAME" class="team-icon" /></div>
           <div class="team-name">FLAME</div>
           <div class="team-color-tag">Red Team</div>
           <p class="team-desc">
-            The elite meritocracy. Top 20% of Red runners become Elites — unlocking 4× points and proving dominance through sheer performance.
+            The elite meritocracy. Top 20% of Red runners become Elites — unlocking 4&times; points and proving dominance through sheer performance.
           </p>
           <ul class="team-perks">
-            <li>⚡ Elite tier: 4× flip multiplier</li>
-            <li>🏆 District & Province bonuses</li>
-            <li>🔥 Pure performance-based ranking</li>
+            <li>&#x26A1; Elite tier: 4&times; flip multiplier</li>
+            <li>&#x1F3C6; District &amp; Province bonuses</li>
+            <li>&#x1F525; Pure performance-based ranking</li>
           </ul>
           <div class="team-stat">
-            <span class="team-stat-val">4×</span>
+            <span class="team-stat-val" data-count="4" data-suffix="×">0</span>
             <span class="team-stat-label">Max Multiplier</span>
           </div>
         </div>
 
         <!-- BLUE -->
-        <div class="team-card team-blue reveal" style="--delay: 0.15s">
+        <div class="team-card team-blue reveal-tilt" style="--delay: 0.15s" data-tilt>
           <div class="team-glow"></div>
+          <div class="team-shine"></div>
           <div class="team-emblem"><img src="assets/wave.webp" alt="WAVE" class="team-icon" /></div>
           <div class="team-name">WAVE</div>
           <div class="team-color-tag">Blue Team</div>
@@ -476,32 +492,33 @@
             United as one. Every Blue runner fights together. District and Province victories amplify the whole team's power with union bonuses.
           </p>
           <ul class="team-perks">
-            <li>🌊 Union base buff for all members</li>
-            <li>🏙️ District win: +1× for everyone</li>
-            <li>🗺️ Province win: +1× stacked</li>
+            <li>&#x1F30A; Union base buff for all members</li>
+            <li>&#x1F3D9;&#xFE0F; District win: +1&times; for everyone</li>
+            <li>&#x1F5FA;&#xFE0F; Province win: +1&times; stacked</li>
           </ul>
           <div class="team-stat">
-            <span class="team-stat-val">3×</span>
+            <span class="team-stat-val" data-count="3" data-suffix="×">0</span>
             <span class="team-stat-label">Max Multiplier</span>
           </div>
         </div>
 
         <!-- PURPLE -->
-        <div class="team-card team-purple reveal" style="--delay: 0.3s">
+        <div class="team-card team-purple reveal-tilt" style="--delay: 0.3s" data-tilt>
           <div class="team-glow"></div>
+          <div class="team-shine"></div>
           <div class="team-emblem"><img src="assets/chaos.webp" alt="CHAOS" class="team-icon" /></div>
           <div class="team-name">CHAOS</div>
-          <div class="team-color-tag">Purple Team · Always Open</div>
+          <div class="team-color-tag">Purple Team &middot; Always Open</div>
           <p class="team-desc">
             The wildcard. Join anytime — but never go back. CHAOS power scales with participation. The more Purples run, the stronger everyone becomes.
           </p>
           <ul class="team-perks">
-            <li>🚪 Available anytime. Irreversible.</li>
-            <li>👥 ≥60% active = 3× buff for all</li>
-            <li>⚠️ Points preserved on defection</li>
+            <li>&#x1F6AA; Available anytime. Irreversible.</li>
+            <li>&#x1F465; &ge;60% active = 3&times; buff for all</li>
+            <li>&#x26A0;&#xFE0F; Points preserved on defection</li>
           </ul>
           <div class="team-stat">
-            <span class="team-stat-val">3×</span>
+            <span class="team-stat-val" data-count="3" data-suffix="×">0</span>
             <span class="team-stat-label">Max Multiplier</span>
           </div>
         </div>
@@ -731,7 +748,7 @@
   <!-- ═══════════════════════════════════════════════ DOWNLOAD -->
   <section class="section download" id="download">
     <div class="container">
-      <div class="download-card reveal">
+      <div class="download-card reveal-scale">
         <div class="download-hex-decoration">⬡</div>
         <div class="section-badge">JOIN THE SEASON</div>
         <h2>Your city is waiting.</h2>
@@ -822,6 +839,34 @@
       </div>
     </div>
   </footer>
+
+  <!-- Section Indicators -->
+  <div class="section-indicators" id="sectionIndicators">
+    <div class="sec-indicator active" data-target="hero">
+      <span class="sec-indicator-label">HOME</span>
+      <div class="sec-indicator-dot"></div>
+    </div>
+    <div class="sec-indicator" data-target="athlete">
+      <span class="sec-indicator-label">GAME</span>
+      <div class="sec-indicator-dot"></div>
+    </div>
+    <div class="sec-indicator" data-target="how-it-works">
+      <span class="sec-indicator-label">HOW</span>
+      <div class="sec-indicator-dot"></div>
+    </div>
+    <div class="sec-indicator" data-target="teams">
+      <span class="sec-indicator-label">TEAMS</span>
+      <div class="sec-indicator-dot"></div>
+    </div>
+    <div class="sec-indicator" data-target="season">
+      <span class="sec-indicator-label">SEASON</span>
+      <div class="sec-indicator-dot"></div>
+    </div>
+    <div class="sec-indicator" data-target="download">
+      <span class="sec-indicator-label">JOIN</span>
+      <div class="sec-indicator-dot"></div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

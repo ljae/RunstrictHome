@@ -38,7 +38,7 @@
 /* ─── Reset & Base ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; /* disable for scroll-driven effects */ }
 
 body {
   font-family: 'Inter', -apple-system, sans-serif;
@@ -64,16 +64,44 @@ img { max-width: 100%; }
   padding: 0 24px;
 }
 
+/* ─── Scroll Progress Bar ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 200;
+  background: rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.scroll-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--red), var(--purple), var(--blue));
+  transition: width 0.08s linear;
+  will-change: width;
+}
+
 /* ─── Navigation ─── */
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 48px;
-  background: linear-gradient(to bottom, rgba(10,10,15,0.8), transparent);
+  background: linear-gradient(to bottom, rgba(10,10,15,0.85), transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1), background 0.3s;
+}
+.nav.nav-scrolled {
+  background: rgba(10,10,15,0.92);
+  padding: 16px 48px;
+}
+.nav.nav-hidden {
+  transform: translateY(-100%);
 }
 
 .nav-logo {
@@ -115,6 +143,18 @@ img { max-width: 100%; }
 }
 
 .nav-links a:hover { color: var(--text); transition: var(--transition); }
+
+.nav-hex-link {
+  color: var(--accent) !important;
+  text-shadow: 0 0 10px rgba(0,229,255,0.45);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: text-shadow var(--transition), opacity var(--transition);
+}
+.nav-hex-link:hover {
+  text-shadow: 0 0 18px rgba(0,229,255,0.85);
+  color: #5af0ff !important;
+}
 
 .nav-cta {
   padding: 10px 20px;
@@ -208,11 +248,22 @@ img { max-width: 100%; }
 /* ─── Hero Section ─── */
 .hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 150vh; /* extended for scroll-out parallax */
   background: var(--black);
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+.hero-parallax-layer {
+  will-change: transform, opacity;
 }
 
 /* Ambient gradients */
@@ -623,6 +674,7 @@ img { max-width: 100%; }
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
+  will-change: transform, opacity;
 }
 
 /* Hero text side */
@@ -640,12 +692,6 @@ img { max-width: 100%; }
   text-transform: uppercase;
   color: #FF6B64;
   margin-bottom: 24px;
-  animation: pulse-badge 3s ease-in-out infinite;
-}
-
-@keyframes pulse-badge {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255,59,48,0); }
-  50% { box-shadow: 0 0 0 6px rgba(255,59,48,0); }
 }
 
 .hero-title {
@@ -885,7 +931,7 @@ img { max-width: 100%; }
   font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  animation: scroll-fade 2.5s ease-in-out infinite;
+  will-change: opacity;
 }
 
 .scroll-arrow {
@@ -1542,13 +1588,304 @@ img { max-width: 100%; }
 /* ─── Reveal animations ─── */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--delay, 0s);
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── Scroll-driven parallax reveals ── */
+.reveal-scale {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0s);
+}
+.reveal-scale.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ── Letter-by-letter hero reveal ── */
+.hero-title .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px) rotateX(-40deg);
+  animation: charReveal 0.6s forwards;
+  animation-delay: var(--d);
+}
+@keyframes charReveal {
+  to { opacity: 1; transform: translateY(0) rotateX(0deg); }
+}
+
+/* ── Hero badge entrance ── */
+.hero-badge {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.7s 0.2s forwards;
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hero sub entrance ── */
+.hero-sub,
+.hero-tagline {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.7s 1s forwards;
+}
+.hero-actions {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.7s 1.2s forwards;
+}
+
+/* ── Scroll hint line ── */
+.scroll-hint .scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(0,229,255,0.5), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(0.6); opacity: 0.3; }
+  50% { transform: scaleY(1); opacity: 0.7; }
+}
+
+/* ── Section header scroll reveal ── */
+.section-header.reveal h2 {
+  transition: opacity 0.8s ease 0.1s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+.section-header.reveal p {
+  transition: opacity 0.8s ease 0.2s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+
+/* ── Staggered card reveals ── */
+.step-card.reveal,
+.team-card.reveal,
+.feature-item.reveal,
+.testimonial-card.reveal {
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0s);
+}
+
+/* ── Proof bar count-up animation ── */
+.proof-num {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.proof-bar.visible .proof-num {
+  animation: countPop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes countPop {
+  0% { transform: translateY(10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Side section indicators ── */
+.section-indicators {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-end;
+}
+.sec-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.sec-indicator-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(232,232,240,0);
+  transition: color 0.3s, transform 0.3s;
+  transform: translateX(8px);
+}
+.sec-indicator:hover .sec-indicator-label,
+.sec-indicator.active .sec-indicator-label {
+  color: rgba(232,232,240,0.5);
+  transform: translateX(0);
+}
+.sec-indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  background: transparent;
+  transition: all 0.4s ease;
+}
+.sec-indicator.active .sec-indicator-dot {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+
+@media (max-width: 900px) {
+  .section-indicators { display: none; }
+}
+
+/* ─── Directional reveals (athlete section) ─── */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(60px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ─── Stagger reveal for stat boxes ─── */
+.reveal-stagger {
+  opacity: 0;
+  transform: translateY(24px) scale(0.9);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0s);
+}
+.reveal-stagger.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ─── Step cards: slide-up with scale + connecting progress bar ─── */
+.reveal-step {
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0s);
+}
+.reveal-step.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Step card number glow on visible */
+.reveal-step.visible .step-number {
+  animation: numGlow 0.8s ease forwards;
+  animation-delay: var(--delay, 0s);
+}
+@keyframes numGlow {
+  from { color: rgba(255,255,255,0.06); }
+  to { color: rgba(255,255,255,0.12); text-shadow: 0 0 30px rgba(0,229,255,0.15); }
+}
+
+/* Step card icon bounce on visible */
+.reveal-step.visible .step-icon {
+  animation: iconBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(var(--delay, 0s) + 0.2s);
+}
+@keyframes iconBounce {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Step progress bar (visual connector at bottom of each card) */
+.step-progress {
+  margin-top: 20px;
+  height: 2px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.step-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), rgba(0,229,255,0.3));
+  border-radius: 2px;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--delay, 0s) + 0.4s);
+}
+.reveal-step.visible .step-progress-fill {
+  width: 100%;
+}
+
+/* ─── Team cards: 3D tilt + shine + reveal ─── */
+.reveal-tilt {
+  opacity: 0;
+  transform: translateY(60px) rotateX(8deg);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--delay, 0s);
+  perspective: 800px;
+}
+.reveal-tilt.visible {
+  opacity: 1;
+  transform: translateY(0) rotateX(0deg);
+}
+
+/* Mouse-tracking shine overlay */
+.team-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,0.08) 0%, transparent 60%);
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+.team-card:hover .team-shine {
+  opacity: 1;
+}
+
+/* Team card hover tilt via JS */
+.team-card[data-tilt] {
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Team perks stagger animation */
+.reveal-tilt.visible .team-perks li {
+  opacity: 0;
+  animation: perkSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal-tilt.visible .team-perks li:nth-child(1) { animation-delay: calc(var(--delay, 0s) + 0.4s); }
+.reveal-tilt.visible .team-perks li:nth-child(2) { animation-delay: calc(var(--delay, 0s) + 0.5s); }
+.reveal-tilt.visible .team-perks li:nth-child(3) { animation-delay: calc(var(--delay, 0s) + 0.6s); }
+
+@keyframes perkSlide {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Team stat value count-up pop */
+.reveal-tilt.visible .team-stat-val {
+  animation: statPop 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--delay, 0s) + 0.5s);
+}
+@keyframes statPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Void banner reveal */
+.void-banner.reveal.visible {
+  animation: voidPulse 3s ease-in-out infinite 1s;
+}
+@keyframes voidPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  50% { box-shadow: 0 0 40px rgba(255,255,255,0.03), inset 0 0 30px rgba(255,255,255,0.02); }
 }
 
 /* ─── Mapbox overrides ─── */

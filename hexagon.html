@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Hex Grid — RunStrict Territory System</title>
+  <meta name="description" content="Explore RunStrict's hexagonal territory system in 3D. Every ~175m hex tile on your city map. Run through it. Flip it. Own it." />
+
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="canonical" href="https://runstrict.com/hexagon.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; /* disable smooth for scroll-driven effects */ }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #0A0A0F;
+      color: #E8E8F0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Loading Screen ── */
+    .hex-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: #0A0A0F;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      transition: opacity 0.9s ease, visibility 0.9s ease;
+    }
+    .hex-loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-icon {
+      font-size: 2.8rem;
+      color: #00E5FF;
+      animation: loader-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes loader-pulse {
+      0%, 100% { opacity: 0.3; transform: scale(0.9) rotate(0deg); }
+      50%       { opacity: 1;   transform: scale(1.1) rotate(30deg); }
+    }
+    .loader-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(232,232,240,0.35);
+    }
+
+    /* ── Three.js Canvas (fixed, full-viewport) ── */
+    #hexCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* ── Page Content (scrolls over canvas) ── */
+    .page-content {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── Navigation ── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: linear-gradient(to bottom, rgba(10,10,15,0.85) 0%, transparent 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav.nav-hidden { transform: translateY(-100%); }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: rgba(232,232,240,0.55);
+    }
+    .nav-links a { transition: color 0.2s; }
+    .nav-links a:hover { color: #E8E8F0; }
+    .nav-cta {
+      padding: 9px 18px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      color: #E8E8F0 !important;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav-cta:hover { background: rgba(255,255,255,0.13); border-color: rgba(255,255,255,0.15); }
+
+    /* ── Gradient Text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #FF3B30 0%, #BF5AF2 50%, #007AFF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-flame {
+      background: linear-gradient(135deg, #FF6B64, #FF3B30);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-wave {
+      background: linear-gradient(135deg, #4DA3FF, #007AFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-chaos {
+      background: linear-gradient(135deg, #CF8AF7, #BF5AF2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Hero Section (scroll-driven parallax) ── */
+    .hex-hero {
+      height: 200vh; /* extra space for scroll-out animation */
+      position: relative;
+    }
+    .hex-hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 24px;
+      will-change: transform;
+    }
+    .hex-hero-overlay {
+      max-width: 760px;
+      will-change: transform, opacity;
+    }
+    .hex-eyebrow {
+      display: inline-block;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #00E5FF;
+      text-shadow: 0 0 14px rgba(0,229,255,0.55);
+      margin-bottom: 22px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s 0.4s forwards;
+    }
+    .hex-title {
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 26px;
+    }
+    /* Letter-by-letter stagger for hero title */
+    .hex-title .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px) rotateX(-40deg);
+      animation: charReveal 0.6s forwards;
+      animation-delay: var(--d);
+    }
+    @keyframes charReveal {
+      to { opacity: 1; transform: translateY(0) rotateX(0deg); }
+    }
+    .hex-sub {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: rgba(232,232,240,0.62);
+      line-height: 1.75;
+      max-width: 540px;
+      margin: 0 auto 44px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s 1.2s forwards;
+    }
+    .hex-scroll-hint {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      color: rgba(232,232,240,0.3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeInUp 0.6s 1.6s forwards;
+    }
+    .hex-scroll-hint .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(0,229,255,0.5), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: scaleY(0.6); opacity: 0.3; }
+      50% { transform: scaleY(1); opacity: 0.7; }
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Horizontal Scroll Team Sections ── */
+    .teams-scroll-container {
+      height: 400vh; /* 100vh per team + 100vh buffer */
+      position: relative;
+    }
+    .teams-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .teams-track {
+      display: flex;
+      gap: 0;
+      will-change: transform;
+      height: 100%;
+    }
+
+    /* ── Individual Team Slide ── */
+    .team-slide {
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 6vw 80px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .team-slide.active { opacity: 1; }
+
+    /* Glassmorphism cards */
+    .info-card {
+      max-width: 460px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 22px;
+      padding: 42px 40px;
+      transform: translateX(-60px);
+      opacity: 0;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .team-slide.active .info-card {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .flame-card {
+      border-color: rgba(255,59,48,0.22);
+      box-shadow: 0 0 60px rgba(255,59,48,0.06);
+    }
+    .flame-card:hover {
+      border-color: rgba(255,59,48,0.5);
+      box-shadow: 0 0 80px rgba(255,59,48,0.14);
+    }
+    .wave-card {
+      border-color: rgba(0,122,255,0.22);
+      box-shadow: 0 0 60px rgba(0,122,255,0.06);
+    }
+    .wave-card:hover {
+      border-color: rgba(0,122,255,0.5);
+      box-shadow: 0 0 80px rgba(0,122,255,0.14);
+    }
+    .chaos-card {
+      border-color: rgba(191,90,242,0.22);
+      box-shadow: 0 0 60px rgba(191,90,242,0.06);
+    }
+    .chaos-card:hover {
+      border-color: rgba(191,90,242,0.5);
+      box-shadow: 0 0 80px rgba(191,90,242,0.14);
+    }
+
+    .card-team-icon {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      margin-bottom: 22px;
+      filter: drop-shadow(0 0 14px rgba(255,255,255,0.2));
+    }
+    .card-eyebrow {
+      display: block;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .card-eyebrow-flame { color: #FF3B30; text-shadow: 0 0 12px rgba(255,59,48,0.55); }
+    .card-eyebrow-wave  { color: #007AFF; text-shadow: 0 0 12px rgba(0,122,255,0.55); }
+    .card-eyebrow-chaos { color: #BF5AF2; text-shadow: 0 0 12px rgba(191,90,242,0.55); }
+
+    .card-title {
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.18;
+      margin-bottom: 18px;
+    }
+    .card-body {
+      font-size: 0.96rem;
+      color: rgba(232,232,240,0.62);
+      line-height: 1.78;
+      margin-bottom: 30px;
+    }
+    .card-stat {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .stat-flame { background: rgba(255,59,48,0.1); border: 1px solid rgba(255,59,48,0.28); color: #FF6B64; }
+    .stat-wave  { background: rgba(0,122,255,0.1); border: 1px solid rgba(0,122,255,0.28); color: #4DA3FF; }
+    .stat-chaos { background: rgba(191,90,242,0.1); border: 1px solid rgba(191,90,242,0.28); color: #CF8AF7; }
+
+    /* Team stats panel */
+    .team-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 40px;
+      transform: translateX(60px);
+      opacity: 0;
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+    }
+    .team-slide.active .team-stats {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .stats-label {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(232,232,240,0.3);
+      text-transform: uppercase;
+    }
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .stat-row-label {
+      font-size: 0.82rem;
+      color: rgba(232,232,240,0.5);
+    }
+    .stat-row-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .flame-val { color: #FF3B30; }
+    .wave-val  { color: #007AFF; }
+    .chaos-val { color: #BF5AF2; }
+    .stat-bar-wrap { margin-top: 4px; }
+    .stat-bar-bg {
+      height: 4px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      width: 0%;
+      transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+    }
+    .team-slide.active .stat-bar-fill { width: var(--bar-w, 70%); }
+    .flame-fill { background: linear-gradient(90deg, #FF3B30, #FF6B64); }
+    .wave-fill  { background: linear-gradient(90deg, #007AFF, #4DA3FF); }
+    .chaos-fill { background: linear-gradient(90deg, #BF5AF2, #CF8AF7); }
+
+    .perk-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .perk-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: rgba(232,232,240,0.55);
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.5s ease;
+    }
+    .team-slide.active .perk-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .team-slide.active .perk-item:nth-child(1) { transition-delay: 0.6s; }
+    .team-slide.active .perk-item:nth-child(2) { transition-delay: 0.75s; }
+    .team-slide.active .perk-item:nth-child(3) { transition-delay: 0.9s; }
+    .perk-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .perk-dot-flame { background: #FF3B30; box-shadow: 0 0 6px rgba(255,59,48,0.9); }
+    .perk-dot-wave  { background: #007AFF; box-shadow: 0 0 6px rgba(0,122,255,0.9); }
+    .perk-dot-chaos { background: #BF5AF2; box-shadow: 0 0 6px rgba(191,90,242,0.9); }
+
+    /* Wave section reversal */
+    .wave-slide .info-card  { order: 2; transform: translateX(60px); }
+    .wave-slide .team-stats { order: 1; transform: translateX(-60px); }
+    .wave-slide.active .info-card,
+    .wave-slide.active .team-stats { transform: translateX(0); }
+
+    /* ── CTA Section ── */
+    .cta-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 24px;
+      background: linear-gradient(to bottom, transparent 0%, rgba(10,10,15,0.7) 100%);
+    }
+    .cta-inner {
+      max-width: 620px;
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cta-inner.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .cta-badge {
+      display: inline-block;
+      padding: 5px 14px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(232,232,240,0.5);
+      margin-bottom: 28px;
+    }
+    .cta-title {
+      font-size: clamp(2rem, 5.5vw, 3.8rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .cta-body {
+      font-size: 1.05rem;
+      color: rgba(232,232,240,0.58);
+      margin-bottom: 44px;
+      line-height: 1.7;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 34px;
+      background: white;
+      color: #0A0A0F;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(255,255,255,0.2);
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 34px;
+      background: rgba(255,255,255,0.06);
+      color: #E8E8F0;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    /* ── Scroll Progress Bar ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      z-index: 200;
+      background: rgba(255,255,255,0.04);
+    }
+    .scroll-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #FF3B30, #BF5AF2, #007AFF);
+      transition: width 0.1s linear;
+      will-change: width;
+    }
+
+    /* ── Side Section Indicators ── */
+    .section-indicators {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-end;
+    }
+    .indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .indicator-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(232,232,240,0);
+      transition: color 0.3s, transform 0.3s;
+      transform: translateX(8px);
+    }
+    .indicator:hover .indicator-label,
+    .indicator.active .indicator-label {
+      color: rgba(232,232,240,0.6);
+      transform: translateX(0);
+    }
+    .indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      background: transparent;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    .indicator.active .indicator-dot {
+      border-color: var(--dot-color, rgba(255,255,255,0.5));
+      background: var(--dot-color, rgba(255,255,255,0.5));
+      box-shadow: 0 0 12px var(--dot-glow, rgba(255,255,255,0.3));
+    }
+    .indicator-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .indicator.active .indicator-dot::after {
+      border-color: var(--dot-color, rgba(255,255,255,0.2));
+    }
+
+    /* ── Hex counter HUD (fixed bottom-left) ── */
+    .hex-hud {
+      position: fixed;
+      bottom: 28px;
+      left: 28px;
+      z-index: 50;
+      display: flex;
+      gap: 16px;
+      background: rgba(10,10,15,0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-family: 'Space Grotesk', sans-serif;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2s;
+    }
+    .hex-hud.visible { transform: translateY(0); opacity: 1; }
+    .hud-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .hud-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .hud-dot-flame  { background: #FF3B30; box-shadow: 0 0 6px rgba(255,59,48,0.9); }
+    .hud-dot-wave   { background: #007AFF; box-shadow: 0 0 6px rgba(0,122,255,0.9); }
+    .hud-dot-chaos  { background: #BF5AF2; box-shadow: 0 0 6px rgba(191,90,242,0.9); }
+    .hud-count { color: #E8E8F0; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .team-slide {
+        grid-template-columns: 1fr;
+        padding: 100px 6vw 60px;
+        gap: 40px;
+      }
+      .wave-slide .info-card  { order: 1; }
+      .wave-slide .team-stats { order: 2; }
+      .team-stats { padding: 0; }
+      .stat-row-val { font-size: 2rem; }
+      .section-indicators { display: none; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; max-width: 280px; justify-content: center; }
+    }
+    @media (max-width: 480px) { .hex-hud { display: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="hex-loader" id="hexLoader">
+    <div class="loader-icon">&#x2B21;</div>
+    <div class="loader-text">Rendering hex grid&#x2026;</div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress">
+    <div class="scroll-progress-fill" id="scrollProgressFill"></div>
+  </div>
+
+  <!-- Three.js Canvas (fixed behind everything) -->
+  <canvas id="hexCanvas"></canvas>
+
+  <!-- Page Content -->
+  <div class="page-content">
+
+    <!-- Navigation -->
+    <nav class="nav" id="mainNav">
+      <div class="nav-logo">
+        <a href="index.html">
+          <picture>
+            <source srcset="assets/runner_logo_transparent.webp" type="image/webp" />
+            <img src="assets/runner_logo_transparent.png" alt="RunStrict" />
+          </picture>
+        </a>
+      </div>
+      <div class="nav-links">
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="index.html#teams">Teams</a>
+        <a href="index.html#season">Season</a>
+        <a href="index.html#download" class="nav-cta">Download</a>
+      </div>
+    </nav>
+
+    <!-- ── Hero (scroll-linked parallax) ── -->
+    <section class="hex-hero" id="sec-hero">
+      <div class="hex-hero-sticky">
+        <div class="hex-hero-overlay" id="heroOverlay">
+          <span class="hex-eyebrow">// TERRITORY SYSTEM &middot; H3 RESOLUTION 9</span>
+          <h1 class="hex-title" id="heroTitle">
+            The <span class="gradient-text">Hex Grid</span>
+          </h1>
+          <p class="hex-sub">
+            Every ~175m hexagonal tile on your city map.<br />
+            Run through it. Flip it. Own it.<br />
+            Three teams. Forty days. One winner.
+          </p>
+          <div class="hex-scroll-hint">
+            Scroll to explore the battle
+            <div class="scroll-line"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Horizontal-scroll Team Sections ── -->
+    <div class="teams-scroll-container" id="teamsContainer">
+      <div class="teams-sticky">
+        <div class="teams-track" id="teamsTrack">
+
+          <!-- FLAME -->
+          <div class="team-slide flame-slide" id="sec-flame" data-team="flame">
+            <div class="info-card flame-card">
+              <img src="assets/flame.webp" alt="FLAME" class="card-team-icon" />
+              <span class="card-eyebrow card-eyebrow-flame">// FLAME TERRITORY</span>
+              <h2 class="card-title">
+                Performance is<br />
+                <span class="gradient-flame">territory.</span>
+              </h2>
+              <p class="card-body">
+                The meritocracy. Top 20% of FLAME runners achieve Elite
+                status — earning 4&times; multipliers on every hex they flip.
+                District and Province victories amplify the whole team.
+                Your pace is your rank.
+              </p>
+              <span class="card-stat stat-flame">&#x26A1; 4&times; MAX MULTIPLIER</span>
+            </div>
+            <div class="team-stats">
+              <div class="stats-label">FLAME POWER METRICS</div>
+              <div class="stat-row">
+                <div class="stat-row-label">Max Flip Multiplier</div>
+                <div class="stat-row-val flame-val">4&times;</div>
+                <div class="stat-bar-wrap">
+                  <div class="stat-bar-bg"><div class="stat-bar-fill flame-fill" style="--bar-w:100%"></div></div>
+                </div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-row-label">Elite Threshold</div>
+                <div class="stat-row-val flame-val">Top 20%</div>
+                <div class="stat-bar-wrap">
+                  <div class="stat-bar-bg"><div class="stat-bar-fill flame-fill" style="--bar-w:20%"></div></div>
+                </div>
+              </div>
+              <div class="perk-list">
+                <div class="perk-item"><div class="perk-dot perk-dot-flame"></div>Province win &rarr; whole team buffed</div>
+                <div class="perk-item"><div class="perk-dot perk-dot-flame"></div>District win &rarr; +1&times; for all Elites</div>
+                <div class="perk-item"><div class="perk-dot perk-dot-flame"></div>Pace under 8 min/km to capture</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WAVE -->
+          <div class="team-slide wave-slide" id="sec-wave" data-team="wave">
+            <div class="info-card wave-card">
+              <img src="assets/wave.webp" alt="WAVE" class="card-team-icon" />
+              <span class="card-eyebrow card-eyebrow-wave">// WAVE TERRITORY</span>
+              <h2 class="card-title">
+                Together we<br />
+                <span class="gradient-wave">conquer.</span>
+              </h2>
+              <p class="card-body">
+                United as one. Every hex a WAVE runner flips strengthens
+                the entire district. Win your district — unlock +1&times; for all.
+                Win the province — stack another. Every run is a vote.
+              </p>
+              <span class="card-stat stat-wave">&#x1F30A; 3&times; UNION BUFF</span>
+            </div>
+            <div class="team-stats">
+              <div class="stats-label">WAVE POWER METRICS</div>
+              <div class="stat-row">
+                <div class="stat-row-label">District Win Bonus</div>
+                <div class="stat-row-val wave-val">+1&times;</div>
+                <div class="stat-bar-wrap">
+                  <div class="stat-bar-bg"><div class="stat-bar-fill wave-fill" style="--bar-w:33%"></div></div>
+                </div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-row-label">Province Win Bonus</div>
+                <div class="stat-row-val wave-val">+1&times;</div>
+                <div class="stat-bar-wrap">
+                  <div class="stat-bar-bg"><div class="stat-bar-fill wave-fill" style="--bar-w:66%"></div></div>
+                </div>
+              </div>
+              <div class="perk-list">
+                <div class="perk-item"><div class="perk-dot perk-dot-wave"></div>Base union buff for all members</div>
+                <div class="perk-item"><div class="perk-dot perk-dot-wave"></div>Collective territory = collective power</div>
+                <div class="perk-item"><div class="perk-dot perk-dot-wave"></div>Max 3&times; when district + province won</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHAOS -->
+          <div class="team-slide chaos-slide" id="sec-chaos" data-team="chaos">
+            <div class="info-card chaos-card">
+              <img src="assets/chaos.webp" alt="CHAOS" class="card-team-icon" />
+              <span class="card-eyebrow card-eyebrow-chaos">// CHAOS TERRITORY</span>
+              <h2 class="card-title">
+                Irreversible.<br />
+                <span class="gradient-chaos">Unstoppable.</span>
+              </h2>
+              <p class="card-body">
+                Join anytime — but you can never leave. CHAOS power scales
+                with participation. When 60% of CHAOS runners are active,
+                everyone scales to 3&times;. The more who run, the stronger you all become.
+              </p>
+              <span class="card-stat stat-chaos">&#x26A0;&#xFE0F; 3&times; WHEN 60% ACTIVE</span>
+            </div>
+            <div class="team-stats">
+              <div class="stats-label">CHAOS POWER METRICS</div>
+              <div class="stat-row">
+                <div class="stat-row-label">Activation Threshold</div>
+                <div class="stat-row-val chaos-val">60%</div>
+                <div class="stat-bar-wrap">
+                  <div class="stat-bar-bg"><div class="stat-bar-fill chaos-fill" style="--bar-w:60%"></div></div>
+                </div>
+              </div>
+              <div class="stat-row">
+                <div class="stat-row-label">Max Multiplier</div>
+                <div class="stat-row-val chaos-val">3&times;</div>
+                <div class="stat-bar-wrap">
+                  <div class="stat-bar-bg"><div class="stat-bar-fill chaos-fill" style="--bar-w:100%"></div></div>
+                </div>
+              </div>
+              <div class="perk-list">
+                <div class="perk-item"><div class="perk-dot perk-dot-chaos"></div>Open to join — anytime, no conditions</div>
+                <div class="perk-item"><div class="perk-dot perk-dot-chaos"></div>Once you join, there is no going back</div>
+                <div class="perk-item"><div class="perk-dot perk-dot-chaos"></div>Points preserved if you later defect</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CTA Section ── -->
+    <section class="cta-section" id="sec-cta">
+      <div class="cta-inner" id="ctaInner">
+        <div class="cta-badge">Join the Season</div>
+        <h2 class="cta-title">
+          Your city has<br />
+          <span class="gradient-text">500,000 hexes.</span>
+        </h2>
+        <p class="cta-body">
+          Season 2 is live. Thousands of hexes are already claimed.<br />
+          The Void comes for everyone. Don't start Season 3 from zero.
+        </p>
+        <div class="cta-buttons">
+          <a href="index.html#download" class="btn-primary">
+            Claim Your Territory
+          </a>
+          <a href="index.html" class="btn-secondary">
+            &larr; Back to Home
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-content -->
+
+  <!-- Side Section Indicators -->
+  <div class="section-indicators" id="sectionIndicators">
+    <div class="indicator active" data-section="sec-hero" style="--dot-color: #00E5FF; --dot-glow: rgba(0,229,255,0.3)">
+      <span class="indicator-label">GRID</span>
+      <div class="indicator-dot"></div>
+    </div>
+    <div class="indicator" data-section="sec-flame" data-team-idx="0" style="--dot-color: #FF3B30; --dot-glow: rgba(255,59,48,0.4)">
+      <span class="indicator-label">FLAME</span>
+      <div class="indicator-dot"></div>
+    </div>
+    <div class="indicator" data-section="sec-wave" data-team-idx="1" style="--dot-color: #007AFF; --dot-glow: rgba(0,122,255,0.4)">
+      <span class="indicator-label">WAVE</span>
+      <div class="indicator-dot"></div>
+    </div>
+    <div class="indicator" data-section="sec-chaos" data-team-idx="2" style="--dot-color: #BF5AF2; --dot-glow: rgba(191,90,242,0.4)">
+      <span class="indicator-label">CHAOS</span>
+      <div class="indicator-dot"></div>
+    </div>
+    <div class="indicator" data-section="sec-cta" style="--dot-color: rgba(255,255,255,0.6); --dot-glow: rgba(255,255,255,0.2)">
+      <span class="indicator-label">JOIN</span>
+      <div class="indicator-dot"></div>
+    </div>
+  </div>
+
+  <!-- Live Hex Count HUD -->
+  <div class="hex-hud" id="hexHud">
+    <div class="hud-item">
+      <div class="hud-dot hud-dot-flame"></div>
+      <span class="hud-count" id="hudFlame">0</span>
+    </div>
+    <div class="hud-item">
+      <div class="hud-dot hud-dot-wave"></div>
+      <span class="hud-count" id="hudWave">0</span>
+    </div>
+    <div class="hud-item">
+      <div class="hud-dot hud-dot-chaos"></div>
+      <span class="hud-count" id="hudChaos">0</span>
+    </div>
+  </div>
+
+  <!-- Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.min.js"></script>
+
+  <script>
+    'use strict';
+
+    // ═══════════════════════════════════════════════════════
+    //  LETTER-BY-LETTER HERO ANIMATION
+    // ═══════════════════════════════════════════════════════
+    (function initCharReveal() {
+      const title = document.getElementById('heroTitle');
+      if (!title) return;
+
+      const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT, {
+        acceptNode: function(node) {
+          if (node.parentElement.closest('.gradient-text')) return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+
+      let charIdx = 0;
+      const textNodes = [];
+      while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+      textNodes.forEach(node => {
+        const text = node.textContent;
+        if (!text.trim()) return;
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < text.length; i++) {
+          const ch = text[i];
+          if (ch === ' ' || ch === '\n') {
+            frag.appendChild(document.createTextNode(ch));
+            continue;
+          }
+          const span = document.createElement('span');
+          span.className = 'char';
+          span.style.setProperty('--d', (0.5 + charIdx * 0.04) + 's');
+          span.textContent = ch;
+          frag.appendChild(span);
+          charIdx++;
+        }
+        node.parentNode.replaceChild(frag, node);
+      });
+
+      // Animate .gradient-text as a whole block
+      const gradientSpan = title.querySelector('.gradient-text');
+      if (gradientSpan) {
+        const delay = 0.5 + charIdx * 0.04;
+        gradientSpan.style.opacity = '0';
+        gradientSpan.style.transform = 'translateY(40px)';
+        gradientSpan.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        gradientSpan.style.transitionDelay = delay + 's';
+        requestAnimationFrame(() => {
+          gradientSpan.style.opacity = '1';
+          gradientSpan.style.transform = 'translateY(0)';
+        });
+      }
+    })();
+
+    // ═══════════════════════════════════════════════════════
+    //  SCROLL-DRIVEN HERO PARALLAX
+    // ═══════════════════════════════════════════════════════
+    const heroOverlay = document.getElementById('heroOverlay');
+    const heroSection = document.getElementById('sec-hero');
+    const scrollFill = document.getElementById('scrollProgressFill');
+    const mainNav = document.getElementById('mainNav');
+
+    let lastScrollY = 0;
+    let ticking = false;
+
+    function onScrollUpdate() {
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight - vh;
+
+      // ── Progress bar ──
+      const progress = Math.min(scrollY / docHeight, 1);
+      scrollFill.style.width = (progress * 100) + '%';
+
+      // ── Hero parallax: fade + scale + translateY ──
+      const heroH = heroSection.offsetHeight;
+      const heroProgress = Math.min(Math.max(scrollY / (heroH * 0.5), 0), 1);
+      const heroOpacity = 1 - heroProgress;
+      const heroScale = 1 - heroProgress * 0.15;
+      const heroY = scrollY * 0.35;
+      heroOverlay.style.opacity = heroOpacity;
+      heroOverlay.style.transform = `translateY(${heroY}px) scale(${heroScale})`;
+
+      // ── Nav hide/show ──
+      if (scrollY > 200 && scrollY > lastScrollY + 5) {
+        mainNav.classList.add('nav-hidden');
+      } else if (scrollY < lastScrollY - 5 || scrollY < 100) {
+        mainNav.classList.remove('nav-hidden');
+      }
+      lastScrollY = scrollY;
+
+      // ── Horizontal scroll for teams ──
+      updateTeamsScroll(scrollY, vh);
+
+      // ── CTA reveal ──
+      const ctaEl = document.getElementById('ctaInner');
+      const ctaRect = ctaEl.getBoundingClientRect();
+      if (ctaRect.top < vh * 0.85) {
+        ctaEl.classList.add('visible');
+      }
+
+      // ── Section indicators ──
+      updateIndicators(scrollY, vh);
+
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(onScrollUpdate);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // ═══════════════════════════════════════════════════════
+    //  HORIZONTAL SCROLL TEAMS
+    // ═══════════════════════════════════════════════════════
+    const teamsContainer = document.getElementById('teamsContainer');
+    const teamsTrack = document.getElementById('teamsTrack');
+    const teamSlides = document.querySelectorAll('.team-slide');
+    const triggered = { flame: false, wave: false, chaos: false };
+
+    function updateTeamsScroll(scrollY, vh) {
+      const containerRect = teamsContainer.getBoundingClientRect();
+      const containerTop = scrollY + containerRect.top;
+      const scrollInContainer = scrollY - containerTop;
+      const totalSlides = teamSlides.length;
+      const scrollRange = teamsContainer.offsetHeight - vh;
+
+      if (scrollInContainer < 0 || scrollInContainer > scrollRange) {
+        // Clamp
+        if (scrollInContainer < 0) {
+          teamsTrack.style.transform = 'translateX(0)';
+        } else {
+          teamsTrack.style.transform = `translateX(-${(totalSlides - 1) * 100}vw)`;
+        }
+      } else {
+        const fraction = scrollInContainer / scrollRange;
+        const translateX = fraction * (totalSlides - 1) * 100;
+        teamsTrack.style.transform = `translateX(-${translateX}vw)`;
+      }
+
+      // Determine active slide
+      const fraction = Math.max(0, Math.min(scrollInContainer / scrollRange, 1));
+      const activeIdx = Math.round(fraction * (totalSlides - 1));
+
+      teamSlides.forEach((slide, i) => {
+        const wasActive = slide.classList.contains('active');
+        if (i === activeIdx) {
+          slide.classList.add('active');
+          // Trigger hex wave
+          const team = slide.dataset.team;
+          if (!wasActive && team && !triggered[team]) {
+            triggered[team] = true;
+            if (typeof launchWave === 'function') launchWave(team);
+          }
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+    }
+
+    // ═══════════════════════════════════════════════════════
+    //  SECTION INDICATORS
+    // ═══════════════════════════════════════════════════════
+    const indicators = document.querySelectorAll('.indicator');
+
+    function updateIndicators(scrollY, vh) {
+      const heroBottom = heroSection.offsetHeight + heroSection.offsetTop;
+      const containerTop = teamsContainer.offsetTop;
+      const containerH = teamsContainer.offsetHeight;
+      const ctaTop = document.getElementById('sec-cta').offsetTop;
+
+      let activeSection = 'sec-hero';
+      if (scrollY + vh * 0.5 >= ctaTop) {
+        activeSection = 'sec-cta';
+      } else if (scrollY >= containerTop) {
+        const fraction = Math.max(0, Math.min((scrollY - containerTop) / (containerH - vh), 1));
+        const idx = Math.round(fraction * 2);
+        activeSection = ['sec-flame', 'sec-wave', 'sec-chaos'][idx];
+      }
+
+      indicators.forEach(ind => {
+        ind.classList.toggle('active', ind.dataset.section === activeSection);
+      });
+    }
+
+    indicators.forEach(ind => {
+      ind.addEventListener('click', () => {
+        const targetId = ind.dataset.section;
+        if (targetId === 'sec-hero') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (targetId === 'sec-cta') {
+          document.getElementById('sec-cta').scrollIntoView({ behavior: 'smooth' });
+        } else {
+          // Scroll to team within container
+          const teamIdx = ind.dataset.teamIdx ? parseInt(ind.dataset.teamIdx) : 0;
+          const containerTop = teamsContainer.offsetTop;
+          const scrollRange = teamsContainer.offsetHeight - window.innerHeight;
+          const targetScroll = containerTop + (teamIdx / 2) * scrollRange;
+          window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // ═══════════════════════════════════════════════════════
+    //  HUD VISIBILITY
+    // ═══════════════════════════════════════════════════════
+    setTimeout(() => document.getElementById('hexHud').classList.add('visible'), 2200);
+
+    // ── Hard-fallback: always hide loader after 4s max ──
+    const _loaderEl = document.getElementById('hexLoader');
+    const _loaderFallback = setTimeout(() => {
+      if (_loaderEl) _loaderEl.classList.add('hidden');
+    }, 4000);
+
+    // ── Initial scroll update ──
+    requestAnimationFrame(onScrollUpdate);
+
+    // ═══════════════════════════════════════════════════════
+    //  THREE.JS — 3D HEX GRID
+    // ═══════════════════════════════════════════════════════
+    if (typeof THREE === 'undefined') {
+      if (_loaderEl) {
+        _loaderEl.querySelector('.loader-text').textContent = '3D requires WebGL — please try a modern browser.';
+      }
+      throw new Error('Three.js not loaded');
+    }
+
+    try {
+    const canvas = document.getElementById('hexCanvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x0A0A0F, 1);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.25;
+
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x0A0A0F, 0.028);
+
+    const camera = new THREE.PerspectiveCamera(52, window.innerWidth / window.innerHeight, 0.1, 120);
+    camera.position.set(0, 0, 24);
+
+    // Lights
+    scene.add(new THREE.AmbientLight(0x0d0d22, 1.8));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.4);
+    dirLight.position.set(6, 9, 12);
+    scene.add(dirLight);
+
+    const lightFlame = new THREE.PointLight(0xFF3B30, 5, 38);
+    const lightWave  = new THREE.PointLight(0x007AFF, 5, 38);
+    const lightChaos = new THREE.PointLight(0xBF5AF2, 5, 38);
+    lightFlame.position.set(-10, 7, 9);
+    lightWave.position.set(10, 5, 9);
+    lightChaos.position.set(0, -7, 7);
+    scene.add(lightFlame, lightWave, lightChaos);
+
+    // Hex geometry
+    const HEX_R = 0.9;
+    const HEX_DEPTH = 0.36;
+    const shape = new THREE.Shape();
+    for (let i = 0; i < 6; i++) {
+      const a = (Math.PI / 3) * i + Math.PI / 6;
+      const x = HEX_R * Math.cos(a);
+      const y = HEX_R * Math.sin(a);
+      i === 0 ? shape.moveTo(x, y) : shape.lineTo(x, y);
+    }
+    shape.closePath();
+    const hexGeom = new THREE.ExtrudeGeometry(shape, {
+      depth: HEX_DEPTH,
+      bevelEnabled: true,
+      bevelThickness: 0.035,
+      bevelSize: 0.035,
+      bevelSegments: 3,
+    });
+    hexGeom.translate(0, 0, -HEX_DEPTH * 0.5);
+
+    // Grid
+    const isMobile = window.innerWidth < 768;
+    const COLS = isMobile ? 9 : 15;
+    const ROWS = isMobile ? 6 : 10;
+    const H_SPACING = Math.sqrt(3) * HEX_R * 1.08;
+    const V_SPACING = HEX_R * 1.5 * 1.08;
+
+    const hexGroup = new THREE.Group();
+    hexGroup.rotation.x = -0.26;
+    scene.add(hexGroup);
+
+    const C_DARK  = new THREE.Color(0x1A1A2E);
+    const C_FLAME = new THREE.Color(0xFF3B30);
+    const C_WAVE  = new THREE.Color(0x007AFF);
+    const C_CHAOS = new THREE.Color(0xBF5AF2);
+    const C_EMI_DARK = new THREE.Color(0x080814);
+
+    const hexes = [];
+
+    function assignTeam(col, row) {
+      const nx = col / (COLS - 1);
+      const ny = row / (ROWS - 1);
+      const wave1 = Math.sin(col * 0.9 + row * 1.3) * 0.18;
+      const wave2 = Math.cos(col * 1.2 - row * 0.7) * 0.12;
+      const nx2 = nx + wave1;
+      const ny2 = ny + wave2;
+      if (nx2 < 0.40 && ny2 > 0.30) return 'flame';
+      if (nx2 > 0.54) return 'wave';
+      return 'chaos';
+    }
+
+    for (let row = 0; row < ROWS; row++) {
+      for (let col = 0; col < COLS; col++) {
+        const mat = new THREE.MeshStandardMaterial({
+          color: C_DARK.clone(),
+          emissive: C_EMI_DARK.clone(),
+          emissiveIntensity: 0.08,
+          metalness: 0.65,
+          roughness: 0.22,
+        });
+        const mesh = new THREE.Mesh(hexGeom, mat);
+        const rowOffset = (row % 2 === 1) ? H_SPACING * 0.5 : 0;
+        mesh.position.x = col * H_SPACING - (COLS - 1) * H_SPACING * 0.5 + rowOffset;
+        mesh.position.y = row * V_SPACING - (ROWS - 1) * V_SPACING * 0.5;
+        mesh.position.z = (Math.random() - 0.5) * 0.12;
+        hexGroup.add(mesh);
+        hexes.push({
+          mesh, mat,
+          state: 'dark',
+          team: assignTeam(col, row),
+          animating: false,
+          animProgress: 0,
+          peakDone: false,
+          targetState: 'dark',
+          baseZ: mesh.position.z,
+        });
+      }
+    }
+
+    // Flip animation
+    const POP_Z = 1.6;
+    const FLIP_SPD = 3.2;
+
+    function colorForState(s) {
+      if (s === 'flame') return C_FLAME;
+      if (s === 'wave') return C_WAVE;
+      if (s === 'chaos') return C_CHAOS;
+      return C_DARK;
+    }
+    function emissiveIntensityForState(s) {
+      return s === 'dark' ? 0.08 : 0.42;
+    }
+
+    function triggerFlip(idx, newState) {
+      const h = hexes[idx];
+      if (h.animating || h.state === newState) return;
+      h.animating = true;
+      h.animProgress = 0;
+      h.peakDone = false;
+      h.targetState = newState;
+    }
+
+    window.launchWave = function(team) {
+      const targets = hexes.map((h, i) => ({ h, i })).filter(({ h }) => h.team === team);
+      if (team === 'flame') {
+        targets.sort((a, b) => (a.h.mesh.position.x + a.h.mesh.position.y * 0.6) - (b.h.mesh.position.x + b.h.mesh.position.y * 0.6));
+      } else if (team === 'wave') {
+        targets.sort((a, b) => b.h.mesh.position.x - a.h.mesh.position.x);
+      } else {
+        targets.sort((a, b) => (a.h.mesh.position.y + Math.random() * 0.9) - (b.h.mesh.position.y + Math.random() * 0.9));
+      }
+      targets.forEach(({ i }, idx) => {
+        const delay = idx * 55 + Math.random() * 25;
+        setTimeout(() => triggerFlip(i, team), delay);
+      });
+      if (team === 'chaos') {
+        hexes.forEach((h, i) => {
+          if (h.state !== 'dark' && h.team !== 'chaos' && Math.random() < 0.14) {
+            setTimeout(() => triggerFlip(i, 'chaos'), 1200 + Math.random() * 800);
+          }
+        });
+      }
+    };
+
+    // ═══════════════════════════════════════════════════════
+    //  SCROLL-DRIVEN CAMERA (zoom + rotation based on scroll)
+    // ═══════════════════════════════════════════════════════
+    const BASE_CAM_Z = 24;
+    const BASE_ROT_X = -0.26;
+    let targetCamZ = BASE_CAM_Z;
+    let targetGridRotX = BASE_ROT_X;
+    let targetGridRotY = 0;
+
+    // Mouse parallax targets (layered on scroll)
+    let mouseRotY = 0;
+    let mouseRotX = 0;
+
+    document.addEventListener('mousemove', e => {
+      const mx = e.clientX / window.innerWidth - 0.5;
+      const my = e.clientY / window.innerHeight - 0.5;
+      mouseRotY = mx * 0.20;
+      mouseRotX = my * -0.09;
+    });
+    document.addEventListener('touchmove', e => {
+      if (!e.touches.length) return;
+      const mx = e.touches[0].clientX / window.innerWidth - 0.5;
+      const my = e.touches[0].clientY / window.innerHeight - 0.5;
+      mouseRotY = mx * 0.13;
+      mouseRotX = my * -0.05;
+    }, { passive: true });
+
+    function updateCameraFromScroll() {
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+      const heroH = heroSection.offsetHeight;
+
+      // Normalize scroll within hero (0→1)
+      const heroFraction = Math.max(0, Math.min(scrollY / heroH, 1));
+
+      // Camera zooms in as you scroll past hero
+      targetCamZ = BASE_CAM_Z - heroFraction * 6;
+
+      // Grid tilts more as you scroll into team sections
+      const teamsTop = teamsContainer.offsetTop;
+      const teamsH = teamsContainer.offsetHeight - vh;
+      const teamsFraction = Math.max(0, Math.min((scrollY - teamsTop) / teamsH, 1));
+
+      // Rotate grid based on which team is active
+      targetGridRotX = BASE_ROT_X - heroFraction * 0.1 + teamsFraction * 0.05;
+      targetGridRotY = teamsFraction * 0.15;
+    }
+
+    // HUD counts
+    const hudFlame = document.getElementById('hudFlame');
+    const hudWave  = document.getElementById('hudWave');
+    const hudChaos = document.getElementById('hudChaos');
+
+    function updateHudCounts() {
+      let f = 0, w = 0, c = 0;
+      hexes.forEach(h => {
+        if (h.state === 'flame') f++;
+        else if (h.state === 'wave') w++;
+        else if (h.state === 'chaos') c++;
+      });
+      hudFlame.textContent = f;
+      hudWave.textContent = w;
+      hudChaos.textContent = c;
+    }
+
+    // Resize
+    function onResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    }
+    window.addEventListener('resize', onResize);
+    onResize();
+
+    // ═══════════════════════════════════════════════════════
+    //  RENDER LOOP
+    // ═══════════════════════════════════════════════════════
+    let lastTime = 0;
+    let lightAngle = 0;
+    let frameCount = 0;
+
+    function animate(time) {
+      requestAnimationFrame(animate);
+      const delta = Math.min((time - lastTime) * 0.001, 0.05);
+      lastTime = time;
+
+      // Scroll-driven camera
+      updateCameraFromScroll();
+
+      // Smooth lerp camera
+      camera.position.z += (targetCamZ - camera.position.z) * 0.04;
+      hexGroup.rotation.y += (targetGridRotY + mouseRotY - hexGroup.rotation.y) * 0.055;
+      hexGroup.rotation.x += (targetGridRotX + mouseRotX - hexGroup.rotation.x) * 0.055;
+
+      // Orbit accent lights
+      lightAngle += delta * 0.28;
+      lightFlame.position.set(
+        Math.cos(lightAngle) * 11,
+        Math.sin(lightAngle * 0.7) * 4 + 5,
+        Math.sin(lightAngle) * 6 + 7
+      );
+      lightWave.position.set(
+        Math.cos(lightAngle + Math.PI * 2 / 3) * 11,
+        Math.sin((lightAngle + Math.PI * 2 / 3) * 0.7) * 4 + 3,
+        Math.sin(lightAngle + Math.PI * 2 / 3) * 6 + 7
+      );
+      lightChaos.position.set(
+        Math.cos(lightAngle + Math.PI * 4 / 3) * 9,
+        Math.sin((lightAngle + Math.PI * 4 / 3) * 0.7) * 4 - 4,
+        Math.sin(lightAngle + Math.PI * 4 / 3) * 5 + 6
+      );
+
+      // Animate hexes
+      hexes.forEach((h, i) => {
+        if (h.animating) {
+          h.animProgress += delta * FLIP_SPD;
+          if (h.animProgress < 0.5) {
+            const t = h.animProgress / 0.5;
+            const e = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            h.mesh.position.z = h.baseZ + e * POP_Z;
+            h.mesh.scale.setScalar(1 + e * 0.1);
+          }
+          if (h.animProgress >= 0.5 && !h.peakDone) {
+            h.peakDone = true;
+            h.state = h.targetState;
+            h.mat.color.set(colorForState(h.state));
+            h.mat.emissive.set(colorForState(h.state));
+            h.mat.emissiveIntensity = emissiveIntensityForState(h.state);
+          }
+          if (h.animProgress >= 0.5) {
+            const t = (h.animProgress - 0.5) / 0.5;
+            const e = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            const inv = 1 - e;
+            const bounce = t > 0.8 ? Math.sin((t - 0.8) / 0.2 * Math.PI) * 0.06 : 0;
+            h.mesh.position.z = h.baseZ + inv * POP_Z;
+            h.mesh.scale.setScalar(1 + bounce);
+          }
+          if (h.animProgress >= 1.0) {
+            h.animating = false;
+            h.animProgress = 0;
+            h.peakDone = false;
+            h.mesh.position.z = h.baseZ;
+            h.mesh.scale.setScalar(1);
+          }
+        } else {
+          h.mesh.position.z = h.baseZ + Math.sin(time * 0.0009 + i * 0.18) * 0.04;
+        }
+      });
+
+      // Update HUD every 15 frames
+      frameCount++;
+      if (frameCount % 15 === 0) updateHudCounts();
+
+      renderer.render(scene, camera);
+    }
+
+    // Kick off
+    requestAnimationFrame(t => {
+      lastTime = t;
+      requestAnimationFrame(animate);
+      clearTimeout(_loaderFallback);
+      setTimeout(() => {
+        if (_loaderEl) _loaderEl.classList.add('hidden');
+      }, 400);
+    });
+
+    } catch (err) {
+      console.error('[RunStrict HexGrid]', err);
+      clearTimeout(_loaderFallback);
+      if (_loaderEl) {
+        _loaderEl.querySelector('.loader-icon').textContent = '\u26A0\uFE0F';
+        _loaderEl.querySelector('.loader-text').textContent = 'WebGL error \u2014 try refreshing';
+        setTimeout(() => _loaderEl.classList.add('hidden'), 2500);
+      }
+    }
+  </script>
+</body>
+</html>

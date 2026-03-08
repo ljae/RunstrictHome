@@ -486,7 +486,273 @@ function initReveal() {
     { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal, .reveal-scale, .reveal-left, .reveal-right, .reveal-stagger, .reveal-step, .reveal-tilt').forEach(el => observer.observe(el));
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LETTER-BY-LETTER HERO TITLE ANIMATION
+// ═══════════════════════════════════════════════════════════════
+function initCharReveal() {
+  const title = document.getElementById('heroTitle');
+  if (!title) return;
+
+  // Process only direct text nodes, skip children like .title-gradient
+  // which use background-clip:text and break when split into char spans
+  const walker = document.createTreeWalker(title, NodeFilter.SHOW_TEXT, {
+    acceptNode: function(node) {
+      // Skip text inside .title-gradient (gradient-clip breaks with char spans)
+      if (node.parentElement.closest('.title-gradient')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  let charIdx = 0;
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+  textNodes.forEach(node => {
+    const text = node.textContent;
+    if (!text.trim()) return;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (ch === ' ' || ch === '\n') {
+        frag.appendChild(document.createTextNode(ch));
+        continue;
+      }
+      const span = document.createElement('span');
+      span.className = 'char';
+      span.style.setProperty('--d', (0.3 + charIdx * 0.04) + 's');
+      span.textContent = ch;
+      frag.appendChild(span);
+      charIdx++;
+    }
+    node.parentNode.replaceChild(frag, node);
+  });
+
+  // Animate .title-gradient as a whole block instead
+  const gradientSpan = title.querySelector('.title-gradient');
+  if (gradientSpan) {
+    const delay = 0.3 + charIdx * 0.04;
+    gradientSpan.style.opacity = '0';
+    gradientSpan.style.transform = 'translateY(40px)';
+    gradientSpan.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    gradientSpan.style.transitionDelay = delay + 's';
+    requestAnimationFrame(() => {
+      gradientSpan.style.opacity = '1';
+      gradientSpan.style.transform = 'translateY(0)';
+    });
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SCROLL-DRIVEN HERO PARALLAX + NAV + PROGRESS BAR
+// ═══════════════════════════════════════════════════════════════
+function initScrollEffects() {
+  const heroContent = document.getElementById('heroContent');
+  const heroRunnerBg = document.getElementById('heroRunnerBg');
+  const scrollHint = document.getElementById('scrollHint');
+  const scrollFill = document.getElementById('scrollProgressFill');
+  const mainNav = document.getElementById('mainNav');
+  const heroSection = document.getElementById('hero');
+  const proofBar = document.querySelector('.proof-bar');
+
+  let lastScrollY = 0;
+  let ticking = false;
+
+  function onScroll() {
+    const scrollY = window.scrollY;
+    const vh = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight - vh;
+
+    // ── Progress bar ──
+    if (scrollFill) {
+      const progress = Math.min(scrollY / docHeight, 1);
+      scrollFill.style.width = (progress * 100) + '%';
+    }
+
+    // ── Hero parallax ──
+    if (heroSection) {
+      const heroH = heroSection.offsetHeight;
+      const heroProgress = Math.min(Math.max(scrollY / (heroH * 0.5), 0), 1);
+
+      if (heroContent) {
+        const heroOpacity = 1 - heroProgress;
+        const heroScale = 1 - heroProgress * 0.12;
+        const heroY = scrollY * 0.3;
+        heroContent.style.opacity = heroOpacity;
+        heroContent.style.transform = 'translateY(' + heroY + 'px) scale(' + heroScale + ')';
+      }
+
+      if (heroRunnerBg) {
+        heroRunnerBg.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+      }
+
+      if (scrollHint) {
+        scrollHint.style.opacity = Math.max(0, 1 - heroProgress * 3);
+      }
+    }
+
+    // ── Nav hide/show + scroll state ──
+    if (mainNav) {
+      if (scrollY > 100) {
+        mainNav.classList.add('nav-scrolled');
+      } else {
+        mainNav.classList.remove('nav-scrolled');
+      }
+
+      if (scrollY > 300 && scrollY > lastScrollY + 8) {
+        mainNav.classList.add('nav-hidden');
+      } else if (scrollY < lastScrollY - 8 || scrollY < 100) {
+        mainNav.classList.remove('nav-hidden');
+      }
+    }
+
+    // ── Proof bar animate ──
+    if (proofBar) {
+      const proofRect = proofBar.getBoundingClientRect();
+      if (proofRect.top < vh * 0.9) {
+        proofBar.classList.add('visible');
+      }
+    }
+
+    // ── Section indicators ──
+    updateSectionIndicators(scrollY, vh);
+
+    lastScrollY = scrollY;
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      requestAnimationFrame(onScroll);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial call
+  requestAnimationFrame(onScroll);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SECTION INDICATORS
+// ═══════════════════════════════════════════════════════════════
+function updateSectionIndicators(scrollY, vh) {
+  const indicators = document.querySelectorAll('.sec-indicator');
+  if (!indicators.length) return;
+
+  const sections = ['hero', 'athlete', 'how-it-works', 'teams', 'season', 'download'];
+  let activeIdx = 0;
+
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top <= vh * 0.5) {
+      activeIdx = i;
+    }
+  });
+
+  indicators.forEach((ind, i) => {
+    ind.classList.toggle('active', i === activeIdx);
+  });
+}
+
+function initSectionIndicators() {
+  document.querySelectorAll('.sec-indicator').forEach(ind => {
+    ind.addEventListener('click', () => {
+      const targetId = ind.dataset.target;
+      const el = document.getElementById(targetId);
+      if (el) {
+        const top = el.offsetTop - 60;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ANIMATED NUMBER COUNT-UP ON SCROLL
+// ═══════════════════════════════════════════════════════════════
+function initCountUp() {
+  const proofNums = document.querySelectorAll('.proof-num');
+  let counted = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !counted) {
+        counted = true;
+        proofNums.forEach(el => {
+          const text = el.textContent.replace(/,/g, '');
+          const target = parseInt(text);
+          if (isNaN(target)) return; // skip non-numeric like "Season 2"
+          animateNumber(el, 0, target, 1200);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const proofBar = document.querySelector('.proof-bar');
+  if (proofBar) observer.observe(proofBar);
+}
+
+function animateNumber(el, start, end, duration) {
+  const startTime = performance.now();
+  function step(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const value = Math.round(start + (end - start) * eased);
+    el.textContent = value.toLocaleString();
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MOUSE-TRACKING 3D TILT + SHINE FOR TEAM CARDS
+// ═══════════════════════════════════════════════════════════════
+function initTiltCards() {
+  document.querySelectorAll('[data-tilt]').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * 16;  // ±8deg
+      const rotateX = (0.5 - y) * 12;  // ±6deg
+      card.style.transform = 'perspective(600px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.02)';
+      card.style.setProperty('--mx', (x * 100) + '%');
+      card.style.setProperty('--my', (y * 100) + '%');
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.setProperty('--mx', '50%');
+      card.style.setProperty('--my', '50%');
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COUNT-UP FOR [data-count] STAT ELEMENTS
+// ═══════════════════════════════════════════════════════════════
+function initStatCountUp() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        if (isNaN(target)) return;
+        animateNumber(el, 0, target, 1000);
+        // Append suffix after animation completes
+        setTimeout(() => {
+          el.textContent = target.toLocaleString() + suffix;
+        }, 1050);
+        observer.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('[data-count]').forEach(el => observer.observe(el));
 }
 
 /** Season countdown to "The Void" */
@@ -589,7 +855,13 @@ window.highlightScreen = function(name) {
 // ═══════════════════════════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', () => {
+  initCharReveal();
   initReveal();
+  initScrollEffects();
+  initSectionIndicators();
+  initCountUp();
+  initTiltCards();
+  initStatCountUp();
   initCountdown();
   initTimeline();
   initRunnerEffects();
