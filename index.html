@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RunStrict — GPS Running Game | Capture Territory. Dominate Your City.</title>
-  <meta name="description" content="The GPS running game where your footsteps capture territory. Run through hexes, conquer your city, and race The Void before the 40-day season resets. Season 2 LIVE — 1,203 active runners and growing." />
+  <meta name="description"
+    content="The GPS running game where your footsteps capture territory. Run through hexes, conquer your city, and race The Void before the 40-day season resets. Season 2 LIVE — 1,203 active runners and growing." />
 
   <!-- ─── SEO: Canonical & Indexing ─── -->
   <link rel="canonical" href="https://runstrict.com/" />
   <meta name="robots" content="index, follow" />
-  <meta name="keywords" content="GPS running game, location-based running game, gamified running app, run to capture territory, hex territory game, team running competition, fitness game app, running challenge app, outdoor GPS game, competitive running app" />
+  <meta name="keywords"
+    content="GPS running game, location-based running game, gamified running app, run to capture territory, hex territory game, team running competition, fitness game app, running challenge app, outdoor GPS game, competitive running app" />
   <meta name="author" content="RunStrict" />
   <meta name="theme-color" content="#0A0A0F" />
   <link rel="manifest" href="manifest.json" />
@@ -24,7 +27,8 @@
   <meta property="og:url" content="https://runstrict.com/" />
   <meta property="og:site_name" content="RunStrict" />
   <meta property="og:title" content="RunStrict — GPS Running Game | Capture Territory. Dominate Your City." />
-  <meta property="og:description" content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, and beat The Void. 40-day seasons. Season 2 LIVE — join 1,203 runners." />
+  <meta property="og:description"
+    content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, and beat The Void. 40-day seasons. Season 2 LIVE — join 1,203 runners." />
   <meta property="og:image" content="https://runstrict.com/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -34,7 +38,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@runstrictapp" />
   <meta name="twitter:title" content="RunStrict — GPS Running Game" />
-  <meta name="twitter:description" content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, beat The Void. Season 2 LIVE." />
+  <meta name="twitter:description"
+    content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, beat The Void. Season 2 LIVE." />
   <meta name="twitter:image" content="https://runstrict.com/assets/og-image.png" />
   <meta name="twitter:image:alt" content="RunStrict GPS running game" />
 
@@ -42,7 +47,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PKVNR2L0JB"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-PKVNR2L0JB');
   </script>
@@ -50,7 +55,9 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
 
   <!-- MapLibre GL JS (Mapbox-compatible, no token required) -->
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
@@ -123,6 +130,7 @@
   </script>
 
 </head>
+
 <body>
 
   <!-- Scroll Progress Bar -->
@@ -134,101 +142,110 @@
   <section class="hero" id="hero">
     <div class="hero-sticky">
 
-    <!-- Hex background pattern -->
-    <div class="hex-bg"></div>
-    <!-- Hero runner image (atmospheric background) -->
-    <div class="hero-runner-bg hero-parallax-layer" id="heroRunnerBg">
-      <picture>
-        <source srcset="assets/hero_runner_v3.webp" type="image/webp" />
-        <img src="assets/hero_runner_v3.webp" alt="" aria-hidden="true" loading="eager" />
-      </picture>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="nav" id="mainNav">
-      <div class="nav-logo">
+      <!-- Hex background pattern -->
+      <div class="hex-bg"></div>
+      <!-- Hero runner image (atmospheric background) -->
+      <div class="hero-runner-bg hero-parallax-layer" id="heroRunnerBg">
         <picture>
-          <source srcset="assets/runner_logo_transparent.webp" type="image/webp" />
-          <img src="assets/runner_logo_transparent.png" alt="RunStrict" class="logo-img" />
+          <source srcset="assets/hero_runner_v3.webp" type="image/webp" />
+          <img src="assets/hero_runner_v3.webp" alt="" aria-hidden="true" loading="eager" />
         </picture>
       </div>
-      <div class="nav-links">
-        <a href="#how-it-works">How It Works</a>
-        <a href="#teams">Teams</a>
-        <a href="#season">Season</a>
-        <a href="hexagon.html" class="nav-hex-link">3D Hex Grid ✦</a>
-        <a href="#download" class="nav-cta">Download</a>
-      </div>
-      <button class="nav-burger" aria-label="Menu" onclick="toggleNav()">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
 
-    <!-- Mobile nav overlay -->
-    <div class="nav-mobile" id="navMobile">
-      <a href="#how-it-works" onclick="toggleNav()">How It Works</a>
-      <a href="#teams" onclick="toggleNav()">Teams</a>
-      <a href="#season" onclick="toggleNav()">Season</a>
-      <a href="hexagon.html" onclick="toggleNav()" style="color:#00E5FF">3D Hex Grid ✦</a>
-      <a href="#download" onclick="toggleNav()">Download</a>
-    </div>
-
-    <!-- Hero content -->
-    <div class="hero-content hero-parallax-layer" id="heroContent">
-      <div class="hero-text">
-        <div class="hero-badge">&#x1F3C3; Season 2 — Active</div>
-        <h1 class="hero-title" id="heroTitle">
-          Run.<br />
-          Flip.<br />
-          <span class="title-gradient">Dominate.</span>
-        </h1>
-        <p class="hero-tagline">We run the same roads.</p>
-        <p class="hero-sub">
-          A location-based running game where your footsteps become territory.
-          Choose your team. Flip hexes. Conquer your city — before the season ends.
-        </p>
-        <div class="hero-actions">
-          <a href="#download" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            App Store
-          </a>
-          <a href="#download" class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z"/></svg>
-            Google Play
-          </a>
+      <!-- Navigation -->
+      <nav class="nav" id="mainNav">
+        <div class="nav-logo">
+          <picture>
+            <source srcset="assets/runner_logo_transparent.webp" type="image/webp" />
+            <img src="assets/runner_logo_transparent.png" alt="RunStrict" class="logo-img" />
+          </picture>
         </div>
+        <div class="nav-links">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#teams">Teams</a>
+          <a href="#season">Season</a>
+          <a href="hexagon.html" class="nav-hex-link">3D Hex Grid ✦</a>
+          <a href="#download" class="nav-cta">Download</a>
+        </div>
+        <button class="nav-burger" aria-label="Menu" onclick="toggleNav()">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+
+      <!-- Mobile nav overlay -->
+      <div class="nav-mobile" id="navMobile">
+        <a href="#how-it-works" onclick="toggleNav()">How It Works</a>
+        <a href="#teams" onclick="toggleNav()">Teams</a>
+        <a href="#season" onclick="toggleNav()">Season</a>
+        <a href="hexagon.html" onclick="toggleNav()" style="color:#00E5FF">3D Hex Grid ✦</a>
+        <a href="#download" onclick="toggleNav()">Download</a>
       </div>
 
-      <!-- Map container -->
-      <div class="map-container">
-        <div class="map-overlay-top">
-          <div class="season-selector">
-            <button class="season-btn" data-season="1" onclick="switchSeason(1)">S1</button>
-            <button class="season-btn active" data-season="2" onclick="switchSeason(2)">S2 ✦</button>
+      <!-- Hero content -->
+      <div class="hero-content hero-parallax-layer" id="heroContent">
+        <div class="hero-text">
+          <div class="hero-badge">&#x1F3C3; Season 2 — Active</div>
+          <h1 class="hero-title" id="heroTitle">
+            Run.<br />
+            Flip.<br />
+            <span class="title-gradient">Dominate.</span>
+          </h1>
+          <p class="hero-tagline">We run the same roads.</p>
+          <p class="hero-sub">
+            A location-based running game where your footsteps become territory.
+            Choose your team. Flip hexes. Conquer your city — before the season ends.
+          </p>
+          <div class="hero-actions">
+            <a href="#download" class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+              </svg>
+              App Store
+            </a>
+            <a href="#download" class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                <path
+                  d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z" />
+              </svg>
+              Google Play
+            </a>
           </div>
-          <div class="map-legend">
-            <div class="legend-item"><span class="legend-dot flame"></span>FLAME</div>
-            <div class="legend-item"><span class="legend-dot wave"></span>WAVE</div>
-            <div class="legend-item"><span class="legend-dot chaos"></span>CHAOS</div>
+        </div>
+
+        <!-- Map container -->
+        <div class="map-container">
+          <div class="map-overlay-top">
+            <div class="season-selector">
+              <button class="season-btn" data-season="1" onclick="switchSeason(1)">S1</button>
+              <button class="season-btn active" data-season="2" onclick="switchSeason(2)">S2 ✦</button>
+            </div>
+            <div class="map-legend">
+              <div class="legend-item"><span class="legend-dot flame"></span>FLAME</div>
+              <div class="legend-item"><span class="legend-dot wave"></span>WAVE</div>
+              <div class="legend-item"><span class="legend-dot chaos"></span>CHAOS</div>
+            </div>
+          </div>
+          <div id="map"></div>
+          <div class="map-tooltip" id="mapTooltip" style="display:none;"></div>
+          <div class="map-overlay-bottom">
+            <div class="map-stat"><span class="stat-val" id="statRed">—</span><span class="stat-label">FLAME</span>
+            </div>
+            <div class="map-divider"></div>
+            <div class="map-stat"><span class="stat-val" id="statBlue">—</span><span class="stat-label">WAVE</span>
+            </div>
+            <div class="map-divider"></div>
+            <div class="map-stat"><span class="stat-val" id="statPurple">—</span><span class="stat-label">CHAOS</span>
+            </div>
           </div>
         </div>
-        <div id="map"></div>
-        <div class="map-tooltip" id="mapTooltip" style="display:none;"></div>
-        <div class="map-overlay-bottom">
-          <div class="map-stat"><span class="stat-val" id="statRed">—</span><span class="stat-label">FLAME</span></div>
-          <div class="map-divider"></div>
-          <div class="map-stat"><span class="stat-val" id="statBlue">—</span><span class="stat-label">WAVE</span></div>
-          <div class="map-divider"></div>
-          <div class="map-stat"><span class="stat-val" id="statPurple">—</span><span class="stat-label">CHAOS</span></div>
-        </div>
       </div>
-    </div>
 
-    <!-- Scroll indicator -->
-    <div class="scroll-hint hero-parallax-layer" id="scrollHint">
-      <span>Scroll to explore</span>
-      <div class="scroll-line"></div>
-    </div>
+      <!-- Scroll indicator -->
+      <div class="scroll-hint hero-parallax-layer" id="scrollHint">
+        <span>Scroll to explore</span>
+        <div class="scroll-line"></div>
+      </div>
 
     </div><!-- /hero-sticky -->
   </section>
@@ -292,7 +309,9 @@
             </div>
             <div class="hud-bar-wrap">
               <div class="hud-bar-label">HEX CAPTURE · 1:23:05</div>
-              <div class="hud-bar"><div class="hud-bar-fill"></div></div>
+              <div class="hud-bar">
+                <div class="hud-bar-fill"></div>
+              </div>
             </div>
             <div class="hud-metric">
               <span class="hud-metric-val">4×</span>
@@ -305,7 +324,8 @@
         <div class="athlete-copy reveal-right">
           <div class="hud-eyebrow">// YOUR CITY. YOUR RULES.</div>
           <h2 class="athlete-headline">Every step is<br /><span class="title-gradient">a declaration.</span></h2>
-          <p class="athlete-sub">RunStrict turns your daily run into territorial warfare. Hit the streets, flip hexes, and conquer your city before The Void resets everything.</p>
+          <p class="athlete-sub">RunStrict turns your daily run into territorial warfare. Hit the streets, flip hexes,
+            and conquer your city before The Void resets everything.</p>
 
           <div class="hud-stats-row">
             <div class="hud-stat-box reveal-stagger" style="--delay: 0.1s">
@@ -323,7 +343,10 @@
           </div>
 
           <a href="#download" class="btn btn-primary athlete-cta">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M13 2.05V13h3l-4 7-4-7h3V2.05c.66.09 1.34.18 2 .26V2.05z" opacity="0"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm-1 14.93V13H8l4-7 4 7h-3v3.93c-.66-.04-1.34-.04-2 0z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path d="M13 2.05V13h3l-4 7-4-7h3V2.05c.66.09 1.34.18 2 .26V2.05z" opacity="0" />
+              <path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm-1 14.93V13H8l4-7 4 7h-3v3.93c-.66-.04-1.34-.04-2 0z" />
+            </svg>
             Join the Season
           </a>
         </div>
@@ -409,29 +432,41 @@
           <div class="step-number">01</div>
           <div class="step-icon">&#x1F3C3;</div>
           <h3>Lace Up &amp; Run</h3>
-          <p>Open RunStrict and hit the streets. GPS tracks every step in real-time. Maintain under 8 min/km to activate hex capture.</p>
-          <div class="step-progress"><div class="step-progress-fill"></div></div>
+          <p>Open RunStrict and hit the streets. GPS tracks every step in real-time. Maintain under 8 min/km to activate
+            hex capture.</p>
+          <div class="step-progress">
+            <div class="step-progress-fill"></div>
+          </div>
         </div>
         <div class="step-card reveal-step" style="--delay: 0.12s">
           <div class="step-number">02</div>
           <div class="step-icon">&#x2B21;</div>
           <h3>Flip the Hexes</h3>
-          <p>Every ~175m hexagonal tile you run through flips to your team's color. The last runner wins. Speed counts. Consistency matters.</p>
-          <div class="step-progress"><div class="step-progress-fill"></div></div>
+          <p>Every ~175m hexagonal tile you run through flips to your team's color. The last runner wins. Speed counts.
+            Consistency matters.</p>
+          <div class="step-progress">
+            <div class="step-progress-fill"></div>
+          </div>
         </div>
         <div class="step-card reveal-step" style="--delay: 0.24s">
           <div class="step-number">03</div>
           <div class="step-icon">&#x1F5FA;&#xFE0F;</div>
           <h3>Dominate the Map</h3>
-          <p>Watch the city transform. Earn points, climb leaderboards, and lead your team to province dominance — before The Void resets everything.</p>
-          <div class="step-progress"><div class="step-progress-fill"></div></div>
+          <p>Watch the city transform. Earn points, climb leaderboards, and lead your team to province dominance —
+            before The Void resets everything.</p>
+          <div class="step-progress">
+            <div class="step-progress-fill"></div>
+          </div>
         </div>
         <div class="step-card reveal-step" style="--delay: 0.36s">
           <div class="step-number">04</div>
           <div class="step-icon">&#x26A1;</div>
           <h3>Earn Buff Multipliers</h3>
-          <p>Red Elites earn 4&times; points. Blue Union gets district bonuses. Purple CHAOS players grow stronger the more they run together.</p>
-          <div class="step-progress"><div class="step-progress-fill"></div></div>
+          <p>Red Elites earn 4&times; points. Blue Union gets district bonuses. Purple CHAOS players grow stronger the
+            more they run together.</p>
+          <div class="step-progress">
+            <div class="step-progress-fill"></div>
+          </div>
         </div>
       </div>
 
@@ -439,12 +474,16 @@
         <div class="void-text">
           <span class="void-label">D-DAY</span>
           <h3>THE VOID</h3>
-          <p>When the 40-day season ends, everything is wiped. All hexes. All points. All territories. Only the legend remains.</p>
+          <p>When the 40-day season ends, everything is wiped. All hexes. All points. All territories. Only the legend
+            remains.</p>
         </div>
         <div class="void-countdown">
-          <div class="countdown-item"><span id="countDays" class="count-num">—</span><span class="count-label">DAYS</span></div>
-          <div class="countdown-item"><span id="countHours" class="count-num">—</span><span class="count-label">HOURS</span></div>
-          <div class="countdown-item"><span id="countMins" class="count-num">—</span><span class="count-label">MINS</span></div>
+          <div class="countdown-item"><span id="countDays" class="count-num">—</span><span
+              class="count-label">DAYS</span></div>
+          <div class="countdown-item"><span id="countHours" class="count-num">—</span><span
+              class="count-label">HOURS</span></div>
+          <div class="countdown-item"><span id="countMins" class="count-num">—</span><span
+              class="count-label">MINS</span></div>
         </div>
       </div>
     </div>
@@ -468,13 +507,28 @@
           <div class="team-name">FLAME</div>
           <div class="team-color-tag">Red Team</div>
           <p class="team-desc">
-            The elite meritocracy. Top 20% of Red runners become Elites — unlocking 4&times; points and proving dominance through sheer performance.
+            The elite meritocracy. Top 20% of Red runners become Elites — unlocking 4&times; points and proving
+            dominance through sheer performance.
           </p>
-          <ul class="team-perks">
-            <li>&#x26A1; Elite tier: 4&times; flip multiplier</li>
-            <li>&#x1F3C6; District &amp; Province bonuses</li>
-            <li>&#x1F525; Pure performance-based ranking</li>
-          </ul>
+          <div class="team-buff-visual flame-visual">
+            <div class="flame-comparison">
+              <div class="f-col">
+                <div class="f-bar-stack">
+                  <div class="f-segment f-bonus-elite"><span>+2&times;<br />WIN</span></div>
+                  <div class="f-segment f-base-elite"><span>2&times;<br />BASE</span></div>
+                </div>
+                <span class="f-title">ELITE (20%)</span>
+              </div>
+              <div class="f-col">
+                <div class="f-bar-stack">
+                  <div class="f-empty"></div>
+                  <div class="f-segment f-bonus-common"><span>+1&times;<br />WIN</span></div>
+                  <div class="f-segment f-base-common"><span>1&times;<br />BASE</span></div>
+                </div>
+                <span class="f-title">COMMON (80%)</span>
+              </div>
+            </div>
+          </div>
           <div class="team-stat">
             <span class="team-stat-val" data-count="4" data-suffix="×">0</span>
             <span class="team-stat-label">Max Multiplier</span>
@@ -489,13 +543,16 @@
           <div class="team-name">WAVE</div>
           <div class="team-color-tag">Blue Team</div>
           <p class="team-desc">
-            United as one. Every Blue runner fights together. District and Province victories amplify the whole team's power with union bonuses.
+            United as one. Every Blue runner fights together. District and Province victories amplify the whole team's
+            power with union bonuses.
           </p>
-          <ul class="team-perks">
-            <li>&#x1F30A; Union base buff for all members</li>
-            <li>&#x1F3D9;&#xFE0F; District win: +1&times; for everyone</li>
-            <li>&#x1F5FA;&#xFE0F; Province win: +1&times; stacked</li>
-          </ul>
+          <div class="team-buff-visual wave-visual">
+            <div class="ripple-container">
+              <div class="ripple ripple-3"><span class="ripple-label">3&times;</span></div>
+              <div class="ripple ripple-2"><span class="ripple-label">2&times;</span></div>
+              <div class="ripple ripple-1"><span class="ripple-label">1&times; Union</span></div>
+            </div>
+          </div>
           <div class="team-stat">
             <span class="team-stat-val" data-count="3" data-suffix="×">0</span>
             <span class="team-stat-label">Max Multiplier</span>
@@ -510,13 +567,23 @@
           <div class="team-name">CHAOS</div>
           <div class="team-color-tag">Purple Team &middot; Always Open</div>
           <p class="team-desc">
-            The wildcard. Join anytime — but never go back. CHAOS power scales with participation. The more Purples run, the stronger everyone becomes.
+            The wildcard. Join anytime — but never go back. CHAOS power scales with participation. The more Purples run,
+            the stronger everyone becomes.
           </p>
-          <ul class="team-perks">
-            <li>&#x1F6AA; Available anytime. Irreversible.</li>
-            <li>&#x1F465; &ge;60% active = 3&times; buff for all</li>
-            <li>&#x26A0;&#xFE0F; Points preserved on defection</li>
-          </ul>
+          <div class="team-buff-visual chaos-visual">
+            <div class="gauge-container">
+              <div class="gauge-track">
+                <div class="gauge-fill"></div>
+                <div class="gauge-threshold t-30"></div>
+                <div class="gauge-threshold t-60"></div>
+              </div>
+              <div class="gauge-labels">
+                <div class="g-label">1&times;</div>
+                <div class="g-label">30% &rarr; 2&times;</div>
+                <div class="g-label">60% &rarr; 3&times;</div>
+              </div>
+            </div>
+          </div>
           <div class="team-stat">
             <span class="team-stat-val" data-count="3" data-suffix="×">0</span>
             <span class="team-stat-label">Max Multiplier</span>
@@ -631,38 +698,44 @@
       <div class="testimonials-grid">
 
         <div class="testimonial-card reveal" style="--delay: 0s">
-          <div class="testimonial-quote">“I started waking up at 5am just to capture the park near my office before anyone else. I’ve never been this consistent in my life. RunStrict broke my brain in the best way.”</div>
+          <div class="testimonial-quote">“I started waking up at 5am just to capture the park near my office before
+            anyone else. I’ve never been this consistent in my life. RunStrict broke my brain in the best way.”</div>
           <div class="testimonial-author">
             <div class="testimonial-avatar testimonial-avatar--red">JK</div>
             <div class="testimonial-meta">
               <div class="testimonial-name">Jason K.</div>
               <div class="testimonial-detail">FLAME · Seoul · Season 1 veteran</div>
             </div>
-            <div class="testimonial-team-badge team-badge--red"><img src="assets/flame.webp" alt="FLAME" class="badge-icon" /> FLAME</div>
+            <div class="testimonial-team-badge team-badge--red"><img src="assets/flame.webp" alt="FLAME"
+                class="badge-icon" /> FLAME</div>
           </div>
         </div>
 
         <div class="testimonial-card reveal" style="--delay: 0.1s">
-          <div class="testimonial-quote">“Our whole district coordinates runs every evening now. We reclaimed 40 hexes in one night. The group chat is on fire. This is the most social I’ve been in years.”</div>
+          <div class="testimonial-quote">“Our whole district coordinates runs every evening now. We reclaimed 40 hexes
+            in one night. The group chat is on fire. This is the most social I’ve been in years.”</div>
           <div class="testimonial-author">
             <div class="testimonial-avatar testimonial-avatar--blue">ML</div>
             <div class="testimonial-meta">
               <div class="testimonial-name">Mia L.</div>
               <div class="testimonial-detail">WAVE · San Francisco · Season 1</div>
             </div>
-            <div class="testimonial-team-badge team-badge--blue"><img src="assets/wave.webp" alt="WAVE" class="badge-icon" /> WAVE</div>
+            <div class="testimonial-team-badge team-badge--blue"><img src="assets/wave.webp" alt="WAVE"
+                class="badge-icon" /> WAVE</div>
           </div>
         </div>
 
         <div class="testimonial-card reveal" style="--delay: 0.2s">
-          <div class="testimonial-quote">“I switched to CHAOS on day 12. Irreversible. Worth it. The pressure of not knowing if we’d hit 60% participation every day was genuinely stressful… and I loved every second.”</div>
+          <div class="testimonial-quote">“I switched to CHAOS on day 12. Irreversible. Worth it. The pressure of not
+            knowing if we’d hit 60% participation every day was genuinely stressful… and I loved every second.”</div>
           <div class="testimonial-author">
             <div class="testimonial-avatar testimonial-avatar--purple">AR</div>
             <div class="testimonial-meta">
               <div class="testimonial-name">Alex R.</div>
               <div class="testimonial-detail">CHAOS · New York · Season 1 → Season 2</div>
             </div>
-            <div class="testimonial-team-badge team-badge--purple"><img src="assets/chaos.webp" alt="CHAOS" class="badge-icon" /> CHAOS</div>
+            <div class="testimonial-team-badge team-badge--purple"><img src="assets/chaos.webp" alt="CHAOS"
+                class="badge-icon" /> CHAOS</div>
           </div>
         </div>
 
@@ -687,7 +760,9 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p>RunStrict is a location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose a team — FLAME, WAVE, or CHAOS — flip hexes, and battle for dominance before the 40-day season resets in The Void.</p>
+            <p>RunStrict is a location-based GPS running game where your physical runs capture hexagonal territory tiles
+              on a real map of your city. Choose a team — FLAME, WAVE, or CHAOS — flip hexes, and battle for dominance
+              before the 40-day season resets in The Void.</p>
           </div>
         </div>
 
@@ -697,7 +772,9 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p>GPS tracks your route in real-time. Every ~175m hexagonal tile you physically run through flips to your team’s color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture mode. No spoofing — accelerometer verification blocks cheaters.</p>
+            <p>GPS tracks your route in real-time. Every ~175m hexagonal tile you physically run through flips to your
+              team’s color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture
+              mode. No spoofing — accelerometer verification blocks cheaters.</p>
           </div>
         </div>
 
@@ -707,7 +784,8 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p>Yes — RunStrict is free to download on iOS and Android. The app is currently in beta. Join the waitlist for early access.</p>
+            <p>Yes — RunStrict is free to download on iOS and Android. The app is currently in beta. Join the waitlist
+              for early access.</p>
           </div>
         </div>
 
@@ -717,7 +795,9 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p>The Void is the season-end reset event every 40 days. All hexes, points, and territorial control are wiped completely clean. Only the season leaderboard legend survives. Then a brand new 40-day season begins — same map, zero territory.</p>
+            <p>The Void is the season-end reset event every 40 days. All hexes, points, and territorial control are
+              wiped completely clean. Only the season leaderboard legend survives. Then a brand new 40-day season begins
+              — same map, zero territory.</p>
           </div>
         </div>
 
@@ -727,7 +807,10 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p><strong>FLAME</strong> if you’re a competitive elite — top 20% earn 4× multipliers through pure performance. <strong>WAVE</strong> if you love collective victory — your whole district wins together. <strong>CHAOS</strong> if you want to join anytime with no conditions — but choose carefully. It’s irreversible.</p>
+            <p><strong>FLAME</strong> if you’re a competitive elite — top 20% earn 4× multipliers through pure
+              performance. <strong>WAVE</strong> if you love collective victory — your whole district wins together.
+              <strong>CHAOS</strong> if you want to join anytime with no conditions — but choose carefully. It’s
+              irreversible.</p>
           </div>
         </div>
 
@@ -737,7 +820,8 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p>RunStrict supports iOS 15+ (iPhone) and Android 10+. GPS accuracy ≤50m is required for hex capture. The app uses battery-optimized 0.5 Hz GPS polling, so it won’t drain your battery on long runs.</p>
+            <p>RunStrict supports iOS 15+ (iPhone) and Android 10+. GPS accuracy ≤50m is required for hex capture. The
+              app uses battery-optimized 0.5 Hz GPS polling, so it won’t drain your battery on long runs.</p>
           </div>
         </div>
 
@@ -759,7 +843,10 @@
         <div class="download-buttons">
           <a href="#" class="store-btn">
             <div class="store-btn-icon">
-              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+              </svg>
             </div>
             <div class="store-btn-text">
               <div class="store-sub">Download on the</div>
@@ -768,7 +855,10 @@
           </a>
           <a href="#" class="store-btn">
             <div class="store-btn-icon">
-              <svg viewBox="0 0 24 24" fill="white" width="28" height="28"><path d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z"/></svg>
+              <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
+                <path
+                  d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z" />
+              </svg>
             </div>
             <div class="store-btn-text">
               <div class="store-sub">Get it on</div>
@@ -778,20 +868,10 @@
         </div>
         <div class="waitlist-form">
           <p class="waitlist-label">Not available in your region yet? Join the waitlist:</p>
-          <form
-            action="https://formspree.io/f/mjgedwzg"
-            method="POST"
-            class="waitlist-input-row"
-            onsubmit="trackWaitlist(event)"
-          >
-            <input
-              type="email"
-              name="email"
-              placeholder="your@email.com"
-              required
-              class="waitlist-email"
-              aria-label="Email address for waitlist"
-            />
+          <form action="https://formspree.io/f/mjgedwzg" method="POST" class="waitlist-input-row"
+            onsubmit="trackWaitlist(event)">
+            <input type="email" name="email" placeholder="your@email.com" required class="waitlist-email"
+              aria-label="Email address for waitlist" />
             <button type="submit" class="waitlist-submit">Join Waitlist</button>
           </form>
           <p class="waitlist-privacy">No spam. One email when the app launches in your city.</p>
@@ -870,4 +950,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
