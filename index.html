@@ -56,7 +56,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap"
     rel="stylesheet" />
 
   <!-- MapLibre GL JS (Mapbox-compatible, no token required) -->
@@ -129,6 +129,582 @@
   }
   </script>
 
+  <!-- ═══ RUNSTRICT — DESIGN UPGRADE OVERRIDES ═══ -->
+  <style>
+    /* ─── FONT VARIABLES ─── */
+    :root {
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+      --font-ui:      'Rajdhani', sans-serif;
+      --font-mono:    'Share Tech Mono', monospace;
+
+      /* Richer background — slight deep-navy tint for cartographic feel */
+      --black:  #070A0F;
+      --dark:   #0D1117;
+      --dark2:  #131824;
+      --dark3:  #1A2130;
+
+      /* More vivid team colors */
+      --red:         #FF2020;
+      --red-glow:    rgba(255, 32, 32, 0.40);
+      --blue:        #0080FF;
+      --blue-glow:   rgba(0, 128, 255, 0.40);
+      --purple:      #C040F0;
+      --purple-glow: rgba(192, 64, 240, 0.40);
+      --accent:      #00F0FF;
+      --accent-glow: rgba(0, 240, 255, 0.22);
+    }
+
+    /* ─── BASE: noise texture + map grid atmosphere ─── */
+    body {
+      font-family: var(--font-ui);
+      background: var(--black);
+      background-image:
+        radial-gradient(ellipse 90% 40% at 50% -10%, rgba(0, 240, 255, 0.05) 0%, transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+
+    /* ─── TYPOGRAPHY: ALL headings → Bebas Neue ─── */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      letter-spacing: 0.04em;
+    }
+    p, span, a, input, button, label, li, div {
+      font-family: inherit;
+    }
+    body, p, .hero-sub, .hero-tagline, .athlete-sub,
+    .team-desc, .feature-item p, .testimonial-quote,
+    .faq-a p, .download-card p, .footer-sub {
+      font-family: var(--font-ui);
+    }
+
+    /* HERO TITLE: massive condensed war poster */
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(5.5rem, 14vw, 13rem);
+      letter-spacing: 0.06em;
+      line-height: 0.88;
+    }
+    .hero-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(0, 240, 255, 0.6);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    /* HERO BADGE: mono HUD bracket style */
+    .hero-badge {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      background: rgba(0, 240, 255, 0.07);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 2px;
+      padding: 6px 12px;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* SECTION BADGES: HUD bracket style — not pill */
+    .section-badge {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-badge::before { content: '[ '; color: rgba(0, 240, 255, 0.4); }
+    .section-badge::after  { content: ' ]'; color: rgba(0, 240, 255, 0.4); }
+
+    /* SECTION H2s */
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      letter-spacing: 0.04em;
+    }
+    .section-header p {
+      font-family: var(--font-ui);
+      font-weight: 400;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── NAV: Military glass HUD ─── */
+    .nav {
+      background: rgba(7, 10, 15, 0.75);
+      backdrop-filter: blur(20px) saturate(1.6);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+    }
+    .nav-logo .logo-img {
+      filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.35));
+    }
+    .nav-links a {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .nav-cta {
+      font-family: var(--font-ui) !important;
+      letter-spacing: 0.12em !important;
+    }
+
+    /* ─── PROOF BAR: Stat monuments ─── */
+    .proof-bar {
+      background: linear-gradient(180deg, rgba(13,17,23,0.98) 0%, rgba(7,10,15,0.98) 100%);
+      border-top: 1px solid rgba(0,240,255,0.07);
+      border-bottom: 1px solid rgba(0,240,255,0.07);
+    }
+    .proof-num {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      letter-spacing: 0.05em;
+      background: linear-gradient(180deg, #ffffff 0%, var(--accent) 120%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .proof-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    /* ─── HUD EYEBROW ─── */
+    .hud-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+    }
+    .athlete-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      letter-spacing: 0.04em;
+    }
+    .hud-stat-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      letter-spacing: 0.05em;
+    }
+    .hud-stat-lbl {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.2em;
+    }
+
+    /* ─── STEP CARDS: mission briefing ─── */
+    .step-card {
+      border-top: 2px solid rgba(0, 240, 255, 0.18);
+      border-radius: 2px 2px 16px 16px;
+    }
+    .step-number {
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      letter-spacing: 0.04em;
+      line-height: 1;
+      opacity: 0.12;
+      color: var(--accent);
+    }
+    .step-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── TEAM CARDS: each team has distinct identity ─── */
+    .team-card {
+      position: relative;
+    }
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      letter-spacing: 0.16em;
+    }
+    .team-color-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .team-stat-val {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      letter-spacing: 0.05em;
+    }
+    .team-stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .team-desc {
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    /* FLAME — Elite meritocracy: sharp military corners, rank insignia feel */
+    .team-red {
+      background: linear-gradient(145deg, rgba(255,32,32,0.06) 0%, rgba(13,17,23,0.98) 45%) !important;
+      border: 1px solid rgba(255, 32, 32, 0.2) !important;
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+      border-radius: 0 !important;
+    }
+    .team-red::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 18px; height: 18px;
+      background: rgba(255, 32, 32, 0.25);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      pointer-events: none;
+    }
+    .team-red .team-glow {
+      background: radial-gradient(ellipse at 50% -10%, rgba(255,32,32,0.22) 0%, transparent 65%) !important;
+    }
+    .team-red .team-name {
+      color: #FF4444;
+      text-shadow: 0 0 24px rgba(255,32,32,0.55), 0 0 60px rgba(255,32,32,0.2);
+    }
+    .team-red .team-stat-val { color: var(--red); }
+
+    /* WAVE — Collective union: fluid organic asymmetry, ripple borders */
+    .team-blue {
+      background: linear-gradient(160deg, rgba(0,80,200,0.07) 0%, rgba(13,17,23,0.98) 50%) !important;
+      border: 1px solid rgba(0, 128, 255, 0.18) !important;
+      border-radius: 24px 4px 24px 4px !important;
+    }
+    .team-blue .team-glow {
+      background: radial-gradient(ellipse at 25% 25%, rgba(0,128,255,0.18) 0%, transparent 65%) !important;
+    }
+    .team-blue .team-name {
+      color: #4499FF;
+      text-shadow: 0 0 24px rgba(0,128,255,0.55), 0 0 60px rgba(0,128,255,0.2);
+    }
+    .team-blue .team-stat-val { color: var(--blue); }
+
+    /* CHAOS — Wildcard: glitch displacement, unstable borders */
+    .team-purple {
+      background: linear-gradient(115deg, rgba(192,64,240,0.06) 0%, rgba(13,17,23,0.98) 55%) !important;
+      border: 1px solid rgba(192, 64, 240, 0.18) !important;
+      border-radius: 4px 22px 4px 22px !important;
+      box-shadow:
+        0 0 0 1px rgba(192,64,240,0.04),
+        inset 1px 0 0 rgba(192,64,240,0.08),
+        inset -1px 0 0 rgba(192,64,240,0.04) !important;
+    }
+    .team-purple .team-glow {
+      background: radial-gradient(ellipse at 75% 105%, rgba(192,64,240,0.22) 0%, transparent 60%) !important;
+    }
+    .team-purple .team-name {
+      color: #D060FF;
+      text-shadow:
+        0 0 24px rgba(192,64,240,0.65),
+        0 0 60px rgba(192,64,240,0.25),
+        2px 0 0 rgba(0,240,255,0.12);
+    }
+    .team-purple .team-stat-val { color: var(--purple); }
+
+    /* ─── THE VOID: Apocalyptic — inevitable annihilation ─── */
+    .void-banner {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 110%, rgba(60,0,120,0.65) 0%, rgba(0,0,0,0.92) 55%),
+        repeating-linear-gradient(0deg,   transparent, transparent 44px, rgba(192,64,240,0.025) 44px, rgba(192,64,240,0.025) 45px),
+        repeating-linear-gradient(90deg,  transparent, transparent 44px, rgba(192,64,240,0.025) 44px, rgba(192,64,240,0.025) 45px) !important;
+      border: 1px solid rgba(192, 64, 240, 0.18) !important;
+      border-top: 2px solid rgba(192, 64, 240, 0.5) !important;
+    }
+    .void-banner::before {
+      content: 'THE VOID';
+      position: absolute;
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 18vw, 16rem);
+      letter-spacing: 0.12em;
+      color: rgba(192, 64, 240, 0.05);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+    }
+    .void-text { position: relative; z-index: 1; }
+    .void-countdown { position: relative; z-index: 1; }
+    .void-text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      letter-spacing: 0.22em;
+      background: linear-gradient(180deg, #E040FF 0%, #7B00FF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .void-label {
+      font-family: var(--font-mono);
+      color: rgba(192, 64, 240, 0.8);
+      letter-spacing: 0.3em;
+      font-size: 0.62rem;
+    }
+    .void-text p {
+      font-family: var(--font-ui);
+      font-size: 0.95rem;
+      color: rgba(232, 232, 240, 0.55);
+      line-height: 1.7;
+    }
+    .count-num {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      letter-spacing: 0.04em;
+      color: #FF40FF;
+      text-shadow:
+        0 0 30px rgba(192,64,240,0.6),
+        0 0 60px rgba(192,64,240,0.25);
+    }
+    .count-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      color: rgba(192, 64, 240, 0.55);
+    }
+
+    /* ─── SEASON STATS ─── */
+    .stat-big {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+    .stat-desc {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .timeline-header span:first-child {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+    .timeline-dates {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── FEATURES GRID ─── */
+    .feature-item h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+    }
+    .feature-item {
+      border-top: 1px solid rgba(0,240,255,0.1);
+      border-radius: 2px 2px 12px 12px;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonial-card {
+      border-left: 2px solid rgba(0, 240, 255, 0.15);
+      border-radius: 0 16px 16px 0;
+    }
+    .testimonial-name {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .testimonial-detail {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ─── DOWNLOAD CTA: High-conversion treatment ─── */
+    .download-card {
+      background:
+        linear-gradient(135deg, rgba(0,240,255,0.05) 0%, rgba(7,10,15,0.98) 50%),
+        radial-gradient(ellipse at 50% -20%, rgba(0,240,255,0.1) 0%, transparent 60%) !important;
+      border: 1px solid rgba(0, 240, 255, 0.18) !important;
+      border-top: 2px solid rgba(0, 240, 255, 0.5) !important;
+      clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+      position: relative;
+    }
+    .download-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 22px; height: 22px;
+      background: rgba(0, 240, 255, 0.2);
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+      pointer-events: none;
+    }
+    .download-card h2 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 9vw, 8rem);
+      letter-spacing: 0.05em;
+      line-height: 0.88;
+    }
+    .download-hex-decoration {
+      font-size: 6rem;
+      color: rgba(0, 240, 255, 0.07);
+      font-family: inherit;
+    }
+    .disclaimer {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .waitlist-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+    }
+    .waitlist-privacy {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* ─── BUTTONS ─── */
+    .btn-primary, .btn-secondary, .store-btn {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+    .store-name {
+      font-family: var(--font-ui);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+    .store-sub {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      border-top: 1px solid rgba(0, 240, 255, 0.07);
+    }
+    .footer-sub {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(0, 240, 255, 0.35);
+    }
+    .footer h5 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+    }
+    .footer-col a {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.88rem;
+    }
+    .footer-quote {
+      font-family: var(--font-ui);
+      font-style: italic;
+      font-size: 0.82rem;
+      opacity: 0.35;
+    }
+    .footer-bottom p:first-child {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+    }
+
+    /* ─── SECTION INDICATORS (sidebar dots) ─── */
+    .sec-indicator-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.18); border-radius: 2px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,240,255,0.4); }
+
+    /* ─── HUD overlay tag styling ─── */
+    .hud-tag {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+    }
+    .hud-bar-label {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+    }
+    .hud-metric-val {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+    }
+    .hud-metric-unit {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+    }
+    .map-legend .legend-item {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+    }
+    .map-stat .stat-val {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      letter-spacing: 0.06em;
+    }
+    .map-stat .stat-label {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
+    }
+    .season-btn {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+    }
+    .phone-label, .phone-thumb-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+    }
+    .faq-q span:first-child {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .faq-chevron {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+    }
+  </style>
 </head>
 
 <body>
@@ -910,6 +1486,7 @@
             <h5>Legal</h5>
             <a href="privacy-policy.html">Privacy Policy</a>
             <a href="terms-of-service.html">Terms of Service</a>
+            <a href="delete-account.html">Delete Account</a>
           </div>
         </div>
       </div>
