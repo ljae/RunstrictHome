@@ -1798,6 +1798,27 @@ img {
   text-shadow: 0 0 20px var(--red-glow);
 }
 
+.team-red .team-stat-val-common {
+  color: var(--text-dim);
+  text-shadow: none;
+  font-size: 1.5rem;
+}
+
+.team-stat-separator {
+  color: var(--text-faint);
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin: 0 -2px;
+}
+
+.hud-stat-num-sub {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  margin-left: 4px;
+  vertical-align: baseline;
+}
+
 .team-blue .team-stat-val {
   color: var(--blue);
   text-shadow: 0 0 20px var(--blue-glow);
