@@ -1799,7 +1799,7 @@ img {
 }
 
 .team-red .team-stat-val-common {
-  color: var(--text-dim);
+  color: #888;
   text-shadow: none;
   font-size: 1.5rem;
 }
