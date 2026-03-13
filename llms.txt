@@ -1,0 +1,88 @@
+# RunStrict
+
+> RunStrict is a free GPS running game for iOS (Android coming April 2026) where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — and compete to dominate their city's map before a 40-day season resets everything in an event called The Void.
+
+## What is RunStrict?
+
+RunStrict is a location-based running app that gamifies outdoor running. Using GPS tracking and Uber's H3 hexagonal grid system (resolution 9, ~175m per hex), every step a runner takes flips territory on a real city map to their team's color. The last runner through a hex owns it.
+
+## Key Features
+
+- **GPS Territory Capture**: Run through ~175m hexagonal tiles to flip them to your team's color in real-time
+- **Three Teams**: FLAME (Red, elite meritocracy with 4x multipliers for top 20%), WAVE (Blue, collective district bonuses up to 3x), CHAOS (Purple, join anytime but irreversible, power scales with participation up to 3x)
+- **40-Day Seasons**: Every season ends with "The Void" — a complete reset of all hexes, points, and territory. Only the leaderboard legend survives
+- **Anti-Cheat**: 25 km/h speed cap, accelerometer verification, GPS accuracy ≤50m required, 8 min/km minimum pace to capture
+- **Battery Optimized**: 0.5 Hz GPS polling, no WebSocket, syncs only on launch/resume/run completion
+- **Tiered Leaderboards**: Province, District, and Zone scope rankings
+- **Privacy First**: No runner IDs stored in hexes, only team color and timestamp
+- **Pace Consistency Score**: CV-based stability metric rewards steady runners
+
+## Platform Availability
+
+- **iOS**: Available now on the App Store (iOS 15+) — https://apps.apple.com/us/app/runstrict/id6760189457
+- **Android**: Coming April 2026 on Google Play (Android 10+)
+
+## How It Works
+
+1. Open RunStrict and start running — GPS tracks your route in real-time
+2. Maintain under 8 min/km pace to activate hex capture mode
+3. Every ~175m hex tile you run through flips to your team's color
+4. The last runner through a hex controls it — speed and consistency matter
+5. Earn buff multipliers based on your team's mechanics
+6. Compete on tiered leaderboards (Zone, District, Province)
+7. When the 40-day season ends, The Void wipes everything and a new season begins
+
+## Teams
+
+### FLAME (Red)
+Performance-based meritocracy. Top 20% of Red runners each season become Elites, earning a 4x point multiplier. Common Red runners earn 2x base. When FLAME wins a territory scope, all members get additional win bonuses.
+
+### WAVE (Blue)
+Collective strength. Every Blue runner benefits when their district or province is dominated by Blue. Union bonuses stack: 1x base → 2x with district win → 3x with province win.
+
+### CHAOS (Purple)
+The wildcard. Any player can join CHAOS at any time, but it's irreversible — you can never switch back. CHAOS power scales with daily participation: 1x base, 2x when 30% of Purples are active, 3x when 60% are active.
+
+## Technology
+
+- **Hex Grid**: Uber's H3 geospatial indexing at resolution 9
+- **Backend**: Supabase (PostgreSQL + RLS + Edge Functions)
+- **Client**: Flutter (iOS + Android)
+- **Map**: Real-time territory visualization on city maps
+
+## Company
+
+- **Website**: https://runstrict.com
+- **App Store**: https://apps.apple.com/us/app/runstrict/id6760189457
+- **Price**: Free
+- **Category**: Sports / Running / Location-based Game
+
+## Comparisons
+
+RunStrict differs from traditional running apps (Strava, Nike Run Club, Runkeeper) by adding a competitive territory-capture game layer. Unlike fitness trackers that focus on personal metrics, RunStrict makes every run a strategic move in a team-based territorial war. It also differs from location games like Pokémon GO by requiring actual physical running (with pace verification) rather than walking.
+
+## FAQ
+
+**Is RunStrict free?**
+Yes, completely free to download and play.
+
+**What phones does it support?**
+iOS 15+ now, Android 10+ coming April 2026.
+
+**Can I cheat with GPS spoofing?**
+No. RunStrict uses accelerometer verification, 25 km/h speed caps, and GPS accuracy requirements to prevent spoofing.
+
+**What happens when a season ends?**
+The Void resets all hexes, points, and territory. A new 40-day season begins from scratch. Only the leaderboard legend survives.
+
+**Can I switch teams?**
+FLAME and WAVE players can switch teams between seasons. CHAOS membership is permanent and irreversible.
+
+**Does it drain battery?**
+No. RunStrict uses 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion — no persistent connections.
+
+**How big are the hexes?**
+Each hex is approximately 175 meters edge-to-edge, using Uber's H3 resolution 9 grid system.
+
+**Where is RunStrict available?**
+RunStrict works globally in any city. Territory capture works anywhere with GPS coverage.

@@ -1,8 +1,32 @@
 User-agent: *
 Allow: /
 
-# Block crawling of legal pages from indexing (optional — remove if you want them indexed)
-# Disallow: /privacy-policy.html
-# Disallow: /terms-of-service.html
+# AI Search Crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
 
 Sitemap: https://runstrict.com/sitemap.xml

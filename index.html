@@ -10,10 +10,13 @@
 
   <!-- ─── SEO: Canonical & Indexing ─── -->
   <link rel="canonical" href="https://runstrict.com/" />
-  <meta name="robots" content="index, follow" />
+  <link rel="help" type="text/plain" href="/llms.txt" title="LLM-readable site summary" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="keywords"
     content="GPS running game, location-based running game, gamified running app, run to capture territory, hex territory game, team running competition, fitness game app, running challenge app, outdoor GPS game, competitive running app" />
   <meta name="author" content="RunStrict" />
+  <meta name="application-name" content="RunStrict" />
+  <meta name="apple-itunes-app" content="app-id=6760189457" />
   <meta name="theme-color" content="#0A0A0F" />
   <link rel="manifest" href="manifest.json" />
 
@@ -73,22 +76,53 @@
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "name": "RunStrict",
+        "url": "https://runstrict.com",
+        "logo": "https://runstrict.com/assets/runner_logo_transparent.png",
+        "description": "RunStrict builds location-based GPS running games that turn daily runs into team-based territorial warfare.",
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "name": "RunStrict",
+        "url": "https://runstrict.com",
+        "description": "RunStrict is a free GPS running game where your footsteps capture hexagonal territory. Choose your team, flip hexes, dominate your city.",
+        "publisher": { "@type": "Organization", "name": "RunStrict" }
+      },
+      {
         "@type": "MobileApplication",
         "name": "RunStrict",
-        "description": "A location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Team-based territorial warfare resets every 40 days in The Void.",
-        "operatingSystem": ["iOS", "Android"],
+        "alternateName": "RunStrict GPS Running Game",
+        "description": "A free location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to dominate your city before the 40-day season resets in The Void. Uses Uber's H3 hex grid at resolution 9 (~175m tiles). Anti-cheat verified with accelerometer and GPS accuracy checks.",
+        "operatingSystem": ["iOS 15+", "Android 10+ (coming April 2026)"],
         "applicationCategory": "SportsApplication",
         "applicationSubCategory": "Running",
-        "genre": "Sports, Strategy",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "genre": ["Sports", "Strategy", "Location-based Game"],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
         "author": { "@type": "Organization", "name": "RunStrict", "url": "https://runstrict.com" },
         "url": "https://runstrict.com",
+        "installUrl": "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "downloadUrl": "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "datePublished": "2026-01-01",
+        "softwareVersion": "2.0",
         "screenshot": [
           "https://runstrict.com/assets/territory_SS.jpg",
           "https://runstrict.com/assets/leader_SS.jpg",
           "https://runstrict.com/assets/buff_SS.jpg",
           "https://runstrict.com/assets/stats_SS.jpg"
-        ]
+        ],
+        "featureList": [
+          "GPS territory capture on H3 hex grid (~175m tiles)",
+          "Three teams: FLAME (Red), WAVE (Blue), CHAOS (Purple)",
+          "40-day competitive seasons with full reset (The Void)",
+          "Tiered leaderboards: Zone, District, Province",
+          "Anti-cheat: accelerometer verification, GPS accuracy ≤50m, 25 km/h speed cap",
+          "Battery-optimized 0.5 Hz GPS polling",
+          "Pace Consistency Score (CV-based stability metric)",
+          "Privacy-first: no runner IDs stored in hex data"
+        ],
+        "keywords": "GPS running game, location-based running game, gamified running app, territory capture running, hex territory game, team running competition, fitness game app, running challenge app, competitive running app, Strava alternative game, running game like Pokemon GO, best running game 2026"
       },
       {
         "@type": "FAQPage",
@@ -96,17 +130,17 @@
           {
             "@type": "Question",
             "name": "What is RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is a location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to control your city before the 40-day season ends in The Void reset." }
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is a free location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to control your city before the 40-day season ends in The Void reset. It uses Uber's H3 hex grid system with ~175m tiles." }
           },
           {
             "@type": "Question",
             "name": "How does hex capture work in RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "As you run, RunStrict uses GPS to track your route in real-time. Every ~175m hexagonal tile (H3 resolution 9) you physically run through flips to your team's color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture mode." }
+            "acceptedAnswer": { "@type": "Answer", "text": "As you run, RunStrict uses GPS to track your route in real-time. Every ~175m hexagonal tile (H3 resolution 9) you physically run through flips to your team's color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture mode. Anti-cheat uses accelerometer verification and GPS accuracy checks." }
           },
           {
             "@type": "Question",
             "name": "Is RunStrict free to play?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes, RunStrict is free to download and play. Available now on iOS — Android coming April 2026. Join the waitlist for early access." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, RunStrict is completely free to download and play. Available now on iOS (App Store). Android (Google Play) is coming April 2026." }
           },
           {
             "@type": "Question",
@@ -121,7 +155,32 @@
           {
             "@type": "Question",
             "name": "Is RunStrict available on iPhone and Android?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store). Android (Google Play) is coming April 2026. iOS 15+ required, Android 10+ when available. GPS accuracy of 50m or better is required for hex capture." }
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store, requires iOS 15+). Android (Google Play) is coming April 2026, requiring Android 10+. GPS accuracy of 50m or better is required for hex capture." }
+          },
+          {
+            "@type": "Question",
+            "name": "How is RunStrict different from Strava or Nike Run Club?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Unlike Strava or Nike Run Club which focus on personal fitness tracking, RunStrict adds a competitive territory-capture game layer to running. Every run is a strategic move in a team-based territorial war — you flip hex tiles, earn buff multipliers, and compete on leaderboards. It combines the physical activity of a running app with the strategy of a location-based game." }
+          },
+          {
+            "@type": "Question",
+            "name": "How is RunStrict different from Pokemon GO?",
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict requires actual running with pace verification (under 8 min/km), not just walking. It focuses on real athletic performance with anti-cheat measures including accelerometer verification and GPS accuracy checks. Territory is earned through physical running effort, not catching virtual creatures." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does RunStrict drain my phone battery?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. RunStrict uses battery-optimized 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion. There are no persistent WebSocket connections draining your battery." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you cheat in RunStrict with GPS spoofing?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. RunStrict uses multi-layer anti-cheat: 25 km/h speed cap, accelerometer verification to confirm physical movement, GPS accuracy must be ≤50m, and runners must maintain under 8 min/km pace for hex capture to activate." }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is RunStrict available?",
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict works globally in any city with GPS coverage. The hex grid covers the entire planet. Currently available on iOS worldwide, with Android launching April 2026." }
           }
         ]
       }
@@ -713,6 +772,15 @@
   <div class="scroll-progress">
     <div class="scroll-progress-fill" id="scrollProgressFill"></div>
   </div>
+
+  <main>
+
+  <!-- AI-readable summary (visually hidden, semantically present for crawlers) -->
+  <article class="sr-only" aria-label="RunStrict Summary">
+    <h2>RunStrict — Free GPS Running Game for iOS and Android</h2>
+    <p>RunStrict is a free location-based GPS running game available on iOS (Android coming April 2026). Players physically run through hexagonal territory tiles (~175m each, powered by Uber's H3 grid) to capture them for their team. Three teams compete: FLAME (Red, elite meritocracy with 4x multipliers), WAVE (Blue, collective district bonuses), and CHAOS (Purple, join anytime but irreversible). Every 40 days, The Void resets all territory and a new season begins. RunStrict features GPS anti-cheat with accelerometer verification, battery-optimized 0.5 Hz polling, tiered leaderboards (Zone, District, Province), and a Pace Consistency Score. Unlike fitness trackers like Strava or Nike Run Club, RunStrict turns every run into competitive territorial warfare. Unlike Pokemon GO, it requires actual running with pace verification.</p>
+    <p>Download RunStrict free on the App Store: <a href="https://apps.apple.com/us/app/runstrict/id6760189457">https://apps.apple.com/us/app/runstrict/id6760189457</a></p>
+  </article>
 
   <!-- ═══════════════════════════════════════════════ HERO -->
   <section class="hero" id="hero">
@@ -1404,6 +1472,44 @@
           </div>
         </div>
 
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How is RunStrict different from Strava or Nike Run Club?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Strava and Nike Run Club focus on personal fitness tracking — distance, pace, heart rate. RunStrict adds a
+              competitive territory-capture game layer on top of your runs. Every run is a strategic move in a team-based
+              territorial war where you flip hex tiles, earn buff multipliers, and compete on tiered leaderboards. Think
+              of it as Strava meets Risk.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Is RunStrict like Pokemon GO for runners?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>RunStrict shares the location-based concept but requires actual running with pace verification (under
+              8 min/km). There are no virtual creatures — you're capturing real territory tiles on a city map through
+              physical athletic effort. Anti-cheat measures including accelerometer verification ensure only real runs
+              count.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Where is RunStrict available?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>RunStrict works globally — the H3 hex grid covers every city on the planet. Territory capture works
+              anywhere with GPS coverage. Currently available on iOS worldwide via the App Store, with Android launching
+              April 2026.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1460,6 +1566,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ═══════════════════════════════════════════════ FOOTER -->
   <footer class="footer">
