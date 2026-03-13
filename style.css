@@ -2096,6 +2096,106 @@ img {
   font-weight: 700;
 }
 
+/* ─── Google Play Coming Soon ─── */
+.store-btn-coming-soon {
+  position: relative;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(0,240,255,0.06) 100%);
+  border: 1px solid rgba(0, 240, 255, 0.15);
+  overflow: hidden;
+}
+
+.store-btn-coming-soon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,240,255,0.08) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+.store-btn-coming-soon:hover {
+  background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(0,240,255,0.1) 100%);
+  border-color: rgba(0, 240, 255, 0.3);
+  transform: translateY(-3px);
+}
+
+.store-btn-coming-soon .store-btn-icon svg {
+  opacity: 0.5;
+}
+
+.store-btn-coming-soon .store-sub {
+  color: rgba(0, 240, 255, 0.7);
+  font-weight: 600;
+}
+
+.coming-soon-badge {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  background: linear-gradient(135deg, #00f0ff, #0080ff);
+  color: #0A0A0F;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.55rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  padding: 3px 10px;
+  border-radius: 0 var(--radius, 8px) 0 var(--radius, 8px);
+  text-transform: uppercase;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  60% { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.btn-coming-soon-hero {
+  position: relative;
+  border-color: rgba(0, 240, 255, 0.2) !important;
+  color: rgba(232, 232, 240, 0.6) !important;
+}
+
+.btn-coming-soon-hero::after {
+  content: 'SOON';
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  background: linear-gradient(135deg, #00f0ff, #0080ff);
+  color: #0A0A0F;
+  padding: 1px 6px;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.footer-coming-soon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-faint);
+  font-size: inherit;
+}
+
+.coming-soon-tag {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #0A0A0F;
+  background: linear-gradient(135deg, #00f0ff, #0080ff);
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
 .disclaimer {
   font-size: 0.78rem;
   color: var(--text-faint);
