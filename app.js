@@ -571,25 +571,28 @@ function initScrollEffects() {
       scrollFill.style.width = (progress * 100) + '%';
     }
 
-    // ── Hero parallax ──
+    // ── Hero parallax: zoom-out effect ──
     if (heroSection) {
       const heroH = heroSection.offsetHeight;
-      const heroProgress = Math.min(Math.max(scrollY / (heroH * 0.5), 0), 1);
+      // Use full hero height so content stays visible much longer on mobile
+      const heroProgress = Math.min(Math.max(scrollY / (heroH * 0.85), 0), 1);
 
       if (heroContent) {
-        const heroOpacity = 1 - heroProgress;
-        const heroScale = 1 - heroProgress * 0.12;
-        const heroY = scrollY * 0.3;
+        // Zoom-out: start at scale(1), shrink to scale(0.8) as you scroll
+        // Opacity fades slower — stays visible until 70% scroll
+        const heroOpacity = Math.max(0, 1 - heroProgress * 1.4);
+        const heroScale = 1 - heroProgress * 0.2;
+        const heroY = scrollY * 0.15;
         heroContent.style.opacity = heroOpacity;
         heroContent.style.transform = 'translateY(' + heroY + 'px) scale(' + heroScale + ')';
       }
 
       if (heroRunnerBg) {
-        heroRunnerBg.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
+        heroRunnerBg.style.transform = 'translateY(' + (scrollY * 0.1) + 'px)';
       }
 
       if (scrollHint) {
-        scrollHint.style.opacity = Math.max(0, 1 - heroProgress * 3);
+        scrollHint.style.opacity = Math.max(0, 1 - heroProgress * 2.5);
       }
     }
 
