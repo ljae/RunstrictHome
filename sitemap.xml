@@ -3,14 +3,14 @@
 
   <url>
     <loc>https://runstrict.com/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://runstrict.com/llms.txt</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
