@@ -234,7 +234,7 @@ function buildGeoJSON(hexes) {
 
 let map = null;
 let seasonData = null;
-let currentSeason = 2;
+let currentSeason = 3;
 
 function initMap() {
   map = new maplibregl.Map({
@@ -760,8 +760,8 @@ function initStatCountUp() {
 
 /** Season countdown to "The Void" */
 function initCountdown() {
-  // Season 2: Feb 11 → Mar 22, 2026 (40 days)
-  const voidDate = new Date('2026-03-23T00:00:00+02:00'); // GMT+2 — The Void arrives Mar 23
+  // Season 3: Mar 23 → May 1, 2026 (40 days)
+  const voidDate = new Date('2026-05-02T00:00:00+02:00'); // GMT+2 — The Void arrives May 2
 
   function update() {
     const now = new Date();
@@ -791,8 +791,8 @@ function initCountdown() {
 
 /** Season progress timeline */
 function initTimeline() {
-  const start = new Date('2026-02-11T00:00:00+02:00');
-  const end   = new Date('2026-03-23T00:00:00+02:00');
+  const start = new Date('2026-03-23T00:00:00+02:00');
+  const end   = new Date('2026-05-02T00:00:00+02:00');
   const now   = new Date();
 
   const total = end - start;
