@@ -867,7 +867,7 @@
     <p>CHAOS (Purple): The wildcard. Join anytime but membership is irreversible. Power scales with daily participation: 1x base, 2x when 30% are active, 3x when 60% are active. Best for social runners who thrive under collective pressure.</p>
 
     <h2>What is The Void in RunStrict?</h2>
-    <p>The Void is RunStrict's 40-day season reset event. When a season ends, all captured hexes, points, and territorial control are completely wiped. Only the leaderboard legend survives. A new season begins from a blank map, giving every runner an equal fresh start. Season 3 runs from March 23 to May 1, 2026.</p>
+    <p>The Void is RunStrict's 40-day season reset event. When a season ends, all captured hexes, points, and territorial control are completely wiped. Only the leaderboard legend survives. A new season begins from a blank map, giving every runner an equal fresh start. Season 3 runs from March 22 to April 30, 2026.</p>
 
     <h2>RunStrict Anti-Cheat System</h2>
     <p>RunStrict uses multi-layer anti-cheat to ensure only real running counts: 25 km/h speed cap, accelerometer verification to confirm physical movement, GPS accuracy must be 50m or better, and runners must maintain under 8 min/km pace for hex capture to activate. GPS spoofing and location faking are detected and blocked.</p>
@@ -922,7 +922,7 @@
       <!-- Hero content -->
       <div class="hero-content hero-parallax-layer" id="heroContent">
         <div class="hero-text">
-          <div class="hero-badge">&#x1F3C3; Season 3 — Day 2</div>
+          <div class="hero-badge" id="heroBadge">&#x1F3C3; Season 3</div>
           <h1 class="hero-title" id="heroTitle">
             Run.<br />
             Flip.<br />
@@ -1371,14 +1371,14 @@
       <div class="season-timeline reveal">
         <div class="timeline-header">
           <span>Season 3 Progress</span>
-          <span class="timeline-dates">Mar 23, 2026 → May 1, 2026</span>
+          <span class="timeline-dates">Mar 22, 2026 → Apr 30, 2026</span>
         </div>
         <div class="timeline-bar">
           <div class="timeline-fill" id="timelineFill"></div>
           <div class="timeline-marker" id="timelineMarker"></div>
         </div>
         <div class="timeline-labels">
-          <span>Day 1</span>
+          <span data-season-day>Day 1</span>
           <span>The Void →</span>
         </div>
       </div>
@@ -1742,6 +1742,54 @@
   </div>
 
   <script src="app.js"></script>
+  <script>
+    // ─── Season auto-calculation ─────────────────────────────────
+    // Season 3 started March 22, 2026. Each season = 40 days.
+    // Automatically updates the hero badge and season progress bar.
+    (function() {
+      var SEASON_NUMBER = 3;
+      var SEASON_START = new Date('2026-03-22T00:00:00+02:00'); // GMT+2 game timezone
+      var SEASON_DAYS = 40;
+
+      var now = new Date();
+      var msPerDay = 86400000;
+      var dayNum = Math.floor((now - SEASON_START) / msPerDay) + 1;
+
+      // Clamp: if before season start, day 1. If past 40, show "The Void".
+      if (dayNum < 1) dayNum = 1;
+      var isVoid = dayNum > SEASON_DAYS;
+      var daysLeft = SEASON_DAYS - dayNum;
+
+      // Update hero badge
+      var badge = document.getElementById('heroBadge');
+      if (badge) {
+        if (isVoid) {
+          badge.innerHTML = '\uD83C\uDF0A The Void — Season ' + (SEASON_NUMBER + 1) + ' Coming';
+        } else {
+          badge.innerHTML = '\uD83C\uDFC3 Season ' + SEASON_NUMBER + ' — Day ' + dayNum;
+        }
+      }
+
+      // Update season progress bar if it exists
+      var progressFill = document.querySelector('.progress-fill');
+      if (progressFill) {
+        var pct = isVoid ? 100 : Math.min(100, Math.round((dayNum / SEASON_DAYS) * 100));
+        progressFill.style.width = pct + '%';
+      }
+
+      // Update "Day X" label in season stats if exists
+      var dayLabels = document.querySelectorAll('[data-season-day]');
+      dayLabels.forEach(function(el) {
+        el.textContent = isVoid ? 'The Void' : 'Day ' + dayNum;
+      });
+
+      // Update days remaining text if exists
+      var daysLeftEls = document.querySelectorAll('[data-days-left]');
+      daysLeftEls.forEach(function(el) {
+        el.textContent = isVoid ? 'Season ended' : daysLeft + ' days left';
+      });
+    })();
+  </script>
 </body>
 
 </html>

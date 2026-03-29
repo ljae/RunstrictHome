@@ -791,8 +791,8 @@ function initCountdown() {
 
 /** Season progress timeline */
 function initTimeline() {
-  const start = new Date('2026-03-23T00:00:00+02:00');
-  const end   = new Date('2026-05-02T00:00:00+02:00');
+  const start = new Date('2026-03-22T00:00:00+02:00');
+  const end   = new Date('2026-05-01T00:00:00+02:00');
   const now   = new Date();
 
   const total = end - start;
