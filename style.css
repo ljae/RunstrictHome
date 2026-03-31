@@ -2256,6 +2256,9 @@ img {
 
 .footer-social {
   margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .social-link {
@@ -2277,6 +2280,14 @@ img {
   background: linear-gradient(135deg, rgba(131, 58, 180, 0.4), rgba(253, 29, 29, 0.4), rgba(252, 176, 69, 0.4));
   border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
+}
+
+.social-link--yt {
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(200, 0, 0, 0.15));
+}
+
+.social-link--yt:hover {
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.4), rgba(200, 0, 0, 0.3));
 }
 
 .social-link svg {
