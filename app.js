@@ -561,6 +561,8 @@ function initCharReveal() {
 // ═══════════════════════════════════════════════════════════════
 function initScrollEffects() {
   const heroContent = document.getElementById('heroContent');
+  const heroText = heroContent ? heroContent.querySelector('.hero-text') : null;
+  const heroMap = heroContent ? heroContent.querySelector('.map-container') : null;
   const heroRunnerBg = document.getElementById('heroRunnerBg');
   const scrollHint = document.getElementById('scrollHint');
   const scrollFill = document.getElementById('scrollProgressFill');
@@ -589,13 +591,38 @@ function initScrollEffects() {
       const heroProgress = Math.min(Math.max(scrollY / (heroH * 0.85), 0), 1);
 
       if (heroContent) {
-        // Zoom-out: start at scale(1), shrink to scale(0.8) as you scroll
-        // Opacity fades slower — stays visible until 70% scroll
-        const heroOpacity = Math.max(0, 1 - heroProgress * 1.4);
-        const heroScale = 1 - heroProgress * 0.2;
+        const isMobile = window.innerWidth <= 768;
         const heroY = scrollY * 0.15;
-        heroContent.style.opacity = heroOpacity;
-        heroContent.style.transform = 'translateY(' + heroY + 'px) scale(' + heroScale + ')';
+
+        if (isMobile) {
+          // Mobile: fade text quickly but keep the map vivid much longer
+          const textOpacity = Math.max(0, 1 - heroProgress * 2);
+          const textScale = 1 - heroProgress * 0.15;
+          const mapOpacity = Math.max(0, 1 - heroProgress * 0.6);
+          const mapScale = 1 - heroProgress * 0.08;
+
+          heroContent.style.opacity = '';
+          heroContent.style.transform = 'translateY(' + heroY + 'px)';
+
+          if (heroText) {
+            heroText.style.opacity = textOpacity;
+            heroText.style.transform = 'scale(' + textScale + ')';
+          }
+          if (heroMap) {
+            heroMap.style.opacity = mapOpacity;
+            heroMap.style.transform = 'scale(' + mapScale + ')';
+          }
+        } else {
+          // Desktop: original zoom-out on entire hero content
+          const heroOpacity = Math.max(0, 1 - heroProgress * 1.4);
+          const heroScale = 1 - heroProgress * 0.2;
+          heroContent.style.opacity = heroOpacity;
+          heroContent.style.transform = 'translateY(' + heroY + 'px) scale(' + heroScale + ')';
+
+          // Clear any mobile-specific inline styles
+          if (heroText) { heroText.style.opacity = ''; heroText.style.transform = ''; }
+          if (heroMap) { heroMap.style.opacity = ''; heroMap.style.transform = ''; }
+        }
       }
 
       if (heroRunnerBg) {
