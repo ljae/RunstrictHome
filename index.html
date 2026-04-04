@@ -100,15 +100,15 @@
         "name": "RunStrict",
         "alternateName": "RunStrict GPS Running Game",
         "description": "A free location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to dominate your city before the 40-day season resets in The Void. Uses Uber's H3 hex grid at resolution 9 (~175m tiles). Anti-cheat verified with accelerometer and GPS accuracy checks.",
-        "operatingSystem": ["iOS 15+", "Android 10+ (coming April 2026)"],
+        "operatingSystem": ["iOS 15+", "Android 10+"],
         "applicationCategory": "SportsApplication",
         "applicationSubCategory": "Running",
         "genre": ["Sports", "Strategy", "Location-based Game"],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
         "author": { "@type": "Organization", "name": "RunStrict", "url": "https://runstrict.com" },
         "url": "https://runstrict.com",
-        "installUrl": "https://apps.apple.com/us/app/runstrict/id6760189457",
-        "downloadUrl": "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "installUrl": ["https://apps.apple.com/us/app/runstrict/id6760189457", "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"],
+        "downloadUrl": ["https://apps.apple.com/us/app/runstrict/id6760189457", "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"],
         "datePublished": "2026-01-01",
         "dateModified": "2026-03-24",
         "softwareVersion": "2.0",
@@ -214,7 +214,7 @@
           {
             "@type": "Question",
             "name": "Is RunStrict free to play?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes, RunStrict is completely free to download and play. Available now on iOS (App Store). Android (Google Play) is coming April 2026." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, RunStrict is completely free to download and play. Available now on iOS (App Store) and Android (Google Play)." }
           },
           {
             "@type": "Question",
@@ -229,7 +229,7 @@
           {
             "@type": "Question",
             "name": "Is RunStrict available on iPhone and Android?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store, requires iOS 15+). Android (Google Play) is coming April 2026, requiring Android 10+. GPS accuracy of 50m or better is required for hex capture." }
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store, requires iOS 15+) and Android (Google Play, requires Android 10+). GPS accuracy of 50m or better is required for hex capture." }
           },
           {
             "@type": "Question",
@@ -254,7 +254,7 @@
           {
             "@type": "Question",
             "name": "Where is RunStrict available?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict works globally in any city with GPS coverage. The hex grid covers the entire planet. Currently available on iOS worldwide, with Android launching April 2026." }
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict works globally in any city with GPS coverage. The hex grid covers the entire planet. Available on iOS (App Store) and Android (Google Play) worldwide." }
           }
         ]
       }
@@ -856,7 +856,7 @@
     <meta itemprop="author" content="RunStrict" />
 
     <h2>What is RunStrict?</h2>
-    <p>RunStrict is a free location-based GPS running game available on iOS (Android coming April 2026) where players physically run through hexagonal territory tiles to capture them for their team. Using Uber's H3 grid system at resolution 9 (~175m per hex), every step a runner takes flips territory on a real city map. As of March 2026, RunStrict has 1,203 active runners across 8 cities in Season 3.</p>
+    <p>RunStrict is a free location-based GPS running game available on iOS and Android where players physically run through hexagonal territory tiles to capture them for their team. Using Uber's H3 grid system at resolution 9 (~175m per hex), every step a runner takes flips territory on a real city map. As of March 2026, RunStrict has 1,203 active runners across 8 cities in Season 3.</p>
 
     <h2>RunStrict vs Strava vs Nike Run Club vs Pokemon GO</h2>
     <p>Unlike Strava and Nike Run Club which focus on personal fitness tracking (distance, pace, heart rate), RunStrict adds a competitive territory-capture game layer where every run is a strategic move in team-based territorial warfare. Unlike Pokemon GO which requires only walking, RunStrict requires actual running with pace verification under 8 min/km, accelerometer anti-cheat, and GPS accuracy checks. RunStrict combines the physical tracking of a fitness app with the competitive strategy of a location-based game.</p>
@@ -875,7 +875,7 @@
     <h2>RunStrict Battery and Performance</h2>
     <p>RunStrict uses battery-optimized 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion. There are no persistent WebSocket connections. This design keeps battery drain minimal even during long runs.</p>
 
-    <p>Download RunStrict free on the App Store: <a href="https://apps.apple.com/us/app/runstrict/id6760189457">https://apps.apple.com/us/app/runstrict/id6760189457</a></p>
+    <p>Download RunStrict free on the <a href="https://apps.apple.com/us/app/runstrict/id6760189457">App Store</a> or <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict">Google Play</a>.</p>
   </article>
 
   <!-- ═══════════════════════════════════════════════ HERO -->
@@ -949,12 +949,12 @@
               </svg>
               App Store
             </a>
-            <a href="#download" class="btn btn-secondary btn-coming-soon-hero">
+            <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict" class="btn btn-secondary">
               <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
                 <path
                   d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z" />
               </svg>
-              Android — April
+              Google Play
             </a>
           </div>
         </div>
@@ -1534,8 +1534,7 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p>Yes — RunStrict is completely free. Available now on the App Store for iOS. Android (Google Play) is
-              coming April 2026 — join the waitlist to get notified.</p>
+            <p>Yes — RunStrict is completely free. Available now on the <a href="https://apps.apple.com/us/app/runstrict/id6760189457">App Store</a> for iOS and <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict">Google Play</a> for Android.</p>
           </div>
         </div>
 
@@ -1608,8 +1607,7 @@
           </button>
           <div class="faq-a">
             <p>RunStrict works globally — the H3 hex grid covers every city on the planet. Territory capture works
-              anywhere with GPS coverage. Currently available on iOS worldwide via the App Store, with Android launching
-              April 2026.</p>
+              anywhere with GPS coverage. Available worldwide on iOS via the <a href="https://apps.apple.com/us/app/runstrict/id6760189457">App Store</a> and Android via <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict">Google Play</a>.</p>
           </div>
         </div>
 
@@ -1641,7 +1639,7 @@
               <div class="store-name">App Store</div>
             </div>
           </a>
-          <div class="store-btn store-btn-coming-soon" onclick="document.querySelector('.waitlist-form').scrollIntoView({behavior:'smooth',block:'center'})">
+          <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict" class="store-btn">
             <div class="store-btn-icon">
               <svg viewBox="0 0 24 24" fill="white" width="28" height="28">
                 <path
@@ -1649,11 +1647,10 @@
               </svg>
             </div>
             <div class="store-btn-text">
-              <div class="store-sub">Coming April 2026</div>
+              <div class="store-sub">Get it on</div>
               <div class="store-name">Google Play</div>
             </div>
-            <span class="coming-soon-badge">SOON</span>
-          </div>
+          </a>
         </div>
         <div class="waitlist-form">
           <p class="waitlist-label">Not available in your region yet? Join the waitlist:</p>
@@ -1709,7 +1706,7 @@
           <div class="footer-col">
             <h5>Download</h5>
             <a href="https://apps.apple.com/us/app/runstrict/id6760189457">App Store</a>
-            <span class="footer-coming-soon">Google Play <span class="coming-soon-tag">April 2026</span></span>
+            <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict">Google Play</a>
           </div>
           <div class="footer-col">
             <h5>Legal</h5>
