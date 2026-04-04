@@ -316,7 +316,16 @@ function initMap() {
 
     // Load current season — defer to next tick to ensure MapLibre style is fully settled
     setTimeout(() => { renderSeason(currentSeason); setupHoverInteraction(); }, 100);
+
+    // Force correct canvas size once tiles are loaded
+    map.resize();
   });
+
+  // Re-measure whenever the container changes size (responsive, orientation, late layout)
+  const mapContainer = document.querySelector('.map-container');
+  if (mapContainer && typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(() => { if (map) map.resize(); }).observe(mapContainer);
+  }
 
   // Slow auto-rotation for the globe (cinematic effect)
   let rotating = true;
@@ -331,6 +340,8 @@ function initMap() {
 
   map.on('load', () => {
     setTimeout(rotateGlobe, 1000);
+    // Deferred resize to catch late layout shifts from hero animations / sticky
+    setTimeout(() => { map.resize(); }, 500);
   });
 
   // Stop rotation on user interaction
