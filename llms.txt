@@ -1,6 +1,6 @@
 # RunStrict
 
-> Last updated: 2026-03-24. Season 3 active (Day 2) with 1,203+ runners across 8 cities.
+> Last updated: 2026-04-05. Season 3 active (Day 14) with 1,203+ runners across 8 cities.
 
 > RunStrict is a free GPS running game for iOS (Android coming April 2026) where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — and compete to dominate their city's map before a 40-day season resets everything in an event called The Void.
 
