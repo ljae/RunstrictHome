@@ -1,8 +1,8 @@
 # RunStrict
 
-> Last updated: 2026-04-05. Season 3 active (Day 14) with 1,203+ runners across 8 cities.
+> Last updated: 2026-04-26. Season 3 active with 1,203+ runners across 8 cities. Apple Watch companion just launched; Wear OS coming soon.
 
-> RunStrict is a free GPS running game for iOS (Android coming April 2026) where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — and compete to dominate their city's map before a 40-day season resets everything in an event called The Void.
+> RunStrict is a free GPS running game for iOS, Android, and Apple Watch (Wear OS coming soon) where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — and compete to dominate their city's map before a 40-day season resets everything in an event called The Void.
 
 ## What is RunStrict?
 
@@ -22,7 +22,9 @@ RunStrict is a location-based running app that gamifies outdoor running. Using G
 ## Platform Availability
 
 - **iOS**: Available now on the App Store (iOS 15+) — https://apps.apple.com/us/app/runstrict/id6760189457
-- **Android**: Coming April 2026 on Google Play (Android 10+)
+- **Android**: Available on Google Play (Android 10+) — https://play.google.com/store/apps/details?id=com.neondialactic.runstrict
+- **Apple Watch**: NEW — watchOS 10+ companion bundled with the iPhone app. Live pace and hex-capture alerts on the wrist.
+- **Wear OS**: Coming soon. Companion app for Pixel Watch, Galaxy Watch, and other Wear OS devices is in development.
 
 ## How It Works
 
@@ -68,8 +70,8 @@ RunStrict differs from traditional running apps (Strava, Nike Run Club, Runkeepe
 **Is RunStrict free?**
 Yes, completely free to download and play.
 
-**What phones does it support?**
-iOS 15+ now, Android 10+ coming April 2026.
+**What devices does it support?**
+iPhone (iOS 15+), Android (10+), and Apple Watch (watchOS 10+, NEW). Wear OS support is coming soon.
 
 **Can I cheat with GPS spoofing?**
 No. RunStrict uses accelerometer verification, 25 km/h speed caps, and GPS accuracy requirements to prevent spoofing.

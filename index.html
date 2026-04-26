@@ -109,7 +109,7 @@
         "name": "RunStrict",
         "alternateName": "RunStrict GPS Running Game",
         "description": "A free location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to dominate your city before the 40-day season resets in The Void. Uses Uber's H3 hex grid at resolution 9 (~175m tiles). Anti-cheat verified with accelerometer and GPS accuracy checks.",
-        "operatingSystem": ["iOS 15+", "Android 10+"],
+        "operatingSystem": ["iOS 15+", "Android 10+", "watchOS 10+"],
         "applicationCategory": "SportsApplication",
         "applicationSubCategory": "Running",
         "genre": ["Sports", "Strategy", "Location-based Game"],
@@ -135,7 +135,8 @@
           "Anti-cheat: accelerometer verification, GPS accuracy ≤50m, 25 km/h speed cap",
           "Battery-optimized 0.5 Hz GPS polling",
           "Pace Consistency Score (CV-based stability metric)",
-          "Privacy-first: no runner IDs stored in hex data"
+          "Privacy-first: no runner IDs stored in hex data",
+          "Apple Watch companion (watchOS 10+) for live pace and hex capture alerts on the wrist; Wear OS coming soon"
         ],
         "keywords": "GPS running game, location-based running game, gamified running app, territory capture running, hex territory game, team running competition, fitness game app, running challenge app, competitive running app, Strava alternative game, running game like Pokemon GO, best running game 2026"
       },
@@ -240,7 +241,7 @@
           {
             "@type": "Question",
             "name": "Is RunStrict available on iPhone and Android?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store, requires iOS 15+) and Android (Google Play, requires Android 10+). GPS accuracy of 50m or better is required for hex capture." }
+            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store, requires iOS 15+) and Android (Google Play, requires Android 10+), with a brand-new Apple Watch companion (watchOS 10+). Wear OS support is coming soon. GPS accuracy of 50m or better is required for hex capture." }
           },
           {
             "@type": "Question",
@@ -1663,6 +1664,44 @@
             </div>
           </a>
         </div>
+
+        <!-- Wearables row: Apple Watch (live, NEW) + Wear OS (coming soon) -->
+        <div class="wearables-row" aria-label="Wearable platforms">
+          <span class="wearables-divider" aria-hidden="true">Plus, on your wrist</span>
+          <div class="wearables-buttons">
+            <a href="https://apps.apple.com/us/app/runstrict/id6760189457" class="watch-btn watch-btn-live" aria-label="RunStrict on Apple Watch — new">
+              <span class="watch-badge watch-badge--new">NEW</span>
+              <div class="watch-btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                  <rect x="6" y="6" width="12" height="12" rx="3" />
+                  <path d="M8.5 6 9 3h6l.5 3" />
+                  <path d="M8.5 18 9 21h6l.5-3" />
+                  <path d="M12 10v2.5l1.5 1" />
+                </svg>
+              </div>
+              <div class="watch-btn-text">
+                <div class="watch-sub">Now on</div>
+                <div class="watch-name">Apple Watch</div>
+              </div>
+            </a>
+            <div class="watch-btn watch-btn-soon" role="img" aria-label="RunStrict on Wear OS — coming soon">
+              <span class="watch-badge watch-badge--soon">SOON</span>
+              <div class="watch-btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                  <rect x="6" y="6" width="12" height="12" rx="3" />
+                  <path d="M8.5 6 9 3h6l.5 3" />
+                  <path d="M8.5 18 9 21h6l.5-3" />
+                  <path d="M12 10v2.5l1.5 1" />
+                </svg>
+              </div>
+              <div class="watch-btn-text">
+                <div class="watch-sub">Coming to</div>
+                <div class="watch-name">Wear OS</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="waitlist-form">
           <p class="waitlist-label">Not available in your region yet? Join the waitlist:</p>
           <form action="https://formspree.io/f/mjgedwzg" method="POST" class="waitlist-input-row"
@@ -1718,6 +1757,8 @@
             <h5>Download</h5>
             <a href="https://apps.apple.com/us/app/runstrict/id6760189457">App Store</a>
             <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict">Google Play</a>
+            <a href="https://apps.apple.com/us/app/runstrict/id6760189457" class="footer-watch-link">Apple Watch <span class="coming-soon-tag coming-soon-tag--new">NEW</span></a>
+            <span class="footer-coming-soon">Wear OS <span class="coming-soon-tag">SOON</span></span>
           </div>
           <div class="footer-col">
             <h5>Legal</h5>
