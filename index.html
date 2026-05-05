@@ -854,6 +854,32 @@
 
 <body>
 
+  <!-- Tactical top strip — file-header bar (matches app screenshots) -->
+  <div class="tactical-strip" aria-hidden="true">
+    <div class="ts-left">
+      <span class="ts-val">RUNSTRICT</span>
+      <span class="ts-mark">//</span>
+      <span class="ts-key">S<span id="tsSeason">04</span></span>
+    </div>
+    <div class="ts-mid">
+      <span class="ts-key">FILE</span>
+      <span class="ts-val">MANIFESTO-04</span>
+      <span class="ts-mark">·</span>
+      <span class="ts-key">RUNNERS</span>
+      <span class="ts-val">1,200+</span>
+      <span class="ts-mark">·</span>
+      <span class="ts-key">CITIES</span>
+      <span class="ts-val">8</span>
+      <span class="ts-mark">·</span>
+      <span class="ts-key">VOID</span>
+      <span class="ts-val" id="tsVoid">T-36</span>
+    </div>
+    <div class="ts-right">
+      <span class="ts-dot"></span>
+      <span class="ts-val">LIVE</span>
+    </div>
+  </div>
+
   <!-- Scroll Progress Bar -->
   <div class="scroll-progress">
     <div class="scroll-progress-fill" id="scrollProgressFill"></div>
@@ -968,6 +994,17 @@
               </svg>
               Google Play
             </a>
+          </div>
+
+          <!-- Tactical meta strip under the hero CTAs -->
+          <div class="hero-meta" aria-hidden="true">
+            <span><span class="hm-key">SZN</span> <span class="hm-val" id="hmSeason">S04</span></span>
+            <span class="hm-sep">/</span>
+            <span><span class="hm-key">DAY</span> <span class="hm-val" id="hmDay">04</span></span>
+            <span class="hm-sep">/</span>
+            <span><span class="hm-key">VOID</span> <span class="hm-val" id="hmVoid">T-36</span></span>
+            <span class="hm-sep">/</span>
+            <span class="hm-live">LIVE</span>
           </div>
         </div>
 
@@ -1120,7 +1157,7 @@
   <section class="section showcase" id="showcase">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">REAL GAME FOOTAGE</div>
+        <div class="section-badge" data-num="01">REAL GAME FOOTAGE</div>
         <h2>See it in action.</h2>
         <p>Actual Season 4 gameplay. Real hexes. Real runners. Real war.</p>
       </div>
@@ -1183,7 +1220,7 @@
   <section class="section how-it-works" id="how-it-works">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">THE GAME</div>
+        <div class="section-badge" data-num="02">THE GAME</div>
         <h2>Simple rule. Endless war.</h2>
         <p>Every run is a battle. Every step is a claim.</p>
       </div>
@@ -1254,7 +1291,7 @@
   <section class="section teams" id="teams">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">CHOOSE YOUR SIDE</div>
+        <div class="section-badge" data-num="03">CHOOSE YOUR SIDE</div>
         <h2>Three teams. One city.</h2>
         <p>Your allegiance shapes your strategy — and your destiny.</p>
       </div>
@@ -1360,7 +1397,7 @@
   <section class="section season-stats" id="season">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">SEASON 4 — DAY 4</div>
+        <div class="section-badge" data-num="04">SEASON 4 — DAY 4</div>
         <h2>The war is happening now.</h2>
         <p>Real-time territory control. Every run matters.</p>
       </div>
@@ -1410,7 +1447,7 @@
   <section class="section features">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">BUILT FOR RUNNERS</div>
+        <div class="section-badge" data-num="05">BUILT FOR RUNNERS</div>
         <h2>Every feature earns its place.</h2>
       </div>
 
@@ -1453,7 +1490,7 @@
   <section class="section testimonials" id="testimonials">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">RUNNERS SAY</div>
+        <div class="section-badge" data-num="06">RUNNERS SAY</div>
         <h2>Real runs. Real obsession.</h2>
         <p>From beta runners who haven’t stopped since Season 1.</p>
       </div>
@@ -1510,7 +1547,7 @@
   <section class="section faq" id="faq">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-badge">FREQUENTLY ASKED</div>
+        <div class="section-badge" data-num="07">FREQUENTLY ASKED</div>
         <h2>Got questions?</h2>
         <p>Everything you need to know before your first run.</p>
       </div>
@@ -1633,7 +1670,7 @@
     <div class="container">
       <div class="download-card reveal-scale">
         <div class="download-hex-decoration">⬡</div>
-        <div class="section-badge">JOIN THE SEASON</div>
+        <div class="section-badge" data-num="08">JOIN THE SEASON</div>
         <h2>Your city is waiting.</h2>
         <p>
           Season 4 just started — every hex is up for grabs.<br />
@@ -1852,6 +1889,32 @@
       daysLeftEls.forEach(function(el) {
         el.textContent = isVoid ? 'Season ended' : daysLeft + ' days left';
       });
+
+      // ─── Sync tactical strip + hero meta with season state ───
+      var pad = function(n) { return n < 10 ? '0' + n : '' + n; };
+      var seasonStr = 'S' + pad(SEASON_NUMBER);
+      var dayStr = pad(dayNum);
+      var voidStr = isVoid ? 'VOID' : 'T-' + Math.max(0, daysLeft);
+
+      var tsSeason = document.getElementById('tsSeason');
+      if (tsSeason) tsSeason.textContent = pad(SEASON_NUMBER);
+      var tsVoid = document.getElementById('tsVoid');
+      if (tsVoid) tsVoid.textContent = voidStr;
+
+      var hmSeason = document.getElementById('hmSeason');
+      if (hmSeason) hmSeason.textContent = seasonStr;
+      var hmDay = document.getElementById('hmDay');
+      if (hmDay) hmDay.textContent = isVoid ? '--' : dayStr;
+      var hmVoid = document.getElementById('hmVoid');
+      if (hmVoid) hmVoid.textContent = voidStr;
+
+      // Keep the section-stats badge in sync too
+      var seasonStatsBadge = document.querySelector('.section-badge[data-num="04"]');
+      if (seasonStatsBadge) {
+        seasonStatsBadge.textContent = isVoid
+          ? 'SEASON ' + SEASON_NUMBER + ' — THE VOID'
+          : 'SEASON ' + SEASON_NUMBER + ' — DAY ' + dayNum;
+      }
     })();
   </script>
 </body>

@@ -3767,3 +3767,352 @@ img {
     width: 100%;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   IDENTITY UPGRADE — App Store screenshot alignment
+   Activates Bebas Neue (display) / Share Tech Mono (tactical) /
+   Rajdhani (numerics) which were already loaded but unused.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --font-display: 'Bebas Neue', 'Space Grotesk', sans-serif;
+  --font-mono: 'Share Tech Mono', ui-monospace, 'SF Mono', monospace;
+  --font-num: 'Rajdhani', 'Space Grotesk', sans-serif;
+  --strip-h: 24px;
+  --cream: #F2EEE5;
+}
+
+@media (max-width: 720px) {
+  :root { --strip-h: 20px; }
+}
+
+/* ─── Tactical top strip (file-header bar) ─── */
+.tactical-strip {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--strip-h);
+  z-index: 250;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 18px;
+  background: #000;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  color: rgba(232,232,240,0.7);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+}
+.tactical-strip .ts-left,
+.tactical-strip .ts-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.tactical-strip .ts-mid {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  justify-content: center;
+  overflow: hidden;
+}
+.tactical-strip .ts-dot {
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--red-glow);
+  animation: ts-pulse 1.6s ease-in-out infinite;
+}
+.tactical-strip .ts-mark {
+  color: rgba(232,232,240,0.32);
+}
+.tactical-strip .ts-key {
+  color: rgba(232,232,240,0.5);
+}
+.tactical-strip .ts-val {
+  color: var(--cream);
+}
+@keyframes ts-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+@media (max-width: 720px) {
+  .tactical-strip { font-size: 0.58rem; padding: 0 12px; gap: 10px; letter-spacing: 0.14em; }
+  .tactical-strip .ts-mid { display: none; }
+}
+
+/* Push existing fixed elements below the new strip */
+.nav { top: var(--strip-h) !important; }
+.scroll-progress { top: var(--strip-h) !important; }
+.hero-sticky { padding-top: var(--strip-h); }
+
+/* ─── Display typography (Bebas Neue) ─── */
+.hero-title,
+.athlete-headline,
+.section-header h2,
+.void-text h3,
+.team-name,
+.stat-big,
+.proof-num,
+.hud-stat-num,
+.count-num {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+.hero-title {
+  font-size: clamp(3.6rem, 8.5vw, 7.2rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  color: var(--cream);
+  letter-spacing: -0.005em;
+  margin-bottom: 14px;
+}
+
+/* Replace the rainbow with a tighter red accent on the marked word */
+.title-gradient {
+  display: block;
+  color: var(--cream) !important;
+  background: none !important;
+  -webkit-text-fill-color: var(--cream) !important;
+  position: relative;
+  animation: none !important;
+}
+.hero-title .title-gradient,
+.athlete-headline .title-gradient {
+  display: inline-block;
+  padding-left: 14px;
+}
+.hero-title .title-gradient::before,
+.athlete-headline .title-gradient::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  width: 4px; height: 0.78em;
+  background: var(--red);
+  box-shadow: 0 0 18px var(--red-glow);
+  transform: translateY(-50%);
+}
+
+.section-header h2 {
+  font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  color: var(--cream);
+}
+
+.athlete-headline {
+  font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  color: var(--cream);
+}
+
+.void-text h3 {
+  font-size: clamp(2.4rem, 4.8vw, 3.6rem);
+  letter-spacing: 0.04em;
+}
+
+.team-name {
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.stat-big,
+.proof-num,
+.hud-stat-num,
+.count-num {
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+/* Slight tracking for legibility */
+.hero-title,
+.athlete-headline,
+.section-header h2,
+.team-name {
+  letter-spacing: 0.012em;
+}
+
+/* ─── Tactical mono labels ─── */
+.section-badge,
+.hero-badge,
+.hud-tag,
+.proof-lbl,
+.stat-desc,
+.hud-stat-lbl,
+.hud-eyebrow,
+.timeline-header,
+.timeline-dates,
+.phone-label,
+.testimonial-detail,
+.count-label {
+  font-family: var(--font-mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Reskin the hero badge as a tactical file label, not a glow pill */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px 4px;
+  background: rgba(255, 59, 48, 0.08);
+  border: 1px solid rgba(255, 59, 48, 0.45);
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #FF6B64;
+  margin-bottom: 22px;
+}
+
+/* Reskin section badge as a file-style mono strip with section number */
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px 5px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  margin-bottom: 22px;
+}
+.section-badge::before {
+  content: attr(data-num) ' / 08';
+  color: rgba(232,232,240,0.42);
+  padding-right: 10px;
+  border-right: 1px solid rgba(255,255,255,0.18);
+}
+.section-badge[data-num="04"] {
+  border-color: rgba(255, 59, 48, 0.45);
+  color: #FF8A82;
+}
+.section-badge[data-num="04"]::before {
+  border-right-color: rgba(255, 59, 48, 0.35);
+  color: rgba(255,138,130,0.55);
+}
+
+/* Subtle file-line under each section header */
+.section-header h2 + p {
+  position: relative;
+  padding-top: 14px;
+  margin-top: 6px;
+}
+.section-header h2 + p::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  width: 36px;
+  height: 1px;
+  background: rgba(255,255,255,0.18);
+  transform: translateX(-50%);
+}
+
+/* ─── Phone label / timeline / testimonials get tactical look ─── */
+.phone-label,
+.timeline-header,
+.timeline-dates,
+.testimonial-detail {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+}
+
+/* ─── Numeric readouts (Rajdhani) ─── */
+.hero-tagline,
+.map-stat .stat-val,
+.hud-metric-val,
+.hud-bar-label,
+.proof-num + .proof-lbl {
+  /* leave existing; just example hooks */
+}
+
+/* Make hero tagline feel like a file caption */
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  font-style: normal;
+  text-transform: uppercase;
+  color: rgba(232,232,240,0.5);
+  margin-bottom: 18px;
+}
+.hero-tagline::before {
+  content: '// ';
+  color: var(--red);
+  margin-right: 4px;
+}
+
+/* Hero sub copy — tighten for less retail-y feel */
+.hero-sub {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: rgba(232,232,240,0.62);
+}
+
+/* ─── Hero meta strip under the CTAs (S04 · DAY 4 · T-36 · LIVE) ─── */
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.hero-meta .hm-key { color: rgba(232,232,240,0.42); }
+.hero-meta .hm-val { color: var(--cream); }
+.hero-meta .hm-sep { color: rgba(232,232,240,0.22); }
+.hero-meta .hm-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--red);
+}
+.hero-meta .hm-live::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--red-glow);
+  animation: ts-pulse 1.6s ease-in-out infinite;
+}
+
+/* ─── HUD tag refinement ─── */
+.hud-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+}
+
+/* Stat card numeric scale-up to match app aesthetic */
+.stat-big { font-size: clamp(2.6rem, 4.2vw, 3.6rem); }
+.proof-num { font-size: clamp(1.8rem, 2.4vw, 2.4rem); }
+
+/* Bigger, sharper section header spacing */
+.section-header { margin-bottom: 56px; }
+
+/* Mobile reductions */
+@media (max-width: 720px) {
+  .hero-title { font-size: clamp(3rem, 12vw, 4.4rem); }
+  .section-header h2 { font-size: clamp(2rem, 8vw, 2.8rem); }
+  .athlete-headline { font-size: clamp(2.2rem, 9vw, 3rem); }
+  .section-badge { font-size: 0.62rem; }
+  .hero-meta { font-size: 0.58rem; gap: 10px; }
+}
