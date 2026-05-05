@@ -1269,6 +1269,17 @@
       </div>
 
       <div class="void-banner reveal">
+        <!-- Reticle backdrop (matches screenshot 08) -->
+        <svg class="void-reticle" viewBox="0 0 520 520" aria-hidden="true">
+          <circle class="ret-outer" cx="260" cy="260" r="240" />
+          <circle cx="260" cy="260" r="180" />
+          <circle cx="260" cy="260" r="120" />
+          <circle cx="260" cy="260" r="60" stroke-dasharray="2 4" />
+          <line class="ret-cross" x1="20"  y1="260" x2="500" y2="260" />
+          <line class="ret-cross" x1="260" y1="20"  x2="260" y2="500" />
+          <line x1="260" y1="240" x2="260" y2="280" />
+          <line x1="240" y1="260" x2="280" y2="260" />
+        </svg>
         <div class="void-text">
           <span class="void-label">D-DAY</span>
           <h3>THE VOID</h3>
@@ -1438,6 +1449,31 @@
         <div class="timeline-labels">
           <span data-season-day>Day 1</span>
           <span>The Void →</span>
+        </div>
+      </div>
+
+      <!-- Deployment tiers — global scale readout (matches screenshot 03) -->
+      <div class="deployment-tiers reveal" aria-label="Global deployment tiers">
+        <div class="dt-header">
+          <span class="dt-tag">Global Deployment</span>
+          <span>S04 · LIVE</span>
+        </div>
+        <div class="dt-grid">
+          <div class="dt-cell">
+            <span class="dt-tier"><span class="dt-arrow">↳</span>Tier 01 · World</span>
+            <span class="dt-num">171</span>
+            <span class="dt-label">Countries Deployed</span>
+          </div>
+          <div class="dt-cell">
+            <span class="dt-tier"><span class="dt-arrow">↳</span>Tier 02 · Province</span>
+            <span class="dt-num">8</span>
+            <span class="dt-label">Cities Live This Season</span>
+          </div>
+          <div class="dt-cell">
+            <span class="dt-tier"><span class="dt-arrow">↳</span>Tier 03 · District</span>
+            <span class="dt-num">4,892</span>
+            <span class="dt-label">Hexes Flipped This Season</span>
+          </div>
         </div>
       </div>
     </div>

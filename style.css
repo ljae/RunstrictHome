@@ -4116,3 +4116,263 @@ img {
   .section-badge { font-size: 0.62rem; }
   .hero-meta { font-size: 0.58rem; gap: 10px; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   FOLLOW-UP UPGRADES — reticle / solid team panels / deployment
+   tiers / dramatized hero photo
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Hero photo: high-contrast manifesto treatment ─── */
+.hero-runner-bg img {
+  opacity: 0.42;
+  filter: grayscale(1) contrast(1.18) brightness(0.78);
+  mix-blend-mode: luminosity;
+}
+.hero-runner-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(115deg, rgba(255, 59, 48, 0.18) 0%, rgba(255, 59, 48, 0.06) 28%, transparent 55%),
+    linear-gradient(to right, rgba(10,10,15,0.55) 0%, transparent 45%);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.hero-runner-bg::after {
+  background:
+    linear-gradient(to right, var(--black) 0%, transparent 42%),
+    linear-gradient(to top, var(--black) 0%, transparent 28%);
+}
+
+/* ─── Reticle behind The Void countdown (matches screenshot 08) ─── */
+.void-banner { isolation: isolate; }
+.void-reticle {
+  position: absolute;
+  right: -110px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 520px;
+  height: 520px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  mask-image: linear-gradient(to right, transparent 0%, #000 28%, #000 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 28%, #000 100%);
+}
+.void-reticle circle,
+.void-reticle line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 1;
+}
+.void-reticle .ret-outer { stroke: rgba(255, 59, 48, 0.42); }
+.void-reticle .ret-cross { stroke: rgba(255, 255, 255, 0.1); }
+
+/* Make sure the void content sits above the reticle */
+.void-text, .void-countdown { position: relative; z-index: 1; }
+
+/* Tone down the giant 'THE VOID' watermark so it doesn't fight the reticle */
+.void-banner::before {
+  color: rgba(255, 255, 255, 0.018);
+  right: -40px;
+}
+
+/* ─── Solid full-bleed team panels (matches FLAME/WAVE app screens) ─── */
+.team-card.team-red,
+.team-card.team-blue,
+.team-card.team-purple {
+  background: var(--team-bg, var(--surface));
+  border-color: rgba(0, 0, 0, 0.45);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 24px 60px rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+.team-card.team-red    { --team-bg: #C82A20; }
+.team-card.team-blue   { --team-bg: #1647A8; }
+.team-card.team-purple { --team-bg: #6B22A8; }
+
+.team-card.team-red:hover    { background: #D63027; box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 28px 80px rgba(255, 59, 48, 0.28); }
+.team-card.team-blue:hover   { background: #1A55C4; box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 28px 80px rgba(0, 122, 255, 0.28); }
+.team-card.team-purple:hover { background: #7B28C0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 28px 80px rgba(191, 90, 242, 0.28); }
+
+.team-card.team-red    .team-name,
+.team-card.team-blue   .team-name,
+.team-card.team-purple .team-name {
+  color: #fff;
+  font-size: clamp(2.8rem, 4.5vw, 3.8rem);
+  letter-spacing: 0.02em;
+  line-height: 0.95;
+  margin-top: 8px;
+}
+
+.team-card.team-red    .team-color-tag,
+.team-card.team-blue   .team-color-tag,
+.team-card.team-purple .team-color-tag {
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.team-card.team-red    .team-desc,
+.team-card.team-blue   .team-desc,
+.team-card.team-purple .team-desc {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Buff visuals: lift contrast on solid color background */
+.team-card.team-red .f-base-common,
+.team-card.team-red .f-bonus-common {
+  background: rgba(0, 0, 0, 0.18);
+  color: rgba(255,255,255,0.7);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.team-card.team-red .f-base-elite {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.team-card.team-red .f-bonus-elite {
+  background: rgba(0, 0, 0, 0.18);
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+}
+.team-card.team-red .f-title {
+  color: rgba(255, 255, 255, 0.7);
+}
+.team-card.team-blue .wave-visual .ripple {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+.team-card.team-blue .wave-visual .ripple-1 {
+  background: rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 16px rgba(0,0,0,0.4);
+  color: #fff;
+}
+.team-card.team-blue .wave-visual .ripple-2 {
+  background: rgba(255, 255, 255, 0.06);
+}
+.team-card.team-blue .wave-visual .ripple-3 {
+  background: rgba(255, 255, 255, 0.03);
+}
+.team-card.team-purple .chaos-visual .gauge-track {
+  background: rgba(0, 0, 0, 0.28);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.team-card.team-red    .team-stat,
+.team-card.team-blue   .team-stat,
+.team-card.team-purple .team-stat {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+.team-card.team-red    .team-stat-val,
+.team-card.team-blue   .team-stat-val,
+.team-card.team-purple .team-stat-val {
+  color: #fff;
+}
+.team-card.team-red    .team-stat-label,
+.team-card.team-blue   .team-stat-label,
+.team-card.team-purple .team-stat-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* The white-glow halo doesn't make sense on solid color — turn it off */
+.team-card.team-red .team-glow,
+.team-card.team-blue .team-glow,
+.team-card.team-purple .team-glow {
+  display: none;
+}
+
+/* ─── Deployment Tiers panel (matches screenshot 03) ─── */
+.deployment-tiers {
+  margin-top: 56px;
+  padding: 28px 32px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.deployment-tiers::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  height: 1px; width: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,59,48,0.6), transparent);
+}
+.dt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 18px;
+}
+.dt-header .dt-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cream);
+}
+.dt-header .dt-tag::before {
+  content: '';
+  width: 8px; height: 8px;
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red-glow);
+}
+.dt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.dt-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 14px;
+  border-left: 2px solid rgba(255,255,255,0.12);
+}
+.dt-cell:nth-child(1) { border-left-color: var(--cream); }
+.dt-cell:nth-child(2) { border-left-color: var(--blue); }
+.dt-cell:nth-child(3) { border-left-color: var(--red); }
+
+.dt-tier {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--text-faint);
+  text-transform: uppercase;
+}
+.dt-arrow {
+  font-family: var(--font-mono);
+  color: rgba(232,232,240,0.32);
+  margin-right: 6px;
+}
+.dt-cell:nth-child(1) .dt-num { color: var(--cream); }
+.dt-cell:nth-child(2) .dt-num { color: #4FA3FF; }
+.dt-cell:nth-child(3) .dt-num { color: #FF6B64; }
+.dt-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  line-height: 0.95;
+  letter-spacing: 0.005em;
+}
+.dt-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+@media (max-width: 720px) {
+  .deployment-tiers { padding: 22px 18px; }
+  .dt-grid { grid-template-columns: 1fr; gap: 18px; }
+  .dt-num { font-size: clamp(2.2rem, 9vw, 3rem); }
+}
