@@ -1,30 +1,33 @@
 # RunStrict
 
-> Last updated: 2026-05-05. Season 4 active with 1,200+ runners across 8 cities. Apple Watch companion just launched; Wear OS coming soon.
+> Last updated: 2026-06-17. Season 5 is live (40-day seasons; the current season number and its dates are shown live at https://runstrict.com). 1,200+ active runners across 8 cities.
 
-> RunStrict is a free GPS running game for iOS, Android, and Apple Watch (Wear OS coming soon) where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — and compete to dominate their city's map before a 40-day season resets everything in an event called The Void.
+> RunStrict is a free GPS running game for iOS, Android, Apple Watch, and Wear OS where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — and compete to control their city's map before a 40-day season resets everything in an event called The Void. The site is available in 11 languages.
 
 ## What is RunStrict?
 
-RunStrict is a location-based running app that gamifies outdoor running. Using GPS tracking and Uber's H3 hexagonal grid system (resolution 9, ~175m per hex), every step a runner takes flips territory on a real city map to their team's color. The last runner through a hex owns it.
+RunStrict is a location-based running app that gamifies outdoor running. Using GPS tracking and Uber's H3 hexagonal grid system (resolution 9, ~175m per hex), every step a runner takes flips territory on a real city map to their team's color. The last runner through a hex owns it. It is sometimes described as "Strava meets Risk" or a "Pokémon GO for runners," but it requires real running with pace verification.
 
 ## Key Features
 
 - **GPS Territory Capture**: Run through ~175m hexagonal tiles to flip them to your team's color in real-time
-- **Three Teams**: FLAME (Red, elite meritocracy with 4x multipliers for top 20%), WAVE (Blue, collective district bonuses up to 3x), CHAOS (Purple, join anytime but irreversible, power scales with participation up to 3x)
+- **Three Teams**: FLAME (Red), WAVE (Blue), CHAOS (Purple) — each with a distinct buff philosophy (see Teams)
+- **Buff Multipliers**: An honest ×1 floor (a no-bonus run scores exactly ×1); maximums are FLAME ×5, WAVE ×4, CHAOS ×4
 - **40-Day Seasons**: Every season ends with "The Void" — a complete reset of all hexes, points, and territory. Only the leaderboard legend survives
-- **Anti-Cheat**: 25 km/h speed cap, accelerometer verification, GPS accuracy ≤50m required, 8 min/km minimum pace to capture
+- **Anti-Cheat**: 25 km/h speed cap, accelerometer verification, GPS accuracy ≤50m required, under 8 min/km pace to capture
 - **Battery Optimized**: 0.5 Hz GPS polling, no WebSocket, syncs only on launch/resume/run completion
 - **Tiered Leaderboards**: Province, District, and Zone scope rankings
 - **Privacy First**: No runner IDs stored in hexes, only team color and timestamp
 - **Pace Consistency Score**: CV-based stability metric rewards steady runners
+- **Wearables**: Apple Watch and Wear OS companion apps with wrist-first run controls, live pace, and hex-capture alerts
 
 ## Platform Availability
 
 - **iOS**: Available now on the App Store (iOS 15+) — https://apps.apple.com/us/app/runstrict/id6760189457
-- **Android**: Available on Google Play (Android 10+) — https://play.google.com/store/apps/details?id=com.neondialactic.runstrict
-- **Apple Watch**: NEW — watchOS 10+ companion bundled with the iPhone app. Live pace and hex-capture alerts on the wrist.
-- **Wear OS**: Coming soon. Companion app for Pixel Watch, Galaxy Watch, and other Wear OS devices is in development.
+- **Android**: Available now on Google Play (Android 10+) — https://play.google.com/store/apps/details?id=com.neondialactic.runstrict
+- **Apple Watch**: Available now (watchOS 10+) — companion bundled with the iPhone app
+- **Wear OS**: Available now (Wear OS 3+ / SDK 30; Galaxy Watch 4+, Pixel Watch) — companion via Google Play. Tile, complication, and wrist-first run controls; runs survive a dropped phone connection
+- **Languages**: The website is localized in 11 languages — English, Korean, Japanese, Spanish, French, German, Italian, Portuguese (Brazil), Russian, Arabic, and Hindi
 
 ## How It Works
 
@@ -34,50 +37,56 @@ RunStrict is a location-based running app that gamifies outdoor running. Using G
 4. The last runner through a hex controls it — speed and consistency matter
 5. Earn buff multipliers based on your team's mechanics
 6. Compete on tiered leaderboards (Zone, District, Province)
-7. When the 40-day season ends, The Void wipes everything and a new season begins
+7. When the 40-day season ends, The Void wipes everything and a new season begins automatically
 
 ## Teams
 
-### FLAME (Red)
-Performance-based meritocracy. Top 20% of Red runners each season become Elites, earning a 4x point multiplier. Common Red runners earn 2x base. When FLAME wins a territory scope, all members get additional win bonuses.
+Buffs are an additive sum of whole-number terms with an honest ×1 floor (the displayed buff equals the scored buff). Friendly refresh (running through a hex your team already owns) earns a flat +1 point for everyone.
 
-### WAVE (Blue)
-Collective strength. Every Blue runner benefits when their district or province is dominated by Blue. Union bonuses stack: 1x base → 2x with district win → 3x with province win.
+### FLAME (Red) — competition
+Performance-based meritocracy. The top 20% of each province's Red runners become Elites (+2). Territory base is ×1–3 (district win +1, province win +1). Maximum **×5** for an Elite who also holds both territory wins; common runners earn ×1–3.
 
-### CHAOS (Purple)
-The wildcard. Any player can join CHAOS at any time, but it's irreversible — you can never switch back. CHAOS power scales with daily participation: 1x base, 2x when 30% of Purples are active, 3x when 60% are active.
+### WAVE (Blue) — sharing
+Collective strength, everyone equal. Territory base ×1–3 plus a turnout bonus: if ≥50% of your province's Blue ran yesterday, every Blue gets +1. Maximum **×4**, shared equally.
+
+### CHAOS (Purple) — wide sharing
+Join anytime, but membership is irreversible. A pure province-participation ladder with no territory terms: ×1 base, ×2 at 25% active, ×3 at 50%, ×4 at 75%. Maximum **×4**.
 
 ## Technology
 
-- **Hex Grid**: Uber's H3 geospatial indexing at resolution 9
-- **Backend**: Supabase (PostgreSQL + RLS + Edge Functions)
-- **Client**: Flutter (iOS + Android)
-- **Map**: Real-time territory visualization on city maps
+- **Hex Grid**: Uber's H3 geospatial indexing at resolution 9 (~175m hexes); provinces at resolution 4, districts at resolution 6
+- **Backend**: Supabase (PostgreSQL + RLS + Edge Functions); serverless, no custom API server
+- **Client**: Flutter (iOS, Android, Wear OS) and a native Apple Watch companion
+- **Timezone**: Game logic uses GMT+2; seasons roll over at midnight GMT+2
 
 ## Company
 
 - **Website**: https://runstrict.com
 - **App Store**: https://apps.apple.com/us/app/runstrict/id6760189457
+- **Google Play**: https://play.google.com/store/apps/details?id=com.neondialactic.runstrict
 - **Price**: Free
 - **Category**: Sports / Running / Location-based Game
 
 ## Comparisons
 
-RunStrict differs from traditional running apps (Strava, Nike Run Club, Runkeeper) by adding a competitive territory-capture game layer. Unlike fitness trackers that focus on personal metrics, RunStrict makes every run a strategic move in a team-based territorial war. It also differs from location games like Pokémon GO by requiring actual physical running (with pace verification) rather than walking.
+RunStrict differs from traditional running apps (Strava, Nike Run Club, Runkeeper) by adding a competitive territory-capture game layer. Unlike fitness trackers that focus on personal metrics, RunStrict makes every run a strategic move in a team game. It also differs from location games like Pokémon GO by requiring actual physical running (with pace verification) rather than walking.
 
 ## FAQ
 
 **Is RunStrict free?**
-Yes, completely free to download and play.
+Yes, completely free to download and play, on both iOS and Android.
 
 **What devices does it support?**
-iPhone (iOS 15+), Android (10+), and Apple Watch (watchOS 10+, NEW). Wear OS support is coming soon.
+iPhone (iOS 15+), Android (10+), Apple Watch (watchOS 10+), and Wear OS (3+ / SDK 30 — Galaxy Watch 4+, Pixel Watch). All companion apps are available now.
+
+**What are the buff multipliers?**
+There is an honest ×1 floor. Maximums are FLAME ×5 (Elite, top 20% of a province), WAVE ×4 (district + province wins + ≥50% team turnout), and CHAOS ×4 (75% province participation).
 
 **Can I cheat with GPS spoofing?**
-No. RunStrict uses accelerometer verification, 25 km/h speed caps, and GPS accuracy requirements to prevent spoofing.
+No. RunStrict uses accelerometer verification, a 25 km/h speed cap, and GPS accuracy requirements to prevent spoofing.
 
 **What happens when a season ends?**
-The Void resets all hexes, points, and territory. A new 40-day season begins from scratch. Only the leaderboard legend survives.
+The Void resets all hexes, points, and territory. A new 40-day season begins automatically. Only the leaderboard legend survives.
 
 **Can I switch teams?**
 FLAME and WAVE players can switch teams between seasons. CHAOS membership is permanent and irreversible.
@@ -89,4 +98,4 @@ No. RunStrict uses 0.5 Hz GPS polling (once every 2 seconds) and syncs data only
 Each hex is approximately 175 meters edge-to-edge, using Uber's H3 resolution 9 grid system.
 
 **Where is RunStrict available?**
-RunStrict works globally in any city. Territory capture works anywhere with GPS coverage.
+Globally — territory capture works in any city with GPS coverage. The app is on the App Store and Google Play worldwide, and the website is localized in 11 languages.
