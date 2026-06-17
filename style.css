@@ -2241,7 +2241,7 @@ img {
   color: var(--text-faint);
 }
 
-/* ─── Wearables row (Apple Watch live + Wear OS soon) ─── */
+/* ─── Wearables row (Apple Watch + Wear OS — both live) ─── */
 .wearables-row {
   display: flex;
   flex-direction: column;
@@ -2341,31 +2341,38 @@ img {
   box-shadow: 0 8px 24px rgba(0, 230, 118, 0.12);
 }
 
-/* Coming soon (Wear OS) — dimmed, shimmer */
-.watch-btn-soon {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 240, 255, 0.05) 100%);
-  border-color: rgba(0, 240, 255, 0.14);
-  cursor: default;
+/* Live (Wear OS) — clickable, distinct cyan/blue accent */
+.watch-btn-wear {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.06) 0%, rgba(0, 128, 255, 0.06) 100%);
+  border-color: rgba(0, 240, 255, 0.22);
 }
 
-.watch-btn-soon::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(0, 240, 255, 0.07) 50%, transparent 100%);
-  transform: translateX(-100%);
-  animation: shimmer 3s ease-in-out infinite;
-  pointer-events: none;
+.watch-btn-wear:hover {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.12) 0%, rgba(0, 128, 255, 0.12) 100%);
+  border-color: rgba(0, 240, 255, 0.42);
+  box-shadow: 0 8px 24px rgba(0, 200, 255, 0.16);
 }
 
-.watch-btn-soon .watch-btn-icon,
-.watch-btn-soon .watch-name {
-  opacity: 0.65;
+/* Premium clickable affordance — arrow slides in on hover (both live buttons) */
+.watch-btn-live::after {
+  content: '\2192';
+  margin-left: 2px;
+  font-size: 0.95rem;
+  color: var(--text-faint);
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: var(--transition);
 }
 
-.watch-btn-soon .watch-sub {
-  color: rgba(0, 240, 255, 0.7);
-  font-weight: 600;
+.watch-btn-live:hover::after {
+  opacity: 0.85;
+  transform: translateX(0);
+}
+
+/* Keyboard focus — both wearable buttons are links */
+.watch-btn:focus-visible {
+  outline: 2px solid var(--accent, #00E5FF);
+  outline-offset: 3px;
 }
 
 /* Watch badge (NEW / SOON) */
@@ -2399,8 +2406,10 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .watch-btn-soon::before { animation: none; }
   .watch-badge { animation: none; }
+  .watch-btn-live:hover { transform: none; }
+  .watch-btn-live::after,
+  .watch-btn-live:hover::after { transition: none; transform: none; }
 }
 
 /* ─── Footer ─── */
