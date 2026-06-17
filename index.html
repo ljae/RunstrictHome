@@ -1896,21 +1896,24 @@
   <script src="app.js"></script>
   <script>
     // ─── Season auto-calculation ─────────────────────────────────
-    // Season 5 started June 11, 2026. Each season = 40 days.
-    // Automatically updates the hero badge and season progress bar.
+    // Reads the canonical auto-renewing season clock defined in app.js
+    // (window.RunStrictSeason). Seasons are 40 days and roll over forever
+    // with no manual edits. Updates the hero badge, tactical strip, progress
+    // bar, day labels, and season-stats badge.
     (function() {
-      var SEASON_NUMBER = 5;
-      var SEASON_START = new Date('2026-06-11T00:00:00+02:00'); // GMT+2 game timezone
       var SEASON_DAYS = 40;
-
-      var now = new Date();
-      var msPerDay = 86400000;
-      var dayNum = Math.floor((now - SEASON_START) / msPerDay) + 1;
-
-      // Clamp: if before season start, day 1. If past 40, show "The Void".
-      if (dayNum < 1) dayNum = 1;
-      var isVoid = dayNum > SEASON_DAYS;
-      var daysLeft = SEASON_DAYS - dayNum;
+      var SEASON_NUMBER, dayNum, daysLeft, isVoid;
+      var S = (window.RunStrictSeason && window.RunStrictSeason()) || null;
+      if (S) {
+        SEASON_NUMBER = S.number; dayNum = S.dayNum; daysLeft = S.daysLeft; isVoid = false;
+      } else {
+        // Fallback if app.js hasn't loaded — anchor to Season 5, Jun 11 2026.
+        var SEASON_START = new Date('2026-06-11T00:00:00+02:00');
+        var dn = Math.floor((new Date() - SEASON_START) / 86400000) + 1;
+        if (dn < 1) dn = 1;
+        SEASON_NUMBER = 5; dayNum = Math.min(SEASON_DAYS, dn);
+        daysLeft = Math.max(0, SEASON_DAYS - dn); isVoid = false;
+      }
 
       // Update hero badge
       var badge = document.getElementById('heroBadge');

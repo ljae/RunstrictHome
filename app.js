@@ -804,56 +804,77 @@ function initStatCountUp() {
   document.querySelectorAll('[data-count]').forEach(el => observer.observe(el));
 }
 
-/** Season countdown to "The Void" */
-function initCountdown() {
-  // Season 4: May 2 → Jun 10, 2026 (40 days)
-  const voidDate = new Date('2026-06-11T00:00:00+02:00'); // GMT+2 — The Void arrives Jun 11
+/**
+ * Canonical auto-renewing season clock — the SINGLE source of truth for every
+ * season number / progress / "The Void" countdown on the site. Seasons last
+ * 40 days and roll over automatically: the instant one ends the next begins,
+ * forever, with zero manual edits. Anchored to Season 5 (Jun 11, 2026 GMT+2).
+ * The inline season script in index.html also reads this.
+ */
+window.RunStrictSeason = function computeSeason() {
+  const DAY_MS = 86400000;
+  const SEASON_DAYS = 40;
+  const SEASON_MS = SEASON_DAYS * DAY_MS;
+  const ANCHOR_START = new Date('2026-06-11T00:00:00+02:00').getTime();
+  const ANCHOR_NUMBER = 5;
 
-  function update() {
-    const now = new Date();
-    const diff = voidDate - now;
+  const now = Date.now();
+  let cycles = Math.floor((now - ANCHOR_START) / SEASON_MS);
+  if (cycles < 0) cycles = 0; // before the anchor → still Season 5, day 1
+  const startMs = ANCHOR_START + cycles * SEASON_MS;
+  const endMs = startMs + SEASON_MS;            // The Void moment
+  const msToVoid = Math.max(0, endMs - now);
 
-    if (diff <= 0) {
-      document.getElementById('countDays').textContent = '00';
-      document.getElementById('countHours').textContent = '00';
-      document.getElementById('countMins').textContent = '00';
-      document.getElementById('daysLeft').textContent = '0';
-      return;
-    }
+  return {
+    number: ANCHOR_NUMBER + cycles,
+    start: new Date(startMs),
+    end: new Date(endMs),
+    seasonDays: SEASON_DAYS,
+    dayNum: Math.min(SEASON_DAYS, Math.floor((now - startMs) / DAY_MS) + 1),
+    daysLeft: Math.floor(msToVoid / DAY_MS),
+    hoursLeft: Math.floor((msToVoid % DAY_MS) / 3600000),
+    minsLeft: Math.floor((msToVoid % 3600000) / 60000),
+    pct: Math.min(100, Math.max(0, Math.round(((now - startMs) / SEASON_MS) * 100)))
+  };
+};
 
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
-    document.getElementById('countDays').textContent = String(days).padStart(2, '0');
-    document.getElementById('countHours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('countMins').textContent = String(mins).padStart(2, '0');
-    document.getElementById('daysLeft').textContent = days;
+/** Localized "Jun 11, 2026" using the page's <html lang>. */
+function fmtSeasonDate(d) {
+  try {
+    return d.toLocaleDateString(document.documentElement.lang || 'en', { year: 'numeric', month: 'short', day: 'numeric' });
+  } catch (e) {
+    return d.toISOString().slice(0, 10);
   }
-
-  update();
-  setInterval(update, 30000); // update every 30s
 }
 
-/** Season progress timeline */
+/** Season countdown to "The Void" — reads the auto-renewing clock. */
+function initCountdown() {
+  function set(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+  function update() {
+    const s = window.RunStrictSeason();
+    set('countDays', String(s.daysLeft).padStart(2, '0'));
+    set('countHours', String(s.hoursLeft).padStart(2, '0'));
+    set('countMins', String(s.minsLeft).padStart(2, '0'));
+    set('daysLeft', s.daysLeft);
+  }
+  update();
+  setInterval(update, 30000); // refresh every 30s; rolls into the next season automatically
+}
+
+/** Season progress timeline — reads the auto-renewing clock. */
 function initTimeline() {
-  const start = new Date('2026-05-02T00:00:00+02:00');
-  const end   = new Date('2026-06-10T00:00:00+02:00');
-  const now   = new Date();
-
-  const total = end - start;
-  const elapsed = Math.max(0, Math.min(now - start, total));
-  const pct = (elapsed / total) * 100;
-
+  const s = window.RunStrictSeason();
   const fill = document.getElementById('timelineFill');
   const marker = document.getElementById('timelineMarker');
-
   if (fill && marker) {
     setTimeout(() => {
-      fill.style.width = pct + '%';
-      marker.style.left = pct + '%';
+      fill.style.width = s.pct + '%';
+      marker.style.left = s.pct + '%';
     }, 500);
   }
+  // Keep the season period in sync (locale-formatted; language-neutral).
+  const dates = document.querySelector('.timeline-dates');
+  if (dates) dates.textContent = fmtSeasonDate(s.start) + ' → ' + fmtSeasonDate(s.end);
 }
 
 /** Mobile nav toggle */
