@@ -98,202 +98,277 @@
   <link rel="stylesheet" href="/style.css" />
   <!-- ─── Structured Data: MobileApplication + FAQ ─── -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "RunStrict",
+      "url": "https://runstrict.com",
+      "logo": "https://runstrict.com/assets/runner_logo_transparent.png",
+      "description": "RunStrict crea juegos de correr con GPS basados en la ubicación que convierten las carreras diarias en una guerra territorial por equipos.",
+      "sameAs": [
+        "https://www.instagram.com/runstrict/",
+        "https://youtube.com/@user-ku4hf4ug9t",
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "RunStrict",
+      "url": "https://runstrict.com",
+      "description": "RunStrict es un juego gratuito de correr con GPS donde tus pasos capturan territorio hexagonal. Elige tu equipo, voltea hexágonos y domina tu ciudad.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "RunStrict"
+      },
+      "dateModified": "2026-05-05",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".sr-only",
+          ".faq-a p",
+          ".hero-sub",
+          ".athlete-sub"
+        ]
+      },
+      "inLanguage": "es"
+    },
+    {
+      "@type": "MobileApplication",
+      "name": "RunStrict",
+      "alternateName": "RunStrict Juego de Correr con GPS",
+      "description": "Un juego gratuito de correr con GPS basado en la ubicación donde los jugadores capturan casillas de territorio hexagonal corriendo físicamente a través de ellas. Elige entre tres equipos — FLAME, WAVE o CHAOS — y compite para dominar tu ciudad antes de que la temporada de 40-day se reinicie en The Void. Usa la cuadrícula hexagonal H3 de Uber a resolución 9 (casillas de ~175m). Verificación anti-trampas con acelerómetro y comprobaciones de precisión del GPS.",
+      "operatingSystem": [
+        "iOS 15+",
+        "Android 10+",
+        "watchOS 10+",
+        "Wear OS 3+"
+      ],
+      "applicationCategory": "SportsApplication",
+      "applicationSubCategory": "Running",
+      "genre": [
+        "Sports",
+        "Strategy",
+        "Location-based Game"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "author": {
         "@type": "Organization",
         "name": "RunStrict",
-        "url": "https://runstrict.com",
-        "logo": "https://runstrict.com/assets/runner_logo_transparent.png",
-        "description": "RunStrict builds location-based GPS running games that turn daily runs into team-based territorial warfare.",
-        "sameAs": [
-          "https://www.instagram.com/runstrict/",
-          "https://youtube.com/@user-ku4hf4ug9t",
-          "https://apps.apple.com/us/app/runstrict/id6760189457",
-          "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
-        ]
+        "url": "https://runstrict.com"
       },
-      {
-        "@type": "WebSite",
-        "name": "RunStrict",
-        "url": "https://runstrict.com",
-        "description": "RunStrict is a free GPS running game where your footsteps capture hexagonal territory. Choose your team, flip hexes, dominate your city.",
-        "publisher": { "@type": "Organization", "name": "RunStrict" },
-        "dateModified": "2026-05-05",
-        "speakable": {
-          "@type": "SpeakableSpecification",
-          "cssSelector": [".sr-only", ".faq-a p", ".hero-sub", ".athlete-sub"]
+      "url": "https://runstrict.com",
+      "installUrl": [
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ],
+      "downloadUrl": [
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ],
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-05-05",
+      "softwareVersion": "2.0",
+      "screenshot": [
+        "https://runstrict.com/assets/territory_SS.jpg",
+        "https://runstrict.com/assets/leader_SS.jpg",
+        "https://runstrict.com/assets/buff_SS.jpg",
+        "https://runstrict.com/assets/stats_SS.jpg"
+      ],
+      "featureList": [
+        "Captura de territorio por GPS en la cuadrícula hexagonal H3 (casillas de ~175m)",
+        "Tres equipos: FLAME (Rojo), WAVE (Azul), CHAOS (Morado)",
+        "Temporadas competitivas de 40-day con reinicio completo (The Void)",
+        "Clasificaciones por niveles: Zona, Distrito, Provincia",
+        "Anti-trampas: verificación con acelerómetro, precisión del GPS ≤50m, límite de velocidad de 25 km/h",
+        "Sondeo de GPS optimizado para la batería a 0.5 Hz",
+        "Puntuación de Consistencia de Ritmo (métrica de estabilidad basada en CV)",
+        "Privacidad ante todo: no se almacenan identificadores de corredores en los datos de hexágonos",
+        "Compañero para Apple Watch (watchOS 10+) y compañero para Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) para ver el ritmo en vivo y alertas de captura de hexágonos en la muñeca"
+      ],
+      "keywords": "juego de correr con GPS, juego de correr basado en la ubicación, app de correr gamificada, captura de territorio corriendo, juego de territorio hexagonal, competición de correr en equipo, app de juego de fitness, app de desafíos de correr, app de correr competitiva, juego alternativo a Strava, juego de correr como Pokemon GO, mejor juego de correr 2026",
+      "inLanguage": "es"
+    },
+    {
+      "@type": "HowTo",
+      "name": "Cómo jugar a RunStrict — Juego de correr con GPS de captura de territorio",
+      "description": "Aprende a capturar casillas de territorio hexagonal corriendo en el juego de correr con GPS RunStrict. Cuatro pasos sencillos desde atarte las zapatillas hasta ganar multiplicadores de bonificación.",
+      "totalTime": "PT30M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Empieza a correr con seguimiento por GPS",
+          "text": "Abre RunStrict y empieza a correr. El GPS rastrea tu ruta en tiempo real. Mantén un ritmo por debajo de 8 min/km para activar el modo de captura de hexágonos. El sistema anti-trampas verifica el movimiento físico mediante el acelerómetro.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Voltea las casillas de territorio hexagonal",
+          "text": "Cada casilla hexagonal de ~175m (resolución 9 de Uber H3) por la que corres físicamente cambia al color de tu equipo — FLAME (Rojo), WAVE (Azul) o CHAOS (Morado). El último corredor que pasa por un hexágono lo controla.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Domina el mapa de la ciudad",
+          "text": "Observa cómo tu ciudad se transforma a medida que reclamas territorio. Gana puntos por cada hexágono capturado, escala las clasificaciones de Zona, Distrito y Provincia, y lleva a tu equipo al dominio territorial.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Gana multiplicadores de bonificación",
+          "text": "Los Élites de FLAME (el 20% superior de su provincia) alcanzan multiplicadores de puntos de hasta 5x. Los miembros de WAVE ascienden juntos hasta 4x mediante victorias de distrito y provincia, además de la participación del equipo. El poder de CHAOS escala con la participación de la provincia hasta 4x. Un suelo honesto de 1x significa que una carrera sin bonificación puntúa exactamente 1x. Los multiplicadores se reinician cada temporada de 40-day.",
+          "url": "https://runstrict.com/#teams"
         }
-      },
-      {
-        "@type": "MobileApplication",
-        "name": "RunStrict",
-        "alternateName": "RunStrict GPS Running Game",
-        "description": "A free location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to dominate your city before the 40-day season resets in The Void. Uses Uber's H3 hex grid at resolution 9 (~175m tiles). Anti-cheat verified with accelerometer and GPS accuracy checks.",
-        "operatingSystem": ["iOS 15+", "Android 10+", "watchOS 10+", "Wear OS 3+"],
-        "applicationCategory": "SportsApplication",
-        "applicationSubCategory": "Running",
-        "genre": ["Sports", "Strategy", "Location-based Game"],
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
-        "author": { "@type": "Organization", "name": "RunStrict", "url": "https://runstrict.com" },
-        "url": "https://runstrict.com",
-        "installUrl": ["https://apps.apple.com/us/app/runstrict/id6760189457", "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"],
-        "downloadUrl": ["https://apps.apple.com/us/app/runstrict/id6760189457", "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"],
-        "datePublished": "2026-01-01",
-        "dateModified": "2026-05-05",
-        "softwareVersion": "2.0",
-        "screenshot": [
-          "https://runstrict.com/assets/territory_SS.jpg",
-          "https://runstrict.com/assets/leader_SS.jpg",
-          "https://runstrict.com/assets/buff_SS.jpg",
-          "https://runstrict.com/assets/stats_SS.jpg"
-        ],
-        "featureList": [
-          "GPS territory capture on H3 hex grid (~175m tiles)",
-          "Three teams: FLAME (Red), WAVE (Blue), CHAOS (Purple)",
-          "40-day competitive seasons with full reset (The Void)",
-          "Tiered leaderboards: Zone, District, Province",
-          "Anti-cheat: accelerometer verification, GPS accuracy ≤50m, 25 km/h speed cap",
-          "Battery-optimized 0.5 Hz GPS polling",
-          "Pace Consistency Score (CV-based stability metric)",
-          "Privacy-first: no runner IDs stored in hex data",
-          "Apple Watch companion (watchOS 10+) and Wear OS companion (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) for live pace and hex capture alerts on the wrist"
-        ],
-        "keywords": "GPS running game, location-based running game, gamified running app, territory capture running, hex territory game, team running competition, fitness game app, running challenge app, competitive running app, Strava alternative game, running game like Pokemon GO, best running game 2026"
-      },
-      {
-        "@type": "HowTo",
-        "name": "How to Play RunStrict — GPS Territory Capture Running Game",
-        "description": "Learn how to capture hexagonal territory tiles by running in the RunStrict GPS running game. Four simple steps from lacing up to earning buff multipliers.",
-        "totalTime": "PT30M",
-        "step": [
-          {
-            "@type": "HowToStep",
-            "position": 1,
-            "name": "Start Running with GPS Tracking",
-            "text": "Open RunStrict and start running. GPS tracks your route in real-time. Maintain under 8 min/km pace to activate hex capture mode. Anti-cheat verifies physical movement via accelerometer.",
-            "url": "https://runstrict.com/#how-it-works"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 2,
-            "name": "Flip Hexagonal Territory Tiles",
-            "text": "Every ~175m hexagonal tile (Uber H3 resolution 9) you physically run through flips to your team's color — FLAME (Red), WAVE (Blue), or CHAOS (Purple). The last runner through a hex controls it.",
-            "url": "https://runstrict.com/#how-it-works"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 3,
-            "name": "Dominate the City Map",
-            "text": "Watch your city transform as you claim territory. Earn points for every hex captured, climb Zone, District, and Province leaderboards, and lead your team to territorial dominance.",
-            "url": "https://runstrict.com/#how-it-works"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 4,
-            "name": "Earn Buff Multipliers",
-            "text": "FLAME Elites (top 20% of their province) reach up to 5x point multipliers. WAVE members rise together up to 4x through district and province wins plus team turnout. CHAOS power scales with province participation up to 4x. An honest 1x floor means a no-bonus run scores exactly 1x. Multipliers reset each 40-day season.",
-            "url": "https://runstrict.com/#teams"
+      ],
+      "inLanguage": "es"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "RunStrict",
+          "item": "https://runstrict.com/"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Comparación de equipos de RunStrict",
+      "description": "Compara los tres equipos de RunStrict: FLAME (Rojo), WAVE (Azul) y CHAOS (Morado). Cada equipo tiene mecánicas de bonificación y estilos de juego únicos.",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FLAME (Equipo Rojo)",
+          "description": "Meritocracia basada en el rendimiento. El 20% superior de los corredores Rojos de cada provincia se convierten en Élites, alcanzando hasta 5x puntos. Los corredores comunes ganan de 1x a 3x mediante victorias de distrito y provincia (suelo honesto de 1x). Ideal para corredores competitivos en solitario."
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "WAVE (Equipo Azul)",
+          "description": "Fuerza colectiva. Cada corredor Azul asciende junto a los demás: una victoria de distrito, una victoria de provincia y la participación del equipo (50%+ de tu provincia corriendo) suman un punto cada una, hasta 4x compartido por igual. Ideal para corredores orientados al equipo."
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CHAOS (Equipo Morado)",
+          "description": "El comodín. Únete en cualquier momento, pero la membresía es irreversible. El poder escala con la participación de la provincia: 1x base, 2x al 25% activo, 3x al 50%, 4x al 75%. Sin bonificaciones de territorio. Ideal para corredores sociales que prosperan bajo presión."
+        }
+      ],
+      "inLanguage": "es"
+    },
+    {
+      "@type": "FAQPage",
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-05-05",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Qué es RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict es un juego gratuito de correr con GPS basado en la ubicación donde tus carreras físicas capturan casillas de territorio hexagonal en un mapa real de tu ciudad. Elige entre tres equipos — FLAME, WAVE o CHAOS — y compite para controlar tu ciudad antes de que la temporada de 40 días termine en el reinicio de The Void. Usa el sistema de cuadrícula hexagonal H3 de Uber con casillas de ~175m."
           }
-        ]
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "RunStrict", "item": "https://runstrict.com/" }
-        ]
-      },
-      {
-        "@type": "ItemList",
-        "name": "RunStrict Teams Comparison",
-        "description": "Compare the three teams in RunStrict: FLAME (Red), WAVE (Blue), and CHAOS (Purple). Each team has unique buff mechanics and play styles.",
-        "numberOfItems": 3,
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "FLAME (Red Team)",
-            "description": "Performance-based meritocracy. The top 20% of each province's Red runners become Elites, reaching up to 5x points. Common runners earn 1x-3x from district and province wins (honest 1x floor). Best for competitive solo runners."
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "WAVE (Blue Team)",
-            "description": "Collective strength. Every Blue runner rises together: a district win, a province win, and team turnout (50%+ of your province running) each add a point, up to 4x shared equally. Best for team-oriented runners."
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "CHAOS (Purple Team)",
-            "description": "The wildcard. Join anytime but membership is irreversible. Power scales with province participation: 1x base, 2x at 25% active, 3x at 50%, 4x at 75%. No territory bonuses. Best for social runners who thrive under pressure."
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo funciona la captura de hexágonos en RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mientras corres, RunStrict usa el GPS para rastrear tu ruta en tiempo real. Cada casilla hexagonal de ~175m (resolución 9 de H3) por la que corres físicamente cambia al color de tu equipo. El último corredor que pasa por un hexágono lo controla. Mantén un ritmo por debajo de 8 min/km para activar el modo de captura. El sistema anti-trampas usa verificación con acelerómetro y comprobaciones de precisión del GPS."
           }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "datePublished": "2026-01-01",
-        "dateModified": "2026-05-05",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is a free location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to control your city before the 40-day season ends in The Void reset. It uses Uber's H3 hex grid system with ~175m tiles." }
-          },
-          {
-            "@type": "Question",
-            "name": "How does hex capture work in RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "As you run, RunStrict uses GPS to track your route in real-time. Every ~175m hexagonal tile (H3 resolution 9) you physically run through flips to your team's color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture mode. Anti-cheat uses accelerometer verification and GPS accuracy checks." }
-          },
-          {
-            "@type": "Question",
-            "name": "Is RunStrict free to play?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes, RunStrict is completely free to download and play. Available now on iOS (App Store) and Android (Google Play)." }
-          },
-          {
-            "@type": "Question",
-            "name": "What is The Void in RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The Void is the season reset event that occurs every 40 days. When The Void arrives, all captured hexes, points, and territorial control are completely wiped. Only the season leaderboard legend survives. Then a new 40-day season begins." }
-          },
-          {
-            "@type": "Question",
-            "name": "What teams can I join in RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict has three teams: FLAME (Red — top 20% of each province become Elites, up to 5× through performance), WAVE (Blue — collective bonuses up to 4× when your district or province wins and turnout is high), and CHAOS (Purple — join anytime, irreversible, a participation ladder up to 4×)." }
-          },
-          {
-            "@type": "Question",
-            "name": "Is RunStrict available on iPhone and Android?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store, requires iOS 15+) and Android (Google Play, requires Android 10+), with brand-new Apple Watch (watchOS 10+) and Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) companion apps. GPS accuracy of 50m or better is required for hex capture." }
-          },
-          {
-            "@type": "Question",
-            "name": "How is RunStrict different from Strava or Nike Run Club?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Unlike Strava or Nike Run Club which focus on personal fitness tracking, RunStrict adds a competitive territory-capture game layer to running. Every run is a strategic move in a team-based territorial war — you flip hex tiles, earn buff multipliers, and compete on leaderboards. It combines the physical activity of a running app with the strategy of a location-based game." }
-          },
-          {
-            "@type": "Question",
-            "name": "How is RunStrict different from Pokemon GO?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict requires actual running with pace verification (under 8 min/km), not just walking. It focuses on real athletic performance with anti-cheat measures including accelerometer verification and GPS accuracy checks. Territory is earned through physical running effort, not catching virtual creatures." }
-          },
-          {
-            "@type": "Question",
-            "name": "Does RunStrict drain my phone battery?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. RunStrict uses battery-optimized 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion. There are no persistent WebSocket connections draining your battery." }
-          },
-          {
-            "@type": "Question",
-            "name": "Can you cheat in RunStrict with GPS spoofing?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. RunStrict uses multi-layer anti-cheat: 25 km/h speed cap, accelerometer verification to confirm physical movement, GPS accuracy must be ≤50m, and runners must maintain under 8 min/km pace for hex capture to activate." }
-          },
-          {
-            "@type": "Question",
-            "name": "Where is RunStrict available?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict works globally in any city with GPS coverage. The hex grid covers the entire planet. Available on iOS (App Store) and Android (Google Play) worldwide." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es gratis jugar a RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, RunStrict es completamente gratis para descargar y jugar. Disponible ahora en iOS (App Store) y Android (Google Play)."
           }
-        ]
-      }
-    ]
-  }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es The Void en RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Void es el evento de reinicio de temporada que ocurre cada 40 días. Cuando llega The Void, todos los hexágonos capturados, los puntos y el control territorial se borran por completo. Solo sobrevive la leyenda de la clasificación de la temporada. Luego comienza una nueva temporada de 40 días."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿A qué equipos puedo unirme en RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict tiene tres equipos: FLAME (Rojo — el 20% superior de cada provincia se convierte en Élites, hasta 5× mediante el rendimiento), WAVE (Azul — bonificaciones colectivas de hasta 4× cuando tu distrito o provincia gana y la participación es alta) y CHAOS (Morado — únete en cualquier momento, irreversible, una escalera de participación de hasta 4×)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Está RunStrict disponible en iPhone y Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict está disponible ahora en iOS (App Store, requiere iOS 15+) y Android (Google Play, requiere Android 10+), con nuevas aplicaciones compañeras para Apple Watch (watchOS 10+) y Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch). Se requiere una precisión de GPS de 50m o mejor para la captura de hexágonos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué se diferencia RunStrict de Strava o Nike Run Club?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A diferencia de Strava o Nike Run Club, que se centran en el seguimiento del fitness personal, RunStrict añade una capa de juego competitivo de captura de territorio a las carreras. Cada carrera es una jugada estratégica en una guerra territorial por equipos — volteas casillas hexagonales, ganas multiplicadores de bonificación y compites en clasificaciones. Combina la actividad física de una app de correr con la estrategia de un juego basado en la ubicación."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué se diferencia RunStrict de Pokemon GO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict requiere correr de verdad con verificación de ritmo (por debajo de 8 min/km), no solo caminar. Se centra en el rendimiento atlético real con medidas anti-trampas que incluyen verificación con acelerómetro y comprobaciones de precisión del GPS. El territorio se gana mediante el esfuerzo físico de correr, no atrapando criaturas virtuales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿RunStrict agota la batería de mi teléfono?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. RunStrict usa un sondeo de GPS optimizado para la batería a 0.5 Hz (una vez cada 2 segundos) y sincroniza los datos solo al iniciar la app, al reanudarla y al completar una carrera. No hay conexiones WebSocket persistentes que agoten tu batería."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Se puede hacer trampa en RunStrict con suplantación de GPS?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. RunStrict usa un sistema anti-trampas de múltiples capas: límite de velocidad de 25 km/h, verificación con acelerómetro para confirmar el movimiento físico, la precisión del GPS debe ser ≤50m, y los corredores deben mantener un ritmo por debajo de 8 min/km para que se active la captura de hexágonos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde está disponible RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict funciona en todo el mundo en cualquier ciudad con cobertura GPS. La cuadrícula hexagonal cubre todo el planeta. Disponible en iOS (App Store) y Android (Google Play) en todo el mundo."
+          }
+        }
+      ],
+      "inLanguage": "es"
+    }
+  ]
+}
   </script>
 
   <!-- ═══ RUNSTRICT — DESIGN UPGRADE OVERRIDES ═══ -->

@@ -1,0 +1,266 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "RunStrict",
+      "url": "https://runstrict.com",
+      "logo": "https://runstrict.com/assets/runner_logo_transparent.png",
+      "description": "RunStrict는 일상의 달리기를 팀 기반 영토 전쟁으로 바꾸는 위치 기반 GPS 러닝 게임을 만듭니다.",
+      "sameAs": [
+        "https://www.instagram.com/runstrict/",
+        "https://youtube.com/@user-ku4hf4ug9t",
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "RunStrict",
+      "url": "https://runstrict.com",
+      "description": "RunStrict는 당신의 발걸음이 육각형 영토를 점령하는 무료 GPS 러닝 게임입니다. 팀을 선택하고, 헥스를 뒤집고, 당신의 도시를 지배하세요.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "RunStrict"
+      },
+      "dateModified": "2026-05-05",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".sr-only",
+          ".faq-a p",
+          ".hero-sub",
+          ".athlete-sub"
+        ]
+      }
+    },
+    {
+      "@type": "MobileApplication",
+      "name": "RunStrict",
+      "alternateName": "RunStrict GPS 러닝 게임",
+      "description": "플레이어가 실제로 달려서 통과하며 육각형 영토 타일을 점령하는 무료 위치 기반 GPS 러닝 게임입니다. FLAME, WAVE, CHAOS 세 팀 중 하나를 선택하고, 40일 시즌이 The Void에서 리셋되기 전에 당신의 도시를 지배하기 위해 경쟁하세요. Uber의 H3 헥스 그리드를 해상도 9(약 175m 타일)로 사용합니다. 가속도계와 GPS 정확도 검사로 부정행위를 검증합니다.",
+      "operatingSystem": [
+        "iOS 15+",
+        "Android 10+",
+        "watchOS 10+",
+        "Wear OS 3+"
+      ],
+      "applicationCategory": "SportsApplication",
+      "applicationSubCategory": "Running",
+      "genre": [
+        "Sports",
+        "Strategy",
+        "Location-based Game"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "RunStrict",
+        "url": "https://runstrict.com"
+      },
+      "url": "https://runstrict.com",
+      "installUrl": [
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ],
+      "downloadUrl": [
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ],
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-05-05",
+      "softwareVersion": "2.0",
+      "screenshot": [
+        "https://runstrict.com/assets/territory_SS.jpg",
+        "https://runstrict.com/assets/leader_SS.jpg",
+        "https://runstrict.com/assets/buff_SS.jpg",
+        "https://runstrict.com/assets/stats_SS.jpg"
+      ],
+      "featureList": [
+        "H3 헥스 그리드(약 175m 타일)에서의 GPS 영토 점령",
+        "세 팀: FLAME (레드), WAVE (블루), CHAOS (퍼플)",
+        "40일 경쟁 시즌과 완전 리셋 (The Void)",
+        "계층형 리더보드: 존, 디스트릭트, 프로빈스",
+        "부정행위 방지: 가속도계 검증, GPS 정확도 ≤50m, 25 km/h 속도 제한",
+        "배터리 최적화 0.5 Hz GPS 폴링",
+        "페이스 일관성 점수 (CV 기반 안정성 지표)",
+        "프라이버시 우선: 헥스 데이터에 러너 ID를 저장하지 않음",
+        "Apple Watch 컴패니언(watchOS 10+) 및 Wear OS 컴패니언(Wear OS 3+, Galaxy Watch 4+ / Pixel Watch)으로 손목에서 실시간 페이스와 헥스 점령 알림 확인"
+      ],
+      "keywords": "GPS 러닝 게임, 위치 기반 러닝 게임, 게임화된 러닝 앱, 영토 점령 러닝, 헥스 영토 게임, 팀 러닝 경쟁, 피트니스 게임 앱, 러닝 챌린지 앱, 경쟁 러닝 앱, Strava 대안 게임, Pokemon GO 같은 러닝 게임, 2026 최고의 러닝 게임"
+    },
+    {
+      "@type": "HowTo",
+      "name": "RunStrict 플레이 방법 — GPS 영토 점령 러닝 게임",
+      "description": "RunStrict GPS 러닝 게임에서 달리며 육각형 영토 타일을 점령하는 방법을 알아보세요. 신발 끈을 매는 것부터 버프 배수를 얻기까지 네 가지 간단한 단계로 설명합니다.",
+      "totalTime": "PT30M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "GPS 추적과 함께 달리기 시작",
+          "text": "RunStrict를 열고 달리기를 시작하세요. GPS가 실시간으로 당신의 경로를 추적합니다. 헥스 점령 모드를 활성화하려면 8 min/km 미만의 페이스를 유지하세요. 부정행위 방지 기능이 가속도계를 통해 실제 움직임을 검증합니다.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "육각형 영토 타일 뒤집기",
+          "text": "당신이 실제로 달려서 통과하는 약 175m 육각형 타일(Uber H3 해상도 9)마다 당신 팀의 색으로 뒤집힙니다 — FLAME (레드), WAVE (블루), 또는 CHAOS (퍼플). 헥스를 마지막으로 통과한 러너가 그것을 차지합니다.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "도시 지도 지배하기",
+          "text": "영토를 차지하면서 당신의 도시가 변화하는 모습을 지켜보세요. 점령한 헥스마다 점수를 얻고, 존, 디스트릭트, 프로빈스 리더보드를 올라가며, 당신의 팀을 영토 지배로 이끄세요.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "버프 배수 획득하기",
+          "text": "FLAME 엘리트(자기 프로빈스의 상위 20%)는 최대 5x 점수 배수에 도달합니다. WAVE 멤버는 디스트릭트와 프로빈스 승리에 팀 참여율을 더해 최대 4x까지 함께 상승합니다. CHAOS 파워는 프로빈스 참여율에 따라 최대 4x까지 확장됩니다. 정직한 1x 하한은 보너스 없는 달리기가 정확히 1x로 기록됨을 의미합니다. 배수는 40일 시즌마다 리셋됩니다.",
+          "url": "https://runstrict.com/#teams"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "RunStrict",
+          "item": "https://runstrict.com/"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "RunStrict 팀 비교",
+      "description": "RunStrict의 세 팀을 비교하세요: FLAME (레드), WAVE (블루), CHAOS (퍼플). 각 팀은 고유한 버프 메커니즘과 플레이 스타일을 가지고 있습니다.",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FLAME (레드 팀)",
+          "description": "성과 기반 능력주의. 각 프로빈스 레드 러너의 상위 20%가 엘리트가 되어 최대 5x 점수에 도달합니다. 일반 러너는 디스트릭트와 프로빈스 승리로 1x-3x를 얻습니다(정직한 1x 하한). 경쟁적인 솔로 러너에게 가장 적합합니다."
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "WAVE (블루 팀)",
+          "description": "집단의 힘. 모든 블루 러너가 함께 상승합니다: 디스트릭트 승리, 프로빈스 승리, 그리고 팀 참여율(프로빈스의 50% 이상이 달리기)이 각각 1점을 더해 최대 4x까지 균등하게 공유됩니다. 팀 지향적인 러너에게 가장 적합합니다."
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CHAOS (퍼플 팀)",
+          "description": "와일드카드. 언제든 가입할 수 있지만 멤버십은 되돌릴 수 없습니다. 파워는 프로빈스 참여율에 따라 확장됩니다: 기본 1x, 활성 25%에서 2x, 50%에서 3x, 75%에서 4x. 영토 보너스는 없습니다. 압박 속에서 빛을 발하는 소셜 러너에게 가장 적합합니다."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-05-05",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "RunStrict란 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict는 당신의 실제 달리기가 당신 도시의 실제 지도 위에서 육각형 영토 타일을 점령하는 무료 위치 기반 GPS 러닝 게임입니다. FLAME, WAVE, CHAOS 세 팀 중 하나를 선택하고, 40일 시즌이 The Void 리셋으로 끝나기 전에 당신의 도시를 장악하기 위해 경쟁하세요. Uber의 H3 헥스 그리드 시스템을 약 175m 타일로 사용합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict에서 헥스 점령은 어떻게 작동하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "당신이 달리면 RunStrict는 GPS를 사용하여 실시간으로 당신의 경로를 추적합니다. 당신이 실제로 달려서 통과하는 약 175m 육각형 타일(H3 해상도 9)마다 당신 팀의 색으로 뒤집힙니다. 헥스를 마지막으로 통과한 러너가 그것을 차지합니다. 점령 모드를 활성화하려면 8 min/km 미만의 페이스를 유지하세요. 부정행위 방지 기능은 가속도계 검증과 GPS 정확도 검사를 사용합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict는 무료로 플레이할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, RunStrict는 완전히 무료로 다운로드하고 플레이할 수 있습니다. 지금 iOS (App Store)와 Android (Google Play)에서 이용할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict의 The Void란 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Void는 40일마다 발생하는 시즌 리셋 이벤트입니다. The Void가 도래하면 점령한 모든 헥스, 점수, 영토 지배권이 완전히 사라집니다. 시즌 리더보드의 전설만 살아남습니다. 그런 다음 새로운 40일 시즌이 시작됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict에서 어떤 팀에 가입할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict에는 세 팀이 있습니다: FLAME (레드 — 각 프로빈스의 상위 20%가 엘리트가 되어 성과를 통해 최대 5×), WAVE (블루 — 디스트릭트나 프로빈스가 이기고 참여율이 높을 때 최대 4×의 집단 보너스), 그리고 CHAOS (퍼플 — 언제든 가입 가능, 되돌릴 수 없으며 최대 4×까지의 참여 사다리)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict는 iPhone과 Android에서 이용할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict는 지금 iOS (App Store, iOS 15+ 필요)와 Android (Google Play, Android 10+ 필요)에서 이용할 수 있으며, 완전히 새로운 Apple Watch (watchOS 10+) 및 Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) 컴패니언 앱도 제공합니다. 헥스 점령에는 50m 이하의 GPS 정확도가 필요합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict는 Strava나 Nike Run Club과 어떻게 다른가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "개인 피트니스 추적에 중점을 둔 Strava나 Nike Run Club과 달리, RunStrict는 달리기에 경쟁적인 영토 점령 게임 레이어를 더합니다. 모든 달리기는 팀 기반 영토 전쟁 속의 전략적인 한 수입니다 — 당신은 헥스 타일을 뒤집고, 버프 배수를 얻고, 리더보드에서 경쟁합니다. 러닝 앱의 신체 활동과 위치 기반 게임의 전략을 결합합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict는 Pokemon GO와 어떻게 다른가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict는 단순한 걷기가 아니라 페이스 검증(8 min/km 미만)을 동반한 실제 달리기를 요구합니다. 가속도계 검증과 GPS 정확도 검사를 포함한 부정행위 방지 조치와 함께 실제 운동 성과에 중점을 둡니다. 영토는 가상 생물을 잡는 것이 아니라 실제 달리기 노력을 통해 얻어집니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict가 내 휴대폰 배터리를 소모하나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. RunStrict는 배터리 최적화 0.5 Hz GPS 폴링(2초마다 한 번)을 사용하며 앱 실행, 재개, 달리기 완료 시에만 데이터를 동기화합니다. 배터리를 소모하는 지속적인 WebSocket 연결이 없습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "GPS 스푸핑으로 RunStrict에서 부정행위를 할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "아니요. RunStrict는 다층 부정행위 방지 기능을 사용합니다: 25 km/h 속도 제한, 실제 움직임을 확인하는 가속도계 검증, GPS 정확도는 반드시 ≤50m여야 하며, 헥스 점령을 활성화하려면 러너가 8 min/km 미만의 페이스를 유지해야 합니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "RunStrict는 어디서 이용할 수 있나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict는 GPS 커버리지가 있는 전 세계 모든 도시에서 작동합니다. 헥스 그리드는 지구 전체를 덮습니다. 전 세계의 iOS (App Store)와 Android (Google Play)에서 이용할 수 있습니다."
+          }
+        }
+      ]
+    }
+  ]
+}
