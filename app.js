@@ -173,11 +173,19 @@ function generateSeasonData() {
       })),
     },
     4: {
-      label: 'Season 4 — Current War',
+      label: 'Season 4 — The Reckoning',
+      story: 'FLAME and WAVE traded continents to the last hex before The Void.',
+      hexes: hexList.map((h, i) => ({
+        ...h,
+        team: assignTeam(4, i, 0.40, 0.38),
+      })),
+    },
+    5: {
+      label: 'Season 5 — Current War',
       story: 'The battle rages now. Who will survive The Void?',
       hexes: hexList.map((h, i) => ({
         ...h,
-        team: assignTeam(4, i, 0.40, 0.38), // Current: slight Red edge
+        team: assignTeam(5, i, 0.38, 0.36), // Current: tight three-way race
       })),
     },
   };
@@ -234,7 +242,7 @@ function buildGeoJSON(hexes) {
 
 let map = null;
 let seasonData = null;
-let currentSeason = 4;
+let currentSeason = 5;
 
 function initMap() {
   map = new maplibregl.Map({
