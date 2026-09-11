@@ -1,496 +1,14 @@
 /**
  * RunStrict Marketing Homepage — app.js
- * World map with H3 hex tiles colored by team season snapshots.
- * Uses MapLibre GL JS + h3-js (both loaded via CDN)
+ * Hero hex field (canvas, no dependencies), scroll effects, season clock,
+ * reveals and the small UI behaviours. No external map libraries.
  */
 
 'use strict';
 
 // ═══════════════════════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════════════════════
-
-// No token needed — MapLibre GL JS uses free tile providers
-const H3_RESOLUTION = 3; // res 3 = ~180km edge, perfect for global world view
-
-// Team colors (matches Flutter app theme exactly)
-const TEAM_COLORS = {
-  red:    '#FF3B30',
-  blue:   '#007AFF',
-  purple: '#BF5AF2',
-};
-
-// Major cities worldwide — used to seed hex IDs
-// [name, lat, lng]
-const CITY_SEEDS = [
-  // East Asia
-  ['Seoul',      37.5665,  126.9780],
-  ['Tokyo',      35.6762,  139.6503],
-  ['Beijing',    39.9042,  116.4074],
-  ['Shanghai',   31.2304,  121.4737],
-  ['Osaka',      34.6937,  135.5023],
-  ['Taipei',     25.0330,  121.5654],
-  ['Hong Kong',  22.3193,  114.1694],
-  ['Busan',      35.1796,  129.0756],
-  // Southeast Asia
-  ['Bangkok',    13.7563,  100.5018],
-  ['Singapore',   1.3521,  103.8198],
-  ['Jakarta',    -6.2088,  106.8456],
-  ['Hanoi',      21.0285,  105.8542],
-  // South Asia
-  ['Mumbai',     19.0760,   72.8777],
-  ['Delhi',      28.7041,   77.1025],
-  ['Dhaka',      23.8103,   90.4125],
-  // Middle East
-  ['Dubai',      25.2048,   55.2708],
-  ['Istanbul',   41.0082,   28.9784],
-  ['Tel Aviv',   32.0853,   34.7818],
-  // Europe
-  ['London',     51.5074,   -0.1278],
-  ['Paris',      48.8566,    2.3522],
-  ['Berlin',     52.5200,   13.4050],
-  ['Amsterdam',  52.3676,    4.9041],
-  ['Madrid',     40.4168,   -3.7038],
-  ['Rome',       41.9028,   12.4964],
-  ['Stockholm',  59.3293,   18.0686],
-  ['Vienna',     48.2082,   16.3738],
-  ['Warsaw',     52.2297,   21.0122],
-  ['Zurich',     47.3769,    8.5417],
-  // Africa
-  ['Cairo',      30.0444,   31.2357],
-  ['Nairobi',    -1.2921,   36.8219],
-  ['Lagos',       6.5244,    3.3792],
-  ['Cape Town', -33.9249,   18.4241],
-  ['Casablanca', 33.5731,   -7.5898],
-  // North America
-  ['New York',   40.7128,  -74.0060],
-  ['Los Angeles',34.0522, -118.2437],
-  ['Chicago',    41.8781,  -87.6298],
-  ['Toronto',    43.6532,  -79.3832],
-  ['Vancouver',  49.2827, -123.1207],
-  ['Mexico City',19.4326,  -99.1332],
-  ['Miami',      25.7617,  -80.1918],
-  ['Seattle',    47.6062, -122.3321],
-  ['Boston',     42.3601,  -71.0589],
-  ['San Francisco',37.7749,-122.4194],
-  // South America
-  ['São Paulo', -23.5505,  -46.6333],
-  ['Buenos Aires',-34.6037,-58.3816],
-  ['Rio de Janeiro',-22.9068,-43.1729],
-  ['Bogotá',      4.7110,  -74.0721],
-  ['Santiago',  -33.4489,  -70.6693],
-  ['Lima',       -12.0464,  -77.0428],
-  // Oceania
-  ['Sydney',    -33.8688,  151.2093],
-  ['Melbourne', -37.8136,  144.9631],
-  ['Auckland',  -36.8485,  174.7633],
-];
-
-// ═══════════════════════════════════════════════════════════════
-// MOCK SEASON DATA GENERATION
-// Each season defines a different geopolitical "battle state"
-// ═══════════════════════════════════════════════════════════════
-
-function generateSeasonData() {
-  // Wait for h3 to be loaded
-  if (typeof h3 === 'undefined') {
-    console.error('h3-js not loaded');
-    return {};
-  }
-
-  // Get unique hex IDs for all cities at our resolution
-  const cityHexMap = {};
-  CITY_SEEDS.forEach(([name, lat, lng]) => {
-    try {
-      const hexId = h3.latLngToCell(lat, lng, H3_RESOLUTION);
-      if (!cityHexMap[hexId]) {
-        cityHexMap[hexId] = { name, hexId, lat, lng };
-      }
-    } catch (e) {
-      // skip invalid coords
-    }
-  });
-
-  const cityHexes = Object.values(cityHexMap);
-
-  // Also add neighboring hexes for each city to make it richer
-  const allHexes = new Map();
-  cityHexes.forEach(({ hexId, name }) => {
-    allHexes.set(hexId, { hexId, primaryCity: name });
-    // Add k-ring neighbors (adjacent hexes)
-    try {
-      const neighbors = h3.gridDisk(hexId, 1);
-      neighbors.forEach(nHex => {
-        if (!allHexes.has(nHex)) {
-          allHexes.set(nHex, { hexId: nHex, primaryCity: name + ' area' });
-        }
-      });
-    } catch (e) { /* ignore */ }
-  });
-
-  const hexList = Array.from(allHexes.values());
-
-  /**
-   * Deterministic "random" based on seed + index
-   * (So each season has consistent, predictable data)
-   */
-  function seededRandom(seed, index) {
-    const x = Math.sin(seed * 9301 + index * 49297 + 233720) * 10000;
-    return x - Math.floor(x);
-  }
-
-  function assignTeam(seed, index, redBias, blueBias) {
-    const r = seededRandom(seed, index);
-    if (r < redBias) return 'red';
-    if (r < redBias + blueBias) return 'blue';
-    return 'purple';
-  }
-
-  // Season configurations — different territorial dominance stories
-  const seasons = {
-    1: {
-      label: 'Season 1 — The Dawn',
-      story: 'First ever season. Red FLAME dominated Asia. Blue WAVE held Europe.',
-      hexes: hexList.map((h, i) => ({
-        ...h,
-        team: assignTeam(1, i, 0.45, 0.40), // Red-leaning
-      })),
-    },
-    2: {
-      label: 'Season 2 — Blue Tide',
-      story: 'WAVE surged globally. Purple CHAOS entered the fray.',
-      hexes: hexList.map((h, i) => ({
-        ...h,
-        team: assignTeam(2, i, 0.25, 0.55), // Blue dominant
-      })),
-    },
-    3: {
-      label: 'Season 3 — CHAOS Rising',
-      story: 'Purple CHAOS gained momentum. Three-way war across all continents.',
-      hexes: hexList.map((h, i) => ({
-        ...h,
-        team: assignTeam(3, i, 0.35, 0.30), // Balanced, more purple
-      })),
-    },
-    4: {
-      label: 'Season 4 — The Reckoning',
-      story: 'FLAME and WAVE traded continents to the last hex before The Void.',
-      hexes: hexList.map((h, i) => ({
-        ...h,
-        team: assignTeam(4, i, 0.40, 0.38),
-      })),
-    },
-    5: {
-      label: 'Season 5 — Current War',
-      story: 'The battle rages now. Who will survive The Void?',
-      hexes: hexList.map((h, i) => ({
-        ...h,
-        team: assignTeam(5, i, 0.38, 0.36), // Current: tight three-way race
-      })),
-    },
-  };
-
-  return seasons;
-}
-
-/**
- * Convert H3 hex ID to GeoJSON polygon feature
- */
-function hexToGeoJSON(hexId, team, cityName) {
-  try {
-    // h3.cellToBoundary returns [lat, lng] pairs — need to flip to [lng, lat] for GeoJSON
-    const boundary = h3.cellToBoundary(hexId);
-    const coords = boundary.map(([lat, lng]) => [lng, lat]);
-    // Close the ring
-    coords.push(coords[0]);
-
-    return {
-      type: 'Feature',
-      properties: {
-        hexId,
-        team,
-        city: cityName,
-        color: TEAM_COLORS[team],
-      },
-      geometry: {
-        type: 'Polygon',
-        coordinates: [coords],
-      },
-    };
-  } catch (e) {
-    return null;
-  }
-}
-
-/**
- * Build GeoJSON FeatureCollection for a given season's hex data
- */
-function buildGeoJSON(hexes) {
-  const features = hexes
-    .map(({ hexId, team, primaryCity }) => hexToGeoJSON(hexId, team, primaryCity))
-    .filter(Boolean);
-
-  return {
-    type: 'FeatureCollection',
-    features,
-  };
-}
-
-// ═══════════════════════════════════════════════════════════════
-// MAP INITIALIZATION
-// ═══════════════════════════════════════════════════════════════
-
-let map = null;
-let seasonData = null;
-let currentSeason = 5;
-
-function initMap() {
-  map = new maplibregl.Map({
-    container: 'map',
-    style: {
-      version: 8,
-      glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-      sources: {
-        'carto-dark': {
-          type: 'raster',
-          tiles: ['https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'],
-          tileSize: 256,
-          attribution: '© OpenStreetMap © CARTO',
-        },
-      },
-      layers: [{
-        id: 'background',
-        type: 'raster',
-        source: 'carto-dark',
-        minzoom: 0,
-        maxzoom: 22,
-        paint: { 'raster-opacity': 0.85 },
-      }],
-    },
-    center: [20, 25],
-    zoom: 1.5,
-    renderWorldCopies: false,
-    attributionControl: false,
-    antialias: true,
-  });
-
-  map.on('load', () => {
-    // Generate all season data
-    seasonData = generateSeasonData();
-
-    // Add hex data source (empty initially)
-    map.addSource('hexes', {
-      type: 'geojson',
-      data: { type: 'FeatureCollection', features: [] },
-    });
-
-    // Fill layer — colored by team
-    map.addLayer({
-      id: 'hex-fill',
-      type: 'fill',
-      source: 'hexes',
-      paint: {
-        'fill-color': ['get', 'color'],
-        'fill-opacity': [
-          'interpolate', ['linear'], ['zoom'],
-          1, 0.55,
-          4, 0.75,
-        ],
-      },
-    });
-
-    // Stroke layer — thin border between hexes
-    map.addLayer({
-      id: 'hex-stroke',
-      type: 'line',
-      source: 'hexes',
-      paint: {
-        'line-color': ['get', 'color'],
-        'line-width': 0.6,
-        'line-opacity': 0.8,
-      },
-    });
-
-    // Hover highlight layer
-    map.addLayer({
-      id: 'hex-hover',
-      type: 'fill',
-      source: 'hexes',
-      paint: {
-        'fill-color': ['get', 'color'],
-        'fill-opacity': 0,
-      },
-    });
-
-    // Load current season — defer to next tick to ensure MapLibre style is fully settled
-    setTimeout(() => { renderSeason(currentSeason); setupHoverInteraction(); }, 100);
-
-    // Force correct canvas size once tiles are loaded
-    map.resize();
-  });
-
-  // Re-measure whenever the container changes size (responsive, orientation, late layout)
-  const mapContainer = document.querySelector('.map-container');
-  if (mapContainer && typeof ResizeObserver !== 'undefined') {
-    new ResizeObserver(() => { if (map) map.resize(); }).observe(mapContainer);
-  }
-
-  // Slow auto-rotation for the globe (cinematic effect)
-  let rotating = true;
-  let rotationAngle = 20;
-
-  function rotateGlobe() {
-    if (!rotating) return;
-    rotationAngle -= 0.015;
-    map.setCenter([rotationAngle, 25]);
-    requestAnimationFrame(rotateGlobe);
-  }
-
-  map.on('load', () => {
-    setTimeout(rotateGlobe, 1000);
-    // Deferred resize to catch late layout shifts from hero animations / sticky
-    setTimeout(() => { map.resize(); }, 500);
-  });
-
-  // Stop rotation on user interaction
-  map.on('mousedown', () => { rotating = false; });
-  map.on('touchstart', () => { rotating = false; });
-
-  // Re-enable rotation after 8s of inactivity
-  let rotateTimer;
-  map.on('mouseup', () => {
-    clearTimeout(rotateTimer);
-    rotateTimer = setTimeout(() => { rotating = true; rotateGlobe(); }, 8000);
-  });
-}
-
-// ═══════════════════════════════════════════════════════════════
-// SEASON SWITCHING
-// ═══════════════════════════════════════════════════════════════
-
-function renderSeason(season) {
-  if (!map || !map.isStyleLoaded() || !seasonData) return;
-
-  const data = seasonData[season];
-  if (!data) return;
-
-  const geojson = buildGeoJSON(data.hexes);
-
-  // Update source
-  const source = map.getSource('hexes');
-  if (source) {
-    source.setData(geojson);
-  }
-
-  // Update stats counter
-  const counts = { red: 0, blue: 0, purple: 0 };
-  data.hexes.forEach(h => { counts[h.team] = (counts[h.team] || 0) + 1; });
-
-  animateCounter('statRed', counts.red);
-  animateCounter('statBlue', counts.blue);
-  animateCounter('statPurple', counts.purple);
-}
-
-window.switchSeason = function(season) {
-  currentSeason = season;
-
-  // Update button states
-  document.querySelectorAll('.season-btn').forEach(btn => {
-    btn.classList.toggle('active', parseInt(btn.dataset.season) === season);
-  });
-
-  // Fade map out, update, fade in
-  const mapEl = document.getElementById('map');
-  mapEl.style.opacity = '0.4';
-  mapEl.style.transition = 'opacity 0.3s ease';
-
-  setTimeout(() => {
-    renderSeason(season);
-    mapEl.style.opacity = '1';
-  }, 300);
-};
-
-// ═══════════════════════════════════════════════════════════════
-// HOVER INTERACTION
-// ═══════════════════════════════════════════════════════════════
-
-function setupHoverInteraction() {
-  const tooltip = document.getElementById('mapTooltip');
-  const mapContainer = document.querySelector('.map-container');
-  let hoveredHexId = null;
-
-  const teamLabels = {
-    red: '🔥 FLAME — Red Team',
-    blue: '🌊 WAVE — Blue Team',
-    purple: '☄️ CHAOS — Purple Team',
-  };
-
-  map.on('mousemove', 'hex-fill', (e) => {
-    if (!e.features || e.features.length === 0) return;
-
-    const feature = e.features[0];
-    const { team, city } = feature.properties;
-
-    // Highlight on hover
-    if (hoveredHexId !== feature.id) {
-      if (hoveredHexId !== null) {
-        map.setPaintProperty('hex-hover', 'fill-opacity', 0);
-      }
-      hoveredHexId = feature.id;
-      map.setPaintProperty('hex-hover', 'fill-opacity', 0.2);
-    }
-
-    // Show tooltip
-    const rect = mapContainer.getBoundingClientRect();
-    const x = e.originalEvent.clientX - rect.left;
-    const y = e.originalEvent.clientY - rect.top;
-
-    tooltip.style.display = 'block';
-    tooltip.style.left = x + 'px';
-    tooltip.style.top = y + 'px';
-    tooltip.innerHTML = `
-      <div style="display:flex;align-items:center;gap:8px;">
-        <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${TEAM_COLORS[team]};box-shadow:0 0 6px ${TEAM_COLORS[team]};flex-shrink:0;"></span>
-        <strong style="color:${TEAM_COLORS[team]}">${teamLabels[team] || team}</strong>
-      </div>
-      <div style="font-size:0.75rem;color:rgba(232,232,240,0.5);margin-top:4px;">${city || 'Territory'}</div>
-    `;
-
-    map.getCanvas().style.cursor = 'pointer';
-  });
-
-  map.on('mouseleave', 'hex-fill', () => {
-    map.getCanvas().style.cursor = '';
-    tooltip.style.display = 'none';
-    hoveredHexId = null;
-    map.setPaintProperty('hex-hover', 'fill-opacity', 0);
-  });
-}
-
-// ═══════════════════════════════════════════════════════════════
 // UI UTILITIES
 // ═══════════════════════════════════════════════════════════════
-
-/** Animated number counter */
-function animateCounter(elementId, target) {
-  const el = document.getElementById(elementId);
-  if (!el) return;
-
-  const start = parseInt(el.textContent.replace(/[^0-9]/g, '')) || 0;
-  const duration = 600;
-  const startTime = performance.now();
-
-  function step(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const value = Math.round(start + (target - start) * eased);
-    el.textContent = value;
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
 
 /** Scroll-reveal animation observer */
 function initReveal() {
@@ -568,14 +86,8 @@ function initCharReveal() {
 // SCROLL-DRIVEN HERO PARALLAX + NAV + PROGRESS BAR
 // ═══════════════════════════════════════════════════════════════
 function initScrollEffects() {
-  const heroContent = document.getElementById('heroContent');
-  const heroText = heroContent ? heroContent.querySelector('.hero-text') : null;
-  const heroMap = heroContent ? heroContent.querySelector('.map-container') : null;
-  const heroRunnerBg = document.getElementById('heroRunnerBg');
-  const scrollHint = document.getElementById('scrollHint');
   const scrollFill = document.getElementById('scrollProgressFill');
   const mainNav = document.getElementById('mainNav');
-  const heroSection = document.getElementById('hero');
   const proofBar = document.querySelector('.proof-bar');
 
   let lastScrollY = 0;
@@ -590,56 +102,6 @@ function initScrollEffects() {
     if (scrollFill) {
       const progress = Math.min(scrollY / docHeight, 1);
       scrollFill.style.width = (progress * 100) + '%';
-    }
-
-    // ── Hero parallax: zoom-out effect ──
-    if (heroSection) {
-      const heroH = heroSection.offsetHeight;
-      // Use full hero height so content stays visible much longer on mobile
-      const heroProgress = Math.min(Math.max(scrollY / (heroH * 0.85), 0), 1);
-
-      if (heroContent) {
-        const isMobile = window.innerWidth <= 768;
-        const heroY = scrollY * 0.15;
-
-        if (isMobile) {
-          // Mobile: fade text quickly but keep the map vivid much longer
-          const textOpacity = Math.max(0, 1 - heroProgress * 2);
-          const textScale = 1 - heroProgress * 0.15;
-          const mapOpacity = Math.max(0, 1 - heroProgress * 0.6);
-          const mapScale = 1 - heroProgress * 0.08;
-
-          heroContent.style.opacity = '';
-          heroContent.style.transform = 'translateY(' + heroY + 'px)';
-
-          if (heroText) {
-            heroText.style.opacity = textOpacity;
-            heroText.style.transform = 'scale(' + textScale + ')';
-          }
-          if (heroMap) {
-            heroMap.style.opacity = mapOpacity;
-            heroMap.style.transform = 'scale(' + mapScale + ')';
-          }
-        } else {
-          // Desktop: original zoom-out on entire hero content
-          const heroOpacity = Math.max(0, 1 - heroProgress * 1.4);
-          const heroScale = 1 - heroProgress * 0.2;
-          heroContent.style.opacity = heroOpacity;
-          heroContent.style.transform = 'translateY(' + heroY + 'px) scale(' + heroScale + ')';
-
-          // Clear any mobile-specific inline styles
-          if (heroText) { heroText.style.opacity = ''; heroText.style.transform = ''; }
-          if (heroMap) { heroMap.style.opacity = ''; heroMap.style.transform = ''; }
-        }
-      }
-
-      if (heroRunnerBg) {
-        heroRunnerBg.style.transform = 'translateY(' + (scrollY * 0.1) + 'px)';
-      }
-
-      if (scrollHint) {
-        scrollHint.style.opacity = Math.max(0, 1 - heroProgress * 2.5);
-      }
     }
 
     // ── Nav hide/show + scroll state ──
@@ -778,6 +240,261 @@ function initTiltCards() {
       card.style.setProperty('--my', '50%');
     });
   });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HERO HEX FIELD
+// A honeycomb fills the hero. One runner at a time crosses it, flipping
+// hexes to their team colour; every flip scores from the live table
+// (new / friendly / enemy) and pops the points. Painted hexes persist and
+// age — the land remembers. Canvas only, no libraries. Static under
+// prefers-reduced-motion; paused while off-screen or tab hidden.
+// ═══════════════════════════════════════════════════════════════
+function initHeroField() {
+  const canvas = document.getElementById('heroField');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const TEAM = { red: '#FF3B30', blue: '#1E90FF', purple: '#C86BFF' };
+  const TABLE = {
+    red:    { new: 3, friendly: 1, enemy: 6 },
+    blue:   { new: 3, friendly: 6, enemy: 1 },
+    purple: { new: 6, friendly: 2, enemy: 2 },
+  };
+  const ORDER = ['red', 'blue', 'purple'];
+  const CREAM = '#F2EEE5';
+  const STEP_MS = 105;          // one hex per step — a runner's cadence
+  const POP_MS = 420;           // flip pop duration
+  const FLOAT_MS = 900;         // "+N" rise/fade duration
+  const AGE_MS = 40000;         // fresh → aged colour over this long
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let W = 0, H = 0, R = 16, hw = 0, cols = 0, rows = 0, bandRows = 0;
+  let grid = null;              // offscreen: the empty honeycomb, drawn once
+  const painted = new Map();    // key "c,r" → { team, t }
+  const floats = [];            // { x, y, text, color, t }
+  let trail = null;             // { team, path: [[c,r]...], i, nextAt }
+  let teamIdx = 0;
+  let running = false, rafId = 0, lastFrame = 0, nextTrailAt = 0;
+
+  const key = (c, r) => c + ',' + r;
+  // pointy-top, odd-r offset layout
+  const cx = (c, r) => c * hw + (r & 1 ? hw / 2 : 0);
+  const cy = (r) => r * 1.5 * R;
+  const NEIGH_EVEN = [[1, 0], [-1, 0], [0, -1], [-1, -1], [0, 1], [-1, 1]];
+  const NEIGH_ODD  = [[1, 0], [-1, 0], [1, -1], [0, -1], [1, 1], [0, 1]];
+  const inBand = (c, r) => c >= 0 && c < cols && r >= 0 && r < bandRows;
+
+  function hexPath(x, y, r) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a = Math.PI / 180 * (60 * i - 30);
+      const px = x + r * Math.cos(a), py = y + r * Math.sin(a);
+      if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+  }
+
+  function layout() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.clientWidth; H = canvas.clientHeight;
+    if (!W || !H) return;
+    canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    R = W < 768 ? 13 : 16;
+    hw = Math.sqrt(3) * R;
+    cols = Math.ceil(W / hw) + 1;
+    rows = Math.ceil(H / (1.5 * R)) + 1;
+    // Trails stay above the headline, wherever it lands (locale, wrap, viewport).
+    const hero = canvas.closest('.hero'), title = document.getElementById('heroTitle');
+    let titleTop = H * 0.5;
+    if (hero && title) titleTop = Math.max(H * 0.28, title.getBoundingClientRect().top - hero.getBoundingClientRect().top);
+    hero && hero.style.setProperty('--veil-top', Math.round(titleTop - 60) + 'px');
+    bandRows = Math.max(6, Math.floor((titleTop - 48) / (1.5 * R)));
+
+    grid = document.createElement('canvas');
+    grid.width = canvas.width; grid.height = canvas.height;
+    const g = grid.getContext('2d');
+    g.setTransform(dpr, 0, 0, dpr, 0, 0);
+    g.strokeStyle = 'rgba(255,255,255,0.055)';
+    g.lineWidth = 1;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const x = cx(c, r), y = cy(r);
+        g.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const a = Math.PI / 180 * (60 * i - 30);
+          const px = x + (R - 1.5) * Math.cos(a), py = y + (R - 1.5) * Math.sin(a);
+          if (i === 0) g.moveTo(px, py); else g.lineTo(px, py);
+        }
+        g.closePath(); g.stroke();
+      }
+    }
+  }
+
+  // Past seasons: a few aged clusters of held ground so the field never starts empty.
+  function seed() {
+    painted.clear();
+    const now = performance.now();
+    const clusters = Math.max(4, Math.round(cols * bandRows / 90));
+    for (let i = 0; i < clusters; i++) {
+      const team = ORDER[Math.floor(Math.random() * 3)];
+      const t = now - AGE_MS * (0.7 + Math.random() * 0.8);
+      let c = Math.floor(Math.random() * cols), r = Math.floor(Math.random() * bandRows);
+      const size = 3 + Math.floor(Math.random() * 7);
+      for (let n = 0; n < size; n++) {
+        painted.set(key(c, r), { team, t });
+        const nb = (r & 1 ? NEIGH_ODD : NEIGH_EVEN)[Math.floor(Math.random() * 6)];
+        const nc = c + nb[0], nr = r + nb[1];
+        if (inBand(nc, nr)) { c = nc; r = nr; }
+      }
+    }
+  }
+
+  // A run: crosses the band edge to edge, wandering up and down but never
+  // doubling back — a line across the city, not a puddle.
+  function makeTrail(team) {
+    const dir = Math.random() < 0.5 ? 1 : -1;            // +1 east, -1 west
+    let c = dir > 0 ? 0 : cols - 1;
+    let r = 1 + Math.floor(Math.random() * Math.max(1, bandRows - 2));
+    const base = dir > 0 ? 0 : Math.PI;
+    let heading = base;
+    const path = [[c, r]];
+    const seen = new Set([key(c, r)]);
+    for (let i = 0; i < cols * 1.6; i++) {
+      heading += (Math.random() - 0.5) * 0.8;               // drift
+      const rel = Math.atan2(Math.sin(heading - base), Math.cos(heading - base));
+      heading = base + Math.max(-1.0, Math.min(1.0, rel));  // stay within ±57° of the crossing
+      const x0 = cx(c, r), y0 = cy(r);
+      const nb = (r & 1 ? NEIGH_ODD : NEIGH_EVEN)
+        .map(([dc, dr]) => [c + dc, r + dr])
+        .filter(([nc, nr]) => inBand(nc, nr) && !seen.has(key(nc, nr)) && (cx(nc, nr) - x0) * dir > 0.1);
+      if (!nb.length) break;
+      nb.sort((A, B) => {
+        const sa = Math.cos(Math.atan2(cy(A[1]) - y0, cx(A[0], A[1]) - x0) - heading);
+        const sb = Math.cos(Math.atan2(cy(B[1]) - y0, cx(B[0], B[1]) - x0) - heading);
+        return sb - sa;
+      });
+      [c, r] = Math.random() < 0.85 || nb.length === 1 ? nb[0] : nb[1];
+      path.push([c, r]); seen.add(key(c, r));
+      if ((dir > 0 && c >= cols - 1) || (dir < 0 && c <= 0)) break;
+    }
+    return { team, path, i: 0, nextAt: 0 };
+  }
+
+  function flip(team, c, r, now, silent) {
+    const k = key(c, r);
+    const cur = painted.get(k);
+    const kind = !cur ? 'new' : (cur.team === team ? 'friendly' : 'enemy');
+    if (kind !== 'friendly') painted.set(k, { team, t: now });
+    if (!silent) floats.push({ x: cx(c, r), y: cy(r) - R, text: '+' + TABLE[team][kind], color: kind === 'friendly' ? TEAM[team] : CREAM, t: now });
+  }
+
+  function draw(now) {
+    ctx.clearRect(0, 0, W, H);
+    if (grid) ctx.drawImage(grid, 0, 0, W, H);
+
+    // painted hexes: fresh pops bright, then settle and age
+    for (const [k, cell] of painted) {
+      const [c, r] = k.split(',').map(Number);
+      const age = now - cell.t;
+      const pop = age < POP_MS ? 1 - age / POP_MS : 0;
+      const alpha = 0.34 + 0.58 * Math.max(0, 1 - Math.max(0, age - POP_MS) / AGE_MS);
+      const rad = (R - 1.5) * (1 + 0.16 * pop * pop);
+      ctx.globalAlpha = Math.min(1, alpha + pop * 0.2);
+      ctx.fillStyle = TEAM[cell.team];
+      hexPath(cx(c, r), cy(r), rad);
+      ctx.fill();
+      if (pop > 0) {
+        ctx.globalAlpha = pop * 0.7;
+        ctx.strokeStyle = CREAM; ctx.lineWidth = 1.2; ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
+
+    // the runner: a bright head with a soft team glow
+    if (trail && trail.i > 0 && trail.i <= trail.path.length) {
+      const [c, r] = trail.path[trail.i - 1];
+      const x = cx(c, r), y = cy(r);
+      const glow = ctx.createRadialGradient(x, y, 0, x, y, R * 1.6);
+      glow.addColorStop(0, TEAM[trail.team] + 'AA'); glow.addColorStop(1, TEAM[trail.team] + '00');
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(x, y, R * 1.6, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = CREAM; ctx.beginPath(); ctx.arc(x, y, 3.2, 0, Math.PI * 2); ctx.fill();
+    }
+
+    // score pops
+    ctx.font = '600 11px "Share Tech Mono", monospace';
+    ctx.textAlign = 'center';
+    for (let i = floats.length - 1; i >= 0; i--) {
+      const f = floats[i];
+      const p = (now - f.t) / FLOAT_MS;
+      if (p >= 1) { floats.splice(i, 1); continue; }
+      ctx.globalAlpha = p < 0.15 ? p / 0.15 : 1 - (p - 0.15) / 0.85;
+      ctx.fillStyle = f.color;
+      ctx.fillText(f.text, f.x, f.y - 18 * p);
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function tick(now) {
+    if (!running) return;
+    rafId = requestAnimationFrame(tick);
+    if (now - lastFrame < 33) return;   // ~30fps is plenty for a field this calm
+    lastFrame = now;
+
+    if (!trail && now >= nextTrailAt) {
+      trail = makeTrail(ORDER[teamIdx % ORDER.length]); teamIdx++;
+      trail.nextAt = now;
+    }
+    if (trail) {
+      while (trail.i < trail.path.length && now >= trail.nextAt) {
+        const [c, r] = trail.path[trail.i++];
+        flip(trail.team, c, r, now, false);
+        trail.nextAt += STEP_MS;
+      }
+      if (trail.i >= trail.path.length && now - trail.nextAt > 900) {
+        trail = null; nextTrailAt = now + 700;
+      }
+    }
+    draw(now);
+  }
+
+  function start() { if (running || reduce) return; running = true; lastFrame = 0; rafId = requestAnimationFrame(tick); }
+  function stop() { running = false; if (rafId) cancelAnimationFrame(rafId); rafId = 0; }
+
+  function reset() {
+    layout();
+    if (!W || !H) return;
+    seed();
+    trail = null; floats.length = 0;
+    if (reduce) {
+      // One still frame: three runs already on the map, no motion.
+      const now = performance.now();
+      ORDER.forEach((team, n) => makeTrail(team).path.forEach(([c, r]) => flip(team, c, r, now - AGE_MS * 0.3 * (3 - n), true)));
+      draw(now);
+    } else {
+      nextTrailAt = performance.now() + 500;
+      draw(performance.now());
+    }
+  }
+
+  reset();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(reset);
+  let resizeT = 0;
+  window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(reset, 150); });
+
+  if (!reduce) {
+    const hero = canvas.closest('.hero') || canvas;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting && !document.hidden) start(); else stop(); });
+    }, { threshold: 0.05 });
+    io.observe(hero);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (hero.getBoundingClientRect().bottom > 0) start();
+    });
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -948,30 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTimeline();
   initRunnerEffects();
 
-  // Wait for MapLibre + H3 to be fully loaded
-  function tryInitMap() {
-    if (typeof maplibregl !== 'undefined' && typeof h3 !== 'undefined') {
-      try {
-        initMap();
-      } catch (err) {
-        console.error('Map init error:', err);
-        // Show fallback static hex pattern if map fails
-        const mapEl = document.getElementById('map');
-        if (mapEl) {
-          mapEl.innerHTML = `
-            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#12121C;flex-direction:column;gap:16px;">
-              <div style="font-size:3rem;opacity:0.4;">⬡ ⬡ ⬡</div>
-              <p style="color:rgba(232,232,240,0.4);font-size:0.85rem;">Map loading...</p>
-            </div>
-          `;
-        }
-      }
-    } else {
-      setTimeout(tryInitMap, 100);
-    }
-  }
-
-  tryInitMap();
+  initHeroField();
 
   function initRunnerEffects() {
     const footstep = document.getElementById('hudFootstep');

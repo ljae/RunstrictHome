@@ -89,13 +89,6 @@
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap"
     rel="stylesheet" />
 
-  <!-- MapLibre GL JS (Mapbox-compatible, no token required) -->
-  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
-  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
-
-  <!-- H3-js -->
-  <script src="https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js"></script>
-
   <link rel="stylesheet" href="/style.css" />
   <!-- ─── Structured Data: MobileApplication + FAQ ─── -->
   <script type="application/ld+json">
@@ -445,13 +438,20 @@
       font-family: var(--font-ui);
     }
 
-    /* HERO TITLE: massive condensed war poster */
+    /* HERO TITLE: one-line war poster across the full width (stacks under 900px) */
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(5.5rem, 14vw, 13rem);
-      letter-spacing: 0.06em;
-      line-height: 0.88;
+      font-size: clamp(3.4rem, 10.4vw, 11rem);
+      letter-spacing: 0.04em;
+      line-height: 0.9;
+      margin-bottom: 22px;
     }
+    @media (max-width: 899px) {
+      .hero-title { font-size: clamp(3.2rem, 15vw, 6.5rem); }
+    }
+    .hero-tagline { margin-bottom: 12px; }
+    .hero-sub { max-width: 52ch; margin-bottom: 22px; }
+    .hero-meta { margin-top: 26px; }
     .hero-tagline {
       font-family: var(--font-mono);
       font-size: 0.8rem;
@@ -465,18 +465,6 @@
       line-height: 1.65;
     }
 
-    /* HERO BADGE: mono HUD bracket style */
-    .hero-badge {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      background: rgba(0, 240, 255, 0.07);
-      border: 1px solid rgba(0, 240, 255, 0.3);
-      border-radius: 2px;
-      padding: 6px 12px;
-      text-transform: uppercase;
-      color: var(--accent);
-    }
 
     /* SECTION BADGES: HUD bracket style — not pill */
     .section-badge {
@@ -1046,135 +1034,89 @@
 
   <!-- ═══════════════════════════════════════════════ HERO -->
   <section class="hero" id="hero">
-    <div class="hero-sticky">
 
-      <!-- Hex background pattern -->
-      <div class="hex-bg"></div>
-      <!-- Hero runner image (atmospheric background) -->
-      <div class="hero-runner-bg hero-parallax-layer" id="heroRunnerBg">
+    <!-- The hex field: a runner crosses the city flipping hexes, scored by the live table -->
+    <canvas class="hero-field" id="heroField" aria-hidden="true"></canvas>
+    <div class="hero-veil" aria-hidden="true"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="mainNav">
+      <div class="nav-logo">
         <picture>
-          <source srcset="/assets/hero_runner_v3.webp" type="image/webp" />
-          <img src="/assets/hero_runner_v3.webp" alt="Runner capturing hexagonal territory in RunStrict GPS running game" loading="eager" />
+          <source srcset="/assets/runner_logo_transparent.webp" type="image/webp" />
+          <img src="/assets/runner_logo_transparent.png" alt="RunStrict" class="logo-img" />
         </picture>
       </div>
-
-      <!-- Navigation -->
-      <nav class="nav" id="mainNav">
-        <div class="nav-logo">
-          <picture>
-            <source srcset="/assets/runner_logo_transparent.webp" type="image/webp" />
-            <img src="/assets/runner_logo_transparent.png" alt="RunStrict" class="logo-img" />
-          </picture>
+      <div class="nav-links">
+        <a href="#how-it-works">Come funziona</a>
+        <a href="#teams">Squadre</a>
+        <a href="#season">Stagione</a>
+        <a href="#download" class="nav-cta">Scarica</a>
+        <div class="nav-social">
+          <a href="https://www.instagram.com/runstrict/" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://youtube.com/@user-ku4hf4ug9t?si=qCKjdTKs50LRMVSQ" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
         </div>
-        <div class="nav-links">
-          <a href="#how-it-works">Come funziona</a>
-          <a href="#teams">Squadre</a>
-          <a href="#season">Stagione</a>
-          <a href="#download" class="nav-cta">Scarica</a>
-          <div class="nav-social">
-            <a href="https://www.instagram.com/runstrict/" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="Instagram">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-            </a>
-            <a href="https://youtube.com/@user-ku4hf4ug9t?si=qCKjdTKs50LRMVSQ" target="_blank" rel="noopener noreferrer" class="nav-social-icon" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </a>
-          </div>
-        </div>
-        <details class="lang-switch"><summary aria-label="Language">&#x1F310; <span class="lang-current">Italiano</span></summary><nav class="lang-menu"><a href="/" hreflang="en">English</a><a href="/ko/" hreflang="ko">한국어</a><a href="/ja/" hreflang="ja">日本語</a><a href="/es/" hreflang="es">Español</a><a href="/fr/" hreflang="fr">Français</a><a href="/de/" hreflang="de">Deutsch</a><a href="/it/" hreflang="it" aria-current="true">Italiano</a><a href="/pt-br/" hreflang="pt-BR">Português</a><a href="/ru/" hreflang="ru">Русский</a><a href="/ar/" hreflang="ar">العربية</a><a href="/hi/" hreflang="hi">हिन्दी</a></nav></details>
-        <button class="nav-burger" aria-label="Menu" onclick="toggleNav()">
-          <span></span><span></span><span></span>
-        </button>
-      </nav>
-
-      <!-- Mobile nav overlay -->
-      <div class="nav-mobile" id="navMobile">
-        <a href="#how-it-works" onclick="toggleNav()">Come funziona</a>
-        <a href="#teams" onclick="toggleNav()">Squadre</a>
-        <a href="#season" onclick="toggleNav()">Stagione</a>
-        <a href="#download" onclick="toggleNav()">Scarica</a>
       </div>
+      <details class="lang-switch"><summary aria-label="Language">&#x1F310; <span class="lang-current">Italiano</span></summary><nav class="lang-menu"><a href="/" hreflang="en">English</a><a href="/ko/" hreflang="ko">한국어</a><a href="/ja/" hreflang="ja">日本語</a><a href="/es/" hreflang="es">Español</a><a href="/fr/" hreflang="fr">Français</a><a href="/de/" hreflang="de">Deutsch</a><a href="/it/" hreflang="it" aria-current="true">Italiano</a><a href="/pt-br/" hreflang="pt-BR">Português</a><a href="/ru/" hreflang="ru">Русский</a><a href="/ar/" hreflang="ar">العربية</a><a href="/hi/" hreflang="hi">हिन्दी</a></nav></details>
+      <button class="nav-burger" aria-label="Menu" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
 
-      <!-- Hero content -->
-      <div class="hero-content hero-parallax-layer" id="heroContent">
-        <div class="hero-text">
-          <div class="hero-badge" id="heroBadge">&#x1F3C3; Season 5</div>
-          <h1 class="hero-title" id="heroTitle">
-            Corri.<br />
-            Ribalta.<br />
-            <span class="title-gradient">Domina.</span>
-          </h1>
-          <p class="hero-tagline">Corriamo sulle stesse strade.</p>
-          <p class="hero-sub">
-            Un gioco di corsa basato sulla posizione dove i tuoi passi diventano territorio.
+    <!-- Mobile nav overlay -->
+    <div class="nav-mobile" id="navMobile">
+      <a href="#how-it-works" onclick="toggleNav()">Come funziona</a>
+      <a href="#teams" onclick="toggleNav()">Squadre</a>
+      <a href="#season" onclick="toggleNav()">Stagione</a>
+      <a href="#download" onclick="toggleNav()">Scarica</a>
+    </div>
+
+    <!-- Hero content -->
+    <div class="hero-content" id="heroContent">
+      <div class="hero-text">
+        <h1 class="hero-title" id="heroTitle">
+          Corri.<br />
+          Ribalta.<br />
+          <span class="title-gradient">Domina.</span>
+        </h1>
+        <p class="hero-tagline">Corriamo sulle stesse strade.</p>
+        <p class="hero-sub">
+          Un gioco di corsa basato sulla posizione dove i tuoi passi diventano territorio.
             Scegli la tua squadra. Ribalta gli esagoni. Conquista la tua città — prima che la stagione finisca.
-          </p>
-          <div class="hero-actions">
-            <a href="https://apps.apple.com/us/app/runstrict/id6760189457" class="btn btn-primary">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                <path
-                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
-              </svg>
-              App Store
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict" class="btn btn-secondary">
-              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                <path
-                  d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z" />
-              </svg>
-              Google Play
-            </a>
-          </div>
-
-          <!-- Tactical meta strip under the hero CTAs -->
-          <div class="hero-meta" aria-hidden="true">
-            <span><span class="hm-key">SZN</span> <span class="hm-val" id="hmSeason">S05</span></span>
-            <span class="hm-sep">/</span>
-            <span><span class="hm-key">DAY</span> <span class="hm-val" id="hmDay">07</span></span>
-            <span class="hm-sep">/</span>
-            <span><span class="hm-key">VOID</span> <span class="hm-val" id="hmVoid">T-33</span></span>
-            <span class="hm-sep">/</span>
-            <span class="hm-live">LIVE</span>
-          </div>
+        </p>
+        <div class="hero-actions">
+          <a href="https://apps.apple.com/us/app/runstrict/id6760189457" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path
+                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+            </svg>
+            App Store
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.neondialactic.runstrict" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+              <path
+                d="M3.18 23.76c.35.2.74.24 1.12.14l12.9-7.43-2.79-2.79-11.23 10.08zm16.94-11.32l-2.93-1.69-3.13 3.13 3.13 3.13 2.96-1.71c.84-.48.84-1.38-.03-1.86zM2.08.28C1.76.6 1.58 1.1 1.58 1.77V22.2c0 .67.18 1.17.5 1.49l.08.07 11.43-11.43v-.27L2.15.21l-.07.07zm9.35 12.29L3.18.28l12.9 7.44-4.65 4.85z" />
+            </svg>
+            Google Play
+          </a>
         </div>
 
-        <!-- Map container -->
-        <div class="map-container">
-          <div class="map-overlay-top">
-            <div class="season-selector">
-              <button class="season-btn" data-season="1" onclick="switchSeason(1)">S1</button>
-              <button class="season-btn" data-season="2" onclick="switchSeason(2)">S2</button>
-              <button class="season-btn" data-season="3" onclick="switchSeason(3)">S3</button>
-              <button class="season-btn" data-season="4" onclick="switchSeason(4)">S4</button>
-              <button class="season-btn active" data-season="5" onclick="switchSeason(5)">S5 ✦</button>
-            </div>
-            <div class="map-legend">
-              <div class="legend-item"><span class="legend-dot flame"></span>FLAME</div>
-              <div class="legend-item"><span class="legend-dot wave"></span>WAVE</div>
-              <div class="legend-item"><span class="legend-dot chaos"></span>CHAOS</div>
-            </div>
-          </div>
-          <div id="map"></div>
-          <div class="map-tooltip" id="mapTooltip" style="display:none;"></div>
-          <div class="map-overlay-bottom">
-            <div class="map-stat"><span class="stat-val" id="statRed">—</span><span class="stat-label">FLAME</span>
-            </div>
-            <div class="map-divider"></div>
-            <div class="map-stat"><span class="stat-val" id="statBlue">—</span><span class="stat-label">WAVE</span>
-            </div>
-            <div class="map-divider"></div>
-            <div class="map-stat"><span class="stat-val" id="statPurple">—</span><span class="stat-label">CHAOS</span>
-            </div>
-          </div>
+        <!-- Tactical meta strip under the hero CTAs -->
+        <div class="hero-meta" aria-hidden="true">
+          <span><span class="hm-key">SZN</span> <span class="hm-val" id="hmSeason">S05</span></span>
+          <span class="hm-sep">/</span>
+          <span><span class="hm-key">DAY</span> <span class="hm-val" id="hmDay">07</span></span>
+          <span class="hm-sep">/</span>
+          <span><span class="hm-key">VOID</span> <span class="hm-val" id="hmVoid">T-33</span></span>
+          <span class="hm-sep">/</span>
+          <span class="hm-live">LIVE</span>
         </div>
       </div>
-
-      <!-- Scroll indicator -->
-      <div class="scroll-hint hero-parallax-layer" id="scrollHint">
-        <span>Scorri per esplorare</span>
-        <div class="scroll-line"></div>
-      </div>
-
-    </div><!-- /hero-sticky -->
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════ SOCIAL PROOF BAR -->
