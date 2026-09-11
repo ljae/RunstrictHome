@@ -1624,210 +1624,197 @@ img {
   margin-bottom: 20px;
 }
 
-/* ── Team Buff Visuals ── */
-.team-buff-visual {
-  margin-bottom: 28px;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.2);
+/* ── Team scoring split: ten hexes, three kinds of ground ──
+   Every team splits the same 10 points across new / own / enemy hexes.
+   The strip is the rule drawn literally; the ledger gives the numbers. */
+.team-split {
+  margin-bottom: 24px;
+  padding: 18px 16px 12px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
-  border: 1px solid rgba(255, 255, 255, 0.03);
-  padding: 16px;
 }
 
-/* FLAME COMPARISON */
-.flame-comparison {
-  display: flex;
-  gap: 24px;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  padding: 4px 0;
-}
-
-.f-col {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 90px;
-  height: 100%;
-}
-
-.f-bar-stack {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 2px;
-}
-
-.f-segment {
+.split-strip {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.6rem;
-  font-weight: 700;
-  border-radius: 3px;
-  text-align: center;
-  line-height: 1.1;
+  gap: 12px;                 /* gap between the three groups */
+  margin-bottom: 14px;
 }
 
-.f-base-elite {
-  height: 50%;
-  background: linear-gradient(135deg, rgba(255, 59, 48, 0.8), rgba(255, 0, 60, 0.8));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 12px rgba(255, 59, 48, 0.3);
-  color: #fff;
+.split-group {
+  display: flex;
+  gap: 3px;
 }
 
-.f-base-common {
-  height: 25%;
-  background: rgba(255, 255, 255, 0.1);
-  color: #ccc;
+/* One hex cell. Same encoding on every card so the strips read side by side:
+   hollow dashed = nobody has ever run it, your team colour = yours, grey = theirs. */
+.split-group i,
+.split-key {
+  display: block;
+  width: 22px;
+  height: 25px;
+  flex: 0 0 auto;
+}
+.split-new i,
+.split-row-new .split-key {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'><path d='M12 1.6 22 7.4v13.2L12 26.4 2 20.6V7.4z' fill='none' stroke='rgba(255,255,255,0.8)' stroke-width='1.6' stroke-dasharray='3.2 2.2' stroke-linejoin='round'/></svg>") center / 100% 100% no-repeat;
+}
+.split-own i,
+.split-foe i,
+.split-row-own .split-key,
+.split-row-foe .split-key {
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'><path d='M12 1.6 22 7.4v13.2L12 26.4 2 20.6V7.4z'/></svg>") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'><path d='M12 1.6 22 7.4v13.2L12 26.4 2 20.6V7.4z'/></svg>") center / 100% 100% no-repeat;
+}
+.split-own i,
+.split-row-own .split-key {
+  background-color: var(--team-color, #fff);
+}
+.split-foe i,
+.split-row-foe .split-key {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.team-red    { --team-color: #FF3B30; }
+.team-blue   { --team-color: #1E90FF; }
+.team-purple { --team-color: #C86BFF; }
+
+.split-ledger {
+  margin: 0;
 }
 
-.f-bonus-elite {
-  height: 50%;
-  background: rgba(255, 59, 48, 0.15);
-  border: 1px dashed rgba(255, 59, 48, 0.5);
-  color: #FF3B30;
-}
-
-.f-bonus-common {
-  height: 25%;
-  background: transparent;
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  color: #888;
-}
-
-.f-empty {
-  height: 50%;
-}
-
-.f-title {
-  font-size: 0.55rem;
-  font-weight: 700;
-  color: var(--text-faint);
-  text-align: center;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* WAVE RIPPLE */
-.wave-visual .ripple-container {
-  position: relative;
-  width: 120px;
-  height: 120px;
-}
-
-.wave-visual .ripple {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  border: 1px solid rgba(0, 141, 255, 0.4);
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: #008DFF;
-}
-
-.wave-visual .ripple-1 {
-  width: 44px;
-  height: 44px;
-  background: rgba(0, 141, 255, 0.8);
-  color: #fff;
-  z-index: 3;
+.split-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 12px rgba(0, 141, 255, 0.5);
-}
-
-.wave-visual .ripple-2 {
-  width: 82px;
-  height: 82px;
-  background: rgba(0, 141, 255, 0.15);
-  z-index: 2;
-}
-
-.wave-visual .ripple-3 {
-  width: 120px;
-  height: 120px;
-  background: rgba(0, 141, 255, 0.05);
-  z-index: 1;
-}
-
-.wave-visual .ripple-2 .ripple-label,
-.wave-visual .ripple-3 .ripple-label {
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-/* CHAOS GAUGE */
-.chaos-visual .gauge-container {
-  width: 100%;
-  max-width: 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.chaos-visual .gauge-track {
-  height: 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 9px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.chaos-visual .gauge-fill {
-  height: 100%;
-  width: 75%;
-  background: linear-gradient(90deg, #8B5CF6, #BF5AF2);
-  border-radius: 9px;
-  box-shadow: 0 0 12px rgba(191, 90, 242, 0.5);
-  transition: width 1s ease-out;
-}
-
-.chaos-visual .gauge-threshold {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: rgba(255, 255, 255, 0.3);
-  z-index: 2;
-}
-
-.chaos-visual .t-25 {
-  left: 25%;
-}
-
-.chaos-visual .t-50 {
-  left: 50%;
-}
-
-.chaos-visual .t-75 {
-  left: 75%;
-}
-
-.chaos-visual .gauge-labels {
-  display: flex;
   justify-content: space-between;
-  font-size: 0.65rem;
-  font-weight: 700;
-  color: var(--text-faint);
-  letter-spacing: 0.05em;
+  gap: 12px;
+  padding: 7px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.split-row:first-child {
+  border-top: 0;
+}
+
+.split-row dt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.split-row .split-key {
+  width: 13px;
+  height: 15px;
+}
+
+.split-row dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.72);
+  min-width: 1.4em;
+  text-align: right;
+}
+
+/* The team's doctrine: the row it bets its 6 on. */
+.split-row.is-doctrine dt {
+  color: #fff;
+}
+
+.split-row.is-doctrine dd {
+  color: #fff;
+  font-size: 2.2rem;
+  text-shadow: 0 0 18px rgba(255, 255, 255, 0.35);
+}
+
+/* One orchestrated moment: the ten hexes land left to right when the card reveals. */
+.reveal-tilt .split-group i {
+  opacity: 0;
+  transform: translateY(6px) scale(0.85);
+}
+
+.reveal-tilt.visible .split-group i {
+  animation: hexLand 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--delay, 0s) + 0.35s + var(--i, 0) * 45ms);
+}
+
+@keyframes hexLand {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Rules every team shares — quiet, below the grid */
+.team-rules {
+  list-style: none;
+  margin: 44px 0 0;
+  padding: 28px 0 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.team-rules li {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.team-rules strong {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.4rem;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  color: var(--text);
+}
+
+.team-rules span {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  max-width: 34ch;
+}
+
+@media (max-width: 768px) {
+  .team-rules {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+}
+
+@media (max-width: 400px) {
+  .split-group i {
+    width: 18px;
+    height: 21px;
+  }
+  .split-strip {
+    gap: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-tilt .split-group i,
+  .reveal-tilt.visible .split-group i {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .team-stat {
   display: flex;
   align-items: baseline;
-  gap: 8px;
+  gap: 10px;
   margin-top: auto;
 }
 
@@ -1840,27 +1827,6 @@ img {
 .team-red .team-stat-val {
   color: var(--red);
   text-shadow: 0 0 20px var(--red-glow);
-}
-
-.team-red .team-stat-val-common {
-  color: #888;
-  text-shadow: none;
-  font-size: 1.5rem;
-}
-
-.team-stat-separator {
-  color: var(--text-faint);
-  font-size: 1.2rem;
-  font-weight: 300;
-  margin: 0 -2px;
-}
-
-.hud-stat-num-sub {
-  display: inline-block;
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  margin-left: 4px;
-  vertical-align: baseline;
 }
 
 .team-blue .team-stat-val {
@@ -4225,43 +4191,12 @@ img {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Buff visuals: lift contrast on solid color background */
-.team-card.team-red .f-base-common,
-.team-card.team-red .f-bonus-common {
-  background: rgba(0, 0, 0, 0.18);
-  color: rgba(255,255,255,0.7);
-  border-color: rgba(255, 255, 255, 0.28);
-}
-.team-card.team-red .f-base-elite {
-  background: rgba(0, 0, 0, 0.35);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
-}
-.team-card.team-red .f-bonus-elite {
-  background: rgba(0, 0, 0, 0.18);
-  border-color: rgba(255, 255, 255, 0.55);
-  color: #fff;
-}
-.team-card.team-red .f-title {
-  color: rgba(255, 255, 255, 0.7);
-}
-.team-card.team-blue .wave-visual .ripple {
-  border-color: rgba(255, 255, 255, 0.45);
-  color: #fff;
-}
-.team-card.team-blue .wave-visual .ripple-1 {
-  background: rgba(0, 0, 0, 0.35);
-  box-shadow: 0 0 16px rgba(0,0,0,0.4);
-  color: #fff;
-}
-.team-card.team-blue .wave-visual .ripple-2 {
-  background: rgba(255, 255, 255, 0.06);
-}
-.team-card.team-blue .wave-visual .ripple-3 {
-  background: rgba(255, 255, 255, 0.03);
-}
-.team-card.team-purple .chaos-visual .gauge-track {
-  background: rgba(0, 0, 0, 0.28);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+/* Split panel on the solid team colour */
+.team-card.team-red    .team-split,
+.team-card.team-blue   .team-split,
+.team-card.team-purple .team-split {
+  background: rgba(0, 0, 0, 0.26);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .team-card.team-red    .team-stat,

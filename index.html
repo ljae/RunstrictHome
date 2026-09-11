@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RunStrict — GPS Running Game | Capture Territory. Dominate Your City.</title>
   <meta name="description"
-    content="The GPS running game where your footsteps capture territory. Run through hexes, conquer your city, and race The Void before the 40-day season resets. Season 5 LIVE — 1,200+ active runners and growing." />
+    content="The GPS running game where your footsteps capture territory. Run through hexes, conquer your city, and race The Void before the 40-day season resets. Live now — 1,200+ active runners and growing." />
 
   <!-- ─── SEO: Canonical & Indexing ─── -->
   <link rel="canonical" href="https://runstrict.com/" />
@@ -57,7 +57,7 @@
   <meta property="og:site_name" content="RunStrict" />
   <meta property="og:title" content="RunStrict — GPS Running Game | Capture Territory. Dominate Your City." />
   <meta property="og:description"
-    content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, and beat The Void. 40-day seasons. Season 5 LIVE — join 1,200+ runners." />
+    content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, and beat The Void. 40-day seasons. Live now — join 1,200+ runners." />
   <meta property="og:image" content="https://runstrict.com/assets/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -68,7 +68,7 @@
   <meta name="twitter:site" content="@runstrictapp" />
   <meta name="twitter:title" content="RunStrict — GPS Running Game" />
   <meta name="twitter:description"
-    content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, beat The Void. Season 5 LIVE." />
+    content="Turn your daily run into territorial warfare. Flip hexes, conquer your city, beat The Void. Live now." />
   <meta name="twitter:image" content="https://runstrict.com/assets/og-image.png" />
   <meta name="twitter:image:alt" content="RunStrict GPS running game" />
   <meta name="twitter:creator" content="@runstrictapp" />
@@ -99,202 +99,297 @@
   <link rel="stylesheet" href="style.css" />
   <!-- ─── Structured Data: MobileApplication + FAQ ─── -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "RunStrict",
+      "url": "https://runstrict.com",
+      "logo": "https://runstrict.com/assets/runner_logo_transparent.png",
+      "description": "RunStrict builds location-based GPS running games that turn daily runs into team-based territorial warfare.",
+      "sameAs": [
+        "https://www.instagram.com/runstrict/",
+        "https://youtube.com/@user-ku4hf4ug9t",
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "name": "RunStrict",
+      "url": "https://runstrict.com",
+      "description": "RunStrict is a free GPS running game where your footsteps capture hexagonal territory. Choose your team, flip hexes, dominate your city.",
+      "publisher": {
         "@type": "Organization",
-        "name": "RunStrict",
-        "url": "https://runstrict.com",
-        "logo": "https://runstrict.com/assets/runner_logo_transparent.png",
-        "description": "RunStrict builds location-based GPS running games that turn daily runs into team-based territorial warfare.",
-        "sameAs": [
-          "https://www.instagram.com/runstrict/",
-          "https://youtube.com/@user-ku4hf4ug9t",
-          "https://apps.apple.com/us/app/runstrict/id6760189457",
-          "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
-        ]
+        "name": "RunStrict"
       },
-      {
-        "@type": "WebSite",
-        "name": "RunStrict",
-        "url": "https://runstrict.com",
-        "description": "RunStrict is a free GPS running game where your footsteps capture hexagonal territory. Choose your team, flip hexes, dominate your city.",
-        "publisher": { "@type": "Organization", "name": "RunStrict" },
-        "dateModified": "2026-05-05",
-        "speakable": {
-          "@type": "SpeakableSpecification",
-          "cssSelector": [".sr-only", ".faq-a p", ".hero-sub", ".athlete-sub"]
-        }
-      },
-      {
-        "@type": "MobileApplication",
-        "name": "RunStrict",
-        "alternateName": "RunStrict GPS Running Game",
-        "description": "A free location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to dominate your city before the 40-day season resets in The Void. Uses Uber's H3 hex grid at resolution 9 (~175m tiles). Anti-cheat verified with accelerometer and GPS accuracy checks.",
-        "operatingSystem": ["iOS 15+", "Android 10+", "watchOS 10+", "Wear OS 3+"],
-        "applicationCategory": "SportsApplication",
-        "applicationSubCategory": "Running",
-        "genre": ["Sports", "Strategy", "Location-based Game"],
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
-        "author": { "@type": "Organization", "name": "RunStrict", "url": "https://runstrict.com" },
-        "url": "https://runstrict.com",
-        "installUrl": ["https://apps.apple.com/us/app/runstrict/id6760189457", "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"],
-        "downloadUrl": ["https://apps.apple.com/us/app/runstrict/id6760189457", "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"],
-        "datePublished": "2026-01-01",
-        "dateModified": "2026-05-05",
-        "softwareVersion": "2.0",
-        "screenshot": [
-          "https://runstrict.com/assets/territory_SS.jpg",
-          "https://runstrict.com/assets/leader_SS.jpg",
-          "https://runstrict.com/assets/buff_SS.jpg",
-          "https://runstrict.com/assets/stats_SS.jpg"
-        ],
-        "featureList": [
-          "GPS territory capture on H3 hex grid (~175m tiles)",
-          "Three teams: FLAME (Red), WAVE (Blue), CHAOS (Purple)",
-          "40-day competitive seasons with full reset (The Void)",
-          "Tiered leaderboards: Zone, District, Province",
-          "Anti-cheat: accelerometer verification, GPS accuracy ≤50m, 25 km/h speed cap",
-          "Battery-optimized 0.5 Hz GPS polling",
-          "Pace Consistency Score (CV-based stability metric)",
-          "Privacy-first: no runner IDs stored in hex data",
-          "Apple Watch companion (watchOS 10+) and Wear OS companion (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) for live pace and hex capture alerts on the wrist"
-        ],
-        "keywords": "GPS running game, location-based running game, gamified running app, territory capture running, hex territory game, team running competition, fitness game app, running challenge app, competitive running app, Strava alternative game, running game like Pokemon GO, best running game 2026"
-      },
-      {
-        "@type": "HowTo",
-        "name": "How to Play RunStrict — GPS Territory Capture Running Game",
-        "description": "Learn how to capture hexagonal territory tiles by running in the RunStrict GPS running game. Four simple steps from lacing up to earning buff multipliers.",
-        "totalTime": "PT30M",
-        "step": [
-          {
-            "@type": "HowToStep",
-            "position": 1,
-            "name": "Start Running with GPS Tracking",
-            "text": "Open RunStrict and start running. GPS tracks your route in real-time. Maintain under 8 min/km pace to activate hex capture mode. Anti-cheat verifies physical movement via accelerometer.",
-            "url": "https://runstrict.com/#how-it-works"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 2,
-            "name": "Flip Hexagonal Territory Tiles",
-            "text": "Every ~175m hexagonal tile (Uber H3 resolution 9) you physically run through flips to your team's color — FLAME (Red), WAVE (Blue), or CHAOS (Purple). The last runner through a hex controls it.",
-            "url": "https://runstrict.com/#how-it-works"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 3,
-            "name": "Dominate the City Map",
-            "text": "Watch your city transform as you claim territory. Earn points for every hex captured, climb Zone, District, and Province leaderboards, and lead your team to territorial dominance.",
-            "url": "https://runstrict.com/#how-it-works"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 4,
-            "name": "Earn Buff Multipliers",
-            "text": "FLAME Elites (top 20% of their province) reach up to 5x point multipliers. WAVE members rise together up to 4x through district and province wins plus team turnout. CHAOS power scales with province participation up to 4x. An honest 1x floor means a no-bonus run scores exactly 1x. Multipliers reset each 40-day season.",
-            "url": "https://runstrict.com/#teams"
-          }
-        ]
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "RunStrict", "item": "https://runstrict.com/" }
-        ]
-      },
-      {
-        "@type": "ItemList",
-        "name": "RunStrict Teams Comparison",
-        "description": "Compare the three teams in RunStrict: FLAME (Red), WAVE (Blue), and CHAOS (Purple). Each team has unique buff mechanics and play styles.",
-        "numberOfItems": 3,
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "FLAME (Red Team)",
-            "description": "Performance-based meritocracy. The top 20% of each province's Red runners become Elites, reaching up to 5x points. Common runners earn 1x-3x from district and province wins (honest 1x floor). Best for competitive solo runners."
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "WAVE (Blue Team)",
-            "description": "Collective strength. Every Blue runner rises together: a district win, a province win, and team turnout (50%+ of your province running) each add a point, up to 4x shared equally. Best for team-oriented runners."
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "CHAOS (Purple Team)",
-            "description": "The wildcard. Join anytime but membership is irreversible. Power scales with province participation: 1x base, 2x at 25% active, 3x at 50%, 4x at 75%. No territory bonuses. Best for social runners who thrive under pressure."
-          }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "datePublished": "2026-01-01",
-        "dateModified": "2026-05-05",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is a free location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose from three teams — FLAME, WAVE, or CHAOS — and compete to control your city before the 40-day season ends in The Void reset. It uses Uber's H3 hex grid system with ~175m tiles." }
-          },
-          {
-            "@type": "Question",
-            "name": "How does hex capture work in RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "As you run, RunStrict uses GPS to track your route in real-time. Every ~175m hexagonal tile (H3 resolution 9) you physically run through flips to your team's color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture mode. Anti-cheat uses accelerometer verification and GPS accuracy checks." }
-          },
-          {
-            "@type": "Question",
-            "name": "Is RunStrict free to play?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes, RunStrict is completely free to download and play. Available now on iOS (App Store) and Android (Google Play)." }
-          },
-          {
-            "@type": "Question",
-            "name": "What is The Void in RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "The Void is the season reset event that occurs every 40 days. When The Void arrives, all captured hexes, points, and territorial control are completely wiped. Only the season leaderboard legend survives. Then a new 40-day season begins." }
-          },
-          {
-            "@type": "Question",
-            "name": "What teams can I join in RunStrict?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict has three teams: FLAME (Red — top 20% of each province become Elites, up to 5× through performance), WAVE (Blue — collective bonuses up to 4× when your district or province wins and turnout is high), and CHAOS (Purple — join anytime, irreversible, a participation ladder up to 4×)." }
-          },
-          {
-            "@type": "Question",
-            "name": "Is RunStrict available on iPhone and Android?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict is available now on iOS (App Store, requires iOS 15+) and Android (Google Play, requires Android 10+), with brand-new Apple Watch (watchOS 10+) and Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) companion apps. GPS accuracy of 50m or better is required for hex capture." }
-          },
-          {
-            "@type": "Question",
-            "name": "How is RunStrict different from Strava or Nike Run Club?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Unlike Strava or Nike Run Club which focus on personal fitness tracking, RunStrict adds a competitive territory-capture game layer to running. Every run is a strategic move in a team-based territorial war — you flip hex tiles, earn buff multipliers, and compete on leaderboards. It combines the physical activity of a running app with the strategy of a location-based game." }
-          },
-          {
-            "@type": "Question",
-            "name": "How is RunStrict different from Pokemon GO?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict requires actual running with pace verification (under 8 min/km), not just walking. It focuses on real athletic performance with anti-cheat measures including accelerometer verification and GPS accuracy checks. Territory is earned through physical running effort, not catching virtual creatures." }
-          },
-          {
-            "@type": "Question",
-            "name": "Does RunStrict drain my phone battery?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. RunStrict uses battery-optimized 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion. There are no persistent WebSocket connections draining your battery." }
-          },
-          {
-            "@type": "Question",
-            "name": "Can you cheat in RunStrict with GPS spoofing?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. RunStrict uses multi-layer anti-cheat: 25 km/h speed cap, accelerometer verification to confirm physical movement, GPS accuracy must be ≤50m, and runners must maintain under 8 min/km pace for hex capture to activate." }
-          },
-          {
-            "@type": "Question",
-            "name": "Where is RunStrict available?",
-            "acceptedAnswer": { "@type": "Answer", "text": "RunStrict works globally in any city with GPS coverage. The hex grid covers the entire planet. Available on iOS (App Store) and Android (Google Play) worldwide." }
-          }
+      "dateModified": "2026-09-11",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".sr-only",
+          ".faq-a p",
+          ".hero-sub",
+          ".athlete-sub"
         ]
       }
-    ]
-  }
+    },
+    {
+      "@type": "MobileApplication",
+      "name": "RunStrict",
+      "alternateName": "RunStrict GPS Running Game",
+      "description": "A free location-based GPS running game where players capture hexagonal territory tiles by physically running through them. Choose one of three teams — FLAME, WAVE, or CHAOS — at season registration; each splits the same 10 points across new, friendly and enemy hexes, so your team is your scoring doctrine. Compete on Zone, District and Province leaderboards before the 40-day season resets in The Void. Uses Uber's H3 hex grid at resolution 9 (~175m tiles); hexes roll up into provinces, countries, regions and continents. Anti-cheat verified with accelerometer and GPS accuracy checks.",
+      "operatingSystem": [
+        "iOS 15+",
+        "Android 10+",
+        "watchOS 10+",
+        "Wear OS 3+"
+      ],
+      "applicationCategory": "SportsApplication",
+      "applicationSubCategory": "Running",
+      "genre": [
+        "Sports",
+        "Strategy",
+        "Location-based Game"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "RunStrict",
+        "url": "https://runstrict.com"
+      },
+      "url": "https://runstrict.com",
+      "installUrl": [
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ],
+      "downloadUrl": [
+        "https://apps.apple.com/us/app/runstrict/id6760189457",
+        "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
+      ],
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-09-11",
+      "softwareVersion": "2.0",
+      "screenshot": [
+        "https://runstrict.com/assets/territory_SS.jpg",
+        "https://runstrict.com/assets/leader_SS.jpg",
+        "https://runstrict.com/assets/run_SS.jpg",
+        "https://runstrict.com/assets/stats_SS.jpg"
+      ],
+      "featureList": [
+        "GPS territory capture on H3 hex grid (~175m tiles)",
+        "Three teams chosen at season start: FLAME (Red, attack 3/1/6), WAVE (Blue, hold 3/6/1), CHAOS (Purple, explore 6/2/2) — points per new / friendly / enemy hex",
+        "40-day competitive seasons: points, ranks and team picks reset in The Void; the hex map persists across seasons",
+        "Territory ladder: hex → province → country → region → continent, with region labels and continent flags for the leading home province and nationality",
+        "Tiered leaderboards: Zone, District, Province",
+        "Anti-cheat: accelerometer verification, GPS accuracy ≤50m, 25 km/h speed cap, capture only under 12 min/km pace",
+        "Battery-optimized 0.5 Hz GPS polling",
+        "Pace Consistency Score (CV-based stability metric)",
+        "Privacy-first: no runner IDs stored in hex data; ownership shown only as team color, province name and nation flag",
+        "Apple Watch companion (watchOS 10+) and Wear OS companion (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) for live pace and hex capture alerts on the wrist"
+      ],
+      "keywords": "GPS running game, location-based running game, gamified running app, territory capture running, hex territory game, team running competition, fitness game app, running challenge app, competitive running app, Strava alternative game, running game like Pokemon GO, best running game 2026"
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Play RunStrict — GPS Territory Capture Running Game",
+      "description": "Learn how to capture hexagonal territory tiles by running in the RunStrict GPS running game. Four simple steps from lacing up to scoring your team's split.",
+      "totalTime": "PT30M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Start Running with GPS Tracking",
+          "text": "Open RunStrict and start running. GPS tracks your route in real-time. Keep a 20-second moving-average pace under 12 min/km to activate hex capture mode. Anti-cheat verifies physical movement via accelerometer.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Flip Hexagonal Territory Tiles",
+          "text": "Every ~175m hexagonal tile (Uber H3 resolution 9) you physically run through flips to your team's color — FLAME (Red), WAVE (Blue), or CHAOS (Purple). The last runner through a hex controls it.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Dominate the Map",
+          "text": "Hexes roll up into provinces, countries, regions and continents. Zoom out and the map names the home province of the runners who hold each region, and flies the flag of the nationality that holds each continent. Climb Zone, District and Province leaderboards.",
+          "url": "https://runstrict.com/#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Score the Split",
+          "text": "Every hex you cross is new ground (never run by anyone), a friendly hex (already your team's) or an enemy hex. Each team splits the same 10 points across those three: FLAME pays 3 / 1 / 6 (attack), WAVE 3 / 6 / 1 (hold), CHAOS 6 / 2 / 2 (explore). Friendly hexes pay once per hex per day; new and enemy hexes pay every run. No multipliers — the table is the whole rule.",
+          "url": "https://runstrict.com/#teams"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "RunStrict",
+          "item": "https://runstrict.com/"
+        }
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "RunStrict Teams Comparison",
+      "description": "Compare the three teams in RunStrict: FLAME (Red), WAVE (Blue), and CHAOS (Purple). Every team splits the same 10 points across new, friendly and enemy hexes; the split is the team's doctrine.",
+      "numberOfItems": 3,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "FLAME (Red Team)",
+          "description": "Attack doctrine. Points per hex: new ground 3, friendly 1, enemy 6. An enemy hex is the biggest single score in the game, so FLAME wins by pushing into the other side's streets. Best for runners who like to take ground."
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "WAVE (Blue Team)",
+          "description": "Hold doctrine. Points per hex: new ground 3, friendly 6, enemy 1. Re-running a hex your team already holds pays 6, once per hex per day, so WAVE wins by showing up every day on the same streets, together. Best for runners who like to defend."
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CHAOS (Purple Team)",
+          "description": "Explore doctrine. Points per hex: new ground 6, friendly 2, enemy 2. A hex nobody has ever run, in any season, pays 6. Because the map persists between seasons, untouched ground only gets rarer. Best for runners who map out streets no one has run."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "datePublished": "2026-01-01",
+      "dateModified": "2026-09-11",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict is a free location-based GPS running game where your physical runs capture hexagonal territory tiles on a real map of your city. Choose one of three teams — FLAME, WAVE, or CHAOS — at season registration and compete to control your city before the 40-day season ends in The Void reset. It uses Uber's H3 hex grid system with ~175m tiles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does hex capture work in RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As you run, RunStrict uses GPS to track your route in real-time. Every ~175m hexagonal tile (H3 resolution 9) you physically run through flips to your team's color. The last runner through a hex holds it. Keep your pace under 12 min/km (20-second moving average) to activate capture mode. Anti-cheat uses accelerometer verification and GPS accuracy checks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is RunStrict free to play?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, RunStrict is completely free to download and play. Available now on iOS (App Store) and Android (Google Play)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is The Void in RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Void is the season reset event that occurs every 40 days. When The Void arrives, all season points, rankings and team assignments are wiped and every runner picks a team again. The hex map is not reset — the land remembers its last runner's team color — so the next season starts on contested ground. Your personal run history is preserved."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What teams can I join in RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict has three teams, all chosen at season registration and locked for the season: FLAME (Red — attack: 3 points for new ground, 1 for a friendly hex, 6 for an enemy hex), WAVE (Blue — hold: 3 new, 6 friendly, 1 enemy), and CHAOS (Purple — explore: 6 new, 2 friendly, 2 enemy). Every team's split sums to 10. Friendly hexes pay once per hex per day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is RunStrict available on iPhone and Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict is available now on iOS (App Store, requires iOS 15+) and Android (Google Play, requires Android 10+), with brand-new Apple Watch (watchOS 10+) and Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) companion apps. GPS accuracy of 50m or better is required for hex capture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is RunStrict different from Strava or Nike Run Club?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Unlike Strava or Nike Run Club which focus on personal fitness tracking, RunStrict adds a competitive territory-capture game layer to running. Every run is a strategic move in a team-based territorial war — you flip hex tiles, score by your team's doctrine, and compete on leaderboards. It combines the physical activity of a running app with the strategy of a location-based game."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is RunStrict different from Pokemon GO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict requires actual running with pace verification (under 12 min/km), not just walking. It focuses on real athletic performance with anti-cheat measures including accelerometer verification and GPS accuracy checks. Territory is earned through physical running effort, not catching virtual creatures."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does RunStrict drain my phone battery?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. RunStrict uses battery-optimized 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion. There are no persistent WebSocket connections draining your battery."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you cheat in RunStrict with GPS spoofing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. RunStrict uses multi-layer anti-cheat: 25 km/h speed cap, accelerometer verification to confirm physical movement, GPS accuracy must be ≤50m, and runners must keep their pace under 12 min/km for hex capture to activate. Points are also classified and scored server-side against the previous midnight's map snapshot."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is RunStrict available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "RunStrict works globally in any city with GPS coverage. The hex grid covers the entire planet. Available on iOS (App Store) and Android (Google Play) worldwide."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does scoring work in RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every hex you cross is classified as new ground (never run by anyone, in any season), a friendly hex (already held by your team) or an enemy hex (held by another team). Your team's scoring table decides the points: FLAME 3 / 1 / 6, WAVE 3 / 6 / 1, CHAOS 6 / 2 / 2 for new / friendly / enemy. Friendly hexes pay once per hex per day; new and enemy hexes pay every run. There are no multipliers or buffs, and the table can be tuned server-side without an app update."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I switch teams in RunStrict?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not during a season. You choose FLAME, WAVE or CHAOS when you register for a season and the choice is locked until The Void. Every new season starts with a fresh choice among all three teams."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does territory ownership work beyond a single hex?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Hexes roll up into provinces, countries, regions and continents. A nightly batch at midnight GMT+2 decides who holds each level. Team color always shows who holds a hex; zoomed out to region level the map labels each region with the home province of the runners who hold the most ground, and at continent level it flies the flag of the nationality that holds the most. Ties keep the previous day's owner. Per-hex owner details are never shown."
+          }
+        }
+      ]
+    }
+  ]
+}
   </script>
 
   <!-- ═══ RUNSTRICT — DESIGN UPGRADE OVERRIDES ═══ -->
@@ -525,7 +620,7 @@
       line-height: 1.7;
     }
 
-    /* FLAME — Elite meritocracy: sharp military corners, rank insignia feel */
+    /* FLAME — attack doctrine: sharp military corners, rank insignia feel */
     .team-red {
       background: linear-gradient(145deg, rgba(255,32,32,0.06) 0%, rgba(13,17,23,0.98) 45%) !important;
       border: 1px solid rgba(255, 32, 32, 0.2) !important;
@@ -913,25 +1008,30 @@
   <!-- AI-readable summary (visually hidden, semantically present for crawlers) -->
   <article class="sr-only" aria-label="RunStrict Summary" itemscope itemtype="https://schema.org/Article">
     <meta itemprop="datePublished" content="2026-01-01" />
-    <meta itemprop="dateModified" content="2026-05-05" />
+    <meta itemprop="dateModified" content="2026-09-11" />
     <meta itemprop="author" content="RunStrict" />
 
     <h2>What is RunStrict?</h2>
-    <p>RunStrict is a free location-based GPS running game available on iOS and Android where players physically run through hexagonal territory tiles to capture them for their team. Using Uber's H3 grid system at resolution 9 (~175m per hex), every step a runner takes flips territory on a real city map. As of June 2026, RunStrict has 1,200+ active runners across 8 cities in Season 5.</p>
+    <p>RunStrict is a free location-based GPS running game available on iOS and Android where players physically run through hexagonal territory tiles to capture them for their team. Using Uber's H3 grid system at resolution 9 (~175m per hex), every step a runner takes flips territory on a real city map. As of September 2026, RunStrict has 1,200+ active runners across 8 cities.</p>
 
     <h2>RunStrict vs Strava vs Nike Run Club vs Pokemon GO</h2>
-    <p>Unlike Strava and Nike Run Club which focus on personal fitness tracking (distance, pace, heart rate), RunStrict adds a competitive territory-capture game layer where every run is a strategic move in team-based territorial warfare. Unlike Pokemon GO which requires only walking, RunStrict requires actual running with pace verification under 8 min/km, accelerometer anti-cheat, and GPS accuracy checks. RunStrict combines the physical tracking of a fitness app with the competitive strategy of a location-based game.</p>
+    <p>Unlike Strava and Nike Run Club which focus on personal fitness tracking (distance, pace, heart rate), RunStrict adds a competitive territory-capture game layer where every run is a strategic move in team-based territorial warfare. Unlike Pokemon GO which requires only walking, RunStrict requires actual running with pace verification under 12 min/km, accelerometer anti-cheat, and GPS accuracy checks. RunStrict combines the physical tracking of a fitness app with the competitive strategy of a location-based game.</p>
 
     <h2>How RunStrict Teams Work: FLAME vs WAVE vs CHAOS</h2>
-    <p>FLAME (Red): Performance-based meritocracy. The top 20% of each province become Elites, reaching up to 5x point multipliers. Common runners earn 1x-3x from district and province wins (honest 1x floor — a no-bonus run scores exactly 1x). Best for competitive solo runners who want to earn rewards through individual performance.</p>
-    <p>WAVE (Blue): Collective strength. Bonuses stack from 1x base up to 4x — a district win, a province win, and team turnout (50%+ of your province running) each add a point, shared equally by every Blue runner. Best for team-oriented runners.</p>
-    <p>CHAOS (Purple): The wildcard. Join anytime but membership is irreversible. Power scales with province participation: 1x base, 2x at 25% active, 3x at 50%, 4x at 75%. No territory bonuses — pure shared participation. Best for social runners who thrive under collective pressure.</p>
+    <p>Every hex a runner crosses is one of three kinds: new ground (never run by anyone, in any season), a friendly hex (already held by the runner's team), or an enemy hex (held by another team). Each team splits the same 10 points across those three kinds, so the split defines the team's doctrine. Friendly hexes pay once per hex per day; new and enemy hexes pay on every run. There are no multipliers, tiers, or buffs — the scoring table is the whole rule, and it is set server-side so it can be tuned without an app update.</p>
+    <p>FLAME (Red) — attack: new ground 3, friendly 1, enemy 6. Best for runners who like to push into the other side's streets.</p>
+    <p>WAVE (Blue) — hold: new ground 3, friendly 6, enemy 1. Best for runners who show up every day on the same streets and defend them together.</p>
+    <p>CHAOS (Purple) — explore: new ground 6, friendly 2, enemy 2. Best for runners who map out streets nobody has ever run.</p>
+    <p>All three teams are chosen at season registration and the choice is locked for the 40-day season. There is no mid-season defection.</p>
+
+    <h2>How RunStrict Territory Ownership Works</h2>
+    <p>Hexes (Uber H3 resolution 9, ~175m) roll up into provinces, countries, regions and continents. Ownership is decided by a nightly batch at midnight GMT+2. Team color always shows who holds each hex. Zoomed out to the region level, the map labels each region with the home province of the runners who hold the most ground there; at the continent level, it flies the flag of the nationality that holds the most. Ties keep the previous day's owner. Per-hex owner details are never shown — only these aggregates.</p>
 
     <h2>What is The Void in RunStrict?</h2>
-    <p>The Void is RunStrict's 40-day season reset event. When a season ends, all captured hexes, points, and territorial control are completely wiped. Only the leaderboard legend survives. A new season begins from a blank map, giving every runner an equal fresh start. Season 5 runs from June 11 to July 20, 2026.</p>
+    <p>The Void is RunStrict's 40-day season reset event. When a season ends, all season points, rankings and team assignments are wiped and every runner picks a team again. The hex map is not reset — the land remembers its last runner's team color, and a snapshot of the final map is archived each season. Because "new ground" means a hex never run in any season, untouched hexes become rarer over time. Seasons roll over automatically every 40 days; the current season number and dates are shown live on the site.</p>
 
     <h2>RunStrict Anti-Cheat System</h2>
-    <p>RunStrict uses multi-layer anti-cheat to ensure only real running counts: 25 km/h speed cap, accelerometer verification to confirm physical movement, GPS accuracy must be 50m or better, and runners must maintain under 8 min/km pace for hex capture to activate. GPS spoofing and location faking are detected and blocked.</p>
+    <p>RunStrict uses multi-layer anti-cheat to ensure only real running counts: 25 km/h speed cap, accelerometer verification to confirm physical movement, GPS accuracy must be 50m or better, and runners must keep a 20-second moving-average pace under 12 min/km for hex capture to activate. Points are classified and scored server-side against the previous midnight's map snapshot. GPS spoofing and location faking are detected and blocked.</p>
 
     <h2>RunStrict Battery and Performance</h2>
     <p>RunStrict uses battery-optimized 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion. There are no persistent WebSocket connections. This design keeps battery drain minimal even during long runs.</p>
@@ -1091,7 +1191,7 @@
       </div>
       <div class="proof-divider"></div>
       <div class="proof-stat">
-        <span class="proof-num">Season 5</span>
+        <span class="proof-num" data-season-name>Season 5</span>
         <span class="proof-lbl proof-live"><span class="proof-dot"></span>Live Now</span>
       </div>
     </div>
@@ -1119,7 +1219,7 @@
           </picture>
           <!-- HUD overlays -->
           <div class="hud-overlay-top">
-            <span class="hud-tag">SZN.05</span>
+            <span class="hud-tag" id="hudSzn">SZN.05</span>
             <span class="hud-dot"></span>
             <span class="hud-tag">LIVE</span>
             <span class="hud-tag hud-tag-pace" id="hudPace">5'28"/km</span>
@@ -1136,8 +1236,8 @@
               </div>
             </div>
             <div class="hud-metric">
-              <span class="hud-metric-val">4×</span>
-              <span class="hud-metric-unit">BUFF</span>
+              <span class="hud-metric-val">+62</span>
+              <span class="hud-metric-unit">PTS</span>
             </div>
           </div>
         </div>
@@ -1147,7 +1247,7 @@
           <div class="hud-eyebrow">// YOUR CITY. YOUR RULES.</div>
           <h2 class="athlete-headline">Every step is<br /><span class="title-gradient">a declaration.</span></h2>
           <p class="athlete-sub">RunStrict turns your daily run into territorial warfare. Hit the streets, flip hexes,
-            and conquer your city before The Void resets everything.</p>
+            and conquer your city before The Void wipes the scoreboard.</p>
 
           <div class="hud-stats-row">
             <div class="hud-stat-box reveal-stagger" style="--delay: 0.1s">
@@ -1159,9 +1259,8 @@
               <div class="hud-stat-lbl">HEX EDGE</div>
             </div>
             <div class="hud-stat-box reveal-stagger" style="--delay: 0.3s">
-              <div class="hud-stat-num" data-count="5" data-suffix="×">0</div>
-              <div class="hud-stat-num-sub">/ 3×</div>
-              <div class="hud-stat-lbl">MAX BUFF</div>
+              <div class="hud-stat-num" data-count="6">0</div>
+              <div class="hud-stat-lbl">MAX PTS / HEX</div>
             </div>
           </div>
 
@@ -1184,7 +1283,7 @@
       <div class="section-header reveal">
         <div class="section-badge" data-num="01">REAL GAME FOOTAGE</div>
         <h2>See it in action.</h2>
-        <p>Actual Season 5 gameplay. Real hexes. Real runners. Real war.</p>
+        <p>Actual gameplay. Real hexes. Real runners. Real war.</p>
       </div>
 
       <!-- Phone video + screenshot carousel -->
@@ -1201,7 +1300,7 @@
             </div>
             <div class="phone-home-bar"></div>
           </div>
-          <div class="phone-label">Season 5 · Live Run</div>
+          <div class="phone-label">Live Run</div>
         </div>
 
         <!-- Side screenshots -->
@@ -1216,16 +1315,9 @@
           <div class="phone-thumb" onclick="highlightScreen('leaderboard')">
             <picture>
               <source srcset="assets/leader_SS.webp" type="image/webp" />
-              <img src="assets/leader_SS.jpg" alt="Season 5 leaderboard" loading="lazy" />
+              <img src="assets/leader_SS.jpg" alt="Season leaderboard" loading="lazy" />
             </picture>
             <div class="phone-thumb-label">🏆 Leaderboard</div>
-          </div>
-          <div class="phone-thumb" onclick="highlightScreen('buff')">
-            <picture>
-              <source srcset="assets/buff_SS.webp" type="image/webp" />
-              <img src="assets/buff_SS.jpg" alt="Buff multiplier screen" loading="lazy" />
-            </picture>
-            <div class="phone-thumb-label">⚡ Buff &amp; Rank</div>
           </div>
           <div class="phone-thumb" onclick="highlightScreen('stats')">
             <picture>
@@ -1233,6 +1325,13 @@
               <img src="assets/stats_SS.jpg" alt="Runner stats screen" loading="lazy" />
             </picture>
             <div class="phone-thumb-label">📊 Stats</div>
+          </div>
+          <div class="phone-thumb" onclick="highlightScreen('run')">
+            <picture>
+              <source srcset="assets/run_SS.webp" type="image/webp" />
+              <img src="assets/run_SS.jpg" alt="Live run HUD — pace, time and distance over the hex map" loading="lazy" />
+            </picture>
+            <div class="phone-thumb-label">🏃 Live HUD</div>
           </div>
         </div>
 
@@ -1255,8 +1354,8 @@
           <div class="step-number">01</div>
           <div class="step-icon">&#x1F3C3;</div>
           <h3>Lace Up &amp; Run</h3>
-          <p>Open RunStrict and hit the streets. GPS tracks every step in real-time. Maintain under 8 min/km to activate
-            hex capture.</p>
+          <p>Open RunStrict and hit the streets. GPS tracks every step in real-time. Keep your pace under 12 min/km to
+            activate hex capture.</p>
           <div class="step-progress">
             <div class="step-progress-fill"></div>
           </div>
@@ -1275,8 +1374,8 @@
           <div class="step-number">03</div>
           <div class="step-icon">&#x1F5FA;&#xFE0F;</div>
           <h3>Dominate the Map</h3>
-          <p>Watch the city transform. Earn points, climb leaderboards, and lead your team to province dominance —
-            before The Void resets everything.</p>
+          <p>Hexes roll up into provinces, countries, regions and continents. Zoom out and the map names the province
+            that holds each region — and flies the flag of the nation that holds each continent.</p>
           <div class="step-progress">
             <div class="step-progress-fill"></div>
           </div>
@@ -1284,9 +1383,9 @@
         <div class="step-card reveal-step" style="--delay: 0.36s">
           <div class="step-number">04</div>
           <div class="step-icon">&#x26A1;</div>
-          <h3>Earn Buff Multipliers</h3>
-          <p>Red Elites reach 5&times; points. Blue rises together up to 4&times; on team wins and turnout. Purple CHAOS
-            climbs to 4&times; as more run together.</p>
+          <h3>Score the Split</h3>
+          <p>Every hex you cross is new ground, yours, or theirs. Your team's split of 10 points decides what each one
+            pays — FLAME bets on enemy hexes, WAVE on its own, CHAOS on the untouched.</p>
           <div class="step-progress">
             <div class="step-progress-fill"></div>
           </div>
@@ -1308,8 +1407,8 @@
         <div class="void-text">
           <span class="void-label">D-DAY</span>
           <h3>THE VOID</h3>
-          <p>When the 40-day season ends, everything is wiped. All hexes. All points. All territories. Only the legend
-            remains.</p>
+          <p>When the 40-day season ends, every point, rank and team pick is wiped. The map is not. The land remembers
+            who ran it last — so no season starts on empty ground.</p>
         </div>
         <div class="void-countdown">
           <div class="countdown-item"><span id="countDays" class="count-num">—</span><span
@@ -1329,7 +1428,7 @@
       <div class="section-header reveal">
         <div class="section-badge" data-num="03">CHOOSE YOUR SIDE</div>
         <h2>Three teams. One city.</h2>
-        <p>Your allegiance shapes your strategy — and your destiny.</p>
+        <p>Every team splits the same 10 points across three kinds of ground. Pick the split that matches how you run.</p>
       </div>
 
       <div class="teams-grid">
@@ -1339,35 +1438,22 @@
           <div class="team-shine"></div>
           <div class="team-emblem"><img src="assets/flame.webp" alt="FLAME" class="team-icon" /></div>
           <div class="team-name">FLAME</div>
-          <div class="team-color-tag">Red Team</div>
+          <div class="team-color-tag">Red Team &middot; Attack</div>
           <p class="team-desc">
-            The elite meritocracy. The top 20% of each province's Red runners become Elites — climbing to 5&times;
-            points through sheer performance. Common runners ride territory wins from 1&times; to 3&times;.
+            Built to take ground. An enemy hex is worth 6 points to a FLAME runner — the biggest single
+            score in the game. Your own streets pay almost nothing, so keep pushing into theirs.
           </p>
-          <div class="team-buff-visual flame-visual">
-            <div class="flame-comparison">
-              <div class="f-col">
-                <div class="f-bar-stack">
-                  <div class="f-segment f-bonus-elite"><span>+2&times;<br />ELITE</span></div>
-                  <div class="f-segment f-base-elite"><span>&le;3&times;<br />TERRITORY</span></div>
-                </div>
-                <span class="f-title">ELITE (20%)</span>
-              </div>
-              <div class="f-col">
-                <div class="f-bar-stack">
-                  <div class="f-empty"></div>
-                  <div class="f-segment f-bonus-common"><span>+2&times;<br />WINS</span></div>
-                  <div class="f-segment f-base-common"><span>1&times;<br />BASE</span></div>
-                </div>
-                <span class="f-title">COMMON (80%)</span>
-              </div>
+          <div class="team-split" aria-label="FLAME scoring split: new ground 3, your hexes 1, enemy hexes 6">
+            <div class="split-strip" aria-hidden="true">
+              <span class="split-group split-new"><i></i><i></i><i></i></span>
+              <span class="split-group split-own"><i></i></span>
+              <span class="split-group split-foe"><i></i><i></i><i></i><i></i><i></i><i></i></span>
             </div>
-          </div>
-          <div class="team-stat">
-            <span class="team-stat-val" data-count="5" data-suffix="×">0</span>
-            <span class="team-stat-separator">/</span>
-            <span class="team-stat-val team-stat-val-common" data-count="3" data-suffix="×">0</span>
-            <span class="team-stat-label">Max Multiplier</span>
+            <dl class="split-ledger">
+              <div class="split-row split-row-new"><dt><span class="split-key"></span>New ground</dt><dd>3</dd></div>
+              <div class="split-row split-row-own"><dt><span class="split-key"></span>Your hexes</dt><dd>1</dd></div>
+              <div class="split-row split-row-foe is-doctrine"><dt><span class="split-key"></span>Enemy hexes</dt><dd>6</dd></div>
+            </dl>
           </div>
         </div>
 
@@ -1377,21 +1463,22 @@
           <div class="team-shine"></div>
           <div class="team-emblem"><img src="assets/wave.webp" alt="WAVE" class="team-icon" /></div>
           <div class="team-name">WAVE</div>
-          <div class="team-color-tag">Blue Team</div>
+          <div class="team-color-tag">Blue Team &middot; Hold</div>
           <p class="team-desc">
-            United as one. Every WAVE runner rises together — district wins, province wins, and strong team
-            turnout each lift the whole team, up to 4&times; shared equally.
+            Built to hold ground. Running a hex your team already owns pays 6 — once per hex per day —
+            so WAVE wins by showing up every day on the same streets, together.
           </p>
-          <div class="team-buff-visual wave-visual">
-            <div class="ripple-container">
-              <div class="ripple ripple-3"><span class="ripple-label">4&times;</span></div>
-              <div class="ripple ripple-2"><span class="ripple-label">2&times;</span></div>
-              <div class="ripple ripple-1"><span class="ripple-label">1&times; Base</span></div>
+          <div class="team-split" aria-label="WAVE scoring split: new ground 3, your hexes 6, enemy hexes 1">
+            <div class="split-strip" aria-hidden="true">
+              <span class="split-group split-new"><i></i><i></i><i></i></span>
+              <span class="split-group split-own"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="split-group split-foe"><i></i></span>
             </div>
-          </div>
-          <div class="team-stat">
-            <span class="team-stat-val" data-count="4" data-suffix="×">0</span>
-            <span class="team-stat-label">Max Multiplier</span>
+            <dl class="split-ledger">
+              <div class="split-row split-row-new"><dt><span class="split-key"></span>New ground</dt><dd>3</dd></div>
+              <div class="split-row split-row-own is-doctrine"><dt><span class="split-key"></span>Your hexes</dt><dd>6</dd></div>
+              <div class="split-row split-row-foe"><dt><span class="split-key"></span>Enemy hexes</dt><dd>1</dd></div>
+            </dl>
           </div>
         </div>
 
@@ -1401,32 +1488,41 @@
           <div class="team-shine"></div>
           <div class="team-emblem"><img src="assets/chaos.webp" alt="CHAOS" class="team-icon" /></div>
           <div class="team-name">CHAOS</div>
-          <div class="team-color-tag">Purple Team &middot; Always Open</div>
+          <div class="team-color-tag">Purple Team &middot; Explore</div>
           <p class="team-desc">
-            The wildcard. Join anytime — but never go back. CHAOS power scales with province participation,
-            climbing to 4&times; as more Purples run — everyone rises together.
+            Built to go where no one has run. A hex nobody has ever touched is worth 6 to CHAOS. The map
+            remembers every season, so untouched ground only gets rarer — and more valuable.
           </p>
-          <div class="team-buff-visual chaos-visual">
-            <div class="gauge-container">
-              <div class="gauge-track">
-                <div class="gauge-fill"></div>
-                <div class="gauge-threshold t-25"></div>
-                <div class="gauge-threshold t-50"></div>
-                <div class="gauge-threshold t-75"></div>
-              </div>
-              <div class="gauge-labels">
-                <div class="g-label">25% &rarr; 2&times;</div>
-                <div class="g-label">50% &rarr; 3&times;</div>
-                <div class="g-label">75% &rarr; 4&times;</div>
-              </div>
+          <div class="team-split" aria-label="CHAOS scoring split: new ground 6, your hexes 2, enemy hexes 2">
+            <div class="split-strip" aria-hidden="true">
+              <span class="split-group split-new"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="split-group split-own"><i></i><i></i></span>
+              <span class="split-group split-foe"><i></i><i></i></span>
             </div>
-          </div>
-          <div class="team-stat">
-            <span class="team-stat-val" data-count="4" data-suffix="×">0</span>
-            <span class="team-stat-label">Max Multiplier</span>
+            <dl class="split-ledger">
+              <div class="split-row split-row-new is-doctrine"><dt><span class="split-key"></span>New ground</dt><dd>6</dd></div>
+              <div class="split-row split-row-own"><dt><span class="split-key"></span>Your hexes</dt><dd>2</dd></div>
+              <div class="split-row split-row-foe"><dt><span class="split-key"></span>Enemy hexes</dt><dd>2</dd></div>
+            </dl>
           </div>
         </div>
       </div>
+
+      <!-- Shared rules — same for all three teams -->
+      <ul class="team-rules reveal" aria-label="Rules shared by all teams">
+        <li>
+          <strong>Pick once per season.</strong>
+          <span>Choose FLAME, WAVE or CHAOS when you register. Your team is locked until The Void.</span>
+        </li>
+        <li>
+          <strong>Your hexes pay once a day.</strong>
+          <span>Re-running ground your team already holds scores once per hex per day. New and enemy hexes score every run.</span>
+        </li>
+        <li>
+          <strong>New means never run.</strong>
+          <span>The map carries over between seasons, so a hex only counts as new ground until the first runner in history crosses it.</span>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -1465,7 +1561,7 @@
       <!-- Season timeline -->
       <div class="season-timeline reveal">
         <div class="timeline-header">
-          <span>Season 5 Progress</span>
+          <span>Season Progress</span>
           <span class="timeline-dates">Jun 11, 2026 → Jul 20, 2026</span>
         </div>
         <div class="timeline-bar">
@@ -1482,11 +1578,11 @@
       <div class="deployment-tiers reveal" aria-label="Global deployment tiers">
         <div class="dt-header">
           <span class="dt-tag">Global Deployment</span>
-          <span>S05 · LIVE</span>
+          <span id="dtSeason">S05 · LIVE</span>
         </div>
         <div class="dt-grid">
           <div class="dt-cell">
-            <span class="dt-tier"><span class="dt-arrow">↳</span>Tier 01 · World</span>
+            <span class="dt-tier"><span class="dt-arrow">↳</span>Tier 01 · Continent</span>
             <span class="dt-num">171</span>
             <span class="dt-label">Countries Deployed</span>
           </div>
@@ -1496,7 +1592,7 @@
             <span class="dt-label">Cities Live This Season</span>
           </div>
           <div class="dt-cell">
-            <span class="dt-tier"><span class="dt-arrow">↳</span>Tier 03 · District</span>
+            <span class="dt-tier"><span class="dt-arrow">↳</span>Tier 03 · Hex</span>
             <span class="dt-num">4,892</span>
             <span class="dt-label">Hexes Flipped This Season</span>
           </div>
@@ -1537,12 +1633,14 @@
         <div class="feature-item reveal" style="--delay: 0.4s">
           <div class="feature-icon">🔒</div>
           <h4>Privacy First</h4>
-          <p>No runner IDs stored in hexes. Only team color and minimal timestamp for conflict resolution.</p>
+          <p>No runner IDs in hex data. Who holds what is shown by team color, province name and nation flag — never by
+            person.</p>
         </div>
         <div class="feature-item reveal" style="--delay: 0.5s">
           <div class="feature-icon">🗺️</div>
           <h4>H3 Hex Grid</h4>
-          <p>Uber's H3 at resolution 9 — ~175m edge hexagons. Global, precise, beautiful on any map.</p>
+          <p>Uber's H3 at resolution 9 — ~175m hexagons that roll up into provinces, countries, regions and continents.
+            One grid, the whole planet.</p>
         </div>
       </div>
     </div>
@@ -1588,13 +1686,14 @@
         </div>
 
         <div class="testimonial-card reveal" style="--delay: 0.2s">
-          <div class="testimonial-quote">“I switched to CHAOS on day 12. Irreversible. Worth it. The pressure of not
-            knowing if we’d hit 60% participation every day was genuinely stressful… and I loved every second.”</div>
+          <div class="testimonial-quote">“I picked CHAOS on day one. Untouched ground is worth 6 to us, so I plan
+            routes through streets nobody has ever run. The map remembers every season — I’m racing the whole
+            city to the last blank hexes.”</div>
           <div class="testimonial-author">
             <div class="testimonial-avatar testimonial-avatar--purple">AR</div>
             <div class="testimonial-meta">
               <div class="testimonial-name">Alex R.</div>
-              <div class="testimonial-detail">CHAOS · New York · Season 1 → Season 5</div>
+              <div class="testimonial-detail">CHAOS · New York · Since Season 1</div>
             </div>
             <div class="testimonial-team-badge team-badge--purple"><img src="assets/chaos.webp" alt="CHAOS"
                 class="badge-icon" /> CHAOS</div>
@@ -1635,7 +1734,7 @@
           </button>
           <div class="faq-a">
             <p>GPS tracks your route in real-time. Every ~175m hexagonal tile you physically run through flips to your
-              team’s color. The last runner through a hex controls it. Maintain under 8 min/km pace to activate capture
+              team’s color. The last runner through a hex holds it. Keep your pace under 12 min/km to activate capture
               mode. No spoofing — accelerometer verification blocks cheaters.</p>
           </div>
         </div>
@@ -1656,9 +1755,9 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p>The Void is the season-end reset event every 40 days. All hexes, points, and territorial control are
-              wiped completely clean. Only the season leaderboard legend survives. Then a brand new 40-day season begins
-              — same map, zero territory.</p>
+            <p>The Void is the season-end reset every 40 days. All points, rankings and team picks are wiped, and
+              everyone chooses a team again. The map itself is not reset — the land remembers its last runner — so the
+              next season starts on contested ground, and truly untouched hexes only get rarer.</p>
           </div>
         </div>
 
@@ -1668,10 +1767,48 @@
             <span class="faq-chevron">+</span>
           </button>
           <div class="faq-a">
-            <p><strong>FLAME</strong> if you’re a competitive elite — the top 20% of your province become Elites, up to 5× through pure
-              performance. <strong>WAVE</strong> if you love collective victory — your whole district wins together, up to 4×.
-              <strong>CHAOS</strong> if you want to join anytime with no conditions — but choose carefully. It’s
-              irreversible.</p>
+            <p>Every team splits the same 10 points across three kinds of hex. <strong>FLAME</strong> if you like to
+              attack — an enemy hex pays 6, new ground 3, your own 1. <strong>WAVE</strong> if you like to hold — your
+              own hexes pay 6 (once per hex per day), new ground 3, enemy 1. <strong>CHAOS</strong> if you like to
+              explore — a hex nobody has ever run pays 6, everything else 2. You pick once when you register; the choice
+              is locked until The Void.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>How does scoring work?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Every hex you cross is one of three kinds: new ground (nobody has ever run it), a friendly hex (your team
+              already holds it) or an enemy hex. Your team’s table sets the points — FLAME 3 / 1 / 6, WAVE 3 / 6 / 1,
+              CHAOS 6 / 2 / 2 for new / friendly / enemy. Friendly hexes pay once per hex per day; new and enemy hexes
+              pay every run. No multipliers, no buffs — the table is the whole rule.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Can I switch teams?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Not during a season. You choose FLAME, WAVE or CHAOS when you register and the choice is locked until The
+              Void. Every new season starts with a fresh choice among all three.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)" aria-expanded="false">
+            <span>Who owns a region or a continent?</span>
+            <span class="faq-chevron">+</span>
+          </button>
+          <div class="faq-a">
+            <p>Hexes roll up into provinces, countries, regions and continents, settled every night at midnight GMT+2.
+              Team color always shows who holds a hex. Zoom out to a region and the map names the home province of the
+              runners holding the most ground there; zoom out to a continent and it flies the flag of the nationality
+              holding the most. Ties keep yesterday’s owner. Nothing is ever shown per person.</p>
           </div>
         </div>
 
@@ -1694,8 +1831,8 @@
           <div class="faq-a">
             <p>Strava and Nike Run Club focus on personal fitness tracking — distance, pace, heart rate. RunStrict adds a
               competitive territory-capture game layer on top of your runs. Every run is a strategic move in a team-based
-              territorial war where you flip hex tiles, earn buff multipliers, and compete on tiered leaderboards. Think
-              of it as Strava meets Risk.</p>
+              territorial war where you flip hex tiles, score by your team’s doctrine, and compete on tiered
+              leaderboards. Think of it as Strava meets Risk.</p>
           </div>
         </div>
 
@@ -1706,7 +1843,7 @@
           </button>
           <div class="faq-a">
             <p>RunStrict shares the location-based concept but requires actual running with pace verification (under
-              8 min/km). There are no virtual creatures — you're capturing real territory tiles on a city map through
+              12 min/km). There are no virtual creatures — you're capturing real territory tiles on a city map through
               physical athletic effort. Anti-cheat measures including accelerometer verification ensure only real runs
               count.</p>
           </div>
@@ -1735,8 +1872,8 @@
         <div class="section-badge" data-num="08">JOIN THE SEASON</div>
         <h2>Your city is waiting.</h2>
         <p>
-          Season 5 just started — every hex is up for grabs.<br />
-          The Void comes for everyone. Don't start Season 6 from behind.
+          A new season starts every 40 days — every point is up for grabs.<br />
+          The Void comes for everyone. Don't start the next one from behind.
         </p>
         <div class="download-buttons">
           <a href="https://apps.apple.com/us/app/runstrict/id6760189457" class="store-btn">
@@ -1963,6 +2100,13 @@
 
       var tsSeason = document.getElementById('tsSeason');
       if (tsSeason) tsSeason.textContent = pad(SEASON_NUMBER);
+      document.querySelectorAll('[data-season-name]').forEach(function(el) {
+        el.textContent = el.textContent.replace(/\d+/, SEASON_NUMBER);
+      });
+      var hudSzn = document.getElementById('hudSzn');
+      if (hudSzn) hudSzn.textContent = 'SZN.' + pad(SEASON_NUMBER);
+      var dtSeason = document.getElementById('dtSeason');
+      if (dtSeason) dtSeason.textContent = seasonStr + (isVoid ? ' · VOID' : ' · LIVE');
       var tsVoid = document.getElementById('tsVoid');
       if (tsVoid) tsVoid.textContent = voidStr;
 

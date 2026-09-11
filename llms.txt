@@ -1,8 +1,8 @@
 # RunStrict
 
-> Last updated: 2026-06-17. Season 5 is live (40-day seasons; the current season number and its dates are shown live at https://runstrict.com). 1,200+ active runners across 8 cities.
+> Last updated: 2026-09-11. 40-day seasons roll over automatically; the current season number and its dates are shown live at https://runstrict.com. 1,200+ active runners across 8 cities. Scoring rules v2 (per-team point tables, no multipliers) are described below.
 
-> RunStrict is a free GPS running game for iOS, Android, Apple Watch, and Wear OS where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — and compete to control their city's map before a 40-day season resets everything in an event called The Void. The site is available in 11 languages.
+> RunStrict is a free GPS running game for iOS, Android, Apple Watch, and Wear OS where runners physically capture hexagonal territory tiles by running through them. Players choose one of three teams — FLAME, WAVE, or CHAOS — at season registration and compete to control their city's map before a 40-day season resets the scoreboard in an event called The Void. The site is available in 11 languages.
 
 ## What is RunStrict?
 
@@ -11,13 +11,14 @@ RunStrict is a location-based running app that gamifies outdoor running. Using G
 ## Key Features
 
 - **GPS Territory Capture**: Run through ~175m hexagonal tiles to flip them to your team's color in real-time
-- **Three Teams**: FLAME (Red), WAVE (Blue), CHAOS (Purple) — each with a distinct buff philosophy (see Teams)
-- **Buff Multipliers**: An honest ×1 floor (a no-bonus run scores exactly ×1); maximums are FLAME ×5, WAVE ×4, CHAOS ×4
-- **40-Day Seasons**: Every season ends with "The Void" — a complete reset of all hexes, points, and territory. Only the leaderboard legend survives
-- **Anti-Cheat**: 25 km/h speed cap, accelerometer verification, GPS accuracy ≤50m required, under 8 min/km pace to capture
+- **Three Teams**: FLAME (Red), WAVE (Blue), CHAOS (Purple) — all three chosen at season registration, locked for the season, each with its own scoring table (see Teams)
+- **Three Kinds of Hex**: every hex you cross is new ground (never run by anyone, in any season), a friendly hex (your team already holds it) or an enemy hex. Each team splits the same 10 points across the three — no multipliers, no buffs
+- **Territory Ladder**: hexes roll up into provinces, countries, regions and continents; region labels show the leading home province, continent markers show the leading nationality's flag
+- **40-Day Seasons**: Every season ends with "The Void" — points, rankings and team picks reset. The hex map persists across seasons ("the land remembers")
+- **Anti-Cheat**: 25 km/h speed cap, accelerometer verification, GPS accuracy ≤50m required, under 12 min/km pace (20 s moving average) to capture
 - **Battery Optimized**: 0.5 Hz GPS polling, no WebSocket, syncs only on launch/resume/run completion
 - **Tiered Leaderboards**: Province, District, and Zone scope rankings
-- **Privacy First**: No runner IDs stored in hexes, only team color and timestamp
+- **Privacy First**: No runner IDs stored in hex data; ownership is only ever shown as team color, province name or nation flag — never per person
 - **Pace Consistency Score**: CV-based stability metric rewards steady runners
 - **Wearables**: Apple Watch and Wear OS companion apps with wrist-first run controls, live pace, and hex-capture alerts
 
@@ -32,29 +33,49 @@ RunStrict is a location-based running app that gamifies outdoor running. Using G
 ## How It Works
 
 1. Open RunStrict and start running — GPS tracks your route in real-time
-2. Maintain under 8 min/km pace to activate hex capture mode
+2. Keep your pace under 12 min/km (20-second moving average) to activate hex capture mode
 3. Every ~175m hex tile you run through flips to your team's color
-4. The last runner through a hex controls it — speed and consistency matter
-5. Earn buff multipliers based on your team's mechanics
-6. Compete on tiered leaderboards (Zone, District, Province)
-7. When the 40-day season ends, The Void wipes everything and a new season begins automatically
+4. The last runner through a hex holds it — speed and consistency matter
+5. Each hex is scored as new / friendly / enemy using your team's point table (see Teams); the server classifies and scores every run against the previous midnight's map snapshot
+6. Compete on tiered leaderboards (Zone, District, Province); zoom out to see which home province holds each region and which nationality holds each continent
+7. When the 40-day season ends, The Void wipes points, ranks and team picks; the map persists, and a new season begins automatically
 
 ## Teams
 
-Buffs are an additive sum of whole-number terms with an honest ×1 floor (the displayed buff equals the scored buff). Friendly refresh (running through a hex your team already owns) earns a flat +1 point for everyone.
+Every team splits the same **10 points** across three kinds of hex. The split is the team's doctrine.
 
-### FLAME (Red) — competition
-Performance-based meritocracy. The top 20% of each province's Red runners become Elites (+2). Territory base is ×1–3 (district win +1, province win +1). Maximum **×5** for an Elite who also holds both territory wins; common runners earn ×1–3.
+| Team | Doctrine | New ground | Friendly hex | Enemy hex |
+|------|----------|-----------:|-------------:|----------:|
+| FLAME (Red) | Attack | 3 | 1 | **6** |
+| WAVE (Blue) | Hold | 3 | **6** | 1 |
+| CHAOS (Purple) | Explore | **6** | 2 | 2 |
 
-### WAVE (Blue) — sharing
-Collective strength, everyone equal. Territory base ×1–3 plus a turnout bonus: if ≥50% of your province's Blue ran yesterday, every Blue gets +1. Maximum **×4**, shared equally.
+- **New ground** = a hex nobody has ever run, in any season. Because the map persists between seasons, new ground only gets rarer.
+- **Friendly hex** = a hex your team already holds (as of the previous midnight's snapshot). Pays **once per hex per day**.
+- **Enemy hex** = a hex held by another team. Pays every run.
+- Team choice happens once, at season registration, for all three teams. It is locked until The Void. There is no mid-season defection ("Traitor's Gate" was removed).
+- The table is the whole scoring rule: there are no buff multipliers, Elite/Common tiers, turnout or participation bonuses. Values are served from the server config so they can be tuned without an app update.
 
-### CHAOS (Purple) — wide sharing
-Join anytime, but membership is irreversible. A pure province-participation ladder with no territory terms: ×1 base, ×2 at 25% active, ×3 at 50%, ×4 at 75%. Maximum **×4**.
+### FLAME (Red) — attack
+Built to take ground. An enemy hex is worth 6 points — the biggest single score in the game — while friendly hexes pay only 1. Best for runners who push into the other side's streets.
+
+### WAVE (Blue) — hold
+Built to hold ground. Re-running a hex your team already holds pays 6 (once per hex per day), so WAVE wins by showing up every day on the same streets, together.
+
+### CHAOS (Purple) — explore
+Built to go where no one has run. A hex nobody has ever touched is worth 6; everything else pays 2. Best for runners who map out untouched streets.
+
+## Territory Ownership
+
+- Levels: hex (H3 res 9) → province (res 5) → country (res 4) → region (res 3) → continent (res 1).
+- Team color (last runner's team) always decides who holds a hex; province/country/continent team dominance is settled nightly.
+- In parallel, a nightly batch (midnight GMT+2) rolls up two owner dimensions from the map snapshot: the runners' **registered home province** and their **nationality**. Region zoom labels each region with the leading home province name (e.g. "Seoul 2"); continent zoom shows the flag of the leading nationality.
+- Ties keep the previous day's owner; if there was none, the level is unowned.
+- Per-hex owner attributes are stored for aggregation only and are never exposed per hex.
 
 ## Technology
 
-- **Hex Grid**: Uber's H3 geospatial indexing at resolution 9 (~175m hexes); provinces at resolution 4, districts at resolution 6
+- **Hex Grid**: Uber's H3 geospatial indexing at resolution 9 (~175m hexes); districts at resolution 6, provinces at resolution 5, countries at resolution 4, regions at resolution 3, continents at resolution 1
 - **Backend**: Supabase (PostgreSQL + RLS + Edge Functions); serverless, no custom API server
 - **Client**: Flutter (iOS, Android, Wear OS) and a native Apple Watch companion
 - **Timezone**: Game logic uses GMT+2; seasons roll over at midnight GMT+2
@@ -79,17 +100,20 @@ Yes, completely free to download and play, on both iOS and Android.
 **What devices does it support?**
 iPhone (iOS 15+), Android (10+), Apple Watch (watchOS 10+), and Wear OS (3+ / SDK 30 — Galaxy Watch 4+, Pixel Watch). All companion apps are available now.
 
-**What are the buff multipliers?**
-There is an honest ×1 floor. Maximums are FLAME ×5 (Elite, top 20% of a province), WAVE ×4 (district + province wins + ≥50% team turnout), and CHAOS ×4 (75% province participation).
+**How are points scored?**
+Each hex you cross is new ground, a friendly hex or an enemy hex, and your team's table sets the points: FLAME 3 / 1 / 6, WAVE 3 / 6 / 1, CHAOS 6 / 2 / 2 (new / friendly / enemy). Friendly hexes pay once per hex per day. There are no multipliers or buffs.
 
 **Can I cheat with GPS spoofing?**
 No. RunStrict uses accelerometer verification, a 25 km/h speed cap, and GPS accuracy requirements to prevent spoofing.
 
 **What happens when a season ends?**
-The Void resets all hexes, points, and territory. A new 40-day season begins automatically. Only the leaderboard legend survives.
+The Void resets season points, rankings and team assignments. The hex map persists — the land remembers its last runner's team color — and a snapshot of the final map is archived. A new 40-day season begins automatically and everyone picks a team again.
 
 **Can I switch teams?**
-FLAME and WAVE players can switch teams between seasons. CHAOS membership is permanent and irreversible.
+Not during a season. You choose FLAME, WAVE or CHAOS at registration and the choice is locked until The Void. Every new season starts with a fresh choice among all three.
+
+**What counts as "new ground"?**
+A hex that nobody has ever run, in any season. Once anyone has run it, it is either friendly or enemy from then on.
 
 **Does it drain battery?**
 No. RunStrict uses 0.5 Hz GPS polling (once every 2 seconds) and syncs data only on app launch, resume, and run completion — no persistent connections.

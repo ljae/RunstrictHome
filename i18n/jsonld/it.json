@@ -23,7 +23,7 @@
         "@type": "Organization",
         "name": "RunStrict"
       },
-      "dateModified": "2026-05-05",
+      "dateModified": "2026-09-11",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -38,7 +38,7 @@
       "@type": "MobileApplication",
       "name": "RunStrict",
       "alternateName": "RunStrict Gioco di Corsa GPS",
-      "description": "Un gioco di corsa GPS gratuito basato sulla posizione in cui i giocatori conquistano tessere di territorio esagonale attraversandole fisicamente di corsa. Scegli tra tre squadre — FLAME, WAVE o CHAOS — e competi per dominare la tua città prima che la stagione di 40 giorni si azzeri in The Void. Utilizza la griglia esagonale H3 di Uber alla risoluzione 9 (tessere di ~175m). Anti-cheat verificato con controlli dell'accelerometro e della precisione GPS.",
+      "description": "Un gioco di corsa GPS gratuito basato sulla posizione in cui i giocatori catturano tasselli di territorio esagonali attraversandoli fisicamente di corsa. Scegli una delle tre squadre — FLAME, WAVE o CHAOS — alla registrazione della stagione; ognuna divide gli stessi 10 punti tra esagoni nuovi, alleati e nemici, quindi la tua squadra è la tua dottrina di punteggio. Compete nelle classifiche di Zona, Distretto e Provincia prima che la stagione di 40 giorni si azzeri in The Void. Usa la griglia esagonale H3 di Uber a risoluzione 9 (tasselli di ~175 m); gli esagoni si sommano in province, paesi, regioni e continenti. Anti-cheat verificato con accelerometro e controlli di precisione GPS.",
       "operatingSystem": [
         "iOS 15+",
         "Android 10+",
@@ -73,38 +73,39 @@
         "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
       ],
       "datePublished": "2026-01-01",
-      "dateModified": "2026-05-05",
+      "dateModified": "2026-09-11",
       "softwareVersion": "2.0",
       "screenshot": [
         "https://runstrict.com/assets/territory_SS.jpg",
         "https://runstrict.com/assets/leader_SS.jpg",
-        "https://runstrict.com/assets/buff_SS.jpg",
+        "https://runstrict.com/assets/run_SS.jpg",
         "https://runstrict.com/assets/stats_SS.jpg"
       ],
       "featureList": [
-        "Conquista del territorio con GPS sulla griglia esagonale H3 (tessere di ~175m)",
-        "Tre squadre: FLAME (Rossa), WAVE (Blu), CHAOS (Viola)",
-        "Stagioni competitive di 40 giorni con azzeramento totale (The Void)",
+        "Cattura di territorio GPS su griglia esagonale H3 (tasselli di ~175 m)",
+        "Tre squadre scelte a inizio stagione: FLAME (Rosso, attacco 3/1/6), WAVE (Blu, difesa 3/6/1), CHAOS (Viola, esplorazione 6/2/2) — punti per esagono nuovo / alleato / nemico",
+        "Stagioni competitive di 40 giorni: punti, posizioni e scelte di squadra si azzerano in The Void; la mappa degli esagoni persiste tra le stagioni",
+        "Scala territoriale: esagono → provincia → paese → regione → continente, con etichette di regione e bandiere di continente per la provincia di casa e la nazionalità in testa",
         "Classifiche a livelli: Zona, Distretto, Provincia",
-        "Anti-cheat: verifica dell'accelerometro, precisione GPS ≤50m, limite di velocità 25 km/h",
-        "Polling GPS a 0.5 Hz ottimizzato per la batteria",
-        "Punteggio di Costanza del Passo (metrica di stabilità basata sul CV)",
-        "Privacy al primo posto: nessun ID dei corridori memorizzato nei dati degli esagoni",
-        "Compagno per Apple Watch (watchOS 10+) e compagno per Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) per il passo in tempo reale e gli avvisi di conquista degli esagoni al polso"
+        "Anti-cheat: verifica con accelerometro, precisione GPS ≤50 m, limite di 25 km/h, cattura solo sotto i 12 min/km",
+        "Polling GPS a 0,5 Hz ottimizzato per la batteria",
+        "Punteggio di costanza del passo (metrica di stabilità basata sul CV)",
+        "Privacy prima di tutto: nessun ID runner nei dati degli esagoni; il possesso si mostra solo con colore della squadra, nome della provincia e bandiera",
+        "App companion per Apple Watch (watchOS 10+) e Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) con passo in tempo reale e avvisi di cattura al polso"
       ],
       "keywords": "gioco di corsa GPS, gioco di corsa basato sulla posizione, app di corsa gamificata, corsa con conquista del territorio, gioco di territorio esagonale, competizione di corsa a squadre, app di gioco fitness, app di sfide di corsa, app di corsa competitiva, gioco alternativo a Strava, gioco di corsa come Pokemon GO, miglior gioco di corsa 2026"
     },
     {
       "@type": "HowTo",
       "name": "Come giocare a RunStrict — Gioco di corsa GPS con conquista del territorio",
-      "description": "Scopri come conquistare tessere di territorio esagonale correndo nel gioco di corsa GPS RunStrict. Quattro semplici passi, dall'allacciare le scarpe al guadagnare moltiplicatori di buff.",
+      "description": "Impara a catturare tasselli di territorio esagonali correndo nel gioco di corsa GPS RunStrict. Quattro semplici passi, dall'allacciare le scarpe al segnare con la ripartizione della tua squadra.",
       "totalTime": "PT30M",
       "step": [
         {
           "@type": "HowToStep",
           "position": 1,
           "name": "Inizia a correre con il tracciamento GPS",
-          "text": "Apri RunStrict e inizia a correre. Il GPS traccia il tuo percorso in tempo reale. Mantieni un passo sotto gli 8 min/km per attivare la modalità di conquista degli esagoni. L'anti-cheat verifica il movimento fisico tramite l'accelerometro.",
+          "text": "Apri RunStrict e inizia a correre. Il GPS traccia il tuo percorso in tempo reale. Mantieni un passo medio mobile su 20 secondi sotto i 12 min/km per attivare la modalità cattura esagoni. L'anti-cheat verifica il movimento fisico tramite accelerometro.",
           "url": "https://runstrict.com/#how-it-works"
         },
         {
@@ -118,14 +119,14 @@
           "@type": "HowToStep",
           "position": 3,
           "name": "Domina la mappa della città",
-          "text": "Guarda la tua città trasformarsi mentre rivendichi territorio. Guadagna punti per ogni esagono conquistato, scala le classifiche di Zona, Distretto e Provincia e guida la tua squadra al dominio territoriale.",
+          "text": "Gli esagoni si sommano in province, paesi, regioni e continenti. Allontana la mappa e vedrai il nome della provincia di casa dei runner che dominano ogni regione, e la bandiera della nazionalità che domina ogni continente. Scala le classifiche di Zona, Distretto e Provincia.",
           "url": "https://runstrict.com/#how-it-works"
         },
         {
           "@type": "HowToStep",
           "position": 4,
-          "name": "Guadagna moltiplicatori di buff",
-          "text": "Gli Elite di FLAME (il 20% migliore della loro provincia) raggiungono moltiplicatori di punti fino a 5x. I membri di WAVE crescono insieme fino a 4x grazie alle vittorie di distretto e provincia più l'affluenza della squadra. La potenza di CHAOS aumenta con la partecipazione della provincia fino a 4x. Un onesto minimo di 1x significa che una corsa senza bonus vale esattamente 1x. I moltiplicatori si azzerano a ogni stagione di 40 giorni.",
+          "name": "Segna con la ripartizione",
+          "text": "Ogni esagono che attraversi è terreno nuovo (mai corso da nessuno), un esagono alleato (già della tua squadra) o un esagono nemico. Ogni squadra divide gli stessi 10 punti tra questi tre: FLAME paga 3 / 1 / 6 (attacco), WAVE 3 / 6 / 1 (difesa), CHAOS 6 / 2 / 2 (esplorazione). Gli esagoni alleati pagano una volta per esagono al giorno; nuovi e nemici pagano a ogni corsa. Niente moltiplicatori — la tabella è tutta la regola.",
           "url": "https://runstrict.com/#teams"
         }
       ]
@@ -144,33 +145,33 @@
     {
       "@type": "ItemList",
       "name": "Confronto delle squadre di RunStrict",
-      "description": "Confronta le tre squadre di RunStrict: FLAME (Rossa), WAVE (Blu) e CHAOS (Viola). Ogni squadra ha meccaniche di buff e stili di gioco unici.",
+      "description": "Confronta le tre squadre di RunStrict: FLAME (Rosso), WAVE (Blu) e CHAOS (Viola). Ogni squadra divide gli stessi 10 punti tra esagoni nuovi, alleati e nemici; la ripartizione è la dottrina della squadra.",
       "numberOfItems": 3,
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "FLAME (Squadra Rossa)",
-          "description": "Meritocrazia basata sulle prestazioni. Il 20% migliore dei corridori Rossi di ogni provincia diventa Elite, raggiungendo fino a 5x punti. I corridori comuni guadagnano da 1x a 3x dalle vittorie di distretto e provincia (onesto minimo di 1x). Ideale per i corridori solitari e competitivi."
+          "description": "Dottrina d'attacco. Punti per esagono: terreno nuovo 3, alleato 1, nemico 6. Un esagono nemico è il punteggio singolo più alto del gioco, quindi FLAME vince spingendo nelle strade avversarie. Ideale per runner a cui piace prendere terreno."
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "WAVE (Squadra Blu)",
-          "description": "Forza collettiva. Ogni corridore Blu cresce insieme agli altri: una vittoria di distretto, una vittoria di provincia e l'affluenza della squadra (il 50%+ della tua provincia in corsa) aggiungono ciascuna un punto, fino a 4x condiviso equamente. Ideale per i corridori orientati alla squadra."
+          "description": "Dottrina di difesa. Punti per esagono: terreno nuovo 3, alleato 6, nemico 1. Ripercorrere un esagono che la tua squadra già tiene paga 6, una volta per esagono al giorno, quindi WAVE vince presentandosi ogni giorno sulle stesse strade, insieme. Ideale per runner a cui piace difendere."
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "CHAOS (Squadra Viola)",
-          "description": "Il jolly. Unisciti in qualsiasi momento, ma l'adesione è irreversibile. La potenza aumenta con la partecipazione della provincia: 1x base, 2x al 25% attivo, 3x al 50%, 4x al 75%. Nessun bonus territoriale. Ideale per i corridori socievoli che danno il meglio sotto pressione."
+          "description": "Dottrina di esplorazione. Punti per esagono: terreno nuovo 6, alleato 2, nemico 2. Un esagono che nessuno ha mai corso, in nessuna stagione, paga 6. Poiché la mappa persiste tra le stagioni, il terreno intatto diventa sempre più raro. Ideale per runner che tracciano strade mai corse."
         }
       ]
     },
     {
       "@type": "FAQPage",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-05-05",
+      "dateModified": "2026-09-11",
       "mainEntity": [
         {
           "@type": "Question",
@@ -185,7 +186,7 @@
           "name": "Come funziona la conquista degli esagoni in RunStrict?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Mentre corri, RunStrict usa il GPS per tracciare il tuo percorso in tempo reale. Ogni tessera esagonale di ~175m (H3 risoluzione 9) che attraversi fisicamente di corsa si ribalta al colore della tua squadra. L'ultimo corridore a passare per un esagono ne ha il controllo. Mantieni un passo sotto gli 8 min/km per attivare la modalità di conquista. L'anti-cheat usa la verifica dell'accelerometro e i controlli della precisione GPS."
+            "text": "Il GPS traccia il tuo percorso in tempo reale. Ogni tassello esagonale di ~175 m che attraversi fisicamente si ribalta al colore della tua squadra. L'ultimo runner a passare su un esagono lo tiene. Tieni un passo sotto i 12 min/km per attivare la modalità cattura. Niente spoofing — la verifica con accelerometro blocca chi bara."
           }
         },
         {
@@ -201,7 +202,7 @@
           "name": "Cos'è The Void in RunStrict?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The Void è l'evento di azzeramento della stagione che si verifica ogni 40 giorni. Quando arriva The Void, tutti gli esagoni conquistati, i punti e il controllo territoriale vengono completamente cancellati. Sopravvive solo la leggenda della classifica di stagione. Poi inizia una nuova stagione di 40 giorni."
+            "text": "The Void è l'azzeramento di fine stagione ogni 40 giorni. Tutti i punti, le classifiche e le scelte di squadra vengono cancellati e tutti scelgono di nuovo la squadra. La mappa in sé non si azzera — la terra ricorda il suo ultimo runner — quindi la stagione successiva parte su terreno conteso, e gli esagoni davvero intatti diventano sempre più rari."
           }
         },
         {
@@ -209,7 +210,7 @@
           "name": "A quali squadre posso unirmi in RunStrict?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "RunStrict ha tre squadre: FLAME (Rossa — il 20% migliore di ogni provincia diventa Elite, fino a 5× grazie alle prestazioni), WAVE (Blu — bonus collettivi fino a 4× quando il tuo distretto o la tua provincia vince e l'affluenza è alta) e CHAOS (Viola — unisciti in qualsiasi momento, irreversibile, una scala di partecipazione fino a 4×)."
+            "text": "Ogni squadra divide gli stessi 10 punti tra tre tipi di esagono. FLAME se ti piace attaccare — un esagono nemico paga 6, terreno nuovo 3, il tuo 1. WAVE se ti piace difendere — i tuoi esagoni pagano 6 (una volta per esagono al giorno), terreno nuovo 3, nemico 1. CHAOS se ti piace esplorare — un esagono che nessuno ha mai corso paga 6, tutto il resto 2. Scegli una volta alla registrazione; la scelta resta bloccata fino a The Void."
           }
         },
         {
@@ -225,7 +226,7 @@
           "name": "In cosa è diverso RunStrict da Strava o Nike Run Club?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A differenza di Strava o Nike Run Club, che si concentrano sul monitoraggio del fitness personale, RunStrict aggiunge alla corsa uno strato di gioco competitivo con conquista del territorio. Ogni corsa è una mossa strategica in una guerra territoriale a squadre — ribalti tessere esagonali, guadagni moltiplicatori di buff e competi nelle classifiche. Combina l'attività fisica di un'app di corsa con la strategia di un gioco basato sulla posizione."
+            "text": "Strava e Nike Run Club si concentrano sul tracciamento personale — distanza, passo, frequenza cardiaca. RunStrict aggiunge sopra le tue corse un livello di gioco competitivo di conquista territoriale. Ogni corsa è una mossa strategica in una guerra territoriale a squadre in cui ribalti esagoni, segni secondo la dottrina della tua squadra e competi in classifiche a livelli. Pensa a Strava che incontra Risiko."
           }
         },
         {
@@ -233,7 +234,7 @@
           "name": "In cosa è diverso RunStrict da Pokemon GO?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "RunStrict richiede una corsa vera con verifica del passo (sotto gli 8 min/km), non solo camminare. Si concentra sulle prestazioni atletiche reali con misure anti-cheat che includono la verifica dell'accelerometro e i controlli della precisione GPS. Il territorio si guadagna con lo sforzo fisico della corsa, non catturando creature virtuali."
+            "text": "RunStrict condivide il concetto basato sulla posizione, ma richiede una corsa vera con verifica del passo (sotto i 12 min/km). Non ci sono creature virtuali — catturi veri tasselli di territorio sulla mappa della città con lo sforzo fisico. Le misure anti-cheat, inclusa la verifica con accelerometro, garantiscono che contino solo le corse reali."
           }
         },
         {
@@ -249,7 +250,7 @@
           "name": "Si può barare in RunStrict con lo spoofing del GPS?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. RunStrict usa un anti-cheat multi-livello: limite di velocità di 25 km/h, verifica dell'accelerometro per confermare il movimento fisico, la precisione GPS deve essere ≤50m e i corridori devono mantenere un passo sotto gli 8 min/km perché la conquista degli esagoni si attivi."
+            "text": "No. RunStrict usa un anti-cheat a più livelli: limite di 25 km/h, verifica con accelerometro per confermare il movimento fisico, precisione GPS obbligatoria ≤50 m, e la cattura degli esagoni si attiva solo con un passo sotto i 12 min/km. Inoltre i punti vengono classificati e calcolati lato server rispetto all'istantanea della mappa della mezzanotte precedente."
           }
         },
         {
@@ -258,6 +259,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "RunStrict funziona in tutto il mondo in qualsiasi città con copertura GPS. La griglia esagonale copre l'intero pianeta. Disponibile su iOS (App Store) e Android (Google Play) in tutto il mondo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come funziona il punteggio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ogni esagono che attraversi è di uno di tre tipi: terreno nuovo (nessuno l'ha mai corso), esagono alleato (la tua squadra lo tiene già) o esagono nemico. La tabella della tua squadra fissa i punti — FLAME 3 / 1 / 6, WAVE 3 / 6 / 1, CHAOS 6 / 2 / 2 per nuovo / alleato / nemico. Gli esagoni alleati pagano una volta per esagono al giorno; nuovi e nemici pagano a ogni corsa. Niente moltiplicatori, niente buff — la tabella è tutta la regola."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso cambiare squadra?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Non durante una stagione. Scegli FLAME, WAVE o CHAOS alla registrazione e la scelta resta bloccata fino a The Void. Ogni nuova stagione riparte con una scelta libera tra le tre."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "A chi appartiene una regione o un continente?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Gli esagoni si sommano in province, paesi, regioni e continenti, assegnati ogni notte a mezzanotte (GMT+2). Il colore della squadra mostra sempre chi tiene un esagono. Allontana la mappa fino a una regione e vedrai il nome della provincia di casa dei runner che lì tengono più terreno; allontanala fino a un continente e sventolerà la bandiera della nazionalità che ne tiene di più. In caso di parità resta il proprietario di ieri. Niente viene mai mostrato per persona."
           }
         }
       ]

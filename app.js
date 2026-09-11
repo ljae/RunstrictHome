@@ -781,6 +781,15 @@ function initTiltCards() {
 }
 
 // ═══════════════════════════════════════════════════════════════
+// TEAM SCORING SPLIT — index each hex so the strip lands left→right
+// ═══════════════════════════════════════════════════════════════
+function initSplitStrips() {
+  document.querySelectorAll('.split-strip').forEach(strip => {
+    strip.querySelectorAll('i').forEach((hex, i) => hex.style.setProperty('--i', i));
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
 // COUNT-UP FOR [data-count] STAT ELEMENTS
 // ═══════════════════════════════════════════════════════════════
 function initStatCountUp() {
@@ -906,7 +915,9 @@ window.highlightScreen = function(name) {
     // Show screenshot over video
     if (video) video.style.display = 'none';
     const img = document.createElement('img');
-    img.src = `assets/screen_${name}.png`;
+    // Use the thumbnail's own image (the assets/screen_<name>.png files don't exist)
+    const thumbImg = clicked && clicked.querySelector('img');
+    img.src = (thumbImg && (thumbImg.currentSrc || thumbImg.src)) || `assets/screen_${name}.png`;
     img.className = 'phone-static-img';
     img.style.cssText = 'width:100%;height:100%;object-fit:cover;object-position:top;position:absolute;inset:0;';
     screen.appendChild(img);
@@ -931,6 +942,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSectionIndicators();
   initCountUp();
   initTiltCards();
+  initSplitStrips();
   initStatCountUp();
   initCountdown();
   initTimeline();

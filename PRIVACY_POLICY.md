@@ -1,7 +1,7 @@
 # Privacy Policy
 
-**Effective Date:** March 1, 2026
-**Version:** 1.0
+**Effective Date:** September 11, 2026
+**Version:** 1.1
 
 RunStrict ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use RunStrict.
 
@@ -28,7 +28,7 @@ RunStrict ("we", "us", "our") is committed to protecting your privacy. This Priv
 - Distance, duration, and pace of each run
 - Hex territories captured (flip count)
 - Coefficient of Variation (CV) for pace consistency
-- Buff multiplier applied to each run
+- Per-run hex breakdown (new ground / friendly / enemy counts)
 - Flip points earned per run
 
 ### 1.4 Device Data
@@ -45,7 +45,8 @@ We use your information to:
 - Provide and operate the RunStrict game service
 - Calculate your running performance, flip points, and leaderboard ranking
 - Determine territory capture (hex flips) during runs
-- Calculate team buff multipliers based on community performance
+- Classify and score each hex on your route against your team's scoring table
+- Compute aggregate territory ownership (team, home province, nationality) for provinces, countries, regions and continents
 - Prevent cheating and maintain competitive fairness
 - Improve the Service and develop new features
 - Send in-app notifications about game events
@@ -56,8 +57,9 @@ We use your information to:
 
 RunStrict is designed with privacy in mind regarding territory data:
 
-- Hex records store **only** the last team color (e.g., "red", "blue") and a conflict-resolution timestamp
+- Hex records store the last team color (e.g., "red", "blue"), a conflict-resolution timestamp, and — for territory rollups only — the nationality and registered home province (H3 resolution 5, ~250 km²) of the account that last ran the hex
 - Your personal runner ID is **never** stored in hex records
+- Nationality and home-province attributes are used only to compute aggregate ownership of regions and continents; they are **never** displayed or queryable per hex
 - Individual timestamps per hex are **not** attributed to specific users
 - Other players can see which team controls a territory but **not** who specifically captured it or when
 - Your home hex is stored at city-district level precision (H3 resolution 6, ~3.2km diameter) — not your exact address
@@ -72,6 +74,7 @@ The following is visible to other RunStrict users:
 - Season flip points and ranking
 - Total distance and pace statistics (aggregated)
 - General neighborhood (home hex end location)
+- Aggregate territory ownership on the map: the leading home-province name per region and the leading nationality flag per continent (never attributed to a person)
 
 ### 4.2 Third-Party Service Providers
 We share data with:
@@ -89,7 +92,7 @@ We do not sell, rent, or trade your personal information to third parties for th
 
 ## 5. Data Retention
 
-**5.1 Season Data.** Territory data (hexes) and season scores are permanently deleted at the end of each 40-day season ("The Void"). This is a core game mechanic.
+**5.1 Season Data.** Season scores, team assignments and per-season rankings are reset at the end of each 40-day season ("The Void"). Territory (hex) data persists across seasons — the land remembers its colors — and a snapshot of the final territory map is archived each season. This is a core game mechanic.
 
 **5.2 Run History.** Your personal running history (distance, pace, runs completed) is preserved across seasons — it is stored locally on your device and is never deleted by season resets. Server-side aggregate statistics are retained for the life of your account.
 

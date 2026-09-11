@@ -1,7 +1,7 @@
 # Terms of Service
 
-**Effective Date:** March 1, 2026
-**Version:** 1.0
+**Effective Date:** September 11, 2026
+**Version:** 1.1
 
 > PLEASE READ THESE TERMS CAREFULLY BEFORE USING RUNSTRICT. BY CREATING AN ACCOUNT OR USING THE APP, YOU AGREE TO BE BOUND BY THESE TERMS.
 
@@ -28,7 +28,7 @@ RunStrict is a location-based running game that gamifies territory control throu
 - Real-time GPS tracking during active running sessions
 - Hexagonal territory ("hex") capture and team competition
 - 40-day competitive seasons ("The Season")
-- Team-based buff multipliers and scoring systems
+- Team-based scoring tables and territory ownership rollups
 - Leaderboards and community competition features
 
 ---
@@ -39,7 +39,7 @@ RunStrict is a location-based running game that gamifies territory control throu
 
 **4.2 Runner Identity.** Your chosen username, team affiliation, and public statistics (distance, pace, flip points, stability score) are visible to other users on leaderboards and within the app.
 
-**4.3 Team Selection.** At the start of each season, you must choose a team: FLAME (Red) or WAVE (Blue). You may defect to CHAOS (Purple) at any time during the season. Defection to Purple is irreversible for the remainder of that season. Season points are preserved upon defection.
+**4.3 Team Selection.** When you register for a season, you must choose one team: FLAME (Red), WAVE (Blue) or CHAOS (Purple). Your choice is locked for the remainder of that season and cannot be changed. Every new season begins with a fresh team choice.
 
 **4.4 Guest Mode.** You may use the Service as a guest for a single session without creating an account. Guest sessions are not preserved across app restarts. Guests may not appear on leaderboards.
 
@@ -67,25 +67,27 @@ RunStrict is a location-based running game that gamifies territory control throu
 
 **6.1 Season Duration.** Each competitive season lasts exactly 40 days.
 
-**6.2 The Void (Season Reset).** On Day 40 (the final day), ALL territory data, team hex counts, and season scores are permanently deleted. This is a core game mechanic. The following data is reset at season end:
+**6.2 The Void (Season Reset).** On Day 40 (the final day), season scores and team assignments are reset. This is a core game mechanic. The following data is reset at season end:
 - All hex territory assignments
 - Season points for all users
 - Team rankings
 - Team assignments (users must re-select teams)
 
-**6.3 Data Preserved After Reset.** Your personal running history (distance, runs, pace records) is permanently stored locally on your device and is never deleted by season resets.
+**6.3 Data Preserved After Reset.** Territory (hex) data persists across seasons — the land remembers its last runner's team color until someone new runs over it. Your personal running history (distance, runs, pace records) is permanently stored locally on your device and is never deleted by season resets. A snapshot of the final territory map is archived at the end of each season.
 
-**6.4 Server-Verified Scoring.** Flip points are calculated on your device and validated server-side. The server caps points at: `hex_count × buff_multiplier`. This validation exists to maintain fairness. Accepted risk: client-authoritative scoring; cap validation bounds maximum damage.
+**6.4 Server-Authoritative Scoring.** The server classifies every hex on your route and computes your points when a run syncs. The figure shown on your device during a run is an estimate and is replaced by the server result after sync. This exists to maintain fairness.
 
 ---
 
-## 7. Buff System and Scoring
+## 7. Scoring
 
-**7.1 Daily Buff Multipliers.** Buff multipliers are calculated at midnight GMT+2 daily and apply to runs completed the following day. Multipliers depend on your team and competitive performance.
+**7.1 Hex Classification.** Each hex you run through is classified as *new ground* (never run by any user in any season), a *friendly hex* (held by your team as of the previous midnight GMT+2 snapshot) or an *enemy hex* (held by another team).
 
-**7.2 Flip Points.** Points are calculated as: territories flipped × buff multiplier. A "flip" occurs when you enter a hex territory that previously belonged to a different team or was neutral.
+**7.2 Team Scoring Tables.** Points are awarded per hex according to your team's scoring table (points for new / friendly / enemy hexes). Friendly hexes are credited at most once per hex per user per day (GMT+2); new and enemy hexes are credited on every run. The same hex is credited at most once per run. The scoring tables are published in the app and on runstrict.com and may be adjusted by us from time to time; changes apply to runs completed after the change and never alter points already credited.
 
-**7.3 No Guarantee of Points.** Network failures, sync errors, or exceptional circumstances may result in points not being credited. We make no guarantee that all runs will be successfully synced.
+**7.3 Territory Ownership.** Ownership of provinces, countries, regions and continents is settled by a nightly process from the territory snapshot. Ties keep the previous day's owner. Aggregate ownership (a leading home-province name per region, a leading nationality per continent) may be displayed on the map; per-hex owner details are never displayed.
+
+**7.4 No Guarantee of Points.** Network failures, sync errors, or exceptional circumstances may result in points not being credited. We make no guarantee that all runs will be successfully synced.
 
 ---
 

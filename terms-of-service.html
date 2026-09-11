@@ -222,7 +222,7 @@
     <div class="legal-header">
       <div class="legal-badge">Legal</div>
       <h1>Terms of Service</h1>
-      <p class="meta">Effective Date: March 1, 2026 &nbsp;·&nbsp; Version: 1.0</p>
+      <p class="meta">Effective Date: September 11, 2026 &nbsp;·&nbsp; Version: 1.1</p>
     </div>
 
     <div class="toc">
@@ -234,7 +234,7 @@
         <li><a href="#s4">User Accounts</a></li>
         <li><a href="#s5">Location Services and GPS</a></li>
         <li><a href="#s6">Seasonal Gameplay and The Void</a></li>
-        <li><a href="#s7">Buff System and Scoring</a></li>
+        <li><a href="#s7">Scoring</a></li>
         <li><a href="#s8">Acceptable Use</a></li>
         <li><a href="#s9">Intellectual Property</a></li>
         <li><a href="#s10">Third-Party Services</a></li>
@@ -268,7 +268,7 @@
         <li>Real-time GPS tracking during active running sessions</li>
         <li>Hexagonal territory ("hex") capture and team competition</li>
         <li>40-day competitive seasons ("The Season")</li>
-        <li>Team-based buff multipliers and scoring systems</li>
+        <li>Team-based scoring tables and territory ownership rollups</li>
         <li>Leaderboards and community competition features</li>
       </ul>
     </div>
@@ -277,7 +277,7 @@
       <h2>4. User Accounts</h2>
       <p><strong>4.1 Account Creation.</strong> You may create an account using Apple Sign-In or Google Sign-In. You are responsible for maintaining the confidentiality of your account credentials.</p>
       <p><strong>4.2 Runner Identity.</strong> Your chosen username, team affiliation, and public statistics (distance, pace, flip points, stability score) are visible to other users on leaderboards and within the app.</p>
-      <p><strong>4.3 Team Selection.</strong> At the start of each season, you must choose a team: FLAME (Red) or WAVE (Blue). You may defect to CHAOS (Purple) at any time during the season. Defection to Purple is irreversible for the remainder of that season. Season points are preserved upon defection.</p>
+      <p><strong>4.3 Team Selection.</strong> When you register for a season, you must choose one team: FLAME (Red), WAVE (Blue) or CHAOS (Purple). Your choice is locked for the remainder of that season and cannot be changed. Every new season begins with a fresh team choice.</p>
       <p><strong>4.4 Guest Mode.</strong> You may use the Service as a guest for a single session without creating an account. Guest sessions are not preserved across app restarts. Guests may not appear on leaderboards.</p>
       <p><strong>4.5 Account Accuracy.</strong> You agree to provide accurate information including your sex and date of birth. This information is used for community statistics only and is not publicly displayed in identifiable form.</p>
     </div>
@@ -299,22 +299,22 @@
     <div class="legal-section" id="s6">
       <h2>6. Seasonal Gameplay and The Void</h2>
       <p><strong>6.1 Season Duration.</strong> Each competitive season lasts exactly 40 days.</p>
-      <p><strong>6.2 The Void (Season Reset).</strong> On Day 40 (the final day), ALL territory data, team hex counts, and season scores are permanently deleted. This is a core game mechanic. The following data is reset at season end:</p>
+      <p><strong>6.2 The Void (Season Reset).</strong> On Day 40 (the final day), season scores and team assignments are reset. This is a core game mechanic. The following data is reset at season end:</p>
       <ul>
-        <li>All hex territory assignments</li>
         <li>Season points for all users</li>
         <li>Team rankings</li>
         <li>Team assignments (users must re-select teams)</li>
       </ul>
-      <p><strong>6.3 Data Preserved After Reset.</strong> Your personal running history (distance, runs, pace records) is permanently stored locally on your device and is never deleted by season resets.</p>
-      <p><strong>6.4 Server-Verified Scoring.</strong> Flip points are calculated on your device and validated server-side. The server caps points at: <code>hex_count × buff_multiplier</code>. This validation exists to maintain fairness.</p>
+      <p><strong>6.3 Data Preserved After Reset.</strong> Territory (hex) data persists across seasons — the land remembers its last runner's team color until someone new runs over it. Your personal running history (distance, runs, pace records) is permanently stored locally on your device and is never deleted by season resets. A snapshot of the final territory map is archived at the end of each season.</p>
+      <p><strong>6.4 Server-Authoritative Scoring.</strong> The server classifies every hex on your route and computes your points when a run syncs. The figure shown on your device during a run is an estimate and is replaced by the server result after sync. This exists to maintain fairness.</p>
     </div>
 
     <div class="legal-section" id="s7">
-      <h2>7. Buff System and Scoring</h2>
-      <p><strong>7.1 Daily Buff Multipliers.</strong> Buff multipliers are calculated at midnight GMT+2 daily and apply to runs completed the following day. Multipliers depend on your team and competitive performance.</p>
-      <p><strong>7.2 Flip Points.</strong> Points are calculated as: territories flipped × buff multiplier. A "flip" occurs when you enter a hex territory that previously belonged to a different team or was neutral.</p>
-      <p><strong>7.3 No Guarantee of Points.</strong> Network failures, sync errors, or exceptional circumstances may result in points not being credited. We make no guarantee that all runs will be successfully synced.</p>
+      <h2>7. Scoring</h2>
+      <p><strong>7.1 Hex Classification.</strong> Each hex you run through is classified as <em>new ground</em> (never run by any user in any season), a <em>friendly hex</em> (held by your team as of the previous midnight GMT+2 snapshot) or an <em>enemy hex</em> (held by another team).</p>
+      <p><strong>7.2 Team Scoring Tables.</strong> Points are awarded per hex according to your team's scoring table (points for new / friendly / enemy hexes). Friendly hexes are credited at most once per hex per user per day (GMT+2); new and enemy hexes are credited on every run. The same hex is credited at most once per run. The scoring tables are published in the app and on runstrict.com and may be adjusted by us from time to time; changes apply to runs completed after the change and never alter points already credited.</p>
+      <p><strong>7.3 Territory Ownership.</strong> Ownership of provinces, countries, regions and continents is settled by a nightly process from the territory snapshot. Ties keep the previous day's owner. Aggregate ownership (a leading home-province name per region, a leading nationality per continent) may be displayed on the map; per-hex owner details are never displayed.</p>
+      <p><strong>7.4 No Guarantee of Points.</strong> Network failures, sync errors, or exceptional circumstances may result in points not being credited. We make no guarantee that all runs will be successfully synced.</p>
     </div>
 
     <div class="legal-section" id="s8">

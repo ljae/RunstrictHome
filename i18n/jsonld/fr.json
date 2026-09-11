@@ -23,7 +23,7 @@
         "@type": "Organization",
         "name": "RunStrict"
       },
-      "dateModified": "2026-05-05",
+      "dateModified": "2026-09-11",
       "speakable": {
         "@type": "SpeakableSpecification",
         "cssSelector": [
@@ -38,7 +38,7 @@
       "@type": "MobileApplication",
       "name": "RunStrict",
       "alternateName": "RunStrict, jeu de course à pied GPS",
-      "description": "Un jeu de course à pied GPS gratuit basé sur la localisation où les joueurs capturent des tuiles de territoire hexagonales en les traversant physiquement en courant. Choisissez parmi trois équipes — FLAME, WAVE ou CHAOS — et rivalisez pour dominer votre ville avant que la saison de 40 jours ne se réinitialise dans The Void. Utilise la grille hexagonale H3 d'Uber à la résolution 9 (tuiles de ~175m). Anti-triche vérifié par accéléromètre et contrôles de précision GPS.",
+      "description": "Un jeu de course GPS gratuit et géolocalisé où les joueurs capturent des tuiles de territoire hexagonales en les traversant physiquement en courant. Choisis l'une des trois équipes — FLAME, WAVE ou CHAOS — à l'inscription de saison ; chacune répartit les mêmes 10 points entre hexagones neufs, alliés et ennemis, ton équipe est donc ta doctrine de score. Affronte les classements Zone, District et Province avant que la saison de 40 jours ne soit remise à zéro dans The Void. Utilise la grille hexagonale H3 d'Uber en résolution 9 (tuiles d'environ 175 m) ; les hexagones se regroupent en provinces, pays, régions et continents. Anti-triche vérifié par accéléromètre et contrôles de précision GPS.",
       "operatingSystem": [
         "iOS 15+",
         "Android 10+",
@@ -73,38 +73,39 @@
         "https://play.google.com/store/apps/details?id=com.neondialactic.runstrict"
       ],
       "datePublished": "2026-01-01",
-      "dateModified": "2026-05-05",
+      "dateModified": "2026-09-11",
       "softwareVersion": "2.0",
       "screenshot": [
         "https://runstrict.com/assets/territory_SS.jpg",
         "https://runstrict.com/assets/leader_SS.jpg",
-        "https://runstrict.com/assets/buff_SS.jpg",
+        "https://runstrict.com/assets/run_SS.jpg",
         "https://runstrict.com/assets/stats_SS.jpg"
       ],
       "featureList": [
-        "Capture de territoire GPS sur la grille hexagonale H3 (tuiles de ~175m)",
-        "Trois équipes : FLAME (Rouge), WAVE (Bleu), CHAOS (Violet)",
-        "Saisons compétitives de 40 jours avec réinitialisation complète (The Void)",
-        "Classements à paliers : Zone, District, Province",
-        "Anti-triche : vérification par accéléromètre, précision GPS ≤50m, limite de vitesse de 25 km/h",
-        "Sondage GPS à 0.5 Hz optimisé pour la batterie",
+        "Capture de territoire GPS sur grille hexagonale H3 (tuiles d'environ 175 m)",
+        "Trois équipes choisies en début de saison : FLAME (Rouge, attaque 3/1/6), WAVE (Bleu, défense 3/6/1), CHAOS (Violet, exploration 6/2/2) — points par hexagone neuf / allié / ennemi",
+        "Saisons compétitives de 40 jours : points, rangs et choix d'équipe remis à zéro dans The Void ; la carte des hexagones persiste d'une saison à l'autre",
+        "Échelle territoriale : hexagone → province → pays → région → continent, avec étiquettes de région et drapeaux de continent pour la province d'origine et la nationalité dominantes",
+        "Classements à plusieurs niveaux : Zone, District, Province",
+        "Anti-triche : vérification par accéléromètre, précision GPS ≤50 m, plafond de 25 km/h, capture uniquement sous 12 min/km",
+        "Sondage GPS à 0,5 Hz optimisé pour la batterie",
         "Score de régularité d'allure (indicateur de stabilité basé sur le CV)",
-        "Confidentialité avant tout : aucun identifiant de coureur stocké dans les données hexagonales",
-        "Application compagnon Apple Watch (watchOS 10+) et compagnon Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) pour l'allure en direct et les alertes de capture d'hexagones au poignet"
+        "Confidentialité d'abord : aucun identifiant de coureur dans les données d'hexagone ; la possession n'est affichée que par couleur d'équipe, nom de province et drapeau",
+        "Applications compagnon Apple Watch (watchOS 10+) et Wear OS (Wear OS 3+, Galaxy Watch 4+ / Pixel Watch) avec allure en direct et alertes de capture au poignet"
       ],
       "keywords": "jeu de course à pied GPS, jeu de course basé sur la localisation, application de course ludifiée, course à capture de territoire, jeu de territoire hexagonal, compétition de course en équipe, application de jeu de fitness, application de défi de course, application de course compétitive, jeu alternatif à Strava, jeu de course comme Pokemon GO, meilleur jeu de course 2026"
     },
     {
       "@type": "HowTo",
       "name": "Comment jouer à RunStrict — le jeu de course à pied GPS de capture de territoire",
-      "description": "Apprenez à capturer des tuiles de territoire hexagonales en courant dans le jeu de course à pied GPS RunStrict. Quatre étapes simples, du laçage des chaussures à l'obtention de multiplicateurs de buff.",
+      "description": "Apprends à capturer des tuiles de territoire hexagonales en courant dans le jeu de course GPS RunStrict. Quatre étapes simples, du laçage des chaussures au score selon la répartition de ton équipe.",
       "totalTime": "PT30M",
       "step": [
         {
           "@type": "HowToStep",
           "position": 1,
           "name": "Commencez à courir avec le suivi GPS",
-          "text": "Ouvrez RunStrict et commencez à courir. Le GPS suit votre parcours en temps réel. Maintenez une allure inférieure à 8 min/km pour activer le mode de capture d'hexagones. L'anti-triche vérifie le mouvement physique via l'accéléromètre.",
+          "text": "Ouvre RunStrict et commence à courir. Le GPS suit ton parcours en temps réel. Garde une allure moyenne glissante sur 20 secondes sous 12 min/km pour activer le mode capture d'hexagones. L'anti-triche vérifie le mouvement physique via l'accéléromètre.",
           "url": "https://runstrict.com/#how-it-works"
         },
         {
@@ -118,14 +119,14 @@
           "@type": "HowToStep",
           "position": 3,
           "name": "Dominez la carte de la ville",
-          "text": "Regardez votre ville se transformer à mesure que vous revendiquez du territoire. Gagnez des points pour chaque hexagone capturé, grimpez dans les classements Zone, District et Province, et menez votre équipe à la domination territoriale.",
+          "text": "Les hexagones se regroupent en provinces, pays, régions et continents. Dézoome et la carte affiche le nom de la province d'origine des coureurs qui tiennent chaque région, et hisse le drapeau de la nationalité qui tient chaque continent. Grimpe dans les classements Zone, District et Province.",
           "url": "https://runstrict.com/#how-it-works"
         },
         {
           "@type": "HowToStep",
           "position": 4,
-          "name": "Gagnez des multiplicateurs de buff",
-          "text": "Les Élites de FLAME (les 20% du haut de leur province) atteignent jusqu'à 5x de multiplicateurs de points. Les membres de WAVE progressent ensemble jusqu'à 4x grâce aux victoires de district et de province ainsi qu'à la participation de l'équipe. La puissance de CHAOS évolue avec la participation de la province jusqu'à 4x. Un plancher honnête de 1x signifie qu'une course sans bonus rapporte exactement 1x. Les multiplicateurs se réinitialisent à chaque saison de 40 jours.",
+          "name": "Marque selon la répartition",
+          "text": "Chaque hexagone que tu traverses est un terrain neuf (jamais couru par personne), un hexagone allié (déjà à ton équipe) ou un hexagone ennemi. Chaque équipe répartit les mêmes 10 points entre ces trois : FLAME paie 3 / 1 / 6 (attaque), WAVE 3 / 6 / 1 (défense), CHAOS 6 / 2 / 2 (exploration). Les hexagones alliés paient une fois par hexagone et par jour ; les neufs et les ennemis paient à chaque course. Pas de multiplicateur — le barème est toute la règle.",
           "url": "https://runstrict.com/#teams"
         }
       ]
@@ -144,33 +145,33 @@
     {
       "@type": "ItemList",
       "name": "Comparatif des équipes RunStrict",
-      "description": "Comparez les trois équipes de RunStrict : FLAME (Rouge), WAVE (Bleu) et CHAOS (Violet). Chaque équipe possède des mécaniques de buff et des styles de jeu uniques.",
+      "description": "Compare les trois équipes de RunStrict : FLAME (Rouge), WAVE (Bleu) et CHAOS (Violet). Chaque équipe répartit les mêmes 10 points entre hexagones neufs, alliés et ennemis ; la répartition est la doctrine de l'équipe.",
       "numberOfItems": 3,
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "FLAME (équipe Rouge)",
-          "description": "Méritocratie basée sur la performance. Les 20% du haut des coureurs Rouges de chaque province deviennent des Élites, atteignant jusqu'à 5x de points. Les coureurs ordinaires gagnent de 1x à 3x grâce aux victoires de district et de province (plancher honnête de 1x). Idéale pour les coureurs solos compétitifs."
+          "description": "Doctrine d'attaque. Points par hexagone : terrain neuf 3, allié 1, ennemi 6. Un hexagone ennemi est le plus gros score unitaire du jeu, FLAME gagne donc en enfonçant les rues adverses. Idéal pour les coureurs qui aiment prendre du terrain."
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "WAVE (équipe Bleue)",
-          "description": "Force collective. Chaque coureur Bleu progresse avec les autres : une victoire de district, une victoire de province et la participation de l'équipe (50%+ de votre province en course) ajoutent chacune un point, jusqu'à 4x partagé équitablement. Idéale pour les coureurs orientés équipe."
+          "description": "Doctrine de défense. Points par hexagone : terrain neuf 3, allié 6, ennemi 1. Repasser sur un hexagone déjà tenu par ton équipe paie 6, une fois par hexagone et par jour ; WAVE gagne donc en revenant chaque jour dans les mêmes rues, ensemble. Idéal pour les coureurs qui aiment défendre."
         },
         {
           "@type": "ListItem",
           "position": 3,
           "name": "CHAOS (équipe Violette)",
-          "description": "L'imprévisible. Rejoignez à tout moment, mais l'adhésion est irréversible. La puissance évolue avec la participation de la province : 1x de base, 2x à 25% d'actifs, 3x à 50%, 4x à 75%. Aucun bonus de territoire. Idéale pour les coureurs sociables qui s'épanouissent sous pression."
+          "description": "Doctrine d'exploration. Points par hexagone : terrain neuf 6, allié 2, ennemi 2. Un hexagone que personne n'a jamais couru, quelle que soit la saison, paie 6. Comme la carte persiste entre les saisons, le terrain vierge se raréfie. Idéal pour les coureurs qui tracent des rues que personne n'a courues."
         }
       ]
     },
     {
       "@type": "FAQPage",
       "datePublished": "2026-01-01",
-      "dateModified": "2026-05-05",
+      "dateModified": "2026-09-11",
       "mainEntity": [
         {
           "@type": "Question",
@@ -185,7 +186,7 @@
           "name": "Comment fonctionne la capture d'hexagones dans RunStrict ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pendant que vous courez, RunStrict utilise le GPS pour suivre votre parcours en temps réel. Chaque tuile hexagonale de ~175m (H3 résolution 9) que vous traversez physiquement en courant passe à la couleur de votre équipe. Le dernier coureur à traverser un hexagone le contrôle. Maintenez une allure inférieure à 8 min/km pour activer le mode de capture. L'anti-triche utilise la vérification par accéléromètre et des contrôles de précision GPS."
+            "text": "Le GPS suit ton parcours en temps réel. Chaque tuile hexagonale d'environ 175 m que tu traverses physiquement passe à la couleur de ton équipe. Le dernier coureur à passer sur un hexagone le tient. Garde une allure sous 12 min/km pour activer le mode capture. Pas de triche — la vérification par accéléromètre bloque les tricheurs."
           }
         },
         {
@@ -201,7 +202,7 @@
           "name": "Qu'est-ce que The Void dans RunStrict ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The Void est l'événement de réinitialisation de saison qui se produit tous les 40 jours. Lorsque The Void survient, tous les hexagones capturés, les points et le contrôle territorial sont entièrement effacés. Seule la légende du classement de la saison subsiste. Puis une nouvelle saison de 40 jours commence."
+            "text": "The Void est la remise à zéro de fin de saison, tous les 40 jours. Tous les points, classements et choix d'équipe sont effacés, et tout le monde rechoisit une équipe. La carte elle-même n'est pas réinitialisée — la terre se souvient de son dernier coureur — la saison suivante démarre donc sur un terrain disputé, et les hexagones vraiment vierges se raréfient."
           }
         },
         {
@@ -209,7 +210,7 @@
           "name": "Quelles équipes puis-je rejoindre dans RunStrict ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "RunStrict compte trois équipes : FLAME (Rouge — les 20% du haut de chaque province deviennent des Élites, jusqu'à 5× grâce à la performance), WAVE (Bleu — bonus collectifs jusqu'à 4× lorsque votre district ou votre province gagne et que la participation est élevée), et CHAOS (Violet — rejoignez à tout moment, irréversible, une échelle de participation jusqu'à 4×)."
+            "text": "Chaque équipe répartit les mêmes 10 points entre trois types d'hexagone. FLAME si tu aimes attaquer — un hexagone ennemi rapporte 6, un terrain neuf 3, le tien 1. WAVE si tu aimes défendre — tes hexagones rapportent 6 (une fois par hexagone et par jour), un terrain neuf 3, un ennemi 1. CHAOS si tu aimes explorer — un hexagone que personne n'a jamais couru rapporte 6, tout le reste 2. Tu choisis une fois à l'inscription ; le choix est verrouillé jusqu'à The Void."
           }
         },
         {
@@ -225,7 +226,7 @@
           "name": "En quoi RunStrict est-il différent de Strava ou Nike Run Club ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Contrairement à Strava ou Nike Run Club qui se concentrent sur le suivi de la forme personnelle, RunStrict ajoute à la course une couche de jeu compétitif de capture de territoire. Chaque course est un coup stratégique dans une guerre territoriale par équipes — vous retournez des tuiles hexagonales, gagnez des multiplicateurs de buff et rivalisez dans les classements. Il combine l'activité physique d'une application de course avec la stratégie d'un jeu basé sur la localisation."
+            "text": "Strava et Nike Run Club se concentrent sur le suivi personnel — distance, allure, fréquence cardiaque. RunStrict ajoute une couche de jeu compétitif de capture de territoire par-dessus tes courses. Chaque course est un coup stratégique dans une guerre de territoire par équipes : tu retournes des hexagones, tu marques selon la doctrine de ton équipe et tu te mesures sur des classements à plusieurs niveaux. Imagine Strava qui rencontre Risk."
           }
         },
         {
@@ -233,7 +234,7 @@
           "name": "En quoi RunStrict est-il différent de Pokemon GO ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "RunStrict exige de réellement courir avec vérification de l'allure (sous 8 min/km), pas seulement de marcher. Il met l'accent sur la véritable performance athlétique avec des mesures anti-triche incluant la vérification par accéléromètre et des contrôles de précision GPS. Le territoire se gagne par l'effort physique de la course, pas en attrapant des créatures virtuelles."
+            "text": "RunStrict partage le concept géolocalisé, mais exige de vraiment courir, avec vérification de l'allure (sous 12 min/km). Aucune créature virtuelle — tu captures de vraies tuiles de territoire sur la carte de ta ville par l'effort physique. Les mesures anti-triche, dont la vérification par accéléromètre, garantissent que seules les vraies courses comptent."
           }
         },
         {
@@ -249,7 +250,7 @@
           "name": "Peut-on tricher dans RunStrict avec l'usurpation GPS ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Non. RunStrict utilise un anti-triche multicouche : limite de vitesse de 25 km/h, vérification par accéléromètre pour confirmer le mouvement physique, précision GPS qui doit être ≤50m, et les coureurs doivent maintenir une allure inférieure à 8 min/km pour que la capture d'hexagones s'active."
+            "text": "Non. RunStrict utilise un anti-triche multicouche : plafond de 25 km/h, vérification par accéléromètre pour confirmer le mouvement physique, précision GPS obligatoire ≤50 m, et la capture d'hexagones ne s'active qu'avec une allure sous 12 min/km. Les points sont en outre classés et calculés côté serveur, par rapport à l'instantané de la carte de minuit précédent."
           }
         },
         {
@@ -258,6 +259,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "RunStrict fonctionne partout dans le monde, dans toute ville disposant d'une couverture GPS. La grille hexagonale couvre la planète entière. Disponible sur iOS (App Store) et Android (Google Play) dans le monde entier."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment fonctionne le score ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chaque hexagone que tu traverses appartient à l'un de trois types : terrain neuf (personne ne l'a jamais couru), hexagone allié (ton équipe le tient déjà) ou hexagone ennemi. Le barème de ton équipe fixe les points — FLAME 3 / 1 / 6, WAVE 3 / 6 / 1, CHAOS 6 / 2 / 2 pour neuf / allié / ennemi. Les hexagones alliés paient une fois par hexagone et par jour ; les neufs et les ennemis paient à chaque course. Pas de multiplicateur, pas de buff — le barème est toute la règle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je changer d'équipe ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pas pendant une saison. Tu choisis FLAME, WAVE ou CHAOS à l'inscription et le choix est verrouillé jusqu'à The Void. Chaque nouvelle saison repart avec un choix libre entre les trois."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qui possède une région ou un continent ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les hexagones se regroupent en provinces, pays, régions et continents, arbitrés chaque nuit à minuit (GMT+2). La couleur d'équipe indique toujours qui tient un hexagone. Dézoome jusqu'à une région et la carte affiche le nom de la province d'origine des coureurs qui y tiennent le plus de terrain ; dézoome jusqu'à un continent et elle hisse le drapeau de la nationalité qui en tient le plus. En cas d'égalité, le propriétaire de la veille est conservé. Rien n'est jamais affiché par personne."
           }
         }
       ]
