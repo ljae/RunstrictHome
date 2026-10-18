@@ -1,6 +1,7 @@
 # Privacy Policy
 
-**Effective Date:** September 11, 2026
+**Effective Date:** March 1, 2026
+**Last Updated:** October 18, 2026
 **Version:** 1.1
 
 RunStrict ("we", "us", "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use RunStrict.
@@ -17,6 +18,7 @@ RunStrict ("we", "us", "our") is committed to protecting your privacy. This Priv
 - Team affiliation (FLAME, WAVE, or CHAOS)
 - Personal manifesto (up to 30 characters, optional, publicly visible)
 - OAuth identity from Apple or Google (email, profile photo)
+- Optional public profile photo and social profile URL (editable or removable)
 
 ### 1.2 Location Data
 - **GPS coordinates:** Collected continuously ONLY during active running sessions
@@ -28,13 +30,15 @@ RunStrict ("we", "us", "our") is committed to protecting your privacy. This Priv
 - Distance, duration, and pace of each run
 - Hex territories captured (flip count)
 - Coefficient of Variation (CV) for pace consistency
-- Per-run hex breakdown (new ground / friendly / enemy counts)
+- Per-run territory breakdown and server-confirmed scoring adjustments
 - Flip points earned per run
+- Average and maximum heart rate when supplied by a connected watch
 
 ### 1.4 Device Data
 - Accelerometer readings (for anti-spoofing validation only; **not stored**)
 - Device locale and timezone
 - App version and platform
+- Advertising identifiers, ad interactions and SDK diagnostics, as described below
 
 ---
 
@@ -45,8 +49,7 @@ We use your information to:
 - Provide and operate the RunStrict game service
 - Calculate your running performance, flip points, and leaderboard ranking
 - Determine territory capture (hex flips) during runs
-- Classify and score each hex on your route against your team's scoring table
-- Compute aggregate territory ownership (team, home province, nationality) for provinces, countries, regions and continents
+- Apply team scoring rules and publish cooperative season contributions
 - Prevent cheating and maintain competitive fairness
 - Improve the Service and develop new features
 - Send in-app notifications about game events
@@ -57,11 +60,10 @@ We use your information to:
 
 RunStrict is designed with privacy in mind regarding territory data:
 
-- Hex records store the last team color (e.g., "red", "blue"), a conflict-resolution timestamp, and — for territory rollups only — the nationality and registered home province (H3 resolution 5, ~250 km²) of the account that last ran the hex
-- Your personal runner ID is **never** stored in hex records
-- Nationality and home-province attributes are used only to compute aggregate ownership of regions and continents; they are **never** displayed or queryable per hex
-- Individual timestamps per hex are **not** attributed to specific users
-- Other players can see which team controls a territory but **not** who specifically captured it or when
+- Public territory data shows team colors and aggregate game results
+- Server-only ownership attributes may associate a hex with a runner for aggregate awards; direct client access to those attributes is blocked
+- Individual capture timestamps are not published with runner identity
+- Other players can see team territory and published regional winners; raw ownership rows and individual capture times are not public
 - Your home hex is stored at city-district level precision (H3 resolution 6, ~3.2km diameter) — not your exact address
 
 ---
@@ -70,17 +72,18 @@ RunStrict is designed with privacy in mind regarding territory data:
 
 ### 4.1 Public Information
 The following is visible to other RunStrict users:
-- Username, team, and manifesto
+- Username, team, manifesto, optional photo and social profile URL
+- Opt-in cooperation membership, coarse registered-home region, published contributions and nationality when enabled
 - Season flip points and ranking
 - Total distance and pace statistics (aggregated)
 - General neighborhood (home hex end location)
-- Aggregate territory ownership on the map: the leading home-province name per region and the leading nationality flag per continent (never attributed to a person)
 
 ### 4.2 Third-Party Service Providers
 We share data with:
 - **Supabase:** Hosts our database. Your profile and run data is stored on Supabase infrastructure.
-- **Mapbox:** Renders maps. Anonymized location data may be sent to Mapbox for tile rendering during map interactions.
-- **Apple / Google:** Provide authentication. We receive only the minimum necessary identity information.
+- **Mapbox:** Renders maps and processes location, SDK identifiers, usage and diagnostics for map functionality and analytics.
+- **Apple / Google:** Provide authentication. Identity providers process account and device information to authenticate you; we receive the authorized identity information needed for your account.
+- **Google AdMob:** Displays ads. Its SDK may collect and share advertising/device identifiers, approximate location derived from IP addresses, ad interactions, usage and diagnostics for advertising, analytics and fraud prevention. iOS tracking authorization and platform advertising controls govern available advertising identifiers. We do not send profile photos, social URLs, running routes or heart-rate records to AdMob for advertising.
 
 ### 4.3 Legal Requirements
 We may disclose your information if required by law or in response to valid legal process.
@@ -92,11 +95,11 @@ We do not sell, rent, or trade your personal information to third parties for th
 
 ## 5. Data Retention
 
-**5.1 Season Data.** Season scores, team assignments and per-season rankings are reset at the end of each 40-day season ("The Void"). Territory (hex) data persists across seasons — the land remembers its colors — and a snapshot of the final territory map is archived each season. This is a core game mechanic.
+**5.1 Season Data.** Season scores, team assignments and buff statistics reset at the end of each 40-day season. Territory data persists. Shared artwork is retained in seasonal albums.
 
-**5.2 Run History.** Your personal running history (distance, pace, runs completed) is preserved across seasons — it is stored locally on your device and is never deleted by season resets. Server-side aggregate statistics are retained for the life of your account.
+**5.2 Run History.** Your personal running history (distance, pace, runs completed) is preserved across seasons — it is stored locally on your device and is never deleted by season resets. Phone growth evidence is also stored locally. Standalone Watch growth and cross-device growth backup are not currently supported.
 
-**5.3 Account Data.** Profile information is retained until you delete your account. Upon deletion, your personal data is removed from our servers within 30 days.
+**5.3 Account Data.** Profile information is retained until you delete your account. Account erasure removes public profile information and owned photos. Retained game records and shared artwork are anonymized to preserve other participants' season results; anonymous coarse regional anchors remain. Deletion requests are completed within 30 days.
 
 **5.4 Legal Holds.** We may retain certain data longer if required by applicable law.
 
